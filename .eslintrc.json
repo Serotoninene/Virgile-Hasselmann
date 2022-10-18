@@ -1,3 +1,5 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": "next/core-web-vitals",
+  // This line avoid me the hassle of switching all the ' for &apos:
+  "rules": { "react/no-unescaped-entities": 0 }
 }
