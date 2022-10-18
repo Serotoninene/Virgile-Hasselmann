@@ -15,8 +15,13 @@ body {
   font-family: "ExensaGrotesk", -apple-system, BlinkMacSystemFont, Segoe UI,
     Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
     sans-serif;
-  background-color: #e2e0db;
+  /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */
+  color: #ddd5cb;
   // cursor: none;
+}
+
+#App {
+  background: radial-gradient(#212224 0%, #181111 99.48%);
 }
 
 a {

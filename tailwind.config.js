@@ -33,9 +33,9 @@ module.exports = {
       colors: {
         transparent: 'transparent',
         current: 'currentColor',
-        'dark': '#191917',
-        'secondary': '#3f3cbb',
-        'background': '#e2e0db'
+        'dark': '#212224',
+        'light': '#DDD5CB',
+        'blue': '#63A0E8'
       },
       gridTemplateRows: {
         // Simple 8 row grid

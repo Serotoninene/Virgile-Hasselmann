@@ -1,6 +1,5 @@
-import { useState, useEffect } from "react";
 // Next
-import { useRouter } from "next/router";
+import Image from "next/image";
 import Head from "next/head";
 // Components
 import Navbar from "./Navbar";
@@ -13,7 +12,7 @@ type Props = {
 
 const Layout = ({ children }: Props): JSX.Element => {
   return (
-    <>
+    <div id="App" className="relative">
       <Head>
         <title>Virgile Hasselmann</title>
         <meta
@@ -22,13 +21,19 @@ const Layout = ({ children }: Props): JSX.Element => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <header>
-        <Navbar />
-      </header>
-      <main>
-        <div>{children}</div>
-      </main>
-    </>
+      <div className="fixed w-screen h-screen">
+        <Image src="/assets/noise.png" layout="fill" />
+      </div>
+
+      <div className="z-10">
+        <header>
+          <Navbar />
+        </header>
+        <main className="h-screen">
+          <div>{children}</div>
+        </main>
+      </div>
+    </div>
   );
 };
 

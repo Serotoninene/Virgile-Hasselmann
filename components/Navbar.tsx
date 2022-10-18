@@ -13,7 +13,7 @@ export default function Navbar() {
       <h1 className="font-icon">VH</h1>
       <ul className="hidden sm:flex">
         {links.map((link, idx) => (
-          <li key={idx} className="ml-14 text-lg font-light">
+          <li key={idx} className="ml-14 text-lgfont-light">
             <Link href={link.href}>{link.title}</Link>
           </li>
         ))}
