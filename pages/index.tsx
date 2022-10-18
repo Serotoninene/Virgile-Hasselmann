@@ -14,7 +14,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main className="text-center text-blue-600">
-        <h1>Welcome to Virgile's portfolio</h1>
+        <h1>Welcome to Virgile&apos;s portfolio</h1>
       </main>
 
       <footer></footer>
