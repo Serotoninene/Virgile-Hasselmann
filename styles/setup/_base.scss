@@ -1,0 +1,52 @@
+// Basic set up
+* {
+  overscroll-behavior: none;
+  font-weight: 400;
+  box-sizing: border-box;
+  list-style: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Pulp", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  background-color: #e2e0db;
+  // cursor: none;
+}
+
+a {
+  text-decoration: none;
+  font-weight: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  pointer-events: auto;
+  color: inherit;
+  font-family: inherit;
+}
+
+#CustomCursor {
+  display: block;
+  position: fixed;
+  pointer-events: none;
+  z-index: 99;
+  width: 36px;
+  height: 36px;
+  border: 1px solid #191917;
+  // border: 4px solid $deepOrange;
+  border-radius: 100%;
+  transform: translate(-50%, -50%);
+  transition: all ease-out 0.25s;
+  transition-property: width, transform, background-color, backdrop-filter;
+
+  &.hovered {
+    background-color: rgba(25, 25, 23, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid transparent;
+    width: 40px;
+    height: 40px;
+  }
+}
