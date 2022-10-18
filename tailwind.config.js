@@ -5,6 +5,11 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    fontFamily: {
+      'sans': ['ui-sans-serif', 'system-ui'],
+      'icon': ['BwModelica', 'ui-sans-serif', 'system-ui'],
+      'body': ['ExensaGrotesk', 'ui-sans-serif', 'system-ui'],
+    },
     screens: {
       'xs': '428px',
       // => @media (min-width: 428px) { ... }

@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 // Components
+import Navbar from "./Navbar";
 // import Header from "./Header";
 // import Footer from "./Footer";
 
@@ -21,6 +22,9 @@ const Layout = ({ children }: Props): JSX.Element => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <header>
+        <Navbar />
+      </header>
       <main>
         <div>{children}</div>
       </main>
