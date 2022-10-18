@@ -1,13 +1,31 @@
-// @font-face {
-//   font-family: "Pulp";
-//   src: url("../../../public/assets/fonts/Pulp/PulpDisplayExtraBold.woff")
-//     format("woff");
-//   font-weight: 800;
-// }
+@font-face {
+  font-family: "ExensaGrotesk";
+  src: url("../../fonts/ExensaGrotesk-Light.ttf") format("TrueType");
+  font-weight: 300;
+}
+@font-face {
+  font-family: "ExensaGrotesk";
+  src: url("../../fonts/ExensaGrotesk-Regular.ttf") format("TrueType");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "ExensaGrotesk";
+  src: url("../../fonts/ExensaGrotesk-Bold.ttf") format("TrueType");
+  font-weight: 700;
+}
+@font-face {
+  font-family: "ExensaGrotesk";
+  src: url("../../fonts/ExensaGrotesk-ExtraBold.ttf") format("TrueType");
+  font-weight: 800;
+}
+@font-face {
+  font-family: "ExensaGrotesk";
+  src: url("../../fonts/ExensaGrotesk-Black.ttf") format("TrueType");
+  font-weight: 900;
+}
 
-// @font-face {
-//   font-family: "Pulp";
-//   src: url("../../../public/assets/fonts/Pulp/PuplDisplayBold.woff")
-//     format("woff");
-//   font-weight: 700;
-// }
+@font-face {
+  font-family: "BwModelica";
+  src: url("../../fonts/BwModelica-ExtraBold.otf") format("OpenType");
+  font-weight: 800;
+}
