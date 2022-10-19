@@ -2,14 +2,15 @@ import React from "react";
 // Framer Motion
 import { motion } from "framer-motion";
 
-type Props = {
+interface Props {
   string: string;
-  delay: number;
-  ease: number[] | string;
-  duration: number;
-  stagger: number;
-  start: boolean;
-};
+  delay?: number;
+  ease?: number[] | string | undefined;
+  duration?: number | undefined;
+  stagger?: number | undefined;
+  start?: boolean | undefined;
+  fontWeight?: string | undefined;
+}
 
 const AnimatedLetters = ({
   string,
@@ -18,9 +19,10 @@ const AnimatedLetters = ({
   duration = 0.45,
   stagger = 0.05,
   start = true,
+  fontWeight = "font-normal",
 }: Props) => {
   const containerAnim = {
-    hidden: { overflow: "hidden", display: "inline-block", lineHeight: "110%" },
+    hidden: {},
     show: {
       transition: {
         delayChildren: delay,
@@ -30,7 +32,7 @@ const AnimatedLetters = ({
   };
 
   const letterAnim = {
-    hidden: { y: 400, display: "inline-block" },
+    hidden: { y: 400 },
     show: {
       y: 0,
       transition: {
@@ -48,14 +50,19 @@ const AnimatedLetters = ({
       initial="hidden"
       animate={start && "show"}
       key={string}
+      className="overflow-hidden inline-block align-bottom"
     >
       {words.map((word) => (
         <span key={word}>
           {[...word].map((letter, idx) => (
-            <motion.span key={`letter${idx}`} variants={letterAnim}>
+            <motion.span
+              key={`letter${idx}`}
+              className={`${fontWeight} inline-block`}
+              variants={letterAnim}
+            >
               {letter}
             </motion.span>
-          ))}{" "}
+          ))}
         </span>
       ))}
     </motion.span>
