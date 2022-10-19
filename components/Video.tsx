@@ -25,6 +25,7 @@ export default function Video(props: Props) {
       <AnimatePresence mode="wait">
         {isLoading && (
           <motion.div
+            key={src}
             variants={anim}
             initial="hidden"
             animate="shown"
@@ -44,9 +45,7 @@ export default function Video(props: Props) {
         loop
         autoPlay
         muted
-        onCanPlayThrough={() => {
-          setIsLoading(false);
-        }}
+        onCanPlayThrough={() => setIsLoading(false)}
         preload="metadata"
         poster={placeholder}
         className={`w-full h-full object-cover ${isLoading && "hidden"}`}
