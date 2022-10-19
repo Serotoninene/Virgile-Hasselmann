@@ -21,7 +21,8 @@ body {
 }
 
 #App {
-  background: radial-gradient(#212224 0%, #181111 99.48%);
+  background: url("/assets/noise.png"),
+    radial-gradient(#212224 0%, #181111 99.48%);
 }
 
 a {

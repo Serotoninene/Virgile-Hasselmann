@@ -21,10 +21,6 @@ const Layout = ({ children }: Props): JSX.Element => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="fixed w-screen h-screen">
-        <Image src="/assets/noise.png" layout="fill" />
-      </div>
-
       <div className="z-10">
         <header>
           <Navbar />
