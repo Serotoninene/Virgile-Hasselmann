@@ -3,8 +3,6 @@ import Image from "next/image";
 import Head from "next/head";
 // Components
 import Navbar from "./Navbar";
-// import Header from "./Header";
-// import Footer from "./Footer";
 
 type Props = {
   children: JSX.Element;
