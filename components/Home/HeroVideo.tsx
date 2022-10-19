@@ -5,6 +5,26 @@ import { motion } from "framer-motion";
 import Video from "components/Utils/Video";
 import AnimatedLetters from "components/Utils/AnimatedLetters";
 
+const containerAnim = {
+  hidden: {},
+  shown: {
+    transition: {
+      staggerChildren: 0.5,
+      delayChildren: 1,
+      staggerDirection: -1,
+    },
+  },
+};
+
+const itemsAnim = {
+  hidden: { y: 50, opacity: 0 },
+  shown: {
+    y: 0,
+    opacity: 1,
+    transition: { duration: 0.6, ease: [0.3, 0.01, -0.05, 0.95] },
+  },
+};
+
 const Content = () => {
   return (
     <div className="relative z-10 h-screen flex flex-col justify-between items-center pt-16 pb-14 px-4 xs:pt-[88px] xs:pb-16 xs:px-6 lg:pb-6 lg:justify-end lg:items-end">
@@ -22,13 +42,24 @@ const Content = () => {
           stagger={0.01}
         />
       </h1>
-      <div className="flex items-end lg:justify-between w-full">
-        <p className="hidden lg:block">Made by @Serotoninene, 2022</p>
-        <p className="text-center font-light text-xl xs:text-3xl lg:text-end lg:text-2xl lg:w-[30vw]">
+      <motion.div
+        variants={containerAnim}
+        initial="hidden"
+        animate="shown"
+        exit="hidden"
+        className="flex items-end lg:justify-between w-full"
+      >
+        <motion.p variants={itemsAnim} className="hidden lg:block">
+          Made by @Serotoninene, 2022
+        </motion.p>
+        <motion.p
+          variants={itemsAnim}
+          className="text-center font-light text-xl xs:text-3xl lg:text-end lg:text-2xl lg:w-[30vw]"
+        >
           Supa short text with a biiiig unerline. Explaining basically who is
           Virgile and what he does (can be keywords).
-        </p>
-      </div>
+        </motion.p>
+      </motion.div>
       <div className="absolute w-screen flex justify-center bottom-2 xs:bottom-6 lg:hidden">
         <div className="w-[64px]">
           <img src="/assets/utils/scrollIndicator.svg" className="w-full" />
