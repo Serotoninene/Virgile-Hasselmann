@@ -33,6 +33,7 @@ module.exports = {
       colors: {
         transparent: 'transparent',
         current: 'currentColor',
+        'darkOpaque': 'rgba(0,0,0,0.8)',
         'dark': '#212224',
         'light': '#DDD5CB',
         'blue': '#63A0E8'
