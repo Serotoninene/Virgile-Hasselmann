@@ -20,7 +20,7 @@ export default function Navbar() {
         {links.map((link, idx) => (
           <li
             key={idx}
-            className={`ml-14 text-lg ${
+            className={`ml-14 text-lg hover:font-bold ${
               router.pathname === link.href ? "font-bold" : "font-light"
             }`}
           >
