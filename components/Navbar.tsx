@@ -20,10 +20,10 @@ export default function Navbar() {
 
   return (
     <div className="flex justify-between py-2 px-4 sm:py-4 sm:px-6">
-      <h1 className="font-icon">
+      <div className="font-icon">
         <Link href="/">VH</Link>
-      </h1>
-      <ul className="hidden sm:flex">
+      </div>
+      <ul className="hidden xs:flex">
         {isLinks &&
           links.map((link, idx) => (
             <li

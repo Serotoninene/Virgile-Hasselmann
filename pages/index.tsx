@@ -1,8 +1,13 @@
 import type { NextPage } from "next";
-import Head from "next/head";
+// Components
+import DarkGradients from "components/Home/DarkGradients";
 
 const Home: NextPage = () => {
-  return <div>C'est la home</div>;
+  return (
+    <div className="relative">
+      <DarkGradients />
+    </div>
+  );
 };
 
 export default Home;
