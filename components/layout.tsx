@@ -21,14 +21,12 @@ const Layout = ({ children }: Props): JSX.Element => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="z-10">
-        <header>
-          <Navbar />
-        </header>
-        <main className="h-screen">
-          <div>{children}</div>
-        </main>
-      </div>
+      <header className="fixed w-screen">
+        <Navbar />
+      </header>
+      <main className="h-screen pt-10 sm:pt-16">
+        <div>{children}</div>
+      </main>
     </div>
   );
 };
