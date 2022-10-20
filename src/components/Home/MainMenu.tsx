@@ -117,10 +117,15 @@ export default function MainMenu({ goToMainMenu }: MainMenuProps) {
         setHoveredSection={setHoveredSection}
         custom={2}
       />
-      <div className="absolute bottom-0 left-0 w-screen text-xs flex justify-between pb-3 px-4 sm:px-6 xl:text-sm">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: goToMainMenu ? 1 : 0 }}
+        transition={{ ease, delay: goToMainMenu ? 1.4 : 0 }}
+        className="absolute bottom-0 left-0 w-screen text-xs flex justify-between pb-3 px-4 sm:px-6 xl:text-sm"
+      >
         <p>@VirgileHasselmann</p>
         <p>2022</p>
-      </div>
+      </motion.div>
     </div>
   );
 }
