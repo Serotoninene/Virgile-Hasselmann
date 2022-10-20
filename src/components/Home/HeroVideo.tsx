@@ -9,7 +9,7 @@ const containerAnim = {
   hidden: {},
   shown: {
     transition: {
-      staggerChildren: 0.5,
+      staggerChildren: 0.1,
       delayChildren: 1,
       staggerDirection: -1,
     },
@@ -29,11 +29,7 @@ const Content = () => {
   return (
     <div className="relative z-10 h-screen flex flex-col justify-between items-center pt-16 pb-14 px-4 xs:pt-[88px] xs:pb-16 xs:px-6 lg:pb-6 lg:justify-end lg:items-end">
       <h1 className="text-5xl text-center xs:text-6xl lg:text-end lg:text-8xl">
-        <AnimatedLetters
-          string="Virgile"
-          fontWeight="font-black"
-          stagger={0.02}
-        />
+        <AnimatedLetters string="Virgile" fontWeight="font-black" />
         <br />
         <AnimatedLetters
           string="Hasselmann"

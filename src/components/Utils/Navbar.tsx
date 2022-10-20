@@ -16,7 +16,7 @@ const containerAnim = {
   shown: {
     transition: {
       staggerChildren: 0.02,
-      delayChildren: 1.4,
+      delayChildren: 1.1,
     },
   },
 };
@@ -26,7 +26,7 @@ const itemsAnim = {
   shown: {
     y: 0,
     opacity: 1,
-    transition: { duration: 0.4, ease: [0.3, 0.01, -0.05, 0.95] },
+    transition: { duration: 0.6, ease: [0.3, 0.01, -0.05, 0.95] },
   },
 };
 
