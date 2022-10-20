@@ -49,7 +49,7 @@ const Content = () => {
         exit="hidden"
         className="flex items-end lg:justify-between w-full"
       >
-        <motion.p variants={itemsAnim} className="hidden lg:block">
+        <motion.p variants={itemsAnim} className="hidden lg:block z-20">
           Made by @Serotoninene, 2022
         </motion.p>
         <motion.p
