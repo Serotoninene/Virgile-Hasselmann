@@ -5,9 +5,10 @@ export default function useParallax(
   distance: number,
   type?: string
 ) {
-  if (type === "reverse") return useTransform(value, [0, 1], [distance, 0]);
-  if (type === "full")
-    return useTransform(value, [0, 1], [-distance, distance]);
+  let outputRange = [];
+  if (type === "reverse") outputRange = [distance, 0];
+  else if (type === "full") outputRange = [-distance, distance];
+  else outputRange = [0, distance];
 
-  return useTransform(value, [0, 1], [0, distance]);
+  return useTransform(value, [0, 1], outputRange);
 }
