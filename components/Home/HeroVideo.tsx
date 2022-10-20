@@ -74,7 +74,7 @@ export default function HeroVideo() {
     <>
       <Content />
       {/* Video background */}
-      <div className="absolute h-screen w-screen top-0 left-0 overflow-hidden flex justify-center items-center">
+      <div className="absolute h-screen w-screen top-0 left-0 overflow-hidden flex justify-center items-center opacity-80">
         <Video
           src="/assets/videos/heroVideo.mp4"
           type="mp4"
