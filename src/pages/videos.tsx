@@ -63,7 +63,7 @@ const Filters = ({ filterSelected, setFilterSelected }: FiltersProps) => {
             >
               {filter}
             </li>
-            {idx !== 2 && <li>/</li>}
+            {idx !== filterLinks.length - 1 && <li>/</li>}
           </div>
         ))}
       </ul>
