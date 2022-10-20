@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 // framer motion
 import { motion } from "framer-motion";
 
@@ -27,9 +27,15 @@ const photoAnim = {
     scale: 1,
     transition: { ease, duration },
   },
+  hover: {
+    scale: 1.3,
+    transition: { ease, duration },
+  },
 };
 
 export default function MainMenu() {
+  const [hoveredSection, setHoveredSection] = useState<string>();
+
   return (
     <div className="h-screen w-screen flex fixed z-20" id="Menu">
       {/* Container for the image and the linkButton */}
@@ -38,7 +44,11 @@ export default function MainMenu() {
         variants={anim}
         initial="invisible"
         animate="visible"
+        // style={{
+        //   filter: hoveredSection === "photos" ? "grayscale(1)" : "grayscale(0)",
+        // }}
         className="h-full w-3/6 relative overflow-hidden flex justify-center items-center"
+        onHoverStart={() => setHoveredSection("videos")}
       >
         {/* LinkButton */}
         <div className="z-10">
@@ -49,6 +59,7 @@ export default function MainMenu() {
           variants={photoAnim}
           initial="invisible"
           animate="visible"
+          whileHover="hover"
           className=" absolute top-0 left-0 w-full"
         >
           <img
@@ -63,6 +74,10 @@ export default function MainMenu() {
         variants={anim}
         initial="invisible"
         animate="visible"
+        // style={{
+        //   filter: hoveredSection === "videos" ? "grayscale(1)" : "grayscale(0)",
+        // }}
+        onHoverStart={() => setHoveredSection("photos")}
         className="h-full w-3/6 relative overflow-hidden  flex justify-center items-center"
       >
         {/* LinkButton */}
@@ -74,6 +89,7 @@ export default function MainMenu() {
           variants={photoAnim}
           initial="invisible"
           animate="visible"
+          whileHover="hover"
           className="h-full absolute top-0 left-0 w-full"
         >
           <img
