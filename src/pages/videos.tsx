@@ -52,7 +52,7 @@ const VideoMiniature = ({
 
   return (
     <div>
-      <div className="border overflow-hidden">
+      <div className="overflow-hidden">
         <motion.div
           className="relative h-[184px] sm:h-[336px] scale-150 opacity-20"
           style={{ y, scale: 1.2 }}
