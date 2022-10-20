@@ -5,6 +5,7 @@ import DarkGradients from "@src/components/Home/DarkGradients";
 import HeroVideo from "@src/components/Home/HeroVideo";
 import MainMenu from "@src/components/Home/MainMenu";
 import { useScroll } from "framer-motion";
+import useDebounce from "@src/hooks/useDebounce";
 //
 
 const Home: NextPage = () => {
