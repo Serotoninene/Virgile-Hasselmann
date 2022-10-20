@@ -63,7 +63,7 @@ const MenuSection = ({
       //   filter:
       //     hoveredSection !== sectionName ? "grayscale(1)" : "grayscale(0)",
       // }}
-      className="h-full w-3/6 relative overflow-hidden flex justify-center items-center"
+      className="relative overflow-hidden flex justify-center items-center h-3/6 md:h-full md:w-3/6  "
       onHoverStart={() => setHoveredSection(sectionName)}
     >
       {/* LinkButton */}
@@ -88,10 +88,12 @@ const MenuSection = ({
 
 export default function MainMenu({ goToMainMenu }: MainMenuProps) {
   const [hoveredSection, setHoveredSection] = useState<string>();
-  console.log(goToMainMenu);
 
   return (
-    <div className="h-screen w-screen flex fixed z-20" id="Menu">
+    <div
+      className="fixed z-20 h-screen w-screen flex flex-col md:flex-row"
+      id="Menu"
+    >
       <MenuSection
         start={goToMainMenu}
         photo="/assets/photos/girl_portrait.png"
@@ -108,6 +110,10 @@ export default function MainMenu({ goToMainMenu }: MainMenuProps) {
         setHoveredSection={setHoveredSection}
         custom={2}
       />
+      <div className="absolute bottom-0 left-0 w-screen text-xs flex justify-between pb-3 px-4 sm:px-6 xl:text-sm">
+        <p>@VirgileHasselmann</p>
+        <p>2022</p>
+      </div>
     </div>
   );
 }
