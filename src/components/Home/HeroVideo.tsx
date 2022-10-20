@@ -2,8 +2,8 @@ import React from "react";
 // Framer motion
 import { motion } from "framer-motion";
 // Components
-import Video from "components/Utils/Video";
-import AnimatedLetters from "components/Utils/AnimatedLetters";
+import Video from "@src/components/Utils/Video";
+import AnimatedLetters from "@src/components/Utils/AnimatedLetters";
 
 const containerAnim = {
   hidden: {},

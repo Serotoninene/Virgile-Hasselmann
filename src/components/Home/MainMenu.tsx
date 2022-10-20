@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 // framer motion
 import { motion } from "framer-motion";
-import AnimatedLetters from "components/Utils/AnimatedLetters";
+import AnimatedLetters from "@src/components/Utils/AnimatedLetters";
 
 interface MainMenuProps {
   goToMainMenu: boolean;

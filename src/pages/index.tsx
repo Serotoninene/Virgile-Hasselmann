@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import type { NextPage } from "next";
 // Components
-import DarkGradients from "components/Home/DarkGradients";
-import HeroVideo from "components/Home/HeroVideo";
-import MainMenu from "components/Home/MainMenu";
+import DarkGradients from "@src/components/Home/DarkGradients";
+import HeroVideo from "@src/components/Home/HeroVideo";
+import MainMenu from "@src/components/Home/MainMenu";
 import { useScroll } from "framer-motion";
 //
 
