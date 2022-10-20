@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import Link from "next/link";
 // framer motion
 import { motion } from "framer-motion";
+// component
 import AnimatedLetters from "@src/components/Utils/AnimatedLetters";
 
 interface MainMenuProps {
@@ -54,35 +56,40 @@ const MenuSection = ({
   setHoveredSection,
 }: MenuSectionProps) => {
   return (
-    <motion.div
-      custom={custom}
-      variants={anim}
-      initial="invisible"
-      animate={start ? "visible" : "invisible"}
-      // style={{
-      //   filter:
-      //     hoveredSection !== sectionName ? "grayscale(1)" : "grayscale(0)",
-      // }}
-      className="relative overflow-hidden flex justify-center items-center h-3/6 md:h-full md:w-3/6  "
-      onHoverStart={() => setHoveredSection(sectionName)}
-    >
-      {/* LinkButton */}
-      <div className="z-10">
-        <h2 className="text-3xl font-light">
-          <AnimatedLetters string={sectionName} start={start} delay={0.7} />
-        </h2>
-      </div>
-      {/* Container for image, needs to be absolute so I can center properly the linkButton + allow the dezooming effect on launch */}
+    <Link href={`/${sectionName.toLowerCase()}`}>
       <motion.div
-        variants={photoAnim}
+        custom={custom}
+        variants={anim}
         initial="invisible"
         animate={start ? "visible" : "invisible"}
-        whileHover="hover"
-        className=" absolute top-0 left-0 w-full h-full"
+        // style={{
+        //   filter:
+        //     hoveredSection !== sectionName ? "grayscale(1)" : "grayscale(0)",
+        // }}
+        className="relative overflow-hidden flex justify-center items-center h-3/6 md:h-full md:w-3/6  "
+        onHoverStart={() => setHoveredSection(sectionName)}
       >
-        <img src={photo} className="w-full h-full object-cover object-center" />
+        {/* LinkButton */}
+        <div className="z-10">
+          <h2 className="text-3xl font-light">
+            <AnimatedLetters string={sectionName} start={start} delay={0.7} />
+          </h2>
+        </div>
+        {/* Container for image, needs to be absolute so I can center properly the linkButton + allow the dezooming effect on launch */}
+        <motion.div
+          variants={photoAnim}
+          initial="invisible"
+          animate={start ? "visible" : "invisible"}
+          whileHover="hover"
+          className=" absolute top-0 left-0 w-full h-full"
+        >
+          <img
+            src={photo}
+            className="w-full h-full object-cover object-center"
+          />
+        </motion.div>
       </motion.div>
-    </motion.div>
+    </Link>
   );
 };
 
@@ -97,7 +104,7 @@ export default function MainMenu({ goToMainMenu }: MainMenuProps) {
       <MenuSection
         start={goToMainMenu}
         photo="/assets/photos/girl_portrait.png"
-        sectionName="Films"
+        sectionName="Videos"
         hoveredSection={hoveredSection}
         setHoveredSection={setHoveredSection}
         custom={-2}
