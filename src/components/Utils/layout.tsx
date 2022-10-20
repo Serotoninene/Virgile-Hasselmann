@@ -1,5 +1,4 @@
 // Next
-import Image from "next/image";
 import Head from "next/head";
 // Components
 import Navbar from "./Navbar";
@@ -22,7 +21,7 @@ const Layout = ({ children }: Props): JSX.Element => {
       <header className="fixed w-screen z-10">
         <Navbar />
       </header>
-      <main className="h-screen">
+      <main className="min-h-screen">
         <div>{children}</div>
       </main>
     </div>
