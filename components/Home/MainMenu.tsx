@@ -1,8 +1,14 @@
 import React, { useState } from "react";
 // framer motion
 import { motion } from "framer-motion";
+import AnimatedLetters from "components/Utils/AnimatedLetters";
+
+interface MainMenuProps {
+  goToMainMenu: boolean;
+}
 
 interface MenuSectionProps {
+  start: boolean;
   photo: string;
   custom: number;
   sectionName: string;
@@ -40,6 +46,7 @@ const photoAnim = {
 };
 
 const MenuSection = ({
+  start,
   photo,
   custom,
   sectionName,
@@ -51,7 +58,7 @@ const MenuSection = ({
       custom={custom}
       variants={anim}
       initial="invisible"
-      animate="visible"
+      animate={start ? "visible" : "invisible"}
       // style={{
       //   filter:
       //     hoveredSection !== sectionName ? "grayscale(1)" : "grayscale(0)",
@@ -61,13 +68,15 @@ const MenuSection = ({
     >
       {/* LinkButton */}
       <div className="z-10">
-        <h2 className="text-3xl font-light">{sectionName}</h2>
+        <h2 className="text-3xl font-light">
+          <AnimatedLetters string={sectionName} start={start} delay={0.7} />
+        </h2>
       </div>
       {/* Container for image, needs to be absolute so I can center properly the linkButton + allow the dezooming effect on launch */}
       <motion.div
         variants={photoAnim}
         initial="invisible"
-        animate="visible"
+        animate={start ? "visible" : "invisible"}
         whileHover="hover"
         className=" absolute top-0 left-0 w-full h-full"
       >
@@ -77,12 +86,14 @@ const MenuSection = ({
   );
 };
 
-export default function MainMenu() {
+export default function MainMenu({ goToMainMenu }: MainMenuProps) {
   const [hoveredSection, setHoveredSection] = useState<string>();
+  console.log(goToMainMenu);
 
   return (
     <div className="h-screen w-screen flex fixed z-20" id="Menu">
       <MenuSection
+        start={goToMainMenu}
         photo="/assets/photos/girl_portrait.png"
         sectionName="Vidéos"
         hoveredSection={hoveredSection}
@@ -90,6 +101,7 @@ export default function MainMenu() {
         custom={-2}
       />
       <MenuSection
+        start={goToMainMenu}
         photo="/assets/photos/hands_holding.png"
         sectionName="Photos"
         hoveredSection={hoveredSection}
