@@ -22,7 +22,7 @@ const anim = {
   invisible: (custom: number) => ({
     y: `${custom * 200}%`,
     scaleY: 0,
-    transition: { ease, duration },
+    transition: { ease: "easeIn", duration },
   }),
   visible: {
     y: 0,
@@ -40,8 +40,8 @@ const photoAnim = {
     transition: { ease, duration },
   },
   hover: {
-    scale: 1.3,
-    transition: { ease, duration: 0.1 },
+    scale: 1.05,
+    transition: { ease, duration: 0.2 },
   },
 };
 
@@ -95,7 +95,7 @@ export default function MainMenu({ goToMainMenu }: MainMenuProps) {
       <MenuSection
         start={goToMainMenu}
         photo="/assets/photos/girl_portrait.png"
-        sectionName="Vidéos"
+        sectionName="Films"
         hoveredSection={hoveredSection}
         setHoveredSection={setHoveredSection}
         custom={-2}
