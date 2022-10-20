@@ -54,7 +54,7 @@ const Filters = ({ filterSelected, setFilterSelected }: FiltersProps) => {
     <div className="flex text-2xl sm:justify-center sm:text-5xl">
       <ul className="flex">
         {filterLinks.map((filter, idx) => (
-          <div key={filter}>
+          <div key={filter} className="flex">
             <li
               onClick={() => setFilterSelected(filter)}
               className={`${
