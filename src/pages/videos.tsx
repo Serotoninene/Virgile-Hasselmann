@@ -5,6 +5,7 @@ import { useScroll } from "framer-motion";
 import SmoothScroll from "@src/components/Utils/SmoothScroll";
 import Filters from "@src/components/Videos/Filters";
 import VideoMiniature from "@src/components/Videos/VideoMiniature";
+import Footer from "@src/components/Utils/Footer";
 
 const shortPadding = "80px";
 const bigPadding = "344px";
@@ -120,29 +121,32 @@ const Videos = (): JSX.Element => {
 
   return (
     <SmoothScroll>
-      <div id="Videos" className="pt-16 xs:pt-[88px]">
-        <Filters
-          filterSelected={filterSelected}
-          setFilterSelected={setFilterSelected}
-        />
-        <div className="px-4 lg:grid grid-cols-1 sm:grid-cols-12 sm:px-6">
-          {data.map((d, idx) => (
-            <div
-              key={idx}
-              className={`pt-4 ${
-                idx < positions.length
-                  ? positions[idx]
-                  : positions[idx % positions.length]
-              }`}
-            >
-              <VideoMiniature
-                placeholder={d.placeholder_ld}
-                scrollYProgress={scrollYProgress}
-              />
-            </div>
-          ))}
+      <>
+        <div id="Videos" className="pt-16 xs:pt-[88px]">
+          <Filters
+            filterSelected={filterSelected}
+            setFilterSelected={setFilterSelected}
+          />
+          <div className="px-4 pb-16 lg:grid grid-cols-1 sm:grid-cols-12 sm:px-6">
+            {data.map((d, idx) => (
+              <div
+                key={idx}
+                className={`pt-4 ${
+                  idx < positions.length
+                    ? positions[idx]
+                    : positions[idx % positions.length]
+                }`}
+              >
+                <VideoMiniature
+                  placeholder={d.placeholder_ld}
+                  scrollYProgress={scrollYProgress}
+                />
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+        <Footer />
+      </>
     </SmoothScroll>
   );
 };
