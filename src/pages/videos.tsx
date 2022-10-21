@@ -6,6 +6,101 @@ import SmoothScroll from "@src/components/Utils/SmoothScroll";
 import Filters from "@src/components/Videos/Filters";
 import VideoMiniature from "@src/components/Videos/VideoMiniature";
 
+const shortPadding = "80px";
+const bigPadding = "344px";
+
+const positions = [
+  `col-start-2 col-end-7 lg:pt-16`,
+  `col-start-8 col-end-13 lg:pr-8 lg:pt-[${bigPadding}]`,
+  `col-start-3 col-end-9 lg:pt-[${shortPadding}]`,
+  `col-start-6 col-end-12 lg:pt-[${shortPadding}]`,
+  `col-span-6 lg:pt-[${shortPadding}]`,
+  `col-start-6 col-end-12 lg:pt-[${shortPadding}]`,
+];
+
+const data = [
+  {
+    date: "08/09/2021",
+    client: "Mitsubichi",
+    titre: "Holding Hands",
+    placeholder_ld: "/assets/photos/hands_holding.png",
+    placeholder_hd: "/assets/photos/hands_holding.png",
+    video: "/assets/videos/hands_holding.mp4",
+  },
+  {
+    date: "08/09/2021",
+    client: "Mitsubichi",
+    titre: "Holding Hands",
+    placeholder_ld: "/assets/photos/hands_holding.png",
+    placeholder_hd: "/assets/photos/hands_holding.png",
+    video: "/assets/videos/hands_holding.mp4",
+  },
+  {
+    date: "08/09/2021",
+    client: "Mitsubichi",
+    titre: "Holding Hands",
+    placeholder_ld: "/assets/photos/hands_holding.png",
+    placeholder_hd: "/assets/photos/hands_holding.png",
+    video: "/assets/videos/hands_holding.mp4",
+  },
+  {
+    date: "08/09/2021",
+    client: "Mitsubichi",
+    titre: "Holding Hands",
+    placeholder_ld: "/assets/photos/hands_holding.png",
+    placeholder_hd: "/assets/photos/hands_holding.png",
+    video: "/assets/videos/hands_holding.mp4",
+  },
+  {
+    date: "08/09/2021",
+    client: "Mitsubichi",
+    titre: "Holding Hands",
+    placeholder_ld: "/assets/photos/hands_holding.png",
+    placeholder_hd: "/assets/photos/hands_holding.png",
+    video: "/assets/videos/hands_holding.mp4",
+  },
+  {
+    date: "08/09/2021",
+    client: "Mitsubichi",
+    titre: "Holding Hands",
+    placeholder_ld: "/assets/photos/hands_holding.png",
+    placeholder_hd: "/assets/photos/hands_holding.png",
+    video: "/assets/videos/hands_holding.mp4",
+  },
+  {
+    date: "08/09/2021",
+    client: "Mitsubichi",
+    titre: "Holding Hands",
+    placeholder_ld: "/assets/photos/hands_holding.png",
+    placeholder_hd: "/assets/photos/hands_holding.png",
+    video: "/assets/videos/hands_holding.mp4",
+  },
+  {
+    date: "08/09/2021",
+    client: "Mitsubichi",
+    titre: "Holding Hands",
+    placeholder_ld: "/assets/photos/hands_holding.png",
+    placeholder_hd: "/assets/photos/hands_holding.png",
+    video: "/assets/videos/hands_holding.mp4",
+  },
+  {
+    date: "08/09/2021",
+    client: "Mitsubichi",
+    titre: "Holding Hands",
+    placeholder_ld: "/assets/photos/hands_holding.png",
+    placeholder_hd: "/assets/photos/hands_holding.png",
+    video: "/assets/videos/hands_holding.mp4",
+  },
+  {
+    date: "08/09/2021",
+    client: "Mitsubichi",
+    titre: "Holding Hands",
+    placeholder_ld: "/assets/photos/hands_holding.png",
+    placeholder_hd: "/assets/photos/hands_holding.png",
+    video: "/assets/videos/hands_holding.mp4",
+  },
+];
+
 const Videos = (): JSX.Element => {
   const { scrollYProgress } = useScroll();
   const [filterSelected, setFilterSelected] = useState<string>("Films");
@@ -30,46 +125,22 @@ const Videos = (): JSX.Element => {
           filterSelected={filterSelected}
           setFilterSelected={setFilterSelected}
         />
-        <div className="px-4 pt-4 lg:grid grid-cols-1 sm:grid-cols-12 sm:px-6">
-          <div className="col-span-5 lg:pt-16">
-            <VideoMiniature
-              placeholder="/assets/photos/hands_holding.png"
-              scrollYProgress={scrollYProgress}
-            />
-          </div>
-          <div></div>
-          <div className="col-span-6 lg:pt-[336px]">
-            <VideoMiniature
-              placeholder="/assets/photos/hands_holding.png"
-              scrollYProgress={scrollYProgress}
-            />
-          </div>
-          <div className="col-start-3 col-end-9 lg:pt-16">
-            <VideoMiniature
-              placeholder="/assets/photos/hands_holding.png"
-              scrollYProgress={scrollYProgress}
-            />
-          </div>
-
-          <div className="col-span-5 lg:pt-16">
-            <VideoMiniature
-              placeholder="/assets/photos/hands_holding.png"
-              scrollYProgress={scrollYProgress}
-            />
-          </div>
-          <div></div>
-          <div className="col-span-6 lg:pt-[336px]">
-            <VideoMiniature
-              placeholder="/assets/photos/hands_holding.png"
-              scrollYProgress={scrollYProgress}
-            />
-          </div>
-          <div className="col-start-3 col-end-9 lg:pt-16">
-            <VideoMiniature
-              placeholder="/assets/photos/hands_holding.png"
-              scrollYProgress={scrollYProgress}
-            />
-          </div>
+        <div className="px-4 lg:grid grid-cols-1 sm:grid-cols-12 sm:px-6">
+          {data.map((d, idx) => (
+            <div
+              key={idx}
+              className={`pt-4 ${
+                idx < positions.length
+                  ? positions[idx]
+                  : positions[idx % positions.length]
+              }`}
+            >
+              <VideoMiniature
+                placeholder={d.placeholder_ld}
+                scrollYProgress={scrollYProgress}
+              />
+            </div>
+          ))}
         </div>
       </div>
     </SmoothScroll>

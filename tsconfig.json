@@ -20,7 +20,8 @@
       "@src/*": ["./src/*"],
       "@public/*": ["./public/*"],
       "@components/*": ["./src/components/*"],
-      "@pages/*": ["./src/pages/*"]
+      "@pages/*": ["./src/pages/*"],
+      "@hooks/*": ["./src/hooks/*"]
     },
     "typeRoots": ["./types"]
   },

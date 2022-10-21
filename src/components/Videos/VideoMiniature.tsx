@@ -35,7 +35,7 @@ const VideoMiniature = ({
 }: VideoMiniatureProps) => {
   let distance = -25;
   const { width } = useWindowSize();
-  width! < 768 ? (distance = -25) : (distance = -35);
+  width! < 768 ? (distance = -25) : (distance = -55);
   const y = useParallax(scrollYProgress, distance);
 
   return (
@@ -48,7 +48,7 @@ const VideoMiniature = ({
       <motion.div className="overflow-hidden" variants={photoAnim}>
         <motion.div
           className="relative h-[184px] sm:h-[336px]"
-          style={{ y, scale: 1.2 }}
+          style={{ y, scale: 1.5 }}
         >
           <Image
             src={placeholder}
