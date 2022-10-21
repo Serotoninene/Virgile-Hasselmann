@@ -68,7 +68,7 @@ export default function Footer() {
       <div className="hidden col-span-4 text-sm md:block">
         Mardi 4 Octobre, 16:02
       </div>
-      <div className="hidden col-span-4  justify-between text-sm md:flex border">
+      <div className="hidden col-span-4 justify-between text-sm md:flex">
         <p>@VirgileHasselman, 2022</p>
         <div className="w-2 h-2 bg-light mt-1"></div>
       </div>

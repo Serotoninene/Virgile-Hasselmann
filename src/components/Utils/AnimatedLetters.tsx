@@ -32,7 +32,13 @@ const AnimatedLetters = ({
   };
 
   const letterAnim = {
-    hidden: { y: 400 },
+    hidden: {
+      y: 400,
+      transition: {
+        ease: ease,
+        duration: duration,
+      },
+    },
     show: {
       y: 0,
       transition: {
@@ -43,12 +49,14 @@ const AnimatedLetters = ({
   };
 
   const words = string.split(" ");
+  console.log(string);
+  console.log(words);
 
   return (
     <motion.span
       variants={containerAnim}
       initial="hidden"
-      animate={start && "show"}
+      animate={start ? "show" : "hidden"}
       key={string}
       className="overflow-hidden inline-block align-bottom"
     >
@@ -62,7 +70,7 @@ const AnimatedLetters = ({
             >
               {letter}
             </motion.span>
-          ))}
+          ))}{" "}
         </span>
       ))}
     </motion.span>
