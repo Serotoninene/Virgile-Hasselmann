@@ -63,8 +63,8 @@ const VideoMiniature = ({
         className="grid grid-cols-12 px-1 pt-2 text-sm"
       >
         <p className="col-span-4">08/09/2021</p>
-        <p className="col-span-3">Client</p>
-        <p className="col-span-5">Titre de l’oeuvre</p>
+        <p className="col-span-4 xs:col-span-5">Client</p>
+        <p className="col-span-4 xs:col-span-3">Titre de l’oeuvre</p>
       </motion.div>
     </motion.div>
   );
