@@ -4,17 +4,20 @@ import AnimatedLetters from "@src/components/Utils/AnimatedLetters";
 import { motion } from "framer-motion";
 
 interface FiltersProps {
+  filters: string[];
   filterSelected: string;
   setFilterSelected: (e: string) => void;
 }
 
-const filterLinks = ["Films", "Corporate", "Musique"];
-
-const Filters = ({ filterSelected, setFilterSelected }: FiltersProps) => {
+const Filters = ({
+  filters,
+  filterSelected,
+  setFilterSelected,
+}: FiltersProps) => {
   return (
     <div className="flex text-2xl sm:justify-center sm:text-5xl">
       <ul className="flex">
-        {filterLinks.map((filter, idx) => (
+        {filters.map((filter, idx) => (
           <div key={filter} className="flex">
             <li
               onClick={() => setFilterSelected(filter)}
@@ -28,7 +31,7 @@ const Filters = ({ filterSelected, setFilterSelected }: FiltersProps) => {
                 stagger={0.01}
               />
             </li>
-            {idx !== filterLinks.length - 1 && (
+            {idx !== filters.length - 1 && (
               <motion.li
                 initial={{ opacity: 0 }}
                 animate={{

@@ -20,12 +20,12 @@ const containerAnim = {
 };
 
 const photoAnim = {
-  hidden: { y: "-100%" },
+  hidden: { y: "-100%", transition: { duration: 0.4, ease } },
   visible: { y: 0, transition: { duration, ease } },
 };
 
 const textAnim = {
-  hidden: { opacity: 0 },
+  hidden: { opacity: 0, transition: { duration, ease } },
   visible: { opacity: 1, transition: { duration, ease } },
 };
 
@@ -43,6 +43,7 @@ const VideoMiniature = ({
       variants={containerAnim}
       initial="hidden"
       animate="visible"
+      exit="hidden"
       className="overflow-hidden"
     >
       <motion.div className="overflow-hidden" variants={photoAnim}>
