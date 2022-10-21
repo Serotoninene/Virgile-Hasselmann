@@ -19,7 +19,7 @@ interface DataUnit {
 }
 
 const positions = [
-  `col-start-2 col-end-7 lg:pt-16`,
+  `col-start-1 col-end-6 lg:pt-16`,
   `col-start-8 col-end-13 lg:pt-[344px]`,
   `col-start-3 col-end-9 lg:pt-[80px]`,
   `col-start-6 col-end-12 lg:pt-[80px]`,
@@ -65,6 +65,51 @@ const data = [
     placeholder_hd: "/assets/photos/hands_holding.png",
     video: "/assets/videos/hands_holding.mp4",
     category: filters[0],
+  },
+  {
+    date: "08/09/2021",
+    client: "Mitsubichi",
+    titre: "Holding Hands",
+    placeholder_ld: "/assets/photos/girl_portrait.png",
+    placeholder_hd: "/assets/photos/girl_portrait.png",
+    video: "/assets/videos/hands_holding.mp4",
+    category: filters[1],
+  },
+  {
+    date: "08/09/2021",
+    client: "Mitsubichi",
+    titre: "Holding Hands",
+    placeholder_ld: "/assets/photos/girl_portrait.png",
+    placeholder_hd: "/assets/photos/girl_portrait.png",
+    video: "/assets/videos/hands_holding.mp4",
+    category: filters[1],
+  },
+  {
+    date: "08/09/2021",
+    client: "Mitsubichi",
+    titre: "Holding Hands",
+    placeholder_ld: "/assets/photos/girl_portrait.png",
+    placeholder_hd: "/assets/photos/girl_portrait.png",
+    video: "/assets/videos/hands_holding.mp4",
+    category: filters[1],
+  },
+  {
+    date: "08/09/2021",
+    client: "Mitsubichi",
+    titre: "Holding Hands",
+    placeholder_ld: "/assets/photos/girl_portrait.png",
+    placeholder_hd: "/assets/photos/girl_portrait.png",
+    video: "/assets/videos/hands_holding.mp4",
+    category: filters[1],
+  },
+  {
+    date: "08/09/2021",
+    client: "Mitsubichi",
+    titre: "Holding Hands",
+    placeholder_ld: "/assets/photos/girl_portrait.png",
+    placeholder_hd: "/assets/photos/girl_portrait.png",
+    video: "/assets/videos/hands_holding.mp4",
+    category: filters[1],
   },
   {
     date: "08/09/2021",
@@ -160,7 +205,7 @@ const data = [
 
 const Videos = (): JSX.Element => {
   const { scrollYProgress } = useScroll();
-  const [filterSelected, setFilterSelected] = useState<string>(filters[0]);
+  const [filterSelected, setFilterSelected] = useState<string>(filters[1]);
   const [dataSelected, setDataSelected] = useState<DataUnit[]>([]);
 
   useEffect(() => {
