@@ -2,6 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { motion } from "framer-motion";
 // Context
 import { CursorContext } from "@src/contexts/CursorProvider";
+import AnimatedLetters from "./AnimatedLetters";
 
 export default function CustomCursor() {
   const { cursorType } = useContext(CursorContext);
@@ -9,6 +10,10 @@ export default function CustomCursor() {
     x: 200,
     y: 200,
   });
+
+  // different types
+  let scrollIndicator = cursorType === "scrollIndicator";
+  let hover = cursorType === "hover";
 
   const onMouseMove = (event: MouseEvent) => {
     const { clientX: x, clientY: y } = event;
@@ -32,7 +37,22 @@ export default function CustomCursor() {
         top: mousePosition.y,
         left: mousePosition.x,
       }}
-      transition={{ type: "spring", damping: 100, mass: 0.25, stiffness: 1000 }}
-    ></motion.div>
+      style={{
+        width: scrollIndicator || hover ? "56px" : "16px",
+        height: scrollIndicator || hover ? "56px" : "16px",
+      }}
+      transition={{
+        type: "spring",
+        damping: 100,
+        mass: 0.25,
+        stiffness: 1000,
+      }}
+    >
+      {cursorType === "scrollIndicator" && (
+        <p className="text-dark text-sm">
+          <AnimatedLetters string="scroll" />
+        </p>
+      )}
+    </motion.div>
   );
 }

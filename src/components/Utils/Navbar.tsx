@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 // Nextjs
-import Link from "next/link";
 import { useRouter } from "next/router";
 // framer motion
 import { motion } from "framer-motion";
+// Components
+import CustomLinks from "./CustomLinks";
 
 const links = [
   { title: "Videos", href: "/videos" },
@@ -48,7 +49,7 @@ export default function Navbar() {
       className="flex justify-between py-2 px-4 sm:py-4 sm:px-6"
     >
       <motion.div variants={itemsAnim} className="font-icon">
-        <Link href="/">VH</Link>
+        <CustomLinks href="/">VH</CustomLinks>
       </motion.div>
       <ul className="hidden xs:flex">
         {isLinks &&
@@ -60,7 +61,7 @@ export default function Navbar() {
                 pathname === link.href ? "font-bold" : "font-light"
               }`}
             >
-              <Link href={link.href}>{link.title}</Link>
+              <CustomLinks href={link.href}>{link.title}</CustomLinks>
             </motion.li>
           ))}
       </ul>

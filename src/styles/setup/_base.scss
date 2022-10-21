@@ -44,12 +44,12 @@ a {
 }
 
 #CustomCursor {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: fixed;
   pointer-events: none;
   z-index: 99;
-  width: 16px;
-  height: 16px;
   background-color: #ddd5cb;
   border-radius: 100%;
   transform: translate(-50%, -50%);
