@@ -2,21 +2,18 @@ import React, { useState, useEffect } from "react";
 // Framer motion
 import { useScroll } from "framer-motion";
 // Component
-import SmoothScroll from "@src/components/Utils/SmoothScroll";
 import Filters from "@src/components/Videos/Filters";
 import VideoMiniature from "@src/components/Videos/VideoMiniature";
 import Footer from "@src/components/Utils/Footer";
-
-const shortPadding = "80px";
-const bigPadding = "344px";
+import SmoothScroll from "@src/components/Utils/SmoothScroll";
 
 const positions = [
   `col-start-2 col-end-7 lg:pt-16`,
-  `col-start-8 col-end-13 lg:pr-8 lg:pt-[${bigPadding}]`,
-  `col-start-3 col-end-9 lg:pt-[${shortPadding}]`,
-  `col-start-6 col-end-12 lg:pt-[${shortPadding}]`,
-  `col-span-6 lg:pt-[${shortPadding}]`,
-  `col-start-6 col-end-12 lg:pt-[${shortPadding}]`,
+  `col-start-8 col-end-13 lg:pt-[344px]`,
+  `col-start-3 col-end-9 lg:pt-[80px]`,
+  `col-start-6 col-end-12 lg:pt-[80px]`,
+  `col-span-6 lg:pt-[80px]`,
+  `col-start-6 col-end-12 lg:pt-[80px]`,
 ];
 
 const data = [
@@ -127,7 +124,7 @@ const Videos = (): JSX.Element => {
             filterSelected={filterSelected}
             setFilterSelected={setFilterSelected}
           />
-          <div className="px-4 pb-16 lg:grid grid-cols-1 sm:grid-cols-12 sm:px-6">
+          <div className="px-4 lg:grid grid-cols-1 sm:grid-cols-12 sm:px-6 ">
             {data.map((d, idx) => (
               <div
                 key={idx}
