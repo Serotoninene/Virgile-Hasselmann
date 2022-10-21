@@ -20,7 +20,7 @@ const contactsLinks = [
 export default function Footer() {
   const { pathname } = useRouter();
   return (
-    <div className="px-4 pt-6  md:pb-4 grid-cols-12 md:grid">
+    <div className="px-4 pt-6  md:pb-4 grid-cols-12 sm:px-6 md:grid">
       {/* Virgile's presentation */}
       <div className="pb-6 col-span-3">
         <h3 className="font-black mb-4 md:mb-12">Virgile Hasselmann</h3>

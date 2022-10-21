@@ -4,6 +4,7 @@ import { useScroll } from "framer-motion";
 // Component
 import Filters from "@src/components/Videos/Filters";
 import VideoMiniature from "@src/components/Videos/VideoMiniature";
+import ScrollTopButton from "@src/components/Videos/ScrollTopButton";
 import Footer from "@src/components/Utils/Footer";
 import SmoothScroll from "@src/components/Utils/SmoothScroll";
 
@@ -25,78 +26,78 @@ const data = [
     placeholder_hd: "/assets/photos/hands_holding.png",
     video: "/assets/videos/hands_holding.mp4",
   },
-  {
-    date: "08/09/2021",
-    client: "Mitsubichi",
-    titre: "Holding Hands",
-    placeholder_ld: "/assets/photos/hands_holding.png",
-    placeholder_hd: "/assets/photos/hands_holding.png",
-    video: "/assets/videos/hands_holding.mp4",
-  },
-  {
-    date: "08/09/2021",
-    client: "Mitsubichi",
-    titre: "Holding Hands",
-    placeholder_ld: "/assets/photos/hands_holding.png",
-    placeholder_hd: "/assets/photos/hands_holding.png",
-    video: "/assets/videos/hands_holding.mp4",
-  },
-  {
-    date: "08/09/2021",
-    client: "Mitsubichi",
-    titre: "Holding Hands",
-    placeholder_ld: "/assets/photos/hands_holding.png",
-    placeholder_hd: "/assets/photos/hands_holding.png",
-    video: "/assets/videos/hands_holding.mp4",
-  },
-  {
-    date: "08/09/2021",
-    client: "Mitsubichi",
-    titre: "Holding Hands",
-    placeholder_ld: "/assets/photos/hands_holding.png",
-    placeholder_hd: "/assets/photos/hands_holding.png",
-    video: "/assets/videos/hands_holding.mp4",
-  },
-  {
-    date: "08/09/2021",
-    client: "Mitsubichi",
-    titre: "Holding Hands",
-    placeholder_ld: "/assets/photos/hands_holding.png",
-    placeholder_hd: "/assets/photos/hands_holding.png",
-    video: "/assets/videos/hands_holding.mp4",
-  },
-  {
-    date: "08/09/2021",
-    client: "Mitsubichi",
-    titre: "Holding Hands",
-    placeholder_ld: "/assets/photos/hands_holding.png",
-    placeholder_hd: "/assets/photos/hands_holding.png",
-    video: "/assets/videos/hands_holding.mp4",
-  },
-  {
-    date: "08/09/2021",
-    client: "Mitsubichi",
-    titre: "Holding Hands",
-    placeholder_ld: "/assets/photos/hands_holding.png",
-    placeholder_hd: "/assets/photos/hands_holding.png",
-    video: "/assets/videos/hands_holding.mp4",
-  },
-  {
-    date: "08/09/2021",
-    client: "Mitsubichi",
-    titre: "Holding Hands",
-    placeholder_ld: "/assets/photos/hands_holding.png",
-    placeholder_hd: "/assets/photos/hands_holding.png",
-    video: "/assets/videos/hands_holding.mp4",
-  },
-  {
-    date: "08/09/2021",
-    client: "Mitsubichi",
-    titre: "Holding Hands",
-    placeholder_ld: "/assets/photos/hands_holding.png",
-    placeholder_hd: "/assets/photos/hands_holding.png",
-    video: "/assets/videos/hands_holding.mp4",
-  },
+  // {
+  //   date: "08/09/2021",
+  //   client: "Mitsubichi",
+  //   titre: "Holding Hands",
+  //   placeholder_ld: "/assets/photos/hands_holding.png",
+  //   placeholder_hd: "/assets/photos/hands_holding.png",
+  //   video: "/assets/videos/hands_holding.mp4",
+  // },
+  // {
+  //   date: "08/09/2021",
+  //   client: "Mitsubichi",
+  //   titre: "Holding Hands",
+  //   placeholder_ld: "/assets/photos/hands_holding.png",
+  //   placeholder_hd: "/assets/photos/hands_holding.png",
+  //   video: "/assets/videos/hands_holding.mp4",
+  // },
+  // {
+  //   date: "08/09/2021",
+  //   client: "Mitsubichi",
+  //   titre: "Holding Hands",
+  //   placeholder_ld: "/assets/photos/hands_holding.png",
+  //   placeholder_hd: "/assets/photos/hands_holding.png",
+  //   video: "/assets/videos/hands_holding.mp4",
+  // },
+  // {
+  //   date: "08/09/2021",
+  //   client: "Mitsubichi",
+  //   titre: "Holding Hands",
+  //   placeholder_ld: "/assets/photos/hands_holding.png",
+  //   placeholder_hd: "/assets/photos/hands_holding.png",
+  //   video: "/assets/videos/hands_holding.mp4",
+  // },
+  // {
+  //   date: "08/09/2021",
+  //   client: "Mitsubichi",
+  //   titre: "Holding Hands",
+  //   placeholder_ld: "/assets/photos/hands_holding.png",
+  //   placeholder_hd: "/assets/photos/hands_holding.png",
+  //   video: "/assets/videos/hands_holding.mp4",
+  // },
+  // {
+  //   date: "08/09/2021",
+  //   client: "Mitsubichi",
+  //   titre: "Holding Hands",
+  //   placeholder_ld: "/assets/photos/hands_holding.png",
+  //   placeholder_hd: "/assets/photos/hands_holding.png",
+  //   video: "/assets/videos/hands_holding.mp4",
+  // },
+  // {
+  //   date: "08/09/2021",
+  //   client: "Mitsubichi",
+  //   titre: "Holding Hands",
+  //   placeholder_ld: "/assets/photos/hands_holding.png",
+  //   placeholder_hd: "/assets/photos/hands_holding.png",
+  //   video: "/assets/videos/hands_holding.mp4",
+  // },
+  // {
+  //   date: "08/09/2021",
+  //   client: "Mitsubichi",
+  //   titre: "Holding Hands",
+  //   placeholder_ld: "/assets/photos/hands_holding.png",
+  //   placeholder_hd: "/assets/photos/hands_holding.png",
+  //   video: "/assets/videos/hands_holding.mp4",
+  // },
+  // {
+  //   date: "08/09/2021",
+  //   client: "Mitsubichi",
+  //   titre: "Holding Hands",
+  //   placeholder_ld: "/assets/photos/hands_holding.png",
+  //   placeholder_hd: "/assets/photos/hands_holding.png",
+  //   video: "/assets/videos/hands_holding.mp4",
+  // },
 ];
 
 const Videos = (): JSX.Element => {
@@ -124,7 +125,7 @@ const Videos = (): JSX.Element => {
             filterSelected={filterSelected}
             setFilterSelected={setFilterSelected}
           />
-          <div className="px-4 lg:grid grid-cols-1 sm:grid-cols-12 sm:px-6 ">
+          <div className="lg:grid grid-cols-1 sm:grid-cols-12 px-4 sm:px-8 ">
             {data.map((d, idx) => (
               <div
                 key={idx}
@@ -142,6 +143,7 @@ const Videos = (): JSX.Element => {
             ))}
           </div>
         </div>
+        <ScrollTopButton />
         <Footer />
       </>
     </SmoothScroll>
