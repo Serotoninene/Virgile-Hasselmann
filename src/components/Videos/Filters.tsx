@@ -1,4 +1,7 @@
 import React from "react";
+// Component
+import AnimatedLetters from "@src/components/Utils/AnimatedLetters";
+import { motion } from "framer-motion";
 
 interface FiltersProps {
   filterSelected: string;
@@ -19,9 +22,23 @@ const Filters = ({ filterSelected, setFilterSelected }: FiltersProps) => {
                 filterSelected === filter ? "text-blue font-black" : ""
               } mx-1`}
             >
-              {filter}
+              <AnimatedLetters
+                string={filter}
+                delay={0.1 * idx}
+                stagger={0.01}
+              />
             </li>
-            {idx !== filterLinks.length - 1 && <li>/</li>}
+            {idx !== filterLinks.length - 1 && (
+              <motion.li
+                initial={{ opacity: 0 }}
+                animate={{
+                  opacity: 1,
+                  transition: { delay: 1, ease: "easeOut" },
+                }}
+              >
+                /
+              </motion.li>
+            )}
           </div>
         ))}
       </ul>
