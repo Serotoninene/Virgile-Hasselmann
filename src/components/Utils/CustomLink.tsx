@@ -6,7 +6,7 @@ interface Props {
   href: string;
 }
 
-export default function CustomLinks({ children, href }: Props) {
+export default function CustomLink({ children, href }: Props) {
   return (
     <Link href={href}>
       <a>{children}</a>

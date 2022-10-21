@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 // framer motion
 import { motion } from "framer-motion";
 // Components
-import CustomLinks from "./CustomLinks";
+import CustomLink from "./CustomLink";
 
 const links = [
   { title: "Videos", href: "/videos" },
@@ -49,7 +49,7 @@ export default function Navbar() {
       className="flex justify-between py-2 px-4 sm:py-4 sm:px-6"
     >
       <motion.div variants={itemsAnim} className="font-icon">
-        <CustomLinks href="/">VH</CustomLinks>
+        <CustomLink href="/">VH</CustomLink>
       </motion.div>
       <ul className="hidden xs:flex">
         {isLinks &&
@@ -61,7 +61,7 @@ export default function Navbar() {
                 pathname === link.href ? "font-bold" : "font-light"
               }`}
             >
-              <CustomLinks href={link.href}>{link.title}</CustomLinks>
+              <CustomLink href={link.href}>{link.title}</CustomLink>
             </motion.li>
           ))}
       </ul>
