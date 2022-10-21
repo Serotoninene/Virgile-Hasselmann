@@ -1,15 +1,19 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import type { NextPage } from "next";
+// framer motion
+import { useScroll } from "framer-motion";
+// Context
+import { CursorContext } from "@src/contexts/CursorProvider";
 // Components
 import DarkGradients from "@src/components/Home/DarkGradients";
 import HeroVideo from "@src/components/Home/HeroVideo";
 import MainMenu from "@src/components/Home/MainMenu";
-import { useScroll } from "framer-motion";
+// Custom Hook
 import useWindowSize from "@src/hooks/useWindowSize";
-//
 
 const Home: NextPage = () => {
   const { scrollY } = useScroll();
+  const { changeCursorType } = useContext(CursorContext);
   const [goToMainMenu, setGoToMainMenu] = useState<boolean>(false);
 
   useEffect(() => {
@@ -18,8 +22,10 @@ const Home: NextPage = () => {
 
       if (scrollY.getPrevious() - latest < 0) {
         setGoToMainMenu(true);
+        changeCursorType("pointer");
       } else {
         setGoToMainMenu(false);
+        changeCursorType("scrollIndicator");
       }
     });
   }, [scrollY]);

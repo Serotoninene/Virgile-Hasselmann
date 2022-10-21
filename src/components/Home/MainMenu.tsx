@@ -72,8 +72,6 @@ const MenuSection = ({
         // }}
         className="relative overflow-hidden flex justify-center items-center h-3/6 md:h-full md:w-3/6  "
         onHoverStart={() => setHoveredSection(sectionName)}
-        onMouseEnter={() => changeCursorType("pointer")}
-        onMouseLeave={() => changeCursorType("scrollIndicator")}
       >
         {/* LinkButton */}
         <div
