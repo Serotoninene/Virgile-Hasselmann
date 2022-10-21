@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 // Framer motion
 import { AnimatePresence, useScroll } from "framer-motion";
+// Context
+import { CursorContext } from "@src/contexts/CursorProvider";
 // Component
 import Filters from "@src/components/Videos/Filters";
 import VideoMiniature from "@src/components/Videos/VideoMiniature";
@@ -204,6 +206,7 @@ const data = [
 ];
 
 const Videos = (): JSX.Element => {
+  const { changeCursorType } = useContext(CursorContext);
   const { scrollYProgress } = useScroll();
   const [filterSelected, setFilterSelected] = useState<string>(filters[1]);
   const [dataSelected, setDataSelected] = useState<DataUnit[]>([]);
@@ -219,6 +222,8 @@ const Videos = (): JSX.Element => {
         }),
       500
     );
+
+    changeCursorType("pointer");
   }, []);
 
   useEffect(() => {

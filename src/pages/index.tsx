@@ -17,6 +17,10 @@ const Home: NextPage = () => {
   const [goToMainMenu, setGoToMainMenu] = useState<boolean>(false);
 
   useEffect(() => {
+    changeCursorType("scrollIndicator");
+  }, []);
+
+  useEffect(() => {
     return scrollY.onChange((latest) => {
       if (latest < 0) return;
 
