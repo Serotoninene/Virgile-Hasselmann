@@ -49,8 +49,6 @@ const AnimatedLetters = ({
   };
 
   const words = string.split(" ");
-  console.log(string);
-  console.log(words);
 
   return (
     <motion.span

@@ -1,13 +1,17 @@
+import "../styles/globals.scss";
 import type { AppProps } from "next/app";
+// Context
+import { CursorProvider } from "@src/contexts/CursorProvider";
 // Components
 import Layout from "@src/components/Utils/layout";
-import "../styles/globals.scss";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <CursorProvider>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </CursorProvider>
   );
 }
 

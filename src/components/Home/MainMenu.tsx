@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Link from "next/link";
+// Context
+import { CursorContext } from "@src/contexts/CursorProvider";
 // framer motion
 import { motion } from "framer-motion";
 // component
@@ -55,6 +57,8 @@ const MenuSection = ({
   hoveredSection,
   setHoveredSection,
 }: MenuSectionProps) => {
+  const { changeCursorType } = useContext(CursorContext);
+
   return (
     <Link href={`/${sectionName.toLowerCase()}`}>
       <motion.div
@@ -68,9 +72,14 @@ const MenuSection = ({
         // }}
         className="relative overflow-hidden flex justify-center items-center h-3/6 md:h-full md:w-3/6  "
         onHoverStart={() => setHoveredSection(sectionName)}
+        onMouseEnter={() => changeCursorType("pointer")}
       >
         {/* LinkButton */}
-        <div className="z-10">
+        <div
+          className="z-10"
+          onMouseEnter={() => changeCursorType("hover")}
+          onMouseLeave={() => changeCursorType("pointer")}
+        >
           <h2 className="text-3xl font-light">
             <AnimatedLetters string={sectionName} start={start} delay={0.7} />
           </h2>

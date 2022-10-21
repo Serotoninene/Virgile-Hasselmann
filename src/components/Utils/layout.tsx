@@ -2,6 +2,7 @@
 import Head from "next/head";
 // Components
 import Navbar from "./Navbar";
+import CustomCursor from "./CustomCursor";
 
 type Props = {
   children: JSX.Element;
@@ -18,6 +19,7 @@ const Layout = ({ children }: Props): JSX.Element => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <CustomCursor />
       <header className="fixed w-screen z-10">
         <Navbar />
       </header>
