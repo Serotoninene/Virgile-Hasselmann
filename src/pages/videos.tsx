@@ -36,8 +36,10 @@ const data = [
     date: "08/09/2021",
     client: "Mitsubichi",
     titre: "Holding Hands",
-    placeholder_ld: "/assets/photos/hands_holding.png",
-    placeholder_hd: "/assets/photos/hands_holding.png",
+    placeholder_ld:
+      "https://virgile-portfollio.s3.amazonaws.com/photos/hands_holding.png",
+    placeholder_hd:
+      "https://virgile-portfollio.s3.amazonaws.com/photos/hands_holding.png",
     video: "/assets/videos/hands_holding.mp4",
     category: filters[0],
   },
@@ -45,8 +47,10 @@ const data = [
     date: "08/09/2021",
     client: "Mitsubichi",
     titre: "Holding Hands",
-    placeholder_ld: "/assets/photos/hands_holding.png",
-    placeholder_hd: "/assets/photos/hands_holding.png",
+    placeholder_ld:
+      "https://virgile-portfollio.s3.amazonaws.com/photos/hands_holding.png",
+    placeholder_hd:
+      "https://virgile-portfollio.s3.amazonaws.com/photos/hands_holding.png",
     video: "/assets/videos/hands_holding.mp4",
     category: filters[0],
   },
@@ -54,8 +58,10 @@ const data = [
     date: "08/09/2021",
     client: "Mitsubichi",
     titre: "Holding Hands",
-    placeholder_ld: "/assets/photos/hands_holding.png",
-    placeholder_hd: "/assets/photos/hands_holding.png",
+    placeholder_ld:
+      "https://virgile-portfollio.s3.amazonaws.com/photos/hands_holding.png",
+    placeholder_hd:
+      "https://virgile-portfollio.s3.amazonaws.com/photos/hands_holding.png",
     video: "/assets/videos/hands_holding.mp4",
     category: filters[0],
   },
@@ -63,8 +69,10 @@ const data = [
     date: "08/09/2021",
     client: "Mitsubichi",
     titre: "Holding Hands",
-    placeholder_ld: "/assets/photos/hands_holding.png",
-    placeholder_hd: "/assets/photos/hands_holding.png",
+    placeholder_ld:
+      "https://virgile-portfollio.s3.amazonaws.com/photos/hands_holding.png",
+    placeholder_hd:
+      "https://virgile-portfollio.s3.amazonaws.com/photos/hands_holding.png",
     video: "/assets/videos/hands_holding.mp4",
     category: filters[0],
   },
@@ -72,8 +80,10 @@ const data = [
     date: "08/09/2021",
     client: "Mitsubichi",
     titre: "Holding Hands",
-    placeholder_ld: "/assets/photos/girl_portrait.png",
-    placeholder_hd: "/assets/photos/girl_portrait.png",
+    placeholder_ld:
+      "https://virgile-portfollio.s3.amazonaws.com/photos/girl_portrait.png",
+    placeholder_hd:
+      "https://virgile-portfollio.s3.amazonaws.com/photos/girl_portrait.png",
     video: "/assets/videos/hands_holding.mp4",
     category: filters[1],
   },
@@ -81,8 +91,10 @@ const data = [
     date: "08/09/2021",
     client: "Mitsubichi",
     titre: "Holding Hands",
-    placeholder_ld: "/assets/photos/girl_portrait.png",
-    placeholder_hd: "/assets/photos/girl_portrait.png",
+    placeholder_ld:
+      "https://virgile-portfollio.s3.amazonaws.com/photos/girl_portrait.png",
+    placeholder_hd:
+      "https://virgile-portfollio.s3.amazonaws.com/photos/girl_portrait.png",
     video: "/assets/videos/hands_holding.mp4",
     category: filters[1],
   },
@@ -90,8 +102,10 @@ const data = [
     date: "08/09/2021",
     client: "Mitsubichi",
     titre: "Holding Hands",
-    placeholder_ld: "/assets/photos/girl_portrait.png",
-    placeholder_hd: "/assets/photos/girl_portrait.png",
+    placeholder_ld:
+      "https://virgile-portfollio.s3.amazonaws.com/photos/girl_portrait.png",
+    placeholder_hd:
+      "https://virgile-portfollio.s3.amazonaws.com/photos/girl_portrait.png",
     video: "/assets/videos/hands_holding.mp4",
     category: filters[1],
   },
@@ -99,8 +113,10 @@ const data = [
     date: "08/09/2021",
     client: "Mitsubichi",
     titre: "Holding Hands",
-    placeholder_ld: "/assets/photos/girl_portrait.png",
-    placeholder_hd: "/assets/photos/girl_portrait.png",
+    placeholder_ld:
+      "https://virgile-portfollio.s3.amazonaws.com/photos/girl_portrait.png",
+    placeholder_hd:
+      "https://virgile-portfollio.s3.amazonaws.com/photos/girl_portrait.png",
     video: "/assets/videos/hands_holding.mp4",
     category: filters[1],
   },
@@ -108,8 +124,10 @@ const data = [
     date: "08/09/2021",
     client: "Mitsubichi",
     titre: "Holding Hands",
-    placeholder_ld: "/assets/photos/girl_portrait.png",
-    placeholder_hd: "/assets/photos/girl_portrait.png",
+    placeholder_ld:
+      "https://virgile-portfollio.s3.amazonaws.com/photos/girl_portrait.png",
+    placeholder_hd:
+      "https://virgile-portfollio.s3.amazonaws.com/photos/girl_portrait.png",
     video: "/assets/videos/hands_holding.mp4",
     category: filters[1],
   },
@@ -117,8 +135,10 @@ const data = [
     date: "08/09/2021",
     client: "Mitsubichi",
     titre: "Holding Hands",
-    placeholder_ld: "/assets/photos/girl_portrait.png",
-    placeholder_hd: "/assets/photos/girl_portrait.png",
+    placeholder_ld:
+      "https://virgile-portfollio.s3.amazonaws.com/photos/girl_portrait.png",
+    placeholder_hd:
+      "https://virgile-portfollio.s3.amazonaws.com/photos/girl_portrait.png",
     video: "/assets/videos/hands_holding.mp4",
     category: filters[1],
   },
@@ -126,8 +146,10 @@ const data = [
     date: "08/09/2021",
     client: "Mitsubichi",
     titre: "Holding Hands",
-    placeholder_ld: "/assets/photos/girl_portrait.png",
-    placeholder_hd: "/assets/photos/girl_portrait.png",
+    placeholder_ld:
+      "https://virgile-portfollio.s3.amazonaws.com/photos/girl_portrait.png",
+    placeholder_hd:
+      "https://virgile-portfollio.s3.amazonaws.com/photos/girl_portrait.png",
     video: "/assets/videos/hands_holding.mp4",
     category: filters[1],
   },
@@ -135,8 +157,10 @@ const data = [
     date: "08/09/2021",
     client: "Mitsubichi",
     titre: "Holding Hands",
-    placeholder_ld: "/assets/photos/girl_portrait.png",
-    placeholder_hd: "/assets/photos/girl_portrait.png",
+    placeholder_ld:
+      "https://virgile-portfollio.s3.amazonaws.com/photos/girl_portrait.png",
+    placeholder_hd:
+      "https://virgile-portfollio.s3.amazonaws.com/photos/girl_portrait.png",
     video: "/assets/videos/hands_holding.mp4",
     category: filters[1],
   },
@@ -144,8 +168,10 @@ const data = [
     date: "08/09/2021",
     client: "Mitsubichi",
     titre: "Holding Hands",
-    placeholder_ld: "/assets/photos/girl_portrait.png",
-    placeholder_hd: "/assets/photos/girl_portrait.png",
+    placeholder_ld:
+      "https://virgile-portfollio.s3.amazonaws.com/photos/girl_portrait.png",
+    placeholder_hd:
+      "https://virgile-portfollio.s3.amazonaws.com/photos/girl_portrait.png",
     video: "/assets/videos/hands_holding.mp4",
     category: filters[1],
   },
@@ -153,8 +179,10 @@ const data = [
     date: "08/09/2021",
     client: "Mitsubichi",
     titre: "Holding Hands",
-    placeholder_ld: "/assets/photos/heroVideo_placeholder.png",
-    placeholder_hd: "/assets/photos/heroVideo_placeholder.png",
+    placeholder_ld:
+      "https://virgile-portfollio.s3.amazonaws.com/photos/heroVideo_placeholder.png",
+    placeholder_hd:
+      "https://virgile-portfollio.s3.amazonaws.com/photos/heroVideo_placeholder.png",
     video: "/assets/videos/hands_holding.mp4",
     category: filters[2],
   },
@@ -162,8 +190,10 @@ const data = [
     date: "08/09/2021",
     client: "Mitsubichi",
     titre: "Holding Hands",
-    placeholder_ld: "/assets/photos/heroVideo_placeholder.png",
-    placeholder_hd: "/assets/photos/heroVideo_placeholder.png",
+    placeholder_ld:
+      "https://virgile-portfollio.s3.amazonaws.com/photos/heroVideo_placeholder.png",
+    placeholder_hd:
+      "https://virgile-portfollio.s3.amazonaws.com/photos/heroVideo_placeholder.png",
     video: "/assets/videos/hands_holding.mp4",
     category: filters[2],
   },
@@ -171,8 +201,10 @@ const data = [
     date: "08/09/2021",
     client: "Mitsubichi",
     titre: "Holding Hands",
-    placeholder_ld: "/assets/photos/heroVideo_placeholder.png",
-    placeholder_hd: "/assets/photos/heroVideo_placeholder.png",
+    placeholder_ld:
+      "https://virgile-portfollio.s3.amazonaws.com/photos/heroVideo_placeholder.png",
+    placeholder_hd:
+      "https://virgile-portfollio.s3.amazonaws.com/photos/heroVideo_placeholder.png",
     video: "/assets/videos/hands_holding.mp4",
     category: filters[2],
   },
@@ -180,8 +212,10 @@ const data = [
     date: "08/09/2021",
     client: "Mitsubichi",
     titre: "Holding Hands",
-    placeholder_ld: "/assets/photos/heroVideo_placeholder.png",
-    placeholder_hd: "/assets/photos/heroVideo_placeholder.png",
+    placeholder_ld:
+      "https://virgile-portfollio.s3.amazonaws.com/photos/heroVideo_placeholder.png",
+    placeholder_hd:
+      "https://virgile-portfollio.s3.amazonaws.com/photos/heroVideo_placeholder.png",
     video: "/assets/videos/hands_holding.mp4",
     category: filters[2],
   },
@@ -189,8 +223,10 @@ const data = [
     date: "08/09/2021",
     client: "Mitsubichi",
     titre: "Holding Hands",
-    placeholder_ld: "/assets/photos/heroVideo_placeholder.png",
-    placeholder_hd: "/assets/photos/heroVideo_placeholder.png",
+    placeholder_ld:
+      "https://virgile-portfollio.s3.amazonaws.com/photos/heroVideo_placeholder.png",
+    placeholder_hd:
+      "https://virgile-portfollio.s3.amazonaws.com/photos/heroVideo_placeholder.png",
     video: "/assets/videos/hands_holding.mp4",
     category: filters[2],
   },
@@ -198,8 +234,10 @@ const data = [
     date: "08/09/2021",
     client: "Mitsubichi",
     titre: "Holding Hands",
-    placeholder_ld: "/assets/photos/heroVideo_placeholder.png",
-    placeholder_hd: "/assets/photos/heroVideo_placeholder.png",
+    placeholder_ld:
+      "https://virgile-portfollio.s3.amazonaws.com/photos/heroVideo_placeholder.png",
+    placeholder_hd:
+      "https://virgile-portfollio.s3.amazonaws.com/photos/heroVideo_placeholder.png",
     video: "/assets/videos/hands_holding.mp4",
     category: filters[2],
   },

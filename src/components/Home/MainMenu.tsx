@@ -111,7 +111,7 @@ export default function MainMenu({ goToMainMenu }: MainMenuProps) {
     >
       <MenuSection
         start={goToMainMenu}
-        photo="/assets/photos/girl_portrait.png"
+        photo="https://virgile-portfollio.s3.amazonaws.com/photos/girl_portrait.png"
         sectionName="Videos"
         hoveredSection={hoveredSection}
         setHoveredSection={setHoveredSection}
@@ -119,7 +119,7 @@ export default function MainMenu({ goToMainMenu }: MainMenuProps) {
       />
       <MenuSection
         start={goToMainMenu}
-        photo="/assets/photos/hands_holding.png"
+        photo="https://virgile-portfollio.s3.amazonaws.com/photos/hands_holding.png"
         sectionName="Photos"
         hoveredSection={hoveredSection}
         setHoveredSection={setHoveredSection}
