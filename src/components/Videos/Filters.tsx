@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
+// framer motion
+import { motion } from "framer-motion";
+// Context
+import { CursorContext } from "@src/contexts/CursorProvider";
 // Component
 import AnimatedLetters from "@src/components/Utils/AnimatedLetters";
-import { motion } from "framer-motion";
 
 interface FiltersProps {
   filters: string[];
@@ -14,6 +17,8 @@ const Filters = ({
   filterSelected,
   setFilterSelected,
 }: FiltersProps) => {
+  const { changeCursorType } = useContext(CursorContext);
+
   return (
     <div className="flex text-2xl sm:justify-center sm:text-5xl">
       <ul className="flex">
@@ -21,6 +26,8 @@ const Filters = ({
           <div key={filter} className="flex">
             <li
               onClick={() => setFilterSelected(filter)}
+              onMouseEnter={() => changeCursorType("hover")}
+              onMouseLeave={() => changeCursorType("pointer")}
               className={`${
                 filterSelected === filter ? "text-blue font-black" : ""
               } mx-1`}

@@ -24,11 +24,11 @@ export default function CustomCursor({ width }: Props) {
     });
   };
 
-  useEffect(() => {
-    // different types
-    let scrollIndicator = cursorType === "scrollIndicator";
-    let hover = cursorType === "hover";
+  // different types
+  let scrollIndicator = cursorType === "scrollIndicator";
+  let hover = cursorType === "hover";
 
+  useEffect(() => {
     scrollIndicator || hover ? cursorSize.set(56) : cursorSize.set(8);
   }, [cursorType]);
 
@@ -49,6 +49,7 @@ export default function CustomCursor({ width }: Props) {
       style={{
         width: cursorSize,
         height: cursorSize,
+        mixBlendMode: hover ? "difference" : "normal",
       }}
       transition={{
         type: "spring",
