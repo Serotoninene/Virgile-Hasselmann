@@ -75,6 +75,7 @@ export default function HeroVideo() {
           src="/assets/videos/heroVideo.mp4"
           type="mp4"
           placeholder="/assets/photos/heroVideo_placeholder.png"
+          priority={true}
         />
       </div>
     </>
