@@ -4,7 +4,11 @@ import { motion, useMotionValue, useSpring } from "framer-motion";
 import { CursorContext } from "@src/contexts/CursorProvider";
 import AnimatedLetters from "./AnimatedLetters";
 
-export default function CustomCursor() {
+interface Props {
+  width?: number;
+}
+
+export default function CustomCursor({ width }: Props) {
   const { cursorType } = useContext(CursorContext);
   const [mousePosition, setMousePosition] = useState({
     x: 200,

@@ -3,12 +3,15 @@ import Head from "next/head";
 // Components
 import Navbar from "./Navbar";
 import CustomCursor from "./CustomCursor";
+// Hook
+import useWindowSize from "@hooks/useWindowSize";
 
 type Props = {
   children: JSX.Element;
 };
 
 const Layout = ({ children }: Props): JSX.Element => {
+  const { width } = useWindowSize();
   return (
     <div id="App" className="relative">
       <Head>
@@ -19,7 +22,7 @@ const Layout = ({ children }: Props): JSX.Element => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <CustomCursor />
+      {width! > 768 && <CustomCursor width={width} />}
       <header className="fixed w-screen z-10">
         <Navbar />
       </header>

@@ -1,17 +1,16 @@
 import { useLayoutEffect, useRef, RefObject, useState } from "react";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 // Custom Hooks
-import useWindowSize from "@src/hooks/useWindowSize";
 import useDebounce from "@src/hooks/useDebounce";
 
 type Props = {
+  width: number | undefined;
   children: JSX.Element;
 };
 
-export default function SmoothScroll({ children }: Props) {
+export default function SmoothScroll({ children, width }: Props) {
   const scrollContainer = useRef() as RefObject<HTMLDivElement>;
   const [pageHeight, setPageHeight] = useState(0);
-  const { width } = useWindowSize();
   const debouncedWidth = useDebounce<number | undefined>(width, 500);
 
   useLayoutEffect(() => {
