@@ -24,14 +24,24 @@ const Home: NextPage = () => {
   useEffect(() => {
     return scrollY.onChange((latest) => {
       if (latest < 0) return;
-      if (width! < 768) return;
 
-      if (scrollY.getPrevious() - latest < 0) {
-        setGoToMainMenu(true);
-        changeCursorType("pointer");
+      let direction = scrollY.getPrevious() - latest; // <- from top to bottom
+      if (width! < 768) {
+        if (latest !== scrollY.getPrevious()) {
+          setGoToMainMenu(true);
+          changeCursorType("pointer");
+        } else {
+          setGoToMainMenu(false);
+          changeCursorType("scrollIndicator");
+        }
       } else {
-        setGoToMainMenu(false);
-        changeCursorType("scrollIndicator");
+        if (direction < 0) {
+          setGoToMainMenu(true);
+          changeCursorType("pointer");
+        } else {
+          setGoToMainMenu(false);
+          changeCursorType("scrollIndicator");
+        }
       }
     });
   }, [scrollY]);
