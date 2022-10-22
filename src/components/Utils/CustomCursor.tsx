@@ -29,7 +29,7 @@ export default function CustomCursor({ width }: Props) {
     let scrollIndicator = cursorType === "scrollIndicator";
     let hover = cursorType === "hover";
 
-    scrollIndicator || hover ? cursorSize.set(56) : cursorSize.set(16);
+    scrollIndicator || hover ? cursorSize.set(56) : cursorSize.set(8);
   }, [cursorType]);
 
   useEffect(() => {
