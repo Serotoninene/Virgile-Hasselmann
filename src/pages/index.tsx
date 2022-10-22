@@ -13,6 +13,7 @@ import useWindowSize from "@src/hooks/useWindowSize";
 
 const Home: NextPage = () => {
   const { scrollY } = useScroll();
+  const { width } = useWindowSize();
   const { changeCursorType } = useContext(CursorContext);
   const [goToMainMenu, setGoToMainMenu] = useState<boolean>(false);
 
@@ -23,6 +24,7 @@ const Home: NextPage = () => {
   useEffect(() => {
     return scrollY.onChange((latest) => {
       if (latest < 0) return;
+      if (width! < 768) return;
 
       if (scrollY.getPrevious() - latest < 0) {
         setGoToMainMenu(true);
@@ -36,7 +38,10 @@ const Home: NextPage = () => {
 
   return (
     <div id="Home" className="h-[105vh]">
-      <div className="fixed w-screen">
+      <div
+        className="fixed w-screen"
+        onTouchMove={() => setGoToMainMenu(!goToMainMenu)}
+      >
         <MainMenu goToMainMenu={goToMainMenu} />
         <HeroVideo />
         <DarkGradients /> {/* <-- must stay on the bottom of the component */}
