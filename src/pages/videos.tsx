@@ -270,7 +270,7 @@ const Videos = (): JSX.Element => {
   }, [filterSelected]);
 
   return (
-    <SmoothScroll>
+    <SmoothScroll filterSelected={filterSelected}>
       <>
         <div id="Videos" className="pt-16 xs:pt-[88px]">
           <Filters

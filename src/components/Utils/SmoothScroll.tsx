@@ -6,9 +6,10 @@ import useWindowSize from "@src/hooks/useWindowSize";
 
 type Props = {
   children: JSX.Element;
+  filterSelected?: string;
 };
 
-export default function SmoothScroll({ children }: Props) {
+export default function SmoothScroll({ children, filterSelected }: Props) {
   const { width } = useWindowSize();
   const scrollContainer = useRef() as RefObject<HTMLDivElement>;
   const [pageHeight, setPageHeight] = useState(0);
@@ -22,7 +23,7 @@ export default function SmoothScroll({ children }: Props) {
 
       setPageHeight(scrollContainerSize!.height);
     }, 500);
-  }, [debouncedWidth]);
+  }, [debouncedWidth, filterSelected]);
 
   const { scrollY } = useScroll(); // measures how many pixels user has scrolled vertically
   // as scrollY changes between 0px and the scrollable height, create a negative scroll value...

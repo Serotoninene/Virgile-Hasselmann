@@ -36,7 +36,7 @@ const VideoMiniature = ({
   let distance = -25;
   const { width } = useWindowSize();
   width! < 768 ? (distance = -25) : (distance = -55);
-  const y = useParallax(scrollYProgress, distance);
+  const y = useParallax(scrollYProgress, distance, "full");
 
   return (
     <motion.div
