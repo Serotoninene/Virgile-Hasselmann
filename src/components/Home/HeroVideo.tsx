@@ -58,7 +58,7 @@ const Content = () => {
       </motion.div>
       <div className="absolute w-screen flex justify-center bottom-2 xs:bottom-6 lg:hidden">
         <div className="w-[64px]">
-          <img src="/assets/utils/scrollIndicator.svg" className="w-full" />
+          <img src="/assets/scrollIndicator.svg" className="w-full" />
         </div>
       </div>
     </div>

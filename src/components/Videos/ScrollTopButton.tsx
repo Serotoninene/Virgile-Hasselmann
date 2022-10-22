@@ -20,7 +20,7 @@ export default function ScrollTopButton() {
       className="flex flex-col items-center"
     >
       <div className="items-center w-2 xl:w-2.5">
-        <img src="/assets/utils/arrow.svg" className="w-full" />
+        <img src="/assets/arrow.svg" className="w-full" />
       </div>
       <p className="text-xs mt-1 xl:text-sm xl:mt-2">
         <AnimatedLetters string="to the top" start={isHovered} delay={0} />
