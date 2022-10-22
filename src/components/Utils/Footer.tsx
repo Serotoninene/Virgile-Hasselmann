@@ -1,6 +1,9 @@
-import Link from "next/link";
-import { useRouter } from "next/router";
 import React from "react";
+// Next
+import { useRouter } from "next/router";
+import Link from "next/link";
+// Framer motion
+import { motion } from "framer-motion";
 
 const contactsLinks = [
   {
@@ -20,7 +23,11 @@ const contactsLinks = [
 export default function Footer() {
   const { pathname } = useRouter();
   return (
-    <div className="px-4 pt-6  md:pb-4 grid-cols-12 sm:px-6 md:grid">
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      className="px-4 pt-6  md:pb-4 grid-cols-12 sm:px-6 md:grid"
+    >
       {/* Virgile's presentation */}
       <div className="pb-6 col-span-3">
         <h3 className="font-black mb-4 md:mb-12">Virgile Hasselmann</h3>
@@ -72,6 +79,6 @@ export default function Footer() {
         <p>@VirgileHasselman, 2022</p>
         <div className="w-2 h-2 bg-light mt-1"></div>
       </div>
-    </div>
+    </motion.div>
   );
 }
