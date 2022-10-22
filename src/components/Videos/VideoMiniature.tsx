@@ -1,14 +1,14 @@
-import React from "react";
+import React, { RefObject, useRef } from "react";
 import Image from "next/image";
 // Framer motion
-import { motion, MotionValue } from "framer-motion";
+import { motion, MotionValue, useScroll } from "framer-motion";
 // Hooks
 import useParallax from "@src/hooks/useParallax";
 import useWindowSize from "@src/hooks/useWindowSize";
 
 interface VideoMiniatureProps {
   placeholder: string;
-  scrollYProgress: MotionValue;
+  scrollYProgress?: MotionValue;
 }
 
 const duration = 0.7;
@@ -31,15 +31,16 @@ const textAnim = {
 
 const VideoMiniature = ({
   placeholder,
-  scrollYProgress,
-}: VideoMiniatureProps) => {
-  let distance = -25;
-  const { width } = useWindowSize();
-  width! < 768 ? (distance = -25) : (distance = -55);
+}: // scrollYProgress,
+VideoMiniatureProps) => {
+  let distance = 10;
+  const ref = useRef() as RefObject<HTMLDivElement>;
+  const { scrollYProgress } = useScroll({ target: ref });
   const y = useParallax(scrollYProgress, distance, "full");
 
   return (
     <motion.div
+      ref={ref}
       variants={containerAnim}
       initial="hidden"
       animate="visible"

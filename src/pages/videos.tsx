@@ -245,7 +245,7 @@ const data = [
 
 const Videos = (): JSX.Element => {
   const { changeCursorType } = useContext(CursorContext);
-  const { scrollYProgress } = useScroll();
+  // const { scrollYProgress } = useScroll();
   const [filterSelected, setFilterSelected] = useState<string>(filters[1]);
   const [dataSelected, setDataSelected] = useState<DataUnit[]>([]);
 
@@ -291,7 +291,7 @@ const Videos = (): JSX.Element => {
                 >
                   <VideoMiniature
                     placeholder={d.placeholder_ld}
-                    scrollYProgress={scrollYProgress}
+                    // scrollYProgress={scrollYProgress}
                   />
                 </div>
               </AnimatePresence>

@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 // Framer motion
 import { motion } from "framer-motion";
 // Components
 import Video from "@src/components/Utils/Video";
 import AnimatedLetters from "@src/components/Utils/AnimatedLetters";
+import { CursorContext } from "@src/contexts/CursorProvider";
 
 const containerAnim = {
   hidden: {},
@@ -26,8 +27,12 @@ const itemsAnim = {
 };
 
 const Content = () => {
+  const { setCursorType } = useContext(CursorContext);
   return (
-    <div className="relative z-10 h-screen flex flex-col justify-between items-center pt-16 pb-14 px-4 xs:pt-[88px] xs:pb-16 xs:px-6 lg:pb-6 lg:justify-end lg:items-end">
+    <div
+      className="relative z-10 h-screen flex flex-col justify-between items-center pt-16 pb-14 px-4 xs:pt-[88px] xs:pb-16 xs:px-6 lg:pb-6 lg:justify-end lg:items-end"
+      onMouseOver={() => setCursorType("scrollIndicator")}
+    >
       <h1 className="text-5xl text-center xs:text-6xl lg:text-end lg:text-8xl">
         <AnimatedLetters string="Virgile" fontWeight="font-black" />
         <br />
