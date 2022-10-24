@@ -12,33 +12,30 @@ const Home: NextPage = () => {
   const { width } = useWindowSize();
   const { changeCursorType } = useContext(CursorContext);
   const [goToMainMenu, setGoToMainMenu] = useState<boolean>(false);
+  let lastY: number = 0;
+
+  const toggleMainMenu = (toggle: boolean) => {
+    setGoToMainMenu(toggle);
+    changeCursorType(toggle ? "pointer" : "scrollIndicator");
+  };
 
   const triggerMainMenuAnimMobile = (e: TouchEvent<HTMLDivElement>) => {
-    if (width! > 768) return;
-
-    let lastY;
     let currentY = e.touches[0].clientY;
-    if (lastY && currentY > lastY) {
-      // moved down
-      setGoToMainMenu(true);
-      changeCursorType("pointer");
-    } else if (lastY && currentY < lastY) {
-      // moved up
-      setGoToMainMenu(false);
-      changeCursorType("scrollIndicator");
+    if (currentY < lastY) {
+      toggleMainMenu(true);
+    } else if (currentY > lastY) {
+      toggleMainMenu(false);
     }
     lastY = currentY;
   };
 
   const triggerMainMenuAnimDesk = (e: WheelEvent<HTMLDivElement>) => {
-    if (width! < 768) return;
+    // if (width! < 768) return;
 
     if (e.deltaY > 0) {
-      setGoToMainMenu(true);
-      changeCursorType("pointer");
+      toggleMainMenu(true);
     } else {
-      setGoToMainMenu(false);
-      changeCursorType("scrollIndicator");
+      toggleMainMenu(false);
     }
   };
 
