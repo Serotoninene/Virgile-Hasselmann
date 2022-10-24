@@ -33,15 +33,3 @@ model Photo {
   description    String?  @db.String(1000)
   published      Boolean  @default(false)
 }
-
-model Test {
-  id             BigInt   @id @default(autoincrement())
-  createdAt      DateTime @default(now())
-  dateOfCreation DateTime
-  title          String
-  photoName      String
-  placeholder    String
-  category       String
-  description    String?  @db.String(1000)
-  published      Boolean  @default(false)
-}
