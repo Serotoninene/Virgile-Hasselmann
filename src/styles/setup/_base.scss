@@ -9,13 +9,12 @@
 
 html,
 body {
-  overscroll-behavior-y: none;
+  overscroll-behavior: none;
   padding: 0;
   margin: 0;
   font-family: "ExensaGrotesk", -apple-system, BlinkMacSystemFont, Segoe UI,
     Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
     sans-serif;
-  /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */
   color: #ddd5cb;
   cursor: none;
   background: url("/assets/noise.png"),
