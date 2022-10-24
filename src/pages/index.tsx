@@ -14,7 +14,7 @@ const Home: NextPage = () => {
   const [goToMainMenu, setGoToMainMenu] = useState<boolean>(false);
 
   const triggerMainMenuAnimMobile = (e: TouchEvent<HTMLDivElement>) => {
-    if (width! < 768) return;
+    if (width! > 768) return;
 
     let lastY;
     let currentY = e.touches[0].clientY;
@@ -31,7 +31,7 @@ const Home: NextPage = () => {
   };
 
   const triggerMainMenuAnimDesk = (e: WheelEvent<HTMLDivElement>) => {
-    if (width! > 768) return;
+    if (width! < 768) return;
 
     if (e.deltaY > 0) {
       setGoToMainMenu(true);
