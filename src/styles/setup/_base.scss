@@ -1,6 +1,5 @@
 // Basic set up
 * {
-  overscroll-behavior: none;
   font-weight: 400;
   box-sizing: border-box;
   list-style: none;
@@ -10,7 +9,7 @@
 
 html,
 body {
-  // overflow-y: hidden;
+  overscroll-behavior-y: none;
   padding: 0;
   margin: 0;
   font-family: "ExensaGrotesk", -apple-system, BlinkMacSystemFont, Segoe UI,
@@ -19,6 +18,8 @@ body {
   /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */
   color: #ddd5cb;
   cursor: none;
+  background: url("/assets/noise.png"),
+    radial-gradient(#212224 0%, #181111 99.48%);
 }
 
 #App {
