@@ -1,7 +1,5 @@
 import { useContext, useEffect, useState, WheelEvent } from "react";
 import type { NextPage } from "next";
-// framer motion
-import { useScroll } from "framer-motion";
 // Context
 import { CursorContext } from "@src/contexts/CursorProvider";
 // Components
@@ -10,7 +8,6 @@ import HeroVideo from "@src/components/Home/HeroVideo";
 import MainMenu from "@src/components/Home/MainMenu";
 
 const Home: NextPage = () => {
-  const { scrollY } = useScroll();
   const { changeCursorType } = useContext(CursorContext);
   const [goToMainMenu, setGoToMainMenu] = useState<boolean>(false);
 

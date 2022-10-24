@@ -23,7 +23,7 @@ const Layout = ({ children }: Props): JSX.Element => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {width! > 768 && <CustomCursor width={width} />}
-      <header className="fixed w-screen z-10">
+      <header className="fixed w-screen z-50">
         <Navbar />
       </header>
       <main className="min-h-screen">
