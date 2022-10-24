@@ -14,8 +14,9 @@ import useWindowSize from "@src/hooks/useWindowSize";
 
 const Home: NextPage = () => {
   // Safari 3.0+ "[object HTMLElementConstructor]"
-  const browser = userAgentFromString(undefined).browser.name;
-  const isSafariUsed = browser === "Safari";
+  const userAgent = userAgentFromString(undefined);
+  const isSafariUsed = userAgent.browser.name === "Safari";
+  console.log(userAgent);
 
   const { scrollY } = useScroll();
   const { width } = useWindowSize();
@@ -32,7 +33,9 @@ const Home: NextPage = () => {
 
       let direction = scrollY.getPrevious() - latest; // <- from top to bottom on other browsers thant safari
       // if we're on safari, weirdly enought we have to reverse the order of the scroll so it's from top to bottom
-      isSafariUsed && (direction = latest - scrollY.getPrevious());
+      isSafariUsed &&
+        width! < 768 &&
+        (direction = latest - scrollY.getPrevious());
 
       if (direction < 0) {
         setGoToMainMenu(true);
