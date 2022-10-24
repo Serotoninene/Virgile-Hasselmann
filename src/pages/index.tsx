@@ -46,7 +46,7 @@ const Home: NextPage = () => {
   return (
     <div
       id="Home"
-      className="w-screen"
+      className="w-screen h-screen"
       onWheel={(e) => triggerMainMenuAnimDesk(e)}
       onTouchMove={(e) => triggerMainMenuAnimMobile(e)}
     >
