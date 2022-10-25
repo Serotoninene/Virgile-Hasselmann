@@ -21,7 +21,7 @@ export default function SmoothScroll({ children, filterSelected }: Props) {
       const scrollContainerSize =
         scrollContainer.current?.getBoundingClientRect();
 
-      setPageHeight(scrollContainerSize!.height);
+      scrollContainerSize && setPageHeight(scrollContainerSize.height);
     }, 500);
   }, [debouncedWidth, filterSelected]);
 

@@ -13,17 +13,6 @@ import { trpc } from "@server/utils/trpc";
 import { GetStaticProps } from "next";
 import { prisma } from "@server/prisma";
 import { Video } from "@prisma/client";
-// import { PrismaClient } from "@prisma/client";
-
-interface DataUnit {
-  date: string;
-  client: string;
-  titre: string;
-  placeholder_ld: string;
-  placeholder_hd: string;
-  video: string;
-  category: string;
-}
 
 const positions = [
   `col-start-1 col-end-6 lg:pt-16`,
@@ -48,6 +37,8 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 const Videos = ({ data }: Props): JSX.Element => {
+  const videos = trpc.get_all_videos.useQuery();
+  console.log(videos);
   const { changeCursorType } = useContext(CursorContext);
   const [filterSelected, setFilterSelected] = useState<string>(filters[1]);
   const [dataSelected, setDataSelected] = useState<Video[]>([]);
