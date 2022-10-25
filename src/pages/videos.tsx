@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 // Framer motion
-import { AnimatePresence, useScroll } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 // Context
 import { CursorContext } from "@src/contexts/CursorProvider";
 // Component
@@ -9,16 +9,10 @@ import VideoMiniature from "@src/components/Videos/VideoMiniature";
 import ScrollTopButton from "@src/components/Videos/ScrollTopButton";
 import Footer from "@src/components/Utils/Footer";
 import SmoothScroll from "@src/components/Utils/SmoothScroll";
-
-interface DataUnit {
-  date: string;
-  client: string;
-  titre: string;
-  placeholder_ld: string;
-  placeholder_hd: string;
-  video: string;
-  category: string;
-}
+import { trpc } from "@server/utils/trpc";
+import { GetStaticProps } from "next";
+import { prisma } from "@server/prisma";
+import { Video } from "@prisma/client";
 
 const positions = [
   `col-start-1 col-end-6 lg:pt-16`,
@@ -31,236 +25,24 @@ const positions = [
 
 const filters = ["Films", "Corporate", "Musique"];
 
-const data = [
-  {
-    date: "08/09/2021",
-    client: "Mitsubichi",
-    titre: "Holding Hands",
-    placeholder_ld:
-      "https://virgile-portfollio.s3.amazonaws.com/photos/hands_holding.png",
-    placeholder_hd:
-      "https://virgile-portfollio.s3.amazonaws.com/photos/hands_holding.png",
-    video: "/assets/videos/hands_holding.mp4",
-    category: filters[0],
-  },
-  {
-    date: "08/09/2021",
-    client: "Mitsubichi",
-    titre: "Holding Hands",
-    placeholder_ld:
-      "https://virgile-portfollio.s3.amazonaws.com/photos/hands_holding.png",
-    placeholder_hd:
-      "https://virgile-portfollio.s3.amazonaws.com/photos/hands_holding.png",
-    video: "/assets/videos/hands_holding.mp4",
-    category: filters[0],
-  },
-  {
-    date: "08/09/2021",
-    client: "Mitsubichi",
-    titre: "Holding Hands",
-    placeholder_ld:
-      "https://virgile-portfollio.s3.amazonaws.com/photos/hands_holding.png",
-    placeholder_hd:
-      "https://virgile-portfollio.s3.amazonaws.com/photos/hands_holding.png",
-    video: "/assets/videos/hands_holding.mp4",
-    category: filters[0],
-  },
-  {
-    date: "08/09/2021",
-    client: "Mitsubichi",
-    titre: "Holding Hands",
-    placeholder_ld:
-      "https://virgile-portfollio.s3.amazonaws.com/photos/hands_holding.png",
-    placeholder_hd:
-      "https://virgile-portfollio.s3.amazonaws.com/photos/hands_holding.png",
-    video: "/assets/videos/hands_holding.mp4",
-    category: filters[0],
-  },
-  {
-    date: "08/09/2021",
-    client: "Mitsubichi",
-    titre: "Holding Hands",
-    placeholder_ld:
-      "https://virgile-portfollio.s3.amazonaws.com/photos/girl_portrait.png",
-    placeholder_hd:
-      "https://virgile-portfollio.s3.amazonaws.com/photos/girl_portrait.png",
-    video: "/assets/videos/hands_holding.mp4",
-    category: filters[1],
-  },
-  {
-    date: "08/09/2021",
-    client: "Mitsubichi",
-    titre: "Holding Hands",
-    placeholder_ld:
-      "https://virgile-portfollio.s3.amazonaws.com/photos/girl_portrait.png",
-    placeholder_hd:
-      "https://virgile-portfollio.s3.amazonaws.com/photos/girl_portrait.png",
-    video: "/assets/videos/hands_holding.mp4",
-    category: filters[1],
-  },
-  {
-    date: "08/09/2021",
-    client: "Mitsubichi",
-    titre: "Holding Hands",
-    placeholder_ld:
-      "https://virgile-portfollio.s3.amazonaws.com/photos/girl_portrait.png",
-    placeholder_hd:
-      "https://virgile-portfollio.s3.amazonaws.com/photos/girl_portrait.png",
-    video: "/assets/videos/hands_holding.mp4",
-    category: filters[1],
-  },
-  {
-    date: "08/09/2021",
-    client: "Mitsubichi",
-    titre: "Holding Hands",
-    placeholder_ld:
-      "https://virgile-portfollio.s3.amazonaws.com/photos/girl_portrait.png",
-    placeholder_hd:
-      "https://virgile-portfollio.s3.amazonaws.com/photos/girl_portrait.png",
-    video: "/assets/videos/hands_holding.mp4",
-    category: filters[1],
-  },
-  {
-    date: "08/09/2021",
-    client: "Mitsubichi",
-    titre: "Holding Hands",
-    placeholder_ld:
-      "https://virgile-portfollio.s3.amazonaws.com/photos/girl_portrait.png",
-    placeholder_hd:
-      "https://virgile-portfollio.s3.amazonaws.com/photos/girl_portrait.png",
-    video: "/assets/videos/hands_holding.mp4",
-    category: filters[1],
-  },
-  {
-    date: "08/09/2021",
-    client: "Mitsubichi",
-    titre: "Holding Hands",
-    placeholder_ld:
-      "https://virgile-portfollio.s3.amazonaws.com/photos/girl_portrait.png",
-    placeholder_hd:
-      "https://virgile-portfollio.s3.amazonaws.com/photos/girl_portrait.png",
-    video: "/assets/videos/hands_holding.mp4",
-    category: filters[1],
-  },
-  {
-    date: "08/09/2021",
-    client: "Mitsubichi",
-    titre: "Holding Hands",
-    placeholder_ld:
-      "https://virgile-portfollio.s3.amazonaws.com/photos/girl_portrait.png",
-    placeholder_hd:
-      "https://virgile-portfollio.s3.amazonaws.com/photos/girl_portrait.png",
-    video: "/assets/videos/hands_holding.mp4",
-    category: filters[1],
-  },
-  {
-    date: "08/09/2021",
-    client: "Mitsubichi",
-    titre: "Holding Hands",
-    placeholder_ld:
-      "https://virgile-portfollio.s3.amazonaws.com/photos/girl_portrait.png",
-    placeholder_hd:
-      "https://virgile-portfollio.s3.amazonaws.com/photos/girl_portrait.png",
-    video: "/assets/videos/hands_holding.mp4",
-    category: filters[1],
-  },
-  {
-    date: "08/09/2021",
-    client: "Mitsubichi",
-    titre: "Holding Hands",
-    placeholder_ld:
-      "https://virgile-portfollio.s3.amazonaws.com/photos/girl_portrait.png",
-    placeholder_hd:
-      "https://virgile-portfollio.s3.amazonaws.com/photos/girl_portrait.png",
-    video: "/assets/videos/hands_holding.mp4",
-    category: filters[1],
-  },
-  {
-    date: "08/09/2021",
-    client: "Mitsubichi",
-    titre: "Holding Hands",
-    placeholder_ld:
-      "https://virgile-portfollio.s3.amazonaws.com/photos/heroVideo_placeholder.png",
-    placeholder_hd:
-      "https://virgile-portfollio.s3.amazonaws.com/photos/heroVideo_placeholder.png",
-    video: "/assets/videos/hands_holding.mp4",
-    category: filters[2],
-  },
-  {
-    date: "08/09/2021",
-    client: "Mitsubichi",
-    titre: "Holding Hands",
-    placeholder_ld:
-      "https://virgile-portfollio.s3.amazonaws.com/photos/heroVideo_placeholder.png",
-    placeholder_hd:
-      "https://virgile-portfollio.s3.amazonaws.com/photos/heroVideo_placeholder.png",
-    video: "/assets/videos/hands_holding.mp4",
-    category: filters[2],
-  },
-  {
-    date: "08/09/2021",
-    client: "Mitsubichi",
-    titre: "Holding Hands",
-    placeholder_ld:
-      "https://virgile-portfollio.s3.amazonaws.com/photos/heroVideo_placeholder.png",
-    placeholder_hd:
-      "https://virgile-portfollio.s3.amazonaws.com/photos/heroVideo_placeholder.png",
-    video: "/assets/videos/hands_holding.mp4",
-    category: filters[2],
-  },
-  {
-    date: "08/09/2021",
-    client: "Mitsubichi",
-    titre: "Holding Hands",
-    placeholder_ld:
-      "https://virgile-portfollio.s3.amazonaws.com/photos/heroVideo_placeholder.png",
-    placeholder_hd:
-      "https://virgile-portfollio.s3.amazonaws.com/photos/heroVideo_placeholder.png",
-    video: "/assets/videos/hands_holding.mp4",
-    category: filters[2],
-  },
-  {
-    date: "08/09/2021",
-    client: "Mitsubichi",
-    titre: "Holding Hands",
-    placeholder_ld:
-      "https://virgile-portfollio.s3.amazonaws.com/photos/heroVideo_placeholder.png",
-    placeholder_hd:
-      "https://virgile-portfollio.s3.amazonaws.com/photos/heroVideo_placeholder.png",
-    video: "/assets/videos/hands_holding.mp4",
-    category: filters[2],
-  },
-  {
-    date: "08/09/2021",
-    client: "Mitsubichi",
-    titre: "Holding Hands",
-    placeholder_ld:
-      "https://virgile-portfollio.s3.amazonaws.com/photos/heroVideo_placeholder.png",
-    placeholder_hd:
-      "https://virgile-portfollio.s3.amazonaws.com/photos/heroVideo_placeholder.png",
-    video: "/assets/videos/hands_holding.mp4",
-    category: filters[2],
-  },
-];
+interface Props {
+  data: Video[];
+}
 
-const Videos = (): JSX.Element => {
+export const getStaticProps: GetStaticProps = async () => {
+  const data = await prisma.video.findMany();
+  return {
+    props: { data: data },
+  };
+};
+
+const Videos = ({ data }: Props): JSX.Element => {
+  const videos = trpc.get_all_videos.useQuery();
   const { changeCursorType } = useContext(CursorContext);
-  // const { scrollYProgress } = useScroll();
   const [filterSelected, setFilterSelected] = useState<string>(filters[1]);
-  const [dataSelected, setDataSelected] = useState<DataUnit[]>([]);
+  const [dataSelected, setDataSelected] = useState<Video[]>([]);
 
   useEffect(() => {
-    // I'm forced to do so because of a bug from scrollYProgress, at the first scroll push,
-    //the value is, just for a milisecond : 1 instead of zero, which pushes the images in a stroke
-    // So I'm emulating a push of the scroll after 0.5s so I can hide the push with an anim 😬
-    setTimeout(
-      () =>
-        window.scroll({
-          top: 1,
-        }),
-      500
-    );
-
     changeCursorType("pointer");
   }, []);
 
@@ -282,7 +64,7 @@ const Videos = (): JSX.Element => {
             {dataSelected.map((d, idx) => (
               <AnimatePresence key={idx} mode="wait">
                 <div
-                  key={d.placeholder_hd + idx}
+                  key={d.placeholder + idx}
                   className={`pt-4 ${
                     idx < positions.length
                       ? positions[idx]
@@ -290,8 +72,7 @@ const Videos = (): JSX.Element => {
                   }`}
                 >
                   <VideoMiniature
-                    placeholder={d.placeholder_ld}
-                    // scrollYProgress={scrollYProgress}
+                    placeholder={process.env.NEXT_PUBLIC_PHOTOS + d.placeholder}
                   />
                 </div>
               </AnimatePresence>

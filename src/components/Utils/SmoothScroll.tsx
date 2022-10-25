@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, RefObject, useState } from "react";
+import { useRef, RefObject, useState, useEffect } from "react";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 // Custom Hooks
 import useDebounce from "@src/hooks/useDebounce";
@@ -15,13 +15,13 @@ export default function SmoothScroll({ children, filterSelected }: Props) {
   const [pageHeight, setPageHeight] = useState(0);
   const debouncedWidth = useDebounce<number | undefined>(width, 500);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     setTimeout(() => {
       // added a setTimeout so the page has the time to load and it still fits
       const scrollContainerSize =
         scrollContainer.current?.getBoundingClientRect();
 
-      setPageHeight(scrollContainerSize!.height);
+      scrollContainerSize && setPageHeight(scrollContainerSize.height);
     }, 500);
   }, [debouncedWidth, filterSelected]);
 
