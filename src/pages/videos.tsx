@@ -17,10 +17,10 @@ import { Video } from "@prisma/client";
 const positions = [
   `col-start-1 col-end-6 lg:pt-16`,
   `col-start-8 col-end-13 lg:pt-[344px]`,
-  `col-start-3 col-end-9 lg:pt-[80px]`,
-  `col-start-6 col-end-12 lg:pt-[80px]`,
-  `col-span-6 lg:pt-[80px]`,
-  `col-start-6 col-end-12 lg:pt-[80px]`,
+  `col-start-3 col-end-9 lg:mt-[184px]`,
+  `col-start-6 col-end-12 lg:mt-[184px]`,
+  `col-span-6 lg:mt-[184px]`,
+  `col-start-6 col-end-12 lg:mt-[184px]`,
 ];
 
 const filters = ["Films", "Corporate", "Musique"];
@@ -66,7 +66,7 @@ const Videos = ({ data }: Props): JSX.Element => {
               <AnimatePresence key={idx} mode="wait">
                 <div
                   key={d.placeholder + idx}
-                  className={`pt-4 ${
+                  className={`${
                     idx < positions.length
                       ? positions[idx]
                       : positions[idx % positions.length]
