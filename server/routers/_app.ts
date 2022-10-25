@@ -5,6 +5,7 @@ import { publicProcedure, router } from "../trpc";
 export const appRouter = router({
   get_all_videos: publicProcedure.query(async () => {
     const videos = await prisma.video.findMany();
+    console.log(videos);
     return videos;
   }),
 });

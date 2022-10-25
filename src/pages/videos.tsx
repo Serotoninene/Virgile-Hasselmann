@@ -11,9 +11,9 @@ import Footer from "@src/components/Utils/Footer";
 import SmoothScroll from "@src/components/Utils/SmoothScroll";
 import { trpc } from "@server/utils/trpc";
 import { GetStaticProps } from "next";
-// import { prisma } from "@server/prisma";
+import { prisma } from "@server/prisma";
 import { Video } from "@prisma/client";
-import { PrismaClient } from "@prisma/client";
+// import { PrismaClient } from "@prisma/client";
 
 interface DataUnit {
   date: string;
@@ -37,47 +37,29 @@ const positions = [
 const filters = ["Films", "Corporate", "Musique"];
 
 interface Props {
-  videos: Video[];
+  data: Video[];
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const prisma = new PrismaClient();
-  const videos = await prisma.video.findMany({
-    select: {
-      title: true,
-    },
-  });
+  const data = await prisma.video.findMany();
   return {
-    props: { videos: videos },
+    props: { data: data },
   };
 };
 
-const Videos = ({ videos }: Props): JSX.Element => {
-  const data = trpc.get_all_videos.useQuery();
-  console.log(videos);
+const Videos = ({ data }: Props): JSX.Element => {
   const { changeCursorType } = useContext(CursorContext);
   const [filterSelected, setFilterSelected] = useState<string>(filters[1]);
-  const [dataSelected, setDataSelected] = useState<DataUnit[]>([]);
+  const [dataSelected, setDataSelected] = useState<Video[]>([]);
 
   useEffect(() => {
-    // I'm forced to do so because of a bug from scrollYProgress, at the first scroll push,
-    //the value is, just for a milisecond : 1 instead of zero, which pushes the images in a stroke
-    // So I'm emulating a push of the scroll after 0.5s so I can hide the push with an anim 😬
-    setTimeout(
-      () =>
-        window.scroll({
-          top: 1,
-        }),
-      500
-    );
-
     changeCursorType("pointer");
   }, []);
 
-  // useEffect(() => {
-  //   const dataToDisplay = data.filter((d) => d.category === filterSelected);
-  //   setDataSelected(dataToDisplay);
-  // }, [filterSelected]);
+  useEffect(() => {
+    const dataToDisplay = data.filter((d) => d.category === filterSelected);
+    setDataSelected(dataToDisplay);
+  }, [filterSelected]);
 
   return (
     <SmoothScroll filterSelected={filterSelected}>
@@ -92,7 +74,7 @@ const Videos = ({ videos }: Props): JSX.Element => {
             {dataSelected.map((d, idx) => (
               <AnimatePresence key={idx} mode="wait">
                 <div
-                  key={d.placeholder_hd + idx}
+                  key={d.placeholder + idx}
                   className={`pt-4 ${
                     idx < positions.length
                       ? positions[idx]
@@ -100,8 +82,7 @@ const Videos = ({ videos }: Props): JSX.Element => {
                   }`}
                 >
                   <VideoMiniature
-                    placeholder={d.placeholder_ld}
-                    // scrollYProgress={scrollYProgress}
+                    placeholder={process.env.NEXT_PUBLIC_PHOTOS + d.placeholder}
                   />
                 </div>
               </AnimatePresence>
