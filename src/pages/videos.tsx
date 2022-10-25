@@ -10,6 +10,10 @@ import ScrollTopButton from "@src/components/Videos/ScrollTopButton";
 import Footer from "@src/components/Utils/Footer";
 import SmoothScroll from "@src/components/Utils/SmoothScroll";
 import { trpc } from "@server/utils/trpc";
+import { GetStaticProps } from "next";
+// import { prisma } from "@server/prisma";
+import { Video } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 
 interface DataUnit {
   date: string;
@@ -32,11 +36,26 @@ const positions = [
 
 const filters = ["Films", "Corporate", "Musique"];
 
-const Videos = (): JSX.Element => {
-  const dataquery = trpc.get_all_videos.useQuery();
-  console.log(dataquery);
+interface Props {
+  videos: Video[];
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+  const prisma = new PrismaClient();
+  const videos = await prisma.video.findMany({
+    select: {
+      title: true,
+    },
+  });
+  return {
+    props: { videos: videos },
+  };
+};
+
+const Videos = ({ videos }: Props): JSX.Element => {
+  const data = trpc.get_all_videos.useQuery();
+  console.log(videos);
   const { changeCursorType } = useContext(CursorContext);
-  // const { scrollYProgress } = useScroll();
   const [filterSelected, setFilterSelected] = useState<string>(filters[1]);
   const [dataSelected, setDataSelected] = useState<DataUnit[]>([]);
 

@@ -3,20 +3,8 @@ import { prisma } from "@server/prisma";
 import { publicProcedure, router } from "../trpc";
 
 export const appRouter = router({
-  hello: publicProcedure
-    .input(
-      z.object({
-        text: z.string().nullish(),
-      })
-    )
-    .query(({ input }) => {
-      return {
-        greeting: `hello ${input?.text ?? "world"}`,
-      };
-    }),
   get_all_videos: publicProcedure.query(async () => {
     const videos = await prisma.video.findMany();
-    console.log(videos);
     return videos;
   }),
 });
