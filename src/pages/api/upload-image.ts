@@ -6,16 +6,16 @@ export default async function handler(req, res) {
   try {
     // 1.
     const s3 = new aws.S3({
-      accessKeyId: process.env.AWS_ACCESS_KEY,
-      secretAccessKey: process.env.AWS_SECRET_KEY,
-      region: process.env.AWS_REGION,
+      accessKeyId: process.env.AWS_ACCOUNT_ACCESS_KEY,
+      secretAccessKey: process.env.AWS_ACCOUNT_SECRET_KEY,
+      region: process.env.AWS_REGION_LOCATION,
     });
 
     // 2.
     aws.config.update({
-      accessKeyId: process.env.AWS_ACCESS_KEY,
-      secretAccessKey: process.env.AWS_SECRET_KEY,
-      region: process.env.AWS_REGION,
+      accessKeyId: process.env.AWS_ACCOUNT_ACCESS_KEY,
+      secretAccessKey: process.env.AWS_ACCOUNT_SECRET_KEY,
+      region: process.env.AWS_REGION_LOCATION,
       signatureVersion: "v4",
     });
 
