@@ -29,16 +29,15 @@ interface Props {
   data: Video[];
 }
 
-export const getStaticProps: GetStaticProps = async () => {
-  const data = await prisma.video.findMany();
-  return {
-    props: { data: data },
-  };
-};
+// export const getStaticProps: GetStaticProps = async () => {
+//   const data = await prisma.video.findMany();
+//   return {
+//     props: { data: data },
+//   };
+// };
 
 const Videos = ({ data }: Props): JSX.Element => {
   const videos = trpc.get_all_videos.useQuery();
-  console.log("e");
   const { changeCursorType } = useContext(CursorContext);
   const [filterSelected, setFilterSelected] = useState<string>(filters[1]);
   const [dataSelected, setDataSelected] = useState<Video[]>([]);
@@ -47,10 +46,10 @@ const Videos = ({ data }: Props): JSX.Element => {
     changeCursorType("pointer");
   }, []);
 
-  useEffect(() => {
-    const dataToDisplay = data.filter((d) => d.category === filterSelected);
-    setDataSelected(dataToDisplay);
-  }, [filterSelected]);
+  // useEffect(() => {
+  //   const dataToDisplay = data.filter((d) => d.category === filterSelected);
+  //   setDataSelected(dataToDisplay);
+  // }, [filterSelected]);
 
   return (
     <SmoothScroll filterSelected={filterSelected}>
