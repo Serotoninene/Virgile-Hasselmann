@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 // Next
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -19,9 +19,46 @@ const contactsLinks = [
     href: " virgilehasselman@gmail.com",
   },
 ];
+function capitalizeWords(string: string) {
+  const uppercasedString = [string].map(
+    (element: string) =>
+      element.charAt(0).toUpperCase() + element.slice(1).toLowerCase()
+  );
+  return uppercasedString.join();
+}
+
+export const DateFormatted = () => {
+  const [dateState, setDateState] = useState(Date.now());
+  const [formattedDate, setformattedDate] = useState<string>();
+  // removing the "à" and setting the first letter of the words uppercase
+  const cleanedDate = formattedDate?.split("à ").join();
+  const upperCasedDate = cleanedDate
+    ?.split(" ")
+    .map((e) => capitalizeWords(e))
+    .join(" ");
+
+  useEffect(() => {
+    setformattedDate(
+      new Date(dateState).toLocaleDateString("fr-FR", {
+        weekday: "long",
+        month: "long",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+      })
+    );
+    // setInterval(() => setDateState(Date.now()), 1000);
+  }, [dateState]);
+
+  return <>{upperCasedDate}</>;
+};
 
 export default function Footer() {
   const { pathname } = useRouter();
+  {
+    /* Mardi 4 Octobre, 16:02 */
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
@@ -73,7 +110,8 @@ export default function Footer() {
         Made by @Serotoninene
       </div>
       <div className="hidden col-span-4 text-sm md:block">
-        Mardi 4 Octobre, 16:02
+        {/* Mardi 4 Octobre, 16:02 */}
+        <DateFormatted />
       </div>
       <div className="hidden col-span-4 justify-between text-sm md:flex">
         <p>@VirgileHasselman, 2022</p>
