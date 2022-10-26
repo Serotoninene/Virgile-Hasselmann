@@ -5,11 +5,12 @@ import { motion } from "framer-motion";
 import { CursorContext } from "@src/contexts/CursorProvider";
 // Component
 import AnimatedLetters from "@src/components/Utils/AnimatedLetters";
+import { Vid_Category } from "@prisma/client";
 
 interface FiltersProps {
-  filters: string[];
-  filterSelected: string;
-  setFilterSelected: (e: string) => void;
+  filters: Vid_Category[];
+  filterSelected?: BigInt;
+  setFilterSelected: (e: BigInt) => void;
 }
 
 const Filters = ({
@@ -19,21 +20,23 @@ const Filters = ({
 }: FiltersProps) => {
   const { changeCursorType } = useContext(CursorContext);
 
+  if (!filters) return <></>;
+
   return (
     <div className="flex text-2xl sm:justify-center sm:text-5xl">
       <ul className="flex">
         {filters.map((filter, idx) => (
-          <div key={filter} className="flex">
+          <div key={filter.name} className="flex">
             <li
-              onClick={() => setFilterSelected(filter)}
+              onClick={() => setFilterSelected(filter.id)}
               onMouseEnter={() => changeCursorType("hover")}
               onMouseLeave={() => changeCursorType("pointer")}
               className={`${
-                filterSelected === filter ? "text-blue font-black" : ""
+                filterSelected === filter.id ? "text-blue font-black" : ""
               } mx-1`}
             >
               <AnimatedLetters
-                string={filter}
+                string={filter.name}
                 delay={0.1 * idx}
                 stagger={0.01}
               />

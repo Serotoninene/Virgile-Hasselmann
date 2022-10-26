@@ -12,7 +12,7 @@ import SmoothScroll from "@src/components/Utils/SmoothScroll";
 import { trpc } from "@server/utils/trpc";
 import { GetStaticProps } from "next";
 import { prisma } from "@server/prisma";
-import { Video } from "@prisma/client";
+import { Video, Vid_Category } from "@prisma/client";
 
 const positions = [
   `col-start-1 col-end-6 lg:pt-16`,
@@ -23,31 +23,34 @@ const positions = [
   `col-start-6 col-end-12 lg:mt-[184px]`,
 ];
 
-const filters = ["Films", "Corporate", "Musique"];
-
 interface Props {
   data: Video[];
+  filters: Vid_Category[];
 }
 
 export const getStaticProps: GetStaticProps = async () => {
   const data = await prisma.video.findMany();
+  const filters = await prisma.vid_Category.findMany();
   return {
-    props: { data: data },
+    props: { data: data, filters: filters },
   };
 };
 
-const Videos = ({ data }: Props): JSX.Element => {
+const Videos = ({ data, filters }: Props): JSX.Element => {
   const { changeCursorType } = useContext(CursorContext);
-  const [filterSelected, setFilterSelected] = useState<string>(filters[1]);
+  const [filterSelected, setFilterSelected] = useState<BigInt>();
   const [dataSelected, setDataSelected] = useState<Video[]>([]);
 
   useEffect(() => {
+    setFilterSelected(filters[1].id);
     changeCursorType("pointer");
   }, []);
 
   useEffect(() => {
-    // const dataToDisplay = data.filter((d) => d.vid_CategoryId === filterSelected);
-    // setDataSelected(dataToDisplay);
+    const dataToDisplay = data.filter(
+      (d) => d.vid_CategoryId === filterSelected
+    );
+    setDataSelected(dataToDisplay);
   }, [filterSelected]);
 
   return (
@@ -63,7 +66,7 @@ const Videos = ({ data }: Props): JSX.Element => {
             {dataSelected.map((d, idx) => (
               <AnimatePresence key={idx} mode="wait">
                 <div
-                  key={idx}
+                  key={d.title + idx}
                   className={`${
                     idx < positions.length
                       ? positions[idx]
