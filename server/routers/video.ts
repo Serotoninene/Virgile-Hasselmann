@@ -7,7 +7,6 @@ export const videoRouter = router({
   create: publicProcedure
     .input(
       z.object({
-        id: z.bigint(),
         title: z.string(),
         dateOfCreation: z.date(),
         videoName: z.string(),
