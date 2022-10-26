@@ -37,6 +37,8 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 const Videos = ({ data, filters }: Props): JSX.Element => {
+  const photos = trpc.photo["list"].useQuery();
+  console.log(photos);
   const { changeCursorType } = useContext(CursorContext);
   const [filterSelected, setFilterSelected] = useState<BigInt>();
   const [dataSelected, setDataSelected] = useState<Video[]>([]);

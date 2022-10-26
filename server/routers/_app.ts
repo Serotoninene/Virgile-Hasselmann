@@ -1,16 +1,15 @@
 import { z } from "zod";
 import { prisma } from "@server/prisma";
 import { publicProcedure, router } from "../trpc";
+import { videoRouter } from "./video";
+import { photoRouter } from "./photo";
 
 export const appRouter = router({
   get_all_videos: publicProcedure.query(() => {
-    /**
-     * For pagination you can have a look at this docs site
-     * @link https://trpc.io/docs/useInfiniteQuery
-     */
-
     return prisma.video.findMany();
   }),
+  video: videoRouter,
+  photo: photoRouter,
 });
 
 // export type definition of API
