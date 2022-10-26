@@ -5,6 +5,13 @@ import Link from "next/link";
 // Framer motion
 import { motion } from "framer-motion";
 
+interface DateElements {
+  weekday?: string;
+  day?: string;
+  month?: string;
+  hour?: string;
+}
+
 const contactsLinks = [
   {
     text: "Twitter : @virgilehasselman",
@@ -19,7 +26,7 @@ const contactsLinks = [
     href: " virgilehasselman@gmail.com",
   },
 ];
-function capitalizeWords(string: string) {
+function capitalizeWord(string: string) {
   const uppercasedString = [string].map(
     (element: string) =>
       element.charAt(0).toUpperCase() + element.slice(1).toLowerCase()
@@ -30,12 +37,16 @@ function capitalizeWords(string: string) {
 export const DateFormatted = () => {
   const [dateState, setDateState] = useState(Date.now());
   const [formattedDate, setformattedDate] = useState<string>();
-  // removing the "à" and setting the first letter of the words uppercase
-  const cleanedDate = formattedDate?.split("à ").join();
-  const upperCasedDate = cleanedDate
-    ?.split(" ")
-    .map((e) => capitalizeWords(e))
-    .join(" ");
+  let dateElements: DateElements = {};
+  if (formattedDate) {
+    const splitDate = formattedDate.split(" ");
+    dateElements = {
+      weekday: capitalizeWord(splitDate[0]),
+      day: capitalizeWord(splitDate[1]),
+      month: capitalizeWord(splitDate[2]),
+      hour: capitalizeWord(splitDate[4]),
+    };
+  }
 
   useEffect(() => {
     setformattedDate(
@@ -47,10 +58,15 @@ export const DateFormatted = () => {
         minute: "2-digit",
       })
     );
-    // setInterval(() => setDateState(Date.now()), 1000);
+    setInterval(() => setDateState(Date.now()), 1000);
   }, [dateState]);
-
-  return <>{upperCasedDate}</>;
+  if (!formattedDate) return <></>;
+  return (
+    <>
+      {dateElements.weekday} {dateElements.day} {dateElements.month},{" "}
+      {dateElements.hour}
+    </>
+  );
 };
 
 export default function Footer() {
