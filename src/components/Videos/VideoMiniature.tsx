@@ -43,7 +43,7 @@ VideoMiniatureProps) => {
   const ref = useRef() as RefObject<HTMLDivElement>;
   const { scrollYProgress } = useScroll({ target: ref });
   const y = useParallax(scrollYProgress, distance, "full");
-  const physics = { damping: 15, mass: 0.17, stiffness: 55 };
+  const physics = { damping: 15, mass: 1, stiffness: 55 };
   const springY = useSpring(y, physics);
 
   return (
