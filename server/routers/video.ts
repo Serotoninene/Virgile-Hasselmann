@@ -30,7 +30,7 @@ export const videoRouter = router({
       z.object({
         id: z.bigint(),
         title: z.string(),
-        dateOfCreation: z.string(),
+        dateOfCreation: z.date(),
         videoName: z.string(),
         placeholder_lq: z.string().or(z.undefined()),
         placeholder_hq: z.string(),
@@ -43,11 +43,10 @@ export const videoRouter = router({
         where: { id: input.id },
         data: {
           title: input.title,
-          dateOfCreation: new Date(input.dateOfCreation),
+          dateOfCreation: input.dateOfCreation,
           videoName: input.videoName,
           placeholder_lq: input.placeholder_lq,
           placeholder_hq: input.placeholder_hq,
-          description: input.description,
           vid_CategoryId: input.vid_CategoryId,
         },
       });
