@@ -56,7 +56,7 @@ const AnimatedLetters = ({
       initial="hidden"
       animate={start ? "show" : "hidden"}
       key={string}
-      className="overflow-hidden inline-block align-bottom"
+      className="overflow-hidden inline-block align-bottom leading-[110%]"
     >
       {words.map((word) => (
         <span key={word}>
