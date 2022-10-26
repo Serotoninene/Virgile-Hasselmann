@@ -1,7 +1,13 @@
 import React, { RefObject, useRef } from "react";
 import Image from "next/image";
 // Framer motion
-import { motion, MotionValue, useScroll } from "framer-motion";
+import {
+  motion,
+  MotionValue,
+  useMotionValue,
+  useScroll,
+  useSpring,
+} from "framer-motion";
 // Hooks
 import useParallax from "@src/hooks/useParallax";
 import useWindowSize from "@src/hooks/useWindowSize";
@@ -37,6 +43,8 @@ VideoMiniatureProps) => {
   const ref = useRef() as RefObject<HTMLDivElement>;
   const { scrollYProgress } = useScroll({ target: ref });
   const y = useParallax(scrollYProgress, distance, "full");
+  const physics = { damping: 15, mass: 0.17, stiffness: 55 };
+  const springY = useSpring(y, physics);
 
   return (
     <motion.div
@@ -50,7 +58,7 @@ VideoMiniatureProps) => {
       <motion.div className="overflow-hidden" variants={photoAnim}>
         <motion.div
           className="relative h-[184px] sm:h-[336px]"
-          style={{ y, scale: 1.5 }}
+          style={{ y: springY, scale: 1.5 }}
         >
           <Image
             src={placeholder}
