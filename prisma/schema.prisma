@@ -11,25 +11,41 @@ datasource db {
 }
 
 model Video {
-  id             BigInt   @id @default(autoincrement())
-  createdAt      DateTime @default(now())
+  id             BigInt       @id @default(autoincrement())
+  createdAt      DateTime     @default(now())
   dateOfCreation DateTime
   title          String
   videoName      String
-  placeholder    String
-  category       String
-  description    String?  @db.String(1000)
-  published      Boolean  @default(false)
+  placeholder_lq String?
+  placeholder_hq String
+  description    String?      @db.String(1000)
+  published      Boolean      @default(false)
+  Vid_Category   Vid_Category @relation(fields: [vid_CategoryId], references: [id])
+  vid_CategoryId BigInt
+}
+
+model Vid_Category {
+  id     BigInt  @id @default(autoincrement())
+  name   String
+  videos Video[]
 }
 
 model Photo {
-  id             BigInt   @id @default(autoincrement())
-  createdAt      DateTime @default(now())
-  dateOfCreation DateTime
-  title          String
-  photoName      String
-  placeholder    String
-  category       String
-  description    String?  @db.String(1000)
-  published      Boolean  @default(false)
+  id               BigInt         @id @default(autoincrement())
+  createdAt        DateTime       @default(now())
+  dateOfCreation   DateTime
+  title            String
+  photoName        String
+  miniature        String
+  placeholder      String
+  description      String?        @db.String(1000)
+  published        Boolean        @default(false)
+  Photo_Category   Photo_Category @relation(fields: [photo_CategoryId], references: [id])
+  photo_CategoryId BigInt
+}
+
+model Photo_Category {
+  id     BigInt  @id @default(autoincrement())
+  name   String
+  photos Photo[]
 }

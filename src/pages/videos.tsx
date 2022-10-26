@@ -46,8 +46,8 @@ const Videos = ({ data }: Props): JSX.Element => {
   }, []);
 
   useEffect(() => {
-    const dataToDisplay = data.filter((d) => d.category === filterSelected);
-    setDataSelected(dataToDisplay);
+    // const dataToDisplay = data.filter((d) => d.vid_CategoryId === filterSelected);
+    // setDataSelected(dataToDisplay);
   }, [filterSelected]);
 
   return (
@@ -63,7 +63,7 @@ const Videos = ({ data }: Props): JSX.Element => {
             {dataSelected.map((d, idx) => (
               <AnimatePresence key={idx} mode="wait">
                 <div
-                  key={d.placeholder + idx}
+                  key={idx}
                   className={`${
                     idx < positions.length
                       ? positions[idx]
@@ -71,7 +71,9 @@ const Videos = ({ data }: Props): JSX.Element => {
                   }`}
                 >
                   <VideoMiniature
-                    placeholder={process.env.NEXT_PUBLIC_PHOTOS + d.placeholder}
+                    placeholder={
+                      process.env.NEXT_PUBLIC_PHOTOS + d.placeholder_hq
+                    }
                   />
                 </div>
               </AnimatePresence>
