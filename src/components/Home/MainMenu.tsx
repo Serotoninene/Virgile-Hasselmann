@@ -106,7 +106,9 @@ export default function MainMenu({ goToMainMenu }: MainMenuProps) {
 
   return (
     <div
-      className="fixed z-20 h-screen w-screen flex flex-col md:flex-row"
+      className={`${
+        !goToMainMenu && "pointer-events-none" // if we're not yet on the mainMenu, the pointer events are deactivated
+      } fixed z-20 h-screen w-screen flex flex-col md:flex-row`}
       id="Menu"
     >
       <MenuSection

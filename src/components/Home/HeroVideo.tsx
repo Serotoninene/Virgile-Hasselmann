@@ -54,9 +54,6 @@ const Content = () => {
         <motion.p variants={itemsAnim} className="hidden lg:block">
           Made by @Serotoninene, 2022
         </motion.p>
-        <motion.div>
-          <UserLogin />
-        </motion.div>
         <motion.p
           variants={itemsAnim}
           className="text-center font-light text-xl xs:text-3xl lg:text-end lg:text-2xl lg:w-[30vw]"
@@ -65,11 +62,18 @@ const Content = () => {
           Virgile and what he does (can be keywords).
         </motion.p>
       </motion.div>
-      <div className="absolute w-screen flex justify-center bottom-2 xs:bottom-6 lg:hidden">
-        <div className="w-[64px]">
+      <div className="absolute w-screen flex justify-center pointer-events-auto bottom-2 xs:bottom-6">
+        <p
+          className="hidden lg:block opacity-40"
+          onMouseMove={() => setCursorType("pointer")}
+        >
+          login
+        </p>
+        <div className="w-[64px] lg:hidden">
           <img src="/assets/scrollIndicator.svg" className="w-full" />
         </div>
       </div>
+      <motion.p>{/* <UserLogin /> */}</motion.p>
     </div>
   );
 };
