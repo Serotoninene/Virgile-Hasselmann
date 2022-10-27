@@ -9,13 +9,13 @@ import MainMenu from "@src/components/Home/MainMenu";
 import UserLogin from "@src/components/Home/UserLogin";
 
 const Home: NextPage = () => {
-  const { changeCursorType } = useContext(CursorContext);
+  const { setCursorType } = useContext(CursorContext);
   const [goToMainMenu, setGoToMainMenu] = useState<boolean>(false);
   let lastY: number = 0;
 
   const toggleMainMenu = (toggle: boolean) => {
     setGoToMainMenu(toggle);
-    changeCursorType(toggle ? "pointer" : "scrollIndicator");
+    setCursorType(toggle ? "pointer" : "scrollIndicator");
   };
 
   const triggerMainMenuAnimMobile = (e: TouchEvent<HTMLDivElement>) => {
