@@ -18,10 +18,7 @@ const UserLogin = () => {
   };
 
   return (
-    <form
-      className="absolute top-0 left-0 h-screen w-screen bg-slate-900 flex justify-center items-center"
-      onSubmit={(e) => handleSubmit(e)}
-    >
+    <form onSubmit={(e) => handleSubmit(e)}>
       <input
         type="password"
         className="mb-4 p-1 bg-transparent outline-none border border-light text-light"

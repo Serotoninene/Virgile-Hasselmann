@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 // Framer motion
 import { motion } from "framer-motion";
 // Components
@@ -27,8 +27,14 @@ const itemsAnim = {
   },
 };
 
+const loginAnim = {
+  hidden: { opacity: 0 },
+  shown: { opacity: 1 },
+};
+
 const Content = () => {
   const { setCursorType } = useContext(CursorContext);
+  const [isLogin, setIsLogin] = useState(false);
   return (
     <div
       className="relative z-10 h-screen flex flex-col justify-between items-center pt-16 pb-14 px-4 xs:pt-[88px] xs:pb-16 xs:px-6 lg:pb-6 lg:justify-end lg:items-end"
@@ -65,6 +71,7 @@ const Content = () => {
       <div className="absolute w-screen flex justify-center pointer-events-auto bottom-2 xs:bottom-6">
         <p
           className="hidden lg:block opacity-40"
+          onClick={() => setIsLogin(true)}
           onMouseMove={() => setCursorType("pointer")}
         >
           login
@@ -73,7 +80,15 @@ const Content = () => {
           <img src="/assets/scrollIndicator.svg" className="w-full" />
         </div>
       </div>
-      <motion.p>{/* <UserLogin /> */}</motion.p>
+      {/* <motion.p
+        className="absolute top-0 left-0 h-screen w-screen bg-slate-900 flex justify-center items-center"
+        onMouseMove={() => setCursorType("pointer")}
+        variants={loginAnim}
+        initial="hidden"
+        animate={isLogin ? "shown" : "hidden"}
+      >
+        <UserLogin />
+      </motion.p> */}
     </div>
   );
 };
