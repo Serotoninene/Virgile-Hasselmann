@@ -57,7 +57,7 @@ const MenuSection = ({
   hoveredSection,
   setHoveredSection,
 }: MenuSectionProps) => {
-  const { changeCursorType } = useContext(CursorContext);
+  const { setCursorType } = useContext(CursorContext);
 
   return (
     <Link href={`/${sectionName.toLowerCase()}`}>
@@ -76,8 +76,8 @@ const MenuSection = ({
         {/* LinkButton */}
         <div
           className="z-10"
-          onMouseEnter={() => changeCursorType("hover")}
-          onMouseLeave={() => changeCursorType("pointer")}
+          onMouseEnter={() => setCursorType("hover")}
+          onMouseLeave={() => setCursorType("pointer")}
         >
           <h2 className="text-3xl font-light">
             <AnimatedLetters string={sectionName} start={start} delay={0.7} />

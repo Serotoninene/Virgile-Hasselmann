@@ -39,13 +39,13 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 const Videos = ({ data, filters }: Props): JSX.Element => {
-  const { changeCursorType } = useContext(CursorContext);
+  const { setCursorType } = useContext(CursorContext);
   const [filterSelected, setFilterSelected] = useState<BigInt>();
   const [dataSelected, setDataSelected] = useState<Video[]>([]);
 
   useEffect(() => {
     setFilterSelected(filters[1].id);
-    changeCursorType("pointer");
+    setCursorType("pointer");
   }, []);
 
   useEffect(() => {

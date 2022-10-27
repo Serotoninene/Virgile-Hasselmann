@@ -8,13 +8,13 @@ interface Props {
 }
 
 export default function CustomLink({ children, href }: Props) {
-  const { changeCursorType } = useContext(CursorContext);
+  const { setCursorType } = useContext(CursorContext);
 
   return (
     <Link href={href}>
       <a
-        onMouseEnter={() => changeCursorType("hover")}
-        onMouseLeave={() => changeCursorType("pointer")}
+        onMouseEnter={() => setCursorType("hover")}
+        onMouseLeave={() => setCursorType("pointer")}
       >
         {children}
       </a>

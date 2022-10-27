@@ -18,7 +18,7 @@ const Filters = ({
   filterSelected,
   setFilterSelected,
 }: FiltersProps) => {
-  const { changeCursorType } = useContext(CursorContext);
+  const { setCursorType } = useContext(CursorContext);
 
   if (!filters) return <></>;
 
@@ -29,8 +29,8 @@ const Filters = ({
           <div key={filter.name} className="flex">
             <li
               onClick={() => setFilterSelected(filter.id)}
-              onMouseEnter={() => changeCursorType("hover")}
-              onMouseLeave={() => changeCursorType("pointer")}
+              onMouseEnter={() => setCursorType("hover")}
+              onMouseLeave={() => setCursorType("pointer")}
               className={`${
                 filterSelected === filter.id ? "text-blue font-black" : ""
               } mx-1`}

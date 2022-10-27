@@ -11,13 +11,13 @@ import Layout from "@src/components/Utils/layout";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <AuthProvider>
-      <CursorProvider>
+    <CursorProvider>
+      <AuthProvider>
         <Layout>
           <Component {...pageProps} />
         </Layout>
-      </CursorProvider>
-    </AuthProvider>
+      </AuthProvider>
+    </CursorProvider>
   );
 }
 
