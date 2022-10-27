@@ -49,3 +49,9 @@ model Photo_Category {
   name   String
   photos Photo[]
 }
+
+model User {
+  id       BigInt @id @default(autoincrement())
+  password String @unique
+  status   String @default("ADMIN")
+}

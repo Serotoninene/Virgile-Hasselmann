@@ -4,13 +4,12 @@ import { publicProcedure, router } from "../trpc";
 import { videoRouter } from "./video";
 import { photoRouter } from "./photo";
 import { vidCatRouter } from "./vidCat";
+import { userRouter } from "./user";
 
 export const appRouter = router({
-  get_all_videos: publicProcedure.query(() => {
-    return prisma.video.findMany();
-  }),
-  vidCat: vidCatRouter,
+  user: userRouter,
   video: videoRouter,
+  vidCat: vidCatRouter,
   photo: photoRouter,
 });
 
