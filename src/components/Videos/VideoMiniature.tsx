@@ -1,16 +1,9 @@
 import React, { RefObject, useRef } from "react";
 import Image from "next/image";
 // Framer motion
-import {
-  motion,
-  MotionValue,
-  useMotionValue,
-  useScroll,
-  useSpring,
-} from "framer-motion";
+import { motion, MotionValue, useScroll, useSpring } from "framer-motion";
 // Hooks
 import useParallax from "@src/hooks/useParallax";
-import useWindowSize from "@src/hooks/useWindowSize";
 
 interface VideoMiniatureProps {
   placeholder: string;

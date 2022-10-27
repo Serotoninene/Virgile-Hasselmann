@@ -3,10 +3,10 @@ import type { NextPage } from "next";
 // Context
 import { CursorContext } from "@src/contexts/CursorProvider";
 // Components
-import DarkGradients from "@src/components/Home/DarkGradients";
-import HeroVideo from "@src/components/Home/HeroVideo";
-import MainMenu from "@src/components/Home/MainMenu";
-import UserLogin from "@src/components/Home/UserLogin";
+import DarkGradients from "@components/Home/DarkGradients";
+import HeroVideo from "@components/Home/HeroVideo";
+import MainMenu from "@components/Home/MainMenu";
+import UserLogin from "@components/Home/UserLogin";
 
 const Home: NextPage = () => {
   const { setCursorType } = useContext(CursorContext);
@@ -43,7 +43,6 @@ const Home: NextPage = () => {
       onWheel={(e) => triggerMainMenuAnimDesk(e)}
       onTouchMove={(e) => triggerMainMenuAnimMobile(e)}
     >
-      <UserLogin />
       <MainMenu goToMainMenu={goToMainMenu} />
       <HeroVideo />
       <DarkGradients /> {/* <-- must stay on the bottom of the component */}

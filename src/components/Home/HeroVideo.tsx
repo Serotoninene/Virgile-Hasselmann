@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Video from "@src/components/Utils/Video";
 import AnimatedLetters from "@src/components/Utils/AnimatedLetters";
 import { CursorContext } from "@src/contexts/CursorProvider";
+import UserLogin from "./UserLogin";
 
 const containerAnim = {
   hidden: {},
@@ -53,6 +54,9 @@ const Content = () => {
         <motion.p variants={itemsAnim} className="hidden lg:block">
           Made by @Serotoninene, 2022
         </motion.p>
+        <motion.div>
+          <UserLogin />
+        </motion.div>
         <motion.p
           variants={itemsAnim}
           className="text-center font-light text-xl xs:text-3xl lg:text-end lg:text-2xl lg:w-[30vw]"
