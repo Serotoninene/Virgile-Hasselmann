@@ -6,7 +6,6 @@ import { CursorContext } from "@src/contexts/CursorProvider";
 import DarkGradients from "@components/Home/DarkGradients";
 import HeroVideo from "@components/Home/HeroVideo";
 import MainMenu from "@components/Home/MainMenu";
-import UserLogin from "@components/Home/UserLogin";
 
 const Home: NextPage = () => {
   const { setCursorType } = useContext(CursorContext);

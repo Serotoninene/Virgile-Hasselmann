@@ -80,15 +80,14 @@ const Content = () => {
           <img src="/assets/scrollIndicator.svg" className="w-full" />
         </div>
       </div>
-      {/* <motion.p
-        className="absolute top-0 left-0 h-screen w-screen bg-slate-900 flex justify-center items-center"
+      <motion.div
+        className={`${
+          isLogin ? "flex" : "hidden"
+        } absolute top-0 left-0 h-screen w-screen bg-slate-900 justify-center items-center`}
         onMouseMove={() => setCursorType("pointer")}
-        variants={loginAnim}
-        initial="hidden"
-        animate={isLogin ? "shown" : "hidden"}
       >
         <UserLogin />
-      </motion.p> */}
+      </motion.div>
     </div>
   );
 };

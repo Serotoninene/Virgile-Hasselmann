@@ -21,7 +21,7 @@ const UserLogin = () => {
     <form onSubmit={(e) => handleSubmit(e)}>
       <input
         type="password"
-        className="mb-4 p-1 bg-transparent outline-none border border-light text-light"
+        className="mb-4 p-1 bg-transparent outline-none border border-light text-light block"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         placeholder="Password"
