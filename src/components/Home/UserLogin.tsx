@@ -1,20 +1,32 @@
-import { FormEvent, useContext, useState } from "react";
+import { FormEvent, useContext, useEffect, useState } from "react";
 // Context
 import { AuthContext } from "@src/contexts/AuthProvider";
 // Trpc
 import { trpc } from "@server/utils/trpc";
 
-const UserLogin = () => {
+interface Props {
+  setIsLogin: (e: boolean) => void;
+}
+
+const UserLogin = ({ setIsLogin }: Props) => {
   const [password, setPassword] = useState("");
-  const login = trpc.user.login.useMutation();
+  const login = trpc.user.login.useMutation({
+    onSuccess(data) {
+      auth.setUserStatus(data);
+    },
+  });
 
   // Context
   const auth = useContext(AuthContext);
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  useEffect(() => {
+    console.log(login);
+  }, [login]);
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await login.mutate(password);
-    auth.setUserStatus(login.data);
+    login.mutate(password);
+    setIsLogin(false);
   };
 
   return (

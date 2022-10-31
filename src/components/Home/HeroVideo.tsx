@@ -1,11 +1,12 @@
 import React, { useContext, useState } from "react";
 // Framer motion
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 // Components
 import Video from "@src/components/Utils/Video";
 import AnimatedLetters from "@src/components/Utils/AnimatedLetters";
 import { CursorContext } from "@src/contexts/CursorProvider";
 import UserLogin from "./UserLogin";
+import { AuthContext } from "@src/contexts/AuthProvider";
 
 const containerAnim = {
   hidden: {},
@@ -34,7 +35,9 @@ const loginAnim = {
 
 const Content = () => {
   const { setCursorType } = useContext(CursorContext);
+  const { userStatus } = useContext(AuthContext);
   const [isLogin, setIsLogin] = useState(false);
+
   return (
     <div
       className="relative z-10 h-screen flex flex-col justify-between items-center pt-16 pb-14 px-4 xs:pt-[88px] xs:pb-16 xs:px-6 lg:pb-6 lg:justify-end lg:items-end"
@@ -68,7 +71,13 @@ const Content = () => {
           Virgile and what he does (can be keywords).
         </motion.p>
       </motion.div>
-      <div className="absolute w-screen flex justify-center pointer-events-auto bottom-2 xs:bottom-6">
+      <div
+        className={
+          userStatus === "ADMIN"
+            ? "hidden"
+            : "absolute w-screen flex justify-center pointer-events-auto bottom-2 xs:bottom-6"
+        }
+      >
         <p
           className="hidden lg:block opacity-40"
           onClick={() => setIsLogin(true)}
@@ -80,14 +89,22 @@ const Content = () => {
           <img src="/assets/scrollIndicator.svg" className="w-full" />
         </div>
       </div>
-      <motion.div
-        className={`${
-          isLogin ? "flex" : "hidden"
-        } absolute top-0 left-0 h-screen w-screen bg-slate-900 justify-center items-center`}
-        onMouseMove={() => setCursorType("pointer")}
-      >
-        <UserLogin />
-      </motion.div>
+      {/* if the user is not an admin yet */}
+      <AnimatePresence mode="wait">
+        {userStatus === "USER" && isLogin && (
+          <motion.div
+            key="login"
+            variants={loginAnim}
+            initial="hidden"
+            animate="shown"
+            exit="hidden"
+            className={`flex absolute top-0 left-0 h-screen w-screen bg-slate-900 justify-center items-center`}
+            onMouseMove={() => setCursorType("pointer")}
+          >
+            <UserLogin setIsLogin={setIsLogin} />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

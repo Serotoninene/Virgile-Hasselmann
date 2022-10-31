@@ -25,5 +25,7 @@ export const userRouter = router({
         return admin;
       }
     }
+
+    return admin;
   }),
 });
