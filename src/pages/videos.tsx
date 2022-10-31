@@ -13,8 +13,6 @@ import Filters from "@src/components/Videos/Filters";
 import VideoMiniature from "@src/components/Videos/VideoMiniature";
 import ScrollTopButton from "@src/components/Videos/ScrollTopButton";
 import Footer from "@src/components/Utils/Footer";
-import VideoInputs from "@src/components/Admin/VideoInputs";
-import { trpc } from "@server/utils/trpc";
 
 const positions = [
   `col-start-1 col-end-6 lg:pt-16`,

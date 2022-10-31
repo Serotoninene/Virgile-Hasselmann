@@ -45,15 +45,17 @@ export default function Admin({ videos, vid_category, photos }: Props) {
       <h2 className="text-xl"> Videos </h2>
       {videos.map((video) => (
         <div className="grid grid-cols-12" key={Number(video.id)}>
-          <div className="col-span-2 border">
+          <div className="col-span-2 p-1">
             {" "}
-            <img src={video.placeholder_hq}></img>{" "}
+            <img
+              src={process.env.NEXT_PUBLIC_PHOTOS + video.placeholder_hq}
+            ></img>{" "}
           </div>
-          <div className="col-span-2 border"> {video.title} </div>
-          <div className="col-span-2 border">
+          <div className="col-span-2 p-1"> {video.title} </div>
+          <div className="col-span-2 p-1">
             {/* supposed to be the video category there */}
           </div>
-          <div className="col-span-2 border"> {video.published} </div>
+          <div className="col-span-2 p-1"> {video.published} </div>
         </div>
       ))}
     </div>
