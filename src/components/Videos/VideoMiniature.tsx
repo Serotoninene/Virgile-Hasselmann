@@ -40,7 +40,7 @@ const VideoMiniature = ({ data, placeholder }: VideoMiniatureProps) => {
   const physics = { damping: 15, mass: 1, stiffness: 55 };
   const springY = useSpring(y, physics);
 
-  // delete video if anim
+  // delete video if userStatus = anim
   const { userStatus } = useContext(AuthContext);
   const deleteVideo = trpc.video.delete.useMutation();
 
