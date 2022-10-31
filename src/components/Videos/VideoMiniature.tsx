@@ -1,7 +1,7 @@
 import React, { RefObject, useContext, useRef } from "react";
 import Image from "next/image";
 // Framer motion
-import { motion, MotionValue, useScroll, useSpring } from "framer-motion";
+import { motion, useScroll, useSpring } from "framer-motion";
 // Hooks
 import useParallax from "@src/hooks/useParallax";
 import { AuthContext } from "@src/contexts/AuthProvider";

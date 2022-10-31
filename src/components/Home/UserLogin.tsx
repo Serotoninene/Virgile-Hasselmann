@@ -26,15 +26,23 @@ const UserLogin = ({ setIsLogin }: Props) => {
   };
 
   return (
-    <form onSubmit={(e) => handleSubmit(e)}>
-      <input
-        type="password"
-        className="block text-[7vw] italic text-center bg-transparent outline-none text-light placeholder-light"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Mot de passe"
-      />
-    </form>
+    <>
+      <form onSubmit={(e) => handleSubmit(e)} className="z-10">
+        <input
+          type="password"
+          className="block text-[7vw] italic text-center bg-transparent outline-none text-light placeholder-light"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Mot de passe"
+        />
+      </form>
+      <div
+        className="absolute w-full h-full"
+        onClick={() => {
+          setIsLogin(false);
+        }}
+      ></div>
+    </>
   );
 };
 
