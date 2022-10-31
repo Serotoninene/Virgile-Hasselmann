@@ -76,6 +76,7 @@ const Videos = ({ data, filters }: Props): JSX.Element => {
                   }`}
                 >
                   <VideoMiniature
+                    data={d}
                     placeholder={
                       process.env.NEXT_PUBLIC_PHOTOS + d.placeholder_hq
                     }
