@@ -1,4 +1,4 @@
-import { FormEvent, useContext, useEffect, useState } from "react";
+import { FormEvent, useContext, useState } from "react";
 // Context
 import { AuthContext } from "@src/contexts/AuthProvider";
 // Trpc
@@ -19,10 +19,6 @@ const UserLogin = ({ setIsLogin }: Props) => {
   // Context
   const auth = useContext(AuthContext);
 
-  useEffect(() => {
-    console.log(login);
-  }, [login]);
-
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     login.mutate(password);
@@ -33,12 +29,11 @@ const UserLogin = ({ setIsLogin }: Props) => {
     <form onSubmit={(e) => handleSubmit(e)}>
       <input
         type="password"
-        className="mb-4 p-1 bg-transparent outline-none border border-light text-light block"
+        className="block text-[7vw] italic text-center bg-transparent outline-none text-light placeholder-light"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        placeholder="Password"
+        placeholder="Mot de passe"
       />
-      <button>ok</button>
     </form>
   );
 };

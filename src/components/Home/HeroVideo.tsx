@@ -98,7 +98,7 @@ const Content = () => {
             initial="hidden"
             animate="shown"
             exit="hidden"
-            className={`flex absolute top-0 left-0 h-screen w-screen bg-slate-900 justify-center items-center`}
+            className={`flex absolute top-0 left-0 h-screen w-screen backdrop-blur-lg bg-white/30 justify-center items-center`}
             onMouseMove={() => setCursorType("pointer")}
           >
             <UserLogin setIsLogin={setIsLogin} />
