@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 // trpc
 import { trpc } from "@server/utils/trpc";
 // Types
 import { Video, Vid_Category } from "@prisma/client";
+import uploadImage from "@src/pages/api/upload-image";
+import axios from "axios";
 
 interface Props {
   data?: Video;
@@ -19,39 +21,39 @@ const VideoInputs = ({ data }: Props) => {
   const [videoName, setVideoName] = useState<string>(
     data ? data.videoName : ""
   );
-  const [placeholder_lq, setPlaceholder_lq] = useState<string | undefined>(
-    data && data.placeholder_lq ? data.placeholder_lq : undefined
-  );
-  const [placeholder_hq, setPlaceholder_hq] = useState<string>(
-    data ? data.placeholder_hq : ""
-  );
+  const [placeholder_hq, setPlaceholder_hq] = useState<File>();
   const [vid_CategoryId, setvid_CategoryID] = useState<bigint>(
     data ? data.vid_CategoryId : BigInt(1)
   );
+
+  // trpc  API routes
   const updateVideo = trpc.video.update.useMutation();
   const createVideo = trpc.video.create.useMutation();
 
-  const handleSubmit = () => {
-    if (data) {
-      updateVideo.mutate({
-        id: data.id,
-        title,
-        dateOfCreation,
-        videoName,
-        placeholder_lq,
-        placeholder_hq,
-        vid_CategoryId,
-      });
-    } else {
-      createVideo.mutate({
-        title,
-        dateOfCreation,
-        videoName,
-        placeholder_lq,
-        placeholder_hq,
-        vid_CategoryId,
-      });
-    }
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    if (!placeholder_hq || !videoName) return;
+
+    let uploadedImage = await uploadImage(placeholder_hq);
+
+    // if (data) {
+    //   updateVideo.mutate({
+    //     id: data.id,
+    //     title,
+    //     dateOfCreation,
+    //     videoName,
+    //     placeholder_hq,
+    //     vid_CategoryId,
+    //   });
+    // } else {
+
+    createVideo.mutate({
+      title,
+      dateOfCreation,
+      videoName,
+      placeholder_hq: placeholder_hq.name,
+      vid_CategoryId,
+    });
   };
 
   return (
@@ -77,17 +79,9 @@ const VideoInputs = ({ data }: Props) => {
         placeholder="Name of the data"
       />
       <input
-        type="text"
+        type="file"
         className="mb-4 p-1 bg-transparent outline-none border border-light text-light"
-        value={placeholder_lq}
-        onChange={(e) => setPlaceholder_lq(e.target.value)}
-        placeholder="Placeholder LQ"
-      />
-      <input
-        type="text"
-        className="mb-4 p-1 bg-transparent outline-none border border-light text-light"
-        value={placeholder_hq}
-        onChange={(e) => setPlaceholder_hq(e.target.value)}
+        onChange={(e) => setPlaceholder_hq(e.currentTarget.files![0])}
         placeholder="Placeholder HQ"
       />
       <select

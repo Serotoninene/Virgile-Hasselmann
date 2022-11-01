@@ -67,11 +67,11 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 export default function Admin({ videos, photos }: Props) {
+  // If the status is not ADMIN, redirects toward the home
   const router = useRouter();
   // auth context
   const { userStatus } = useContext(AuthContext);
 
-  // If the status is not ADMIN, redirects toward the home
   // useEffect(() => {
   //   if (userStatus !== "ADMIN") {
   //     router.push("/");
@@ -79,13 +79,31 @@ export default function Admin({ videos, photos }: Props) {
   // }, []);
   // if (userStatus !== "ADMIN") return <></>;
 
+  // Show or not the video inputs to add a new one
+  const [isAddingVideo, setIsAddingVideo] = useState(false);
+
   return (
     <div className="pt-16 xs:pt-[88px] px-4 sm:px-6">
       <h1 className="text-center text-2xl text-light font-bold">
         Admin's page
       </h1>
       <h2 className="text-xl"> Videos </h2>
-      {videos && videos.map((video) => <VideoLine video={video} />)}
+      {isAddingVideo ? (
+        <VideoInputs />
+      ) : (
+        <p
+          className="text-blue text-end cursor-pointer"
+          onClick={() => {
+            setIsAddingVideo(true);
+          }}
+        >
+          Add a video
+        </p>
+      )}
+      {videos &&
+        videos.map((video) => (
+          <VideoLine video={video} key={video.id.toString()} />
+        ))}
     </div>
   );
 }

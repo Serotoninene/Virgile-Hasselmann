@@ -1,39 +1,45 @@
-// pages/api/upload-image.ts
-import aws from "aws-sdk";
+import S3 from "aws-sdk/clients/s3";
+import axios from "axios";
 
-//@ts-ignore
-export default async function handler(req, res) {
+const s3 = new S3({
+  region: "eu-west-3",
+  accessKeyId: process.env.NEXT_PUBLIC_AWS_ACCOUNT_ACCESS_KEY!,
+  secretAccessKey: process.env.NEXT_PUBLIC_AWS_ACCOUNT_SECRET_KEY!,
+  signatureVersion: "v4",
+});
+
+// export config to set sizelimit of files
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: "100000",
+    },
+  },
+};
+
+export default async function uploadImage(file: File) {
+  // Allow only POST method
+  if (!file) {
+    return { message: "No file" };
+  }
   try {
-    // 1.
-    const s3 = new aws.S3({
-      accessKeyId: process.env.AWS_ACCOUNT_ACCESS_KEY,
-      secretAccessKey: process.env.AWS_ACCOUNT_SECRET_KEY,
-      region: process.env.AWS_REGION_LOCATION,
-    });
-
-    // 2.
-    aws.config.update({
-      accessKeyId: process.env.AWS_ACCOUNT_ACCESS_KEY,
-      secretAccessKey: process.env.AWS_ACCOUNT_SECRET_KEY,
-      region: process.env.AWS_REGION_LOCATION,
-      signatureVersion: "v4",
-    });
-
-    // 3.
-    const post = await s3.createPresignedPost({
-      Bucket: process.env.AWS_S3_BUCKET_NAME,
-      Fields: {
-        key: req.query.file,
+    // Setting parameters - ACL will allow us to see a file
+    const fileParams = {
+      Bucket: "virgile-portfollio/photos",
+      Key: file.name,
+      Expires: 600,
+      ContentType: file.type,
+    };
+    // Generating a signed URL which we'll use to upload the file
+    const url = await s3.getSignedUrlPromise("putObject", fileParams);
+    await axios.put(url, file, {
+      headers: {
+        "Content-type": String(file.type),
+        "Access-Control-Allow-Origin": "*",
       },
-      Expires: 60, // seconds
-      Conditions: [
-        ["content-length-range", 0, 5048576], // up to 1 MB
-      ],
     });
-
-    // 4.
-    return res.status(200).json(post);
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    console.log(err);
+    return { message: err };
   }
 }
