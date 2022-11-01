@@ -4,17 +4,13 @@ import { useRouter } from "next/router";
 // Context
 import { AuthContext } from "@src/contexts/AuthProvider";
 // Prisma
-import { Prisma } from "@prisma/client";
 import { prisma } from "@server/prisma";
 import { Photo, Video, Vid_Category } from "@prisma/client";
 import VideoInputs from "@src/components/Admin/VideoInputs";
 import { trpc } from "@server/utils/trpc";
+import { VideoWithCategories } from "types";
 
 // Defining a type for videos that includes the relation with categories`
-const videoWithCategories = Prisma.validator<Prisma.VideoArgs>()({
-  include: { Vid_Category: true },
-});
-type VideoWithCategories = Prisma.VideoGetPayload<typeof videoWithCategories>;
 
 interface Props {
   videos: VideoWithCategories[];
