@@ -9,7 +9,6 @@ interface Props {
 }
 
 const VideoInputs = ({ data }: Props) => {
-  console.log(data);
   // filters Id for default vid_categoryId
   const filters: Vid_Category[] | undefined = trpc.vidCat.list.useQuery().data;
   // inputs

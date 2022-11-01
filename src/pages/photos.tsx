@@ -1,5 +1,5 @@
 import React from "react";
 
 export default function photos() {
-  return <div>photos</div>;
+  return <div className="pt-16 xs:pt-[88px]">photos</div>;
 }
