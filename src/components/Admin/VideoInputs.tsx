@@ -3,8 +3,7 @@ import React, { FormEvent, useState } from "react";
 import { trpc } from "@server/utils/trpc";
 // Types
 import { Video, Vid_Category } from "@prisma/client";
-import uploadImage from "@src/pages/api/upload-image";
-import axios from "axios";
+import { uploadImage, uploadVideo } from "@src/pages/api/upload-image";
 
 interface Props {
   data?: Video;
@@ -18,9 +17,7 @@ const VideoInputs = ({ data }: Props) => {
   const [dateOfCreation, setDateOfCreation] = useState<Date>(
     data ? data.dateOfCreation : new Date("1994-08-01")
   );
-  const [videoName, setVideoName] = useState<string>(
-    data ? data.videoName : ""
-  );
+  const [video, setVideo] = useState<File>();
   const [placeholder_hq, setPlaceholder_hq] = useState<File>();
   const [vid_CategoryId, setvid_CategoryID] = useState<bigint>(
     data ? data.vid_CategoryId : BigInt(1)
@@ -32,9 +29,10 @@ const VideoInputs = ({ data }: Props) => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!placeholder_hq || !videoName) return;
+    if (!placeholder_hq || !video) return;
 
-    let uploadedImage = await uploadImage(placeholder_hq);
+    await uploadImage(placeholder_hq);
+    await uploadVideo(video);
 
     // if (data) {
     //   updateVideo.mutate({
@@ -50,7 +48,7 @@ const VideoInputs = ({ data }: Props) => {
     createVideo.mutate({
       title,
       dateOfCreation,
-      videoName,
+      videoName: video.name,
       placeholder_hq: placeholder_hq.name,
       vid_CategoryId,
     });
@@ -72,10 +70,9 @@ const VideoInputs = ({ data }: Props) => {
         onChange={(e) => setDateOfCreation(new Date(e.target.value))}
       />
       <input
-        type="text"
+        type="file"
         className="mb-4 p-1 bg-transparent outline-none border border-light text-light"
-        value={videoName}
-        onChange={(e) => setVideoName(e.target.value)}
+        onChange={(e) => setVideo(e.currentTarget.files![0])}
         placeholder="Name of the data"
       />
       <input
