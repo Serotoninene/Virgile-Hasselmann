@@ -5,16 +5,15 @@ import { useRouter } from "next/router";
 import { AuthContext } from "@src/contexts/AuthProvider";
 // Prisma
 import { prisma } from "@server/prisma";
-import { Photo, Video, Vid_Category } from "@prisma/client";
 import VideoInputs from "@src/components/Admin/VideoInputs";
 import { trpc } from "@server/utils/trpc";
-import { VideoWithCategories } from "types";
+import { VideoWithCategories, PhotoWithCategories } from "types";
 
 // Defining a type for videos that includes the relation with categories`
 
 interface Props {
   videos: VideoWithCategories[];
-  photos: Photo[];
+  photos: PhotoWithCategories[];
 }
 
 interface VideoLineProps {

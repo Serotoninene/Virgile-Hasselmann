@@ -12,6 +12,6 @@ export type VideoWithCategories = Prisma.VideoGetPayload<
   typeof videoWithCategories
 >;
 
-export type PhotoWithCategoties = Prisma.PhotoGetPayload<
+export type PhotoWithCategories = Prisma.PhotoGetPayload<
   typeof photoWithCategories
 >;
