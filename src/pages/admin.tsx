@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { GetStaticProps } from "next";
 import { useRouter } from "next/router";
 // Context
@@ -7,6 +7,8 @@ import { AuthContext } from "@src/contexts/AuthProvider";
 import { Prisma } from "@prisma/client";
 import { prisma } from "@server/prisma";
 import { Photo, Video, Vid_Category } from "@prisma/client";
+import VideoInputs from "@src/components/Admin/VideoInputs";
+import { trpc } from "@server/utils/trpc";
 
 // Defining a type for videos that includes the relation with categories`
 const videoWithCategories = Prisma.validator<Prisma.VideoArgs>()({
@@ -18,6 +20,45 @@ interface Props {
   videos: VideoWithCategories[];
   photos: Photo[];
 }
+
+interface VideoLineProps {
+  video: VideoWithCategories;
+}
+
+const VideoLine = ({ video }: VideoLineProps) => {
+  const [isUpdated, setIsUpdated] = useState(false);
+  const deleteVideo = trpc.video.delete.useMutation();
+
+  if (isUpdated) return <VideoInputs data={video} />;
+  return (
+    <div className="grid grid-cols-12" key={Number(video.id)}>
+      <div className="col-span-2 p-1">
+        <img src={process.env.NEXT_PUBLIC_PHOTOS + video.placeholder_hq}></img>
+      </div>
+      <div className="col-span-2 p-1 flex items-end"> {video.title} </div>
+      <div className="col-span-2 p-1 flex items-end">
+        {video.Vid_Category.name}
+      </div>
+      <div className="col-span-2 p-1 flex items-end">
+        {video.dateOfCreation.toDateString()}
+      </div>
+      <div
+        className="col-span-2 p-1 flex items-end cursor-pointer"
+        onClick={() => {
+          setIsUpdated(true);
+        }}
+      >
+        update
+      </div>
+      <div
+        className="col-span-2 p-1 flex items-end cursor-pointer"
+        onClick={() => deleteVideo.mutate(video.id)}
+      >
+        delete
+      </div>
+    </div>
+  );
+};
 
 export const getStaticProps: GetStaticProps = async () => {
   const videos = await prisma.video.findMany({
@@ -49,23 +90,7 @@ export default function Admin({ videos, photos }: Props) {
         Admin's page
       </h1>
       <h2 className="text-xl"> Videos </h2>
-      {videos &&
-        videos.map((video) => (
-          <div className="grid grid-cols-12" key={Number(video.id)}>
-            <div className="col-span-2 p-1">
-              <img
-                src={process.env.NEXT_PUBLIC_PHOTOS + video.placeholder_hq}
-              ></img>
-            </div>
-            <div className="col-span-2 p-1 flex items-end"> {video.title} </div>
-            <div className="col-span-2 p-1 flex items-end">
-              {video.Vid_Category.name}
-            </div>
-            <div className="col-span-2 p-1 flex items-end">
-              {video.published}
-            </div>
-          </div>
-        ))}
+      {videos && videos.map((video) => <VideoLine video={video} />)}
     </div>
   );
 }
