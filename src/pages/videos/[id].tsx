@@ -10,7 +10,7 @@ interface Props {}
 
 const VideoPlayer = () => {
   const { query } = useRouter();
-  const videoData = trpc.video.byId.useQuery(query.id).data;
+  const videoData = trpc.video.byId.useQuery(query.id!).data;
   const [video, setVideo] = useState<Video | null | undefined>(null);
 
   useEffect(() => {
@@ -22,9 +22,8 @@ const VideoPlayer = () => {
       {video && (
         <video
           preload="metadata"
-          loop
-          autoPlay
-          muted
+          controls
+          controlsList="nodownload nofullscreen noremoteplayback"
           className={`w-full h-full object-cover border`}
         >
           <source
