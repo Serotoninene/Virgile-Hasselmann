@@ -19,8 +19,8 @@ const VideoInputs = ({ data }: Props) => {
   );
   const [video, setVideo] = useState<File>();
   const [placeholder_hq, setPlaceholder_hq] = useState<File>();
-  const [vid_CategoryId, setvid_CategoryID] = useState<bigint>(
-    data ? data.vid_CategoryId : BigInt(1)
+  const [vid_CategoryId, setvid_CategoryID] = useState<string>(
+    data ? data.vid_CategoryId : "Films"
   );
 
   // trpc  API routes
@@ -82,8 +82,8 @@ const VideoInputs = ({ data }: Props) => {
         placeholder="Placeholder HQ"
       />
       <select
-        value={Number(vid_CategoryId)}
-        onChange={(e) => setvid_CategoryID(BigInt(e.target.value))}
+        value={vid_CategoryId}
+        onChange={(e) => setvid_CategoryID(e.target.value)}
       >
         {filters &&
           filters.map((filter, idx) => (

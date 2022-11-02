@@ -9,8 +9,8 @@ import { Vid_Category } from "@prisma/client";
 
 interface FiltersProps {
   filters: Vid_Category[];
-  filterSelected?: BigInt;
-  setFilterSelected: (e: BigInt) => void;
+  filterSelected?: string;
+  setFilterSelected: (e: string) => void;
 }
 
 const Filters = ({

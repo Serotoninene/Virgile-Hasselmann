@@ -13,7 +13,7 @@ export const videoRouter = router({
         placeholder_lq: z.string().or(z.undefined()),
         placeholder_hq: z.string(),
         description: z.string().or(z.undefined()),
-        vid_CategoryId: z.bigint(),
+        vid_CategoryId: z.string(),
       })
     )
     .mutation(async ({ input }) => {
@@ -24,18 +24,21 @@ export const videoRouter = router({
   list: publicProcedure.query(async () => {
     return await prisma.video.findMany();
   }),
+  byId: publicProcedure.input(z.string()).query(async ({ input }) => {
+    return await prisma.video.findFirst({ where: { id: input } });
+  }),
   // Update
   update: publicProcedure
     .input(
       z.object({
-        id: z.bigint(),
+        id: z.string(),
         title: z.string(),
         dateOfCreation: z.date(),
         videoName: z.string(),
         placeholder_lq: z.string().or(z.undefined()),
         placeholder_hq: z.string(),
         description: z.string().or(z.undefined()),
-        vid_CategoryId: z.bigint(),
+        vid_CategoryId: z.string(),
       })
     )
     .mutation(async ({ input }) => {
@@ -53,7 +56,7 @@ export const videoRouter = router({
       return { success: true, video: updatedVideo };
     }),
   // Delete
-  delete: publicProcedure.input(z.bigint()).mutation(async ({ input }) => {
+  delete: publicProcedure.input(z.string()).mutation(async ({ input }) => {
     await prisma.video.delete({ where: { id: input } });
   }),
 });

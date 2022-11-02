@@ -11,7 +11,6 @@ import { Video, Vid_Category } from "@prisma/client";
 import SmoothScroll from "@src/components/Utils/SmoothScroll";
 import Filters from "@src/components/Videos/Filters";
 import VideoMiniature from "@src/components/Videos/VideoMiniature";
-import VideoPlayer from "@src/components/Videos/VideoPlayer";
 import ScrollTopButton from "@src/components/Videos/ScrollTopButton";
 import Footer from "@src/components/Utils/Footer";
 
@@ -40,7 +39,7 @@ export const getStaticProps: GetStaticProps = async () => {
 const Videos = ({ data, filters }: Props): JSX.Element => {
   const { setCursorType } = useContext(CursorContext);
   // State managing the category selected and the data displayed accordingly
-  const [filterSelected, setFilterSelected] = useState<BigInt>();
+  const [filterSelected, setFilterSelected] = useState<string>();
   const [dataSelected, setDataSelected] = useState<Video[]>([]);
 
   // setting up the category selected at launch and the cursor style

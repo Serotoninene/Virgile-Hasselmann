@@ -11,7 +11,7 @@ datasource db {
 }
 
 model Video {
-  id             BigInt       @id @default(autoincrement())
+  id             String       @id @default(uuid())
   createdAt      DateTime     @default(now())
   dateOfCreation DateTime
   title          String
@@ -21,17 +21,17 @@ model Video {
   description    String?      @db.String(1000)
   published      Boolean      @default(false)
   Vid_Category   Vid_Category @relation(fields: [vid_CategoryId], references: [id])
-  vid_CategoryId BigInt
+  vid_CategoryId String
 }
 
 model Vid_Category {
-  id     BigInt  @id @default(autoincrement())
+  id     String  @id @default(uuid())
   name   String
   videos Video[]
 }
 
 model Photo {
-  id               BigInt         @id @default(autoincrement())
+  id               String         @id @default(uuid())
   createdAt        DateTime       @default(now())
   dateOfCreation   DateTime
   title            String
@@ -41,17 +41,17 @@ model Photo {
   description      String?        @db.String(1000)
   published        Boolean        @default(false)
   Photo_Category   Photo_Category @relation(fields: [photo_CategoryId], references: [id])
-  photo_CategoryId BigInt
+  photo_CategoryId String
 }
 
 model Photo_Category {
-  id     BigInt  @id @default(autoincrement())
+  id     String  @id @default(uuid())
   name   String
   photos Photo[]
 }
 
 model User {
-  id       BigInt @id @default(autoincrement())
+  id       String @id @default(uuid())
   password String @unique
   status   String @default("ADMIN")
 }

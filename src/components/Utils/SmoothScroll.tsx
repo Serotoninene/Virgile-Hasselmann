@@ -6,7 +6,7 @@ import useWindowSize from "@src/hooks/useWindowSize";
 
 type Props = {
   children: JSX.Element;
-  filterSelected?: BigInt;
+  filterSelected?: string;
 };
 
 export default function SmoothScroll({ children, filterSelected }: Props) {

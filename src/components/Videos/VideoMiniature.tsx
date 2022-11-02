@@ -1,4 +1,4 @@
-import React, { RefObject, useContext, useRef, useState } from "react";
+import React, { RefObject, useContext, useRef } from "react";
 import Image from "next/image";
 // Framer motion
 import { motion, useScroll, useSpring } from "framer-motion";
@@ -7,6 +7,7 @@ import useParallax from "@src/hooks/useParallax";
 import { AuthContext } from "@src/contexts/AuthProvider";
 import { trpc } from "@server/utils/trpc";
 import { Video } from "@prisma/client";
+import Link from "next/link";
 
 interface VideoMiniatureProps {
   data: Video;
@@ -49,43 +50,45 @@ const VideoMiniature = ({ data }: VideoMiniatureProps) => {
   };
 
   return (
-    <motion.div
-      ref={ref}
-      variants={containerAnim}
-      initial="hidden"
-      animate="visible"
-      exit="hidden"
-      className="overflow-hidden"
-    >
-      <motion.div className="overflow-hidden" variants={photoAnim}>
+    <Link href={`/videos/${data.id}`}>
+      <motion.div
+        ref={ref}
+        variants={containerAnim}
+        initial="hidden"
+        animate="visible"
+        exit="hidden"
+        className="overflow-hidden"
+      >
+        <motion.div className="overflow-hidden" variants={photoAnim}>
+          <motion.div
+            className="relative h-[184px] sm:h-[336px]"
+            style={{ y: springY, scale: 1.5 }}
+          >
+            <Image
+              src={`https://virgile-portfollio.s3.amazonaws.com/photos/${data.placeholder_hq}`}
+              layout="fill"
+              objectFit="cover"
+              objectPosition="center"
+            />
+          </motion.div>
+        </motion.div>
         <motion.div
-          className="relative h-[184px] sm:h-[336px]"
-          style={{ y: springY, scale: 1.5 }}
+          variants={textAnim}
+          className="grid grid-cols-12 px-1 pt-2 text-sm"
         >
-          <Image
-            src={`https://virgile-portfollio.s3.amazonaws.com/photos/${data.placeholder_hq}`}
-            layout="fill"
-            objectFit="cover"
-            objectPosition="center"
-          />
+          <p className="col-span-4">08/09/2021</p>
+          <p className="col-span-4 xs:col-span-5">Client</p>
+          {userStatus === "ADMIN" ? (
+            <div className="col-span-4 flex justify-between xs:col-span-3">
+              <p>{data.title}</p>
+              <p onClick={() => handleDeletingVideo(data.id)}>X</p>
+            </div>
+          ) : (
+            <p className="col-span-4 xs:col-span-3">{data.title}</p>
+          )}
         </motion.div>
       </motion.div>
-      <motion.div
-        variants={textAnim}
-        className="grid grid-cols-12 px-1 pt-2 text-sm"
-      >
-        <p className="col-span-4">08/09/2021</p>
-        <p className="col-span-4 xs:col-span-5">Client</p>
-        {userStatus === "ADMIN" ? (
-          <div className="col-span-4 flex justify-between xs:col-span-3">
-            <p>{data.title}</p>
-            <p onClick={() => handleDeletingVideo(data.id)}>X</p>
-          </div>
-        ) : (
-          <p className="col-span-4 xs:col-span-3">{data.title}</p>
-        )}
-      </motion.div>
-    </motion.div>
+    </Link>
   );
 };
 
