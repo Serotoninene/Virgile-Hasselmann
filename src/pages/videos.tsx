@@ -11,6 +11,7 @@ import { Video, Vid_Category } from "@prisma/client";
 import SmoothScroll from "@src/components/Utils/SmoothScroll";
 import Filters from "@src/components/Videos/Filters";
 import VideoMiniature from "@src/components/Videos/VideoMiniature";
+import VideoPlayer from "@src/components/Videos/VideoPlayer";
 import ScrollTopButton from "@src/components/Videos/ScrollTopButton";
 import Footer from "@src/components/Utils/Footer";
 
@@ -38,14 +39,20 @@ export const getStaticProps: GetStaticProps = async () => {
 
 const Videos = ({ data, filters }: Props): JSX.Element => {
   const { setCursorType } = useContext(CursorContext);
+  // State managing the category selected and the data displayed accordingly
   const [filterSelected, setFilterSelected] = useState<BigInt>();
   const [dataSelected, setDataSelected] = useState<Video[]>([]);
+  // State managing the launch of the videoPlayer
+  const [videoPlayed, setVideoPlayed] = useState("");
+  const [isVideoPlayed, setIsVideoPlayed] = useState(false);
 
+  // setting up the category selected at launch and the cursor style
   useEffect(() => {
     setFilterSelected(filters[1].id);
     setCursorType("pointer");
   }, []);
 
+  // changing the data to display when new filter selected
   useEffect(() => {
     const dataToDisplay = data.filter(
       (d) => d.vid_CategoryId === filterSelected
@@ -54,42 +61,51 @@ const Videos = ({ data, filters }: Props): JSX.Element => {
   }, [filterSelected]);
 
   return (
-    <SmoothScroll filterSelected={filterSelected}>
-      <>
-        <div id="Videos" className="pt-16 xs:pt-[88px]">
-          <Filters
-            filters={filters}
-            filterSelected={filterSelected}
-            setFilterSelected={setFilterSelected}
-          />
-          <div className="lg:grid grid-cols-1 sm:grid-cols-12 px-4 sm:px-8 ">
-            {dataSelected.map((d, idx) => (
-              <AnimatePresence key={idx} mode="wait">
-                <div
-                  key={d.title + idx}
-                  className={`${
-                    idx < positions.length
-                      ? positions[idx]
-                      : positions[idx % positions.length]
-                  }`}
-                >
-                  <VideoMiniature
-                    data={d}
-                    placeholder={
-                      process.env.NEXT_PUBLIC_PHOTOS + d.placeholder_hq
-                    }
-                  />
-                </div>
-              </AnimatePresence>
-            ))}
+    <>
+      <VideoPlayer
+        videoPlayed={videoPlayed}
+        isVideoPlayed={isVideoPlayed}
+        setIsVideoPlayed={setIsVideoPlayed}
+      />
+      <SmoothScroll filterSelected={filterSelected}>
+        <>
+          <div id="Videos" className="pt-16 xs:pt-[88px]">
+            <Filters
+              filters={filters}
+              filterSelected={filterSelected}
+              setFilterSelected={setFilterSelected}
+            />
+            <div className="lg:grid grid-cols-1 sm:grid-cols-12 px-4 sm:px-8 ">
+              {dataSelected.map((d, idx) => (
+                <AnimatePresence key={idx} mode="wait">
+                  <div
+                    key={d.title + idx}
+                    className={`${
+                      idx < positions.length
+                        ? positions[idx]
+                        : positions[idx % positions.length]
+                    }`}
+                  >
+                    <VideoMiniature
+                      data={d}
+                      placeholder={
+                        process.env.NEXT_PUBLIC_PHOTOS + d.placeholder_hq
+                      }
+                      setVideoPlayed={setVideoPlayed}
+                      setIsVideoPlayed={setIsVideoPlayed}
+                    />
+                  </div>
+                </AnimatePresence>
+              ))}
+            </div>
           </div>
-        </div>
-        <div className="hidden pt-8 pr-10 justify-end cursor-pointer lg:flex">
-          <ScrollTopButton />
-        </div>
-        <Footer />
-      </>
-    </SmoothScroll>
+          <div className="hidden pt-8 pr-10 justify-end cursor-pointer lg:flex">
+            <ScrollTopButton />
+          </div>
+          <Footer />
+        </>
+      </SmoothScroll>
+    </>
   );
 };
 
