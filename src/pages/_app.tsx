@@ -5,19 +5,18 @@ import { AuthProvider } from "@src/contexts/AuthProvider";
 import { CursorProvider } from "@src/contexts/CursorProvider";
 // trpc
 import { trpc } from "@server/utils/trpc";
-
 // Components
 import Layout from "@src/components/Utils/layout";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <CursorProvider>
-      <AuthProvider>
+    <AuthProvider>
+      <CursorProvider>
         <Layout>
           <Component {...pageProps} />
         </Layout>
-      </AuthProvider>
-    </CursorProvider>
+      </CursorProvider>
+    </AuthProvider>
   );
 }
 

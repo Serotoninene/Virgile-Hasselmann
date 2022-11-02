@@ -1,3 +1,4 @@
+import React, { useMemo } from "react";
 // Next
 import Head from "next/head";
 // Components
@@ -12,25 +13,28 @@ type Props = {
 
 const Layout = ({ children }: Props): JSX.Element => {
   const { width } = useWindowSize();
-  return (
-    <div id="App" className="relative">
-      <Head>
-        <title>Virgile Hasselmann</title>
-        <meta
-          name="description"
-          content="Virgile Hasselmann, a video and photo portfolio"
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      {width! > 768 && <CustomCursor width={width} />}
-      <header className="fixed w-screen z-50">
-        <Navbar />
-      </header>
-      <main className="min-h-screen">
-        <div>{children}</div>
-      </main>
-    </div>
-  );
+  const memoizedJSX = useMemo(() => {
+    return (
+      <div id="App" className="relative">
+        <Head>
+          <title>Virgile Hasselmann</title>
+          <meta
+            name="description"
+            content="Virgile Hasselmann, a video and photo portfolio"
+          />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+        {width! > 768 && <CustomCursor />}
+        <header className="fixed w-screen z-50">
+          <Navbar />
+        </header>
+        <main className="min-h-screen">
+          <div>{children}</div>
+        </main>
+      </div>
+    );
+  }, []);
+  return memoizedJSX;
 };
 
 export default Layout;
