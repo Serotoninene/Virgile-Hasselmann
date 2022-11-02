@@ -1,4 +1,4 @@
-import React, { RefObject, useContext, useRef } from "react";
+import React, { RefObject, useContext, useRef, useState } from "react";
 import Image from "next/image";
 // Framer motion
 import { motion, useScroll, useSpring } from "framer-motion";
@@ -31,7 +31,11 @@ const textAnim = {
   visible: { opacity: 1, transition: { duration, ease } },
 };
 
-const VideoMiniature = ({ data, placeholder }: VideoMiniatureProps) => {
+const VideoMiniature = ({ data }: VideoMiniatureProps) => {
+  // Handling the loading of the video
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+
   // Parallax animation
   let distance = 10;
   const ref = useRef() as RefObject<HTMLDivElement>;
@@ -63,7 +67,7 @@ const VideoMiniature = ({ data, placeholder }: VideoMiniatureProps) => {
           style={{ y: springY, scale: 1.5 }}
         >
           <Image
-            src={placeholder}
+            src={`https://virgile-portfollio.s3.amazonaws.com/photos/${data.placeholder_hq}`}
             layout="fill"
             objectFit="cover"
             objectPosition="center"
