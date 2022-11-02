@@ -11,8 +11,6 @@ import { Video } from "@prisma/client";
 interface VideoMiniatureProps {
   data: Video;
   placeholder: string;
-  setVideoPlayed: (e: string) => void;
-  setIsVideoPlayed: (e: boolean) => void;
 }
 
 const duration = 0.7;
@@ -33,11 +31,7 @@ const textAnim = {
   visible: { opacity: 1, transition: { duration, ease } },
 };
 
-const VideoMiniature = ({
-  data,
-  setVideoPlayed,
-  setIsVideoPlayed,
-}: VideoMiniatureProps) => {
+const VideoMiniature = ({ data }: VideoMiniatureProps) => {
   // Parallax animation
   let distance = 10;
   const ref = useRef() as RefObject<HTMLDivElement>;
@@ -62,12 +56,6 @@ const VideoMiniature = ({
       animate="visible"
       exit="hidden"
       className="overflow-hidden"
-      onMouseEnter={() => {
-        setVideoPlayed(data.videoName);
-      }}
-      onClick={() => {
-        setIsVideoPlayed(true);
-      }}
     >
       <motion.div className="overflow-hidden" variants={photoAnim}>
         <motion.div

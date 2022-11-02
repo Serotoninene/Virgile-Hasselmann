@@ -42,9 +42,6 @@ const Videos = ({ data, filters }: Props): JSX.Element => {
   // State managing the category selected and the data displayed accordingly
   const [filterSelected, setFilterSelected] = useState<BigInt>();
   const [dataSelected, setDataSelected] = useState<Video[]>([]);
-  // State managing the launch of the videoPlayer
-  const [videoPlayed, setVideoPlayed] = useState("");
-  const [isVideoPlayed, setIsVideoPlayed] = useState(false);
 
   // setting up the category selected at launch and the cursor style
   useEffect(() => {
@@ -62,11 +59,6 @@ const Videos = ({ data, filters }: Props): JSX.Element => {
 
   return (
     <>
-      <VideoPlayer
-        videoPlayed={videoPlayed}
-        isVideoPlayed={isVideoPlayed}
-        setIsVideoPlayed={setIsVideoPlayed}
-      />
       <SmoothScroll filterSelected={filterSelected}>
         <>
           <div id="Videos" className="pt-16 xs:pt-[88px]">
@@ -91,8 +83,6 @@ const Videos = ({ data, filters }: Props): JSX.Element => {
                       placeholder={
                         process.env.NEXT_PUBLIC_PHOTOS + d.placeholder_hq
                       }
-                      setVideoPlayed={setVideoPlayed}
-                      setIsVideoPlayed={setIsVideoPlayed}
                     />
                   </div>
                 </AnimatePresence>
