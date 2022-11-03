@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // Framer motion
 import { AnimatePresence, motion } from "framer-motion";
 import { trpc } from "@server/utils/trpc";
@@ -6,16 +6,29 @@ import { trpc } from "@server/utils/trpc";
 const videoLink = "https://virgile-portfollio.s3.amazonaws.com/photos/";
 
 export default function photos() {
-  const photos = trpc.photo.list.useQuery();
-  const [isOverview, setIsOverview] = useState(false);
-  const [category, setCategory] = useState("Artistiques");
-  const [photoDisplayed, setPhotoDisplayed] = useState("girl_portrait.png");
+  const photos = trpc.photo.list.useQuery().data;
+  const filters = trpc.photoCat.list.useQuery().data;
+  if (!photos || !filters) return <>Loading</>; // while the data's loading, returns loading hihi
+
+  const [isOverview, setIsOverview] = useState(false); // if overview's true -> shows the overview nav bar (to be made)
+  const [category, setCategory] = useState(filters[0].name); // manage the category selected, for now : "Artistiques" and "Professionnelles"
+
+  const [photoIdx, setPhotoIdx] = useState(0);
+  const [photoDisplayed, setPhotoDisplayed] = useState(
+    photos[photoIdx].photoName
+  );
 
   const handleClick = () => {
-    photoDisplayed === "hands_holding.png"
-      ? setPhotoDisplayed("girl_portrait.png")
-      : setPhotoDisplayed("hands_holding.png");
+    if (photoIdx < photos.length - 1) {
+      setPhotoIdx(photoIdx + 1);
+    } else {
+      setPhotoIdx(0);
+    }
   };
+
+  useEffect(() => {
+    setPhotoDisplayed(photos[photoIdx].photoName);
+  }, [photoIdx]);
 
   return (
     <div
@@ -47,8 +60,17 @@ export default function photos() {
             Overview
           </li>
           <li className="ml-14 font-light">Categories : </li>
-          <li className="ml-14 font-light">Artistiques</li>
-          <li className="ml-14 font-light">Professionnelles</li>
+          {filters.map((filter) => (
+            <li
+              key={filter.id}
+              className={`ml-14 ${
+                filter.name === category ? "font-bold" : "font-light"
+              }`}
+              onClick={() => setCategory(filter.name)}
+            >
+              {filter.name}
+            </li>
+          ))}
         </ul>
       </div>
     </div>
