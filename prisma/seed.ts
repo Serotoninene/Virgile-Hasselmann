@@ -141,7 +141,7 @@ async function main() {
         photoName: "hands_holding.png",
         miniature: "hands_holding.png",
         placeholder: "hands_holding.png",
-        photo_CategoryId: "Artistiques",
+        photo_CategoryId: "Professionnelles",
       },
       {
         dateOfCreation: new Date("1994-08-01"),

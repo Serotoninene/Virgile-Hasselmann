@@ -9,7 +9,7 @@ interface Props {
   setIsOverview: (e: boolean) => void;
   filters: Photo_Category[];
   category: string;
-  setCategory: (e: string) => void;
+  setCategory: (e: Photo_Category) => void;
 }
 
 const PhotosFooter = ({
@@ -43,7 +43,7 @@ const PhotosFooter = ({
             className={`ml-14 sm:block ${
               filter.name === category ? "font-bold" : "font-light"
             }`}
-            onClick={() => setCategory(filter.name)}
+            onClick={() => setCategory(filter)}
           >
             {filter.name}
           </li>

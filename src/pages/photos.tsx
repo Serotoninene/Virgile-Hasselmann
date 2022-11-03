@@ -14,38 +14,51 @@ export default function photos() {
   if (!photosData || !filters) return <>Loading</>; // while the data's loading, returns loading hihi
 
   const [isOverview, setIsOverview] = useState(false); // if overview's true -> shows the overview nav bar (to be made)
-  const [category, setCategory] = useState(filters[0].name); // manage the category selected, for now : "Artistiques" and "Professionnelles"
+  const [category, setCategory] = useState<Photo_Category>(filters[0]); // manage the category selected, for now : "Artistiques" and "Professionnelles"
 
+  // Init the data to display with the photos of the first category
+  const [dataSelected, setDataSelected] = useState<Photo[]>(
+    photosData.filter((photo) => photo.photo_CategoryId === category.id)
+  );
   const [photoIdx, setPhotoIdx] = useState(0);
   const [photoDisplayed, setPhotoDisplayed] = useState(
     photosData[photoIdx].photoName
   );
 
   const handleClick = () => {
-    if (photoIdx < photosData.length - 1) {
+    if (photoIdx < dataSelected.length - 1) {
       setPhotoIdx(photoIdx + 1);
     } else {
       setPhotoIdx(0);
     }
   };
 
+  // Changing the photoDisplayed every time the photoIdx changes
   useEffect(() => {
-    setPhotoDisplayed(photosData[photoIdx].photoName);
+    setPhotoDisplayed(dataSelected[photoIdx].photoName);
   }, [photoIdx]);
+
+  // changing the data to display when new filter selected
+  useEffect(() => {
+    const dataToDisplay = photosData.filter(
+      (photo) => photo.photo_CategoryId === category.id
+    );
+    setPhotoIdx(0);
+    setDataSelected(dataToDisplay);
+  }, [category]);
 
   return (
     <div
       className="h-screen pt-12 px-2 flex flex-col justify-between relative sm:px-6"
       onClick={handleClick}
     >
-      <div className="absolute opacity-0 h-0 overflow-hidden"></div>
       <div className="h-full relative overflow-hidden flex items-start sm:items-center">
         <AnimatedPhoto photoDisplayed={photoDisplayed} />
       </div>
       <PhotosFooter
-        category={category}
+        category={category.name}
         photoIdx={photoIdx}
-        photosLength={photos.length}
+        photosLength={dataSelected.length}
         isOverview={isOverview}
         setIsOverview={setIsOverview}
         filters={filters}
