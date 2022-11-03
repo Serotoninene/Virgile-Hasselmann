@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
-// Framer motion
-import { AnimatePresence, motion } from "framer-motion";
+// server | Types
 import { trpc } from "@server/utils/trpc";
-import Image from "next/image";
-import { Photo } from "@prisma/client";
-import useWindowSize from "@src/hooks/useWindowSize";
-
-const videoLink = "https://virgile-portfollio.s3.amazonaws.com/photos/";
+import { Photo, Photo_Category } from "@prisma/client";
+// Components
+import PhotosFooter from "@src/components/Photos/PhotosFooter";
+import AnimatedPhoto from "@src/components/Photos/AnimatedPhoto";
 
 export default function photos() {
-  const { width } = useWindowSize();
+  // Getting all the datas, photos and filters(/ that I'll call categories for more complexity ...)
   const photosData: Photo[] | undefined = trpc.photo.list.useQuery().data;
-  const filters = trpc.photoCat.list.useQuery().data;
+  const filters: Photo_Category[] | undefined =
+    trpc.photoCat.list.useQuery().data;
   if (!photosData || !filters) return <>Loading</>; // while the data's loading, returns loading hihi
 
   const [isOverview, setIsOverview] = useState(false); // if overview's true -> shows the overview nav bar (to be made)
@@ -41,51 +40,17 @@ export default function photos() {
     >
       <div className="absolute opacity-0 h-0 overflow-hidden"></div>
       <div className="h-full relative overflow-hidden flex items-start sm:items-center">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={photoDisplayed}
-            initial={{ y: "-100%" }}
-            animate={{ y: 0 }}
-            exit={{ y: "100%" }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
-            className="w-full min-h-[70vh] sm:w-full sm:h-full"
-          >
-            <Image
-              src={videoLink + photoDisplayed}
-              layout="fill"
-              objectFit={width! < 640 ? "cover" : "contain"}
-              objectPosition="left"
-              placeholder="blur"
-              blurDataURL={videoLink + photoDisplayed}
-            />
-          </motion.div>
-        </AnimatePresence>
+        <AnimatedPhoto photoDisplayed={photoDisplayed} />
       </div>
-      <div className="pt-2 pb-1 flex justify-between text-sm 2xl:text-base">
-        <p className="font-light">Made by @Serotoninene, 2022</p>
-        <ul className="flex">
-          <li
-            className={`${
-              isOverview ? "font-bold" : "font-light"
-            } ml-14 hover:font-bold `}
-            onClick={() => setIsOverview(!isOverview)}
-          >
-            Overview
-          </li>
-          <li className="ml-14 font-light">Categories : </li>
-          {filters.map((filter) => (
-            <li
-              key={filter.id}
-              className={`ml-14 ${
-                filter.name === category ? "font-bold" : "font-light"
-              }`}
-              onClick={() => setCategory(filter.name)}
-            >
-              {filter.name}
-            </li>
-          ))}
-        </ul>
-      </div>
+      <PhotosFooter
+        category={category}
+        photoIdx={photoIdx}
+        photosLength={photos.length}
+        isOverview={isOverview}
+        setIsOverview={setIsOverview}
+        filters={filters}
+        setCategory={setCategory}
+      />
     </div>
   );
 }
