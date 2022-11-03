@@ -37,7 +37,7 @@ export default function CustomCursor() {
 
   return (
     <motion.div
-      id="CustomCursor"
+      id="CustomCursor" // had to use css for styling here --> base.scss
       animate={{
         top: mousePosition.y,
         left: mousePosition.x,

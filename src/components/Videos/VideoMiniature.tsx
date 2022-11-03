@@ -45,7 +45,7 @@ const VideoMiniature = ({ data }: VideoMiniatureProps) => {
   const { userStatus } = useContext(AuthContext);
   const deleteVideo = trpc.video.delete.useMutation();
 
-  const handleDeletingVideo = (e: BigInt) => {
+  const handleDeletingVideo = (e: string) => {
     deleteVideo.mutate(data.id);
   };
 
