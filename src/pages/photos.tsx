@@ -4,10 +4,12 @@ import { AnimatePresence, motion } from "framer-motion";
 import { trpc } from "@server/utils/trpc";
 import Image from "next/image";
 import { Photo } from "@prisma/client";
+import useWindowSize from "@src/hooks/useWindowSize";
 
 const videoLink = "https://virgile-portfollio.s3.amazonaws.com/photos/";
 
 export default function photos() {
+  const { width } = useWindowSize();
   const photosData: Photo[] | undefined = trpc.photo.list.useQuery().data;
   const filters = trpc.photoCat.list.useQuery().data;
   if (!photosData || !filters) return <>Loading</>; // while the data's loading, returns loading hihi
@@ -34,21 +36,29 @@ export default function photos() {
 
   return (
     <div
-      className="h-screen pt-14 px-2 flex flex-col justify-between relative sm:px-6"
+      className="h-screen pt-12 px-2 flex flex-col justify-between relative sm:px-6"
       onClick={handleClick}
     >
       <div className="absolute opacity-0 h-0 overflow-hidden"></div>
-      <div className="h-full relative overflow-hidden flex items-center">
+      <div className="h-full relative overflow-hidden flex items-start sm:items-center">
         <AnimatePresence mode="wait">
-          <motion.img
+          <motion.div
             key={photoDisplayed}
             initial={{ y: "-100%" }}
             animate={{ y: 0 }}
             exit={{ y: "100%" }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            src={videoLink + photoDisplayed}
-            className="w-full sm:w-fit sm:h-full"
-          />
+            className="w-full min-h-[70vh] sm:w-full sm:h-full"
+          >
+            <Image
+              src={videoLink + photoDisplayed}
+              layout="fill"
+              objectFit={width! < 640 ? "cover" : "contain"}
+              objectPosition="left"
+              placeholder="blur"
+              blurDataURL={videoLink + photoDisplayed}
+            />
+          </motion.div>
         </AnimatePresence>
       </div>
       <div className="pt-2 pb-1 flex justify-between text-sm 2xl:text-base">
