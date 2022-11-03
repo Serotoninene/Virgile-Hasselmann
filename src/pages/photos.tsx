@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 // Framer motion
 import { AnimatePresence, motion } from "framer-motion";
-// Component
-import useWindowSize from "@src/hooks/useWindowSize";
+import { trpc } from "@server/utils/trpc";
 
 const videoLink = "https://virgile-portfollio.s3.amazonaws.com/photos/";
 
 export default function photos() {
+  const photos = trpc.photo.list.useQuery();
   const [isOverview, setIsOverview] = useState(false);
   const [category, setCategory] = useState("Artistiques");
   const [photoDisplayed, setPhotoDisplayed] = useState("girl_portrait.png");
