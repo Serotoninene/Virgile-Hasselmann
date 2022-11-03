@@ -40,20 +40,15 @@ export default function photos() {
       <div className="absolute opacity-0 h-0 overflow-hidden"></div>
       <div className="h-full relative overflow-hidden flex items-center">
         <AnimatePresence mode="wait">
-          <motion.div
+          <motion.img
             key={photoDisplayed}
             initial={{ y: "-100%" }}
             animate={{ y: 0 }}
             exit={{ y: "100%" }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="w-full sm:h-full"
-          >
-            <Image
-              src={videoLink + photoDisplayed}
-              layout="fill"
-              object-fit="fit"
-            />
-          </motion.div>
+            src={videoLink + photoDisplayed}
+            className="w-full sm:w-fit sm:h-full"
+          />
         </AnimatePresence>
       </div>
       <div className="pt-2 pb-1 flex justify-between text-sm 2xl:text-base">
