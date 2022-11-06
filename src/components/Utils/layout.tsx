@@ -25,6 +25,10 @@ const Layout = ({ children }: Props): JSX.Element => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {width! > 768 && <CustomCursor />}
+      <img
+        src="assets/noise.png"
+        className="w-full h-full fixed top-0 left-0"
+      />
       <header className="fixed w-screen z-50">
         <Navbar />
       </header>
