@@ -36,7 +36,7 @@ const VideoMiniature = ({ data }: VideoMiniatureProps) => {
   // Parallax animation
   let distance = 10;
   const ref = useRef() as RefObject<HTMLDivElement>;
-  const { scrollYProgress } = useScroll({ target: ref });
+  const { scrollYProgress } = useScroll({ target: ref, smooth: 0.5 });
   const y = useParallax(scrollYProgress, distance, "full");
   const physics = { damping: 15, mass: 1, stiffness: 55 };
   const springY = useSpring(y, physics);

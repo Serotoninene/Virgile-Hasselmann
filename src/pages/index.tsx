@@ -9,25 +9,21 @@ const Home: NextPage = () => {
   const [goToMainMenu, setGoToMainMenu] = useState<boolean>(false);
   let lastY: number = 0;
 
-  const toggleMainMenu = (toggle: boolean) => {
-    setGoToMainMenu(toggle);
-  };
-
   const triggerMainMenuAnimMobile = (e: TouchEvent<HTMLDivElement>) => {
     let currentY = e.touches[0].clientY;
     if (currentY < lastY) {
-      toggleMainMenu(true);
+      setGoToMainMenu(true);
     } else if (currentY > lastY) {
-      toggleMainMenu(false);
+      setGoToMainMenu(false);
     }
     lastY = currentY;
   };
 
   const triggerMainMenuAnimDesk = (e: WheelEvent<HTMLDivElement>) => {
     if (e.deltaY > 0) {
-      toggleMainMenu(true);
+      setGoToMainMenu(true);
     } else {
-      toggleMainMenu(false);
+      setGoToMainMenu(false);
     }
   };
 

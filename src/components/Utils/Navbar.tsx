@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 // Nextjs
 import { useRouter } from "next/router";
 // framer motion
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 // Components
 import CustomLink from "./CustomLink";
 
@@ -32,16 +32,17 @@ const itemsAnim = {
 };
 
 export default function Navbar() {
+  const ref = useRef(null);
   const { pathname } = useRouter();
-  const [isLinks, setIsLinks] = useState<boolean>(false);
+  const inView = useInView(ref, { margin: "1000px" });
 
-  // the NavLinks are invisible when you're on the homepage
   useEffect(() => {
-    pathname === "/" ? setIsLinks(false) : setIsLinks(true);
-  }, [pathname]);
+    console.log(inView);
+  }, [inView]);
 
   return (
     <motion.div
+      ref={ref}
       variants={containerAnim}
       initial="hidden"
       animate="shown"
@@ -52,18 +53,17 @@ export default function Navbar() {
         <CustomLink href="/">VH</CustomLink>
       </motion.div>
       <ul className="hidden xs:flex">
-        {isLinks &&
-          links.map((link, idx) => (
-            <motion.li
-              key={idx}
-              variants={itemsAnim}
-              className={`ml-14 text-lg hover:font-bold ${
-                pathname === link.href ? "font-bold" : "font-light"
-              }`}
-            >
-              <CustomLink href={link.href}>{link.title}</CustomLink>
-            </motion.li>
-          ))}
+        {links.map((link, idx) => (
+          <motion.li
+            key={idx}
+            variants={itemsAnim}
+            className={`ml-14 text-lg hover:font-bold ${
+              pathname === link.href ? "font-bold" : "font-light"
+            }`}
+          >
+            <CustomLink href={link.href}>{link.title}</CustomLink>
+          </motion.li>
+        ))}
       </ul>
     </motion.div>
   );
