@@ -11,6 +11,7 @@ export default function photos() {
   const photosData: Photo[] | undefined = trpc.photo.list.useQuery().data;
   const filters: Photo_Category[] | undefined =
     trpc.photoCat.list.useQuery().data;
+
   if (!photosData || !filters) return <>Loading</>; // while the data's loading, returns loading hihi
 
   const [isOverview, setIsOverview] = useState(false); // if overview's true -> shows the overview nav bar (to be made)

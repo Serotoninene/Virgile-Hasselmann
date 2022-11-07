@@ -27,9 +27,9 @@ const Layout = ({ children }: Props): JSX.Element => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <header className="fixed w-screen z-50">
+      {/* <header className="fixed w-screen z-50">
         <Navbar />
-      </header>
+      </header> */}
       <main className="min-h-screen" onScroll={(e) => triggerNav(e)}>
         {/* Background noise */}
         <img
