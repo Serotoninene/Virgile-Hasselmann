@@ -1,8 +1,6 @@
-import React, { useContext } from "react";
+import React from "react";
 // framer motion
 import { motion } from "framer-motion";
-// Context
-import { CursorContext } from "@src/contexts/CursorProvider";
 // Component
 import AnimatedLetters from "@src/components/Utils/AnimatedLetters";
 import { Vid_Category } from "@prisma/client";
@@ -18,8 +16,6 @@ const Filters = ({
   filterSelected,
   setFilterSelected,
 }: FiltersProps) => {
-  const { setCursorType } = useContext(CursorContext);
-
   if (!filters) return <></>;
 
   return (
@@ -29,11 +25,9 @@ const Filters = ({
           <div key={filter.name} className="flex">
             <li
               onClick={() => setFilterSelected(filter.id)}
-              onMouseEnter={() => setCursorType("hover")}
-              onMouseLeave={() => setCursorType("pointer")}
               className={`${
                 filterSelected === filter.id ? "text-blue font-black" : ""
-              } mx-1`}
+              } mx-1 cursor-pointer`}
             >
               <AnimatedLetters
                 string={filter.name}

@@ -1,7 +1,5 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
-// Context
-import { CursorContext } from "@src/contexts/CursorProvider";
 // framer motion
 import { motion } from "framer-motion";
 // component
@@ -54,11 +52,8 @@ const MenuSection = ({
   photo,
   custom,
   sectionName,
-  hoveredSection,
   setHoveredSection,
 }: MenuSectionProps) => {
-  const { setCursorType } = useContext(CursorContext);
-
   return (
     <Link href={`/${sectionName.toLowerCase()}`}>
       <motion.div
@@ -74,11 +69,7 @@ const MenuSection = ({
         onHoverStart={() => setHoveredSection(sectionName)}
       >
         {/* LinkButton */}
-        <div
-          className="z-10"
-          onMouseEnter={() => setCursorType("hover")}
-          onMouseLeave={() => setCursorType("pointer")}
-        >
+        <div className="z-10">
           <h2 className="text-3xl font-light">
             <AnimatedLetters string={sectionName} start={start} delay={0.7} />
           </h2>

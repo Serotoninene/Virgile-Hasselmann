@@ -4,7 +4,6 @@ import { AnimatePresence, motion } from "framer-motion";
 // Components
 import Video from "@src/components/Utils/Video";
 import AnimatedLetters from "@src/components/Utils/AnimatedLetters";
-import { CursorContext } from "@src/contexts/CursorProvider";
 import UserLogin from "./UserLogin";
 import { AuthContext } from "@src/contexts/AuthProvider";
 
@@ -34,15 +33,11 @@ const loginAnim = {
 };
 
 const Content = () => {
-  const { setCursorType } = useContext(CursorContext);
   const { userStatus } = useContext(AuthContext);
   const [isLogin, setIsLogin] = useState(false);
 
   return (
-    <div
-      className="relative z-10 h-screen flex flex-col justify-between items-center pt-16 pb-14 px-4 xs:pt-[88px] xs:pb-16 xs:px-6 lg:pb-6 lg:justify-end lg:items-end"
-      onMouseOver={() => setCursorType("scrollIndicator")}
-    >
+    <div className="relative z-10 h-screen flex flex-col justify-between items-center pt-16 pb-14 px-4 xs:pt-[88px] xs:pb-16 xs:px-6 lg:pb-6 lg:justify-end lg:items-end">
       <h1 className="text-5xl text-center xs:text-6xl lg:text-end lg:text-8xl">
         <AnimatedLetters string="Virgile" fontWeight="font-black" />
         <br />
@@ -81,7 +76,6 @@ const Content = () => {
         <p
           className="hidden lg:block opacity-40"
           onClick={() => setIsLogin(true)}
-          onMouseMove={() => setCursorType("pointer")}
         >
           login
         </p>
@@ -99,7 +93,6 @@ const Content = () => {
             animate="shown"
             exit="hidden"
             className={`flex absolute top-0 left-0 h-screen w-screen backdrop-blur-lg bg-white/30 justify-center items-center`}
-            onMouseMove={() => setCursorType("pointer")}
           >
             <UserLogin setIsLogin={setIsLogin} />
           </motion.div>

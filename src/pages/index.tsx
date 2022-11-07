@@ -1,20 +1,16 @@
-import { TouchEvent, useContext, useState, WheelEvent } from "react";
+import { TouchEvent, useState, WheelEvent } from "react";
 import type { NextPage } from "next";
-// Context
-import { CursorContext } from "@src/contexts/CursorProvider";
 // Components
 import DarkGradients from "@components/Home/DarkGradients";
 import HeroVideo from "@components/Home/HeroVideo";
 import MainMenu from "@components/Home/MainMenu";
 
 const Home: NextPage = () => {
-  const { setCursorType } = useContext(CursorContext);
   const [goToMainMenu, setGoToMainMenu] = useState<boolean>(false);
   let lastY: number = 0;
 
   const toggleMainMenu = (toggle: boolean) => {
     setGoToMainMenu(toggle);
-    setCursorType(toggle ? "pointer" : "scrollIndicator");
   };
 
   const triggerMainMenuAnimMobile = (e: TouchEvent<HTMLDivElement>) => {

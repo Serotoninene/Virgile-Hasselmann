@@ -1,9 +1,7 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { GetStaticProps } from "next";
 // Framer motion
 import { AnimatePresence } from "framer-motion";
-// Context
-import { CursorContext } from "@src/contexts/CursorProvider";
 // Prisma
 import { prisma } from "@server/prisma";
 import { Video, Vid_Category } from "@prisma/client";
@@ -37,7 +35,6 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 const Videos = ({ data, filters }: Props): JSX.Element => {
-  const { setCursorType } = useContext(CursorContext);
   // State managing the category selected and the data displayed accordingly
   const [filterSelected, setFilterSelected] = useState<string>();
   const [dataSelected, setDataSelected] = useState<Video[]>([]);
@@ -45,7 +42,6 @@ const Videos = ({ data, filters }: Props): JSX.Element => {
   // setting up the category selected at launch and the cursor style
   useEffect(() => {
     setFilterSelected(filters[1].id);
-    setCursorType("pointer");
   }, []);
 
   // changing the data to display when new filter selected
