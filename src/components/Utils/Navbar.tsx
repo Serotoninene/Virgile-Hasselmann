@@ -2,9 +2,14 @@ import React, { useEffect, useRef, useState } from "react";
 // Nextjs
 import { useRouter } from "next/router";
 // framer motion
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useScroll } from "framer-motion";
 // Components
 import CustomLink from "./CustomLink";
+import useWindowSize from "@src/hooks/useWindowSize";
+
+interface Props {
+  isNavVisible: boolean;
+}
 
 const links = [
   { title: "Videos", href: "/videos" },
@@ -17,7 +22,6 @@ const containerAnim = {
   shown: {
     transition: {
       staggerChildren: 0.02,
-      delayChildren: 1.1,
     },
   },
 };
@@ -31,21 +35,14 @@ const itemsAnim = {
   },
 };
 
-export default function Navbar() {
-  const ref = useRef(null);
+export default function Navbar({ isNavVisible }: Props) {
   const { pathname } = useRouter();
-  const inView = useInView(ref, { margin: "1000px" });
-
-  useEffect(() => {
-    console.log(inView);
-  }, [inView]);
 
   return (
     <motion.div
-      ref={ref}
       variants={containerAnim}
       initial="hidden"
-      animate="shown"
+      animate={isNavVisible ? "shown" : "hidden"}
       exit="hidden"
       className="flex justify-between py-2 px-4 sm:py-4 sm:px-6"
     >

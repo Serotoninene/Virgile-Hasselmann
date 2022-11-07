@@ -12,12 +12,22 @@ const Layout = ({ children }: Props): JSX.Element => {
   // Trigger animation only after scrolling a bit (like 100vh)
   const [isNavVisible, setIsNavVisible] = useState(false);
 
-  const triggerNav = (e: React.UIEvent<HTMLElement>) => {
-    console.log(e);
+  const toggleNav = (e: React.WheelEvent<HTMLElement>) => {
+    if (e.deltaY < 0) {
+      setIsNavVisible(true); // if wheel back up => shows the navbar
+    } else {
+      setIsNavVisible(false);
+    }
   };
 
   return (
-    <div id="App" className="relative">
+    <div
+      id="App"
+      className="relative"
+      onWheel={(e) => {
+        toggleNav(e);
+      }}
+    >
       <Head>
         <title>Virgile Hasselmann</title>
         <meta
@@ -27,10 +37,10 @@ const Layout = ({ children }: Props): JSX.Element => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {/* <header className="fixed w-screen z-50">
-        <Navbar />
-      </header> */}
-      <main className="min-h-screen" onScroll={(e) => triggerNav(e)}>
+      <header className="fixed w-screen z-50">
+        <Navbar isNavVisible={isNavVisible} />
+      </header>
+      <main className="min-h-screen">
         {/* Background noise */}
         <img
           src="assets/noise.png"
