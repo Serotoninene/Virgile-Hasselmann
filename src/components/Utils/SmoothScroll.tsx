@@ -1,8 +1,8 @@
 import { useRef, RefObject, useState, useEffect } from "react";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 // Custom Hooks
-import useDebounce from "@src/hooks/useDebounce";
-import useWindowSize from "@src/hooks/useWindowSize";
+import useDebounce from "@hooks/useDebounce";
+import useWindowSize from "@hooks/useWindowSize";
 
 type Props = {
   children: JSX.Element;
@@ -23,7 +23,7 @@ export default function SmoothScroll({ children, filterSelected }: Props) {
 
       scrollContainerSize && setPageHeight(scrollContainerSize.height);
     }, 500);
-  }, [debouncedWidth, filterSelected]);
+  }, [debouncedWidth.debouncedValue, filterSelected]);
 
   const { scrollY } = useScroll(); // measures how many pixels user has scrolled vertically
   // as scrollY changes between 0px and the scrollable height, create a negative scroll value...

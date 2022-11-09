@@ -30,7 +30,7 @@ const PhotosFooter = ({
         <li
           className={`${
             isOverview ? "font-bold" : "font-light"
-          } ml-14 hover:font-bold `}
+          } ml-14 cursor-pointer hover:font-bold `}
           onClick={() => setIsOverview(!isOverview)}
         >
           Overview
@@ -39,7 +39,7 @@ const PhotosFooter = ({
         {filters.map((filter) => (
           <li
             key={filter.id}
-            className={`ml-14 sm:block ${
+            className={`ml-14 sm:block cursor-pointer ${
               filter.name === category ? "font-bold" : "font-light"
             }`}
             onClick={() => setCategory(filter)}

@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, WheelEvent } from "react";
 // server | Types
 import { trpc } from "@server/utils/trpc";
 import { Photo, Photo_Category } from "@prisma/client";
+// Custom hooks
+import useDebounce from "@hooks/useDebounce";
 // Components
-import PhotosFooter from "@src/components/Photos/PhotosFooter";
-import AnimatedPhoto from "@src/components/Photos/AnimatedPhoto";
+import PhotosFooter from "@components/Photos/PhotosFooter";
+import AnimatedPhoto from "@components/Photos/AnimatedPhoto";
 
 export default function photos() {
   // Getting all the datas, photos and filters(/ that I'll call categories for more complexity ...)
@@ -17,6 +19,8 @@ export default function photos() {
 
   // Init the data to display with the photos of the first category
   const [photoIdx, setPhotoIdx] = useState(0);
+  const { debouncedValue, setDebounce } = useDebounce(photoIdx, 900);
+
   const [photoDisplayed, setPhotoDisplayed] = useState("");
   const [dataSelected, setDataSelected] = useState<Photo[]>();
 
@@ -42,8 +46,6 @@ export default function photos() {
     setDataSelected(dataToDisplay);
   }, [category]);
 
-  if (!photosData || !filters) return <>Loading</>; // while the data's loading, returns loading hihi
-
   const handleClick = () => {
     if (photoIdx < dataSelected!.length - 1) {
       setPhotoIdx(photoIdx + 1);
@@ -52,10 +54,34 @@ export default function photos() {
     }
   };
 
+  const handleWheel = (e: WheelEvent<HTMLDivElement>) => {
+    if (e.deltaY > 0) {
+      if (photoIdx < dataSelected!.length - 1) {
+        setDebounce(photoIdx + 1);
+        setPhotoIdx(debouncedValue);
+      } else {
+        setDebounce(0);
+        setPhotoIdx(debouncedValue);
+      }
+    } else {
+      if (photoIdx > 0) {
+        setDebounce(photoIdx - 1);
+        setPhotoIdx(debouncedValue);
+      } else {
+        setDebounce(dataSelected!.length - 1);
+        setPhotoIdx(debouncedValue);
+      }
+    }
+  };
+
+  if (!photosData || !filters) return <>Loading</>; // while the data's loading, returns loading hihi
+
   return (
     <div
       className="h-screen pt-12 px-2 flex flex-col justify-between relative sm:px-6"
-      onClick={handleClick}
+      onWheel={(e) => {
+        handleWheel(e);
+      }}
     >
       <div className="h-full relative overflow-hidden flex items-start sm:items-center">
         <AnimatedPhoto photoDisplayed={photoDisplayed} />

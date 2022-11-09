@@ -22,6 +22,7 @@
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "framer-motion": "^7.6.1",
+    "lodash": "^4.17.21",
     "next": "12.3.1",
     "next-s3-upload": "^0.2.4",
     "next-superjson": "^0.0.4",
@@ -33,6 +34,7 @@
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
+    "@types/lodash": "^4.14.188",
     "@types/node": "^18.11.4",
     "@types/react": "18.0.21",
     "@types/react-dom": "18.0.6",
