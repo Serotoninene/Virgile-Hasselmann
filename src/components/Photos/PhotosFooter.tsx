@@ -4,11 +4,11 @@ import { Photo_Category } from "@prisma/client";
 
 interface Props {
   photoIdx: number;
-  photosLength: number;
+  photosLength?: number;
   isOverview: boolean;
   setIsOverview: (e: boolean) => void;
   filters: Photo_Category[];
-  category: string;
+  category?: string;
   setCategory: (e: Photo_Category) => void;
 }
 

@@ -12,41 +12,45 @@ export default function photos() {
   const filters: Photo_Category[] | undefined =
     trpc.photoCat.list.useQuery().data;
 
-  if (!photosData || !filters) return <>Loading</>; // while the data's loading, returns loading hihi
-
   const [isOverview, setIsOverview] = useState(false); // if overview's true -> shows the overview nav bar (to be made)
-  const [category, setCategory] = useState<Photo_Category>(filters[0]); // manage the category selected, for now : "Artistiques" and "Professionnelles"
+  const [category, setCategory] = useState<Photo_Category>(); // manage the category selected, for now : "Artistiques" and "Professionnelles"
 
   // Init the data to display with the photos of the first category
-  const [dataSelected, setDataSelected] = useState<Photo[]>(
-    photosData.filter((photo) => photo.photo_CategoryId === category.id)
-  );
   const [photoIdx, setPhotoIdx] = useState(0);
-  const [photoDisplayed, setPhotoDisplayed] = useState(
-    photosData[photoIdx].photoName
-  );
+  const [photoDisplayed, setPhotoDisplayed] = useState("");
+  const [dataSelected, setDataSelected] = useState<Photo[]>();
+
+  // Here we'll push all the data fetched by api into the states
+  useEffect(() => {
+    if (photosData && filters) {
+      setCategory(filters[0]);
+      setPhotoDisplayed(photosData[photoIdx].photoName);
+    }
+  }, [photosData, filters]);
+
+  // Changing the photoDisplayed every time the photoIdx changes
+  useEffect(() => {
+    dataSelected && setPhotoDisplayed(dataSelected[photoIdx].photoName);
+  }, [photoIdx]);
+
+  // changing the data to display when new filter selected
+  useEffect(() => {
+    const dataToDisplay = photosData?.filter(
+      (photo) => photo.photo_CategoryId === category?.id
+    );
+    setPhotoIdx(0);
+    setDataSelected(dataToDisplay);
+  }, [category]);
+
+  if (!photosData || !filters) return <>Loading</>; // while the data's loading, returns loading hihi
 
   const handleClick = () => {
-    if (photoIdx < dataSelected.length - 1) {
+    if (photoIdx < dataSelected!.length - 1) {
       setPhotoIdx(photoIdx + 1);
     } else {
       setPhotoIdx(0);
     }
   };
-
-  // Changing the photoDisplayed every time the photoIdx changes
-  useEffect(() => {
-    setPhotoDisplayed(dataSelected[photoIdx].photoName);
-  }, [photoIdx]);
-
-  // changing the data to display when new filter selected
-  useEffect(() => {
-    const dataToDisplay = photosData.filter(
-      (photo) => photo.photo_CategoryId === category.id
-    );
-    setPhotoIdx(0);
-    setDataSelected(dataToDisplay);
-  }, [category]);
 
   return (
     <div
@@ -57,9 +61,9 @@ export default function photos() {
         <AnimatedPhoto photoDisplayed={photoDisplayed} />
       </div>
       <PhotosFooter
-        category={category.name}
+        category={category?.name}
         photoIdx={photoIdx}
-        photosLength={dataSelected.length}
+        photosLength={dataSelected?.length}
         isOverview={isOverview}
         setIsOverview={setIsOverview}
         filters={filters}
