@@ -8,15 +8,11 @@ import { motion } from "framer-motion";
 
 const VideoPlayer = () => {
   const { query } = useRouter();
+  const videoData = query.id && trpc.video.byId.useQuery(query.id[0]).data;
   const [video, setVideo] = useState<Video | null | undefined>(null);
 
-  if (!query.id) return;
-  const videoData = trpc.video.byId.useQuery(query.id[0]).data;
-
-  if (!videoData) return;
-
   useEffect(() => {
-    setVideo(videoData);
+    videoData && setVideo(videoData);
   }, [videoData]);
 
   return (
