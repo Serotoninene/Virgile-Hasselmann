@@ -23,8 +23,7 @@ const PhotosFooter = ({
 }: Props) => {
   return (
     <div className="pt-2 pb-1 flex justify-between text-sm 2xl:text-base">
-      <p className="hidden sm:block font-light">Made by @Serotoninene, 2022</p>
-      <p className="block font-light sm:hidden">
+      <p className="block font-light">
         {photoIdx + 1} / {photosLength}
       </p>
       <ul className="flex">
