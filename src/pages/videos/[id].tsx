@@ -6,12 +6,14 @@ import { trpc } from "@server/utils/trpc";
 // Framer motion
 import { motion } from "framer-motion";
 
-interface Props {}
-
 const VideoPlayer = () => {
   const { query } = useRouter();
-  const videoData = trpc.video.byId.useQuery(query.id!).data;
   const [video, setVideo] = useState<Video | null | undefined>(null);
+
+  if (!query.id) return;
+  const videoData = trpc.video.byId.useQuery(query.id[0]).data;
+
+  if (!videoData) return;
 
   useEffect(() => {
     setVideo(videoData);
