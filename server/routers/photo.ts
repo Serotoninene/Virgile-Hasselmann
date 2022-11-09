@@ -55,7 +55,7 @@ export const photoRouter = router({
       return { success: true, photo: updatePhoto };
     }),
   // Delete
-  delete: publicProcedure.input(z.bigint()).mutation(async ({ input }) => {
+  delete: publicProcedure.input(z.string()).mutation(async ({ input }) => {
     await prisma.photo.delete({ where: { id: input } });
   }),
 });
