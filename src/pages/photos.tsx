@@ -14,12 +14,13 @@ export default function Photos() {
   const filters: Photo_Category[] | undefined =
     trpc.photoCat.list.useQuery().data;
 
+  const [isWheelDown, setIsWheelDown] = useState(true);
   const [isOverview, setIsOverview] = useState(false); // if overview's true -> shows the overview nav bar (to be made)
   const [category, setCategory] = useState<Photo_Category>(); // manage the category selected, for now : "Artistiques" and "Professionnelles"
 
   // Init the data to display with the photos of the first category
   const [photoIdx, setPhotoIdx] = useState(0);
-  const { debouncedValue, setDebounce } = useDebounce(photoIdx, 900);
+  const { debouncedValue, setDebounce } = useDebounce(photoIdx, 1000);
 
   const [photoDisplayed, setPhotoDisplayed] = useState("");
   const [dataSelected, setDataSelected] = useState<Photo[]>();
@@ -46,27 +47,22 @@ export default function Photos() {
     setDataSelected(dataToDisplay);
   }, [category]);
 
-  const handleClick = () => {
-    if (photoIdx < dataSelected!.length - 1) {
-      setPhotoIdx(photoIdx + 1);
-    } else {
-      setPhotoIdx(0);
-    }
-  };
-
   const setDebouncedIdx = (value: number) => {
     setDebounce(value);
     setPhotoIdx(debouncedValue);
   };
 
   const handleWheel = (e: WheelEvent<HTMLDivElement>) => {
+    console.log(e);
     if (e.deltaY > 0) {
+      setIsWheelDown(true);
       if (photoIdx < dataSelected!.length - 1) {
         setDebouncedIdx(photoIdx + 1);
       } else {
         setDebouncedIdx(0);
       }
     } else {
+      setIsWheelDown(false);
       if (photoIdx > 0) {
         setDebouncedIdx(photoIdx - 1);
       } else {
@@ -85,7 +81,10 @@ export default function Photos() {
       }}
     >
       <div className="h-full relative overflow-hidden flex items-start sm:items-center">
-        <AnimatedPhoto photoDisplayed={photoDisplayed} />
+        <AnimatedPhoto
+          isWheelDown={isWheelDown}
+          photoDisplayed={photoDisplayed}
+        />
       </div>
       <PhotosFooter
         category={category?.name}

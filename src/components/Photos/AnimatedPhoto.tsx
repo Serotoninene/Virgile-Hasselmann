@@ -6,10 +6,19 @@ import { AnimatePresence, motion } from "framer-motion";
 import useWindowSize from "@src/hooks/useWindowSize";
 
 interface Props {
+  isWheelDown: boolean;
   photoDisplayed: string;
 }
 
-const AnimatedPhoto = ({ photoDisplayed }: Props) => {
+const transition = { duration: 0.1, ease: [0.3, 0.01, -0.05, 0.95] };
+
+const anim = {
+  fromDown: { y: "100%", transition: transition },
+  fromUp: { y: "-100%", transition: transition },
+  center: { y: 0, transition: transition },
+};
+
+const AnimatedPhoto = ({ isWheelDown, photoDisplayed }: Props) => {
   const photoLink = "https://virgile-portfollio.s3.amazonaws.com/photos/";
   const { width } = useWindowSize(); // getting the width of the page for the Image Component
 
@@ -17,10 +26,10 @@ const AnimatedPhoto = ({ photoDisplayed }: Props) => {
     <AnimatePresence mode="wait">
       <motion.div
         key={photoDisplayed}
-        initial={{ y: "-100%" }}
-        animate={{ y: 0 }}
-        exit={{ y: "100%" }}
-        transition={{ duration: 0.1, ease: [0.3, 0.01, -0.05, 0.95] }}
+        variants={anim}
+        initial={isWheelDown ? "fromDown" : "fromUp"}
+        animate="center"
+        exit={!isWheelDown ? "fromDown" : "fromUp"}
         className="w-full min-h-[70vh] sm:w-full sm:h-full"
       >
         <Image
