@@ -14,7 +14,7 @@ export const photoRouter = router({
         miniature: z.string(),
         placeholder: z.string(),
         description: z.string().or(z.undefined()),
-        photo_CategoryId: z.bigint(),
+        photo_CategoryId: z.string(),
       })
     )
     .mutation(async ({ input }) => {
@@ -29,14 +29,14 @@ export const photoRouter = router({
   update: publicProcedure
     .input(
       z.object({
-        id: z.bigint(),
+        id: z.string(),
         title: z.string(),
         dateOfCreation: z.date(),
         photoName: z.string(),
         miniature: z.string(),
         placeholder: z.string(),
         description: z.string().or(z.undefined()),
-        photo_CategoryId: z.bigint(),
+        photo_CategoryId: z.string(),
       })
     )
     .mutation(async ({ input }) => {

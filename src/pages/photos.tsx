@@ -8,7 +8,7 @@ import useDebounce from "@hooks/useDebounce";
 import PhotosFooter from "@components/Photos/PhotosFooter";
 import AnimatedPhoto from "@components/Photos/AnimatedPhoto";
 
-export default function photos() {
+export default function Photos() {
   // Getting all the datas, photos and filters(/ that I'll call categories for more complexity ...)
   const photosData: Photo[] | undefined = trpc.photo.list.useQuery().data;
   const filters: Photo_Category[] | undefined =
@@ -54,22 +54,23 @@ export default function photos() {
     }
   };
 
+  const setDebouncedIdx = (value: number) => {
+    setDebounce(value);
+    setPhotoIdx(debouncedValue);
+  };
+
   const handleWheel = (e: WheelEvent<HTMLDivElement>) => {
     if (e.deltaY > 0) {
       if (photoIdx < dataSelected!.length - 1) {
-        setDebounce(photoIdx + 1);
-        setPhotoIdx(debouncedValue);
+        setDebouncedIdx(photoIdx + 1);
       } else {
-        setDebounce(0);
-        setPhotoIdx(debouncedValue);
+        setDebouncedIdx(0);
       }
     } else {
       if (photoIdx > 0) {
-        setDebounce(photoIdx - 1);
-        setPhotoIdx(debouncedValue);
+        setDebouncedIdx(photoIdx - 1);
       } else {
-        setDebounce(dataSelected!.length - 1);
-        setPhotoIdx(debouncedValue);
+        setDebouncedIdx(dataSelected!.length - 1);
       }
     }
   };
