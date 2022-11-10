@@ -20,7 +20,7 @@ export default function Photos() {
 
   // Init the data to display with the photos of the first category
   const [photoIdx, setPhotoIdx] = useState(0);
-  const { debouncedValue, setDebounce } = useDebounce(photoIdx, 1000);
+  const { debouncedValue, setDebounce } = useDebounce(photoIdx, 2000);
 
   const [photoDisplayed, setPhotoDisplayed] = useState("");
   const [dataSelected, setDataSelected] = useState<Photo[]>();
@@ -48,8 +48,8 @@ export default function Photos() {
   }, [category]);
 
   const setDebouncedIdx = (value: number) => {
-    setDebounce(value);
     setPhotoIdx(debouncedValue);
+    setDebounce(value);
   };
 
   const handleWheel = (e: WheelEvent<HTMLDivElement>) => {
