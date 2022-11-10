@@ -1,6 +1,4 @@
-import { z } from "zod";
-import { prisma } from "@server/prisma";
-import { publicProcedure, router } from "../trpc";
+import { router } from "../trpc";
 import { videoRouter } from "./video";
 import { vidCatRouter } from "./vidCat";
 import { photoRouter } from "./photo";
