@@ -9,6 +9,7 @@ export default function PhotosBanner() {
           <Image
             src="https://virgile-portfollio.s3.amazonaws.com/photos/girl_portrait.png"
             layout="fill"
+            objectFit="cover"
           />
         </div>
         <div className="flex flex-col justify-center">
