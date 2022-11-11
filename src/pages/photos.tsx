@@ -20,10 +20,10 @@ export default function Photos() {
 
   // Init the data to display with the photos of the first category
   const [photoIdx, setPhotoIdx] = useState(0);
-  const { debouncedValue, setDebounce } = useDebounce(photoIdx, 2000);
+  const { debouncedValue, setDebounce } = useDebounce(photoIdx, 500);
 
-  const [photoDisplayed, setPhotoDisplayed] = useState("");
-  const [dataSelected, setDataSelected] = useState<Photo[]>();
+  const [photoDisplayed, setPhotoDisplayed] = useState(""); // photo displayed among the dataSelected
+  const [dataSelected, setDataSelected] = useState<Photo[]>(); // photos from the category selected
 
   // Here we'll push all the data fetched by api into the states
   useEffect(() => {
@@ -48,12 +48,15 @@ export default function Photos() {
   }, [category]);
 
   const setDebouncedIdx = (value: number) => {
-    setPhotoIdx(debouncedValue);
     setDebounce(value);
+    setPhotoIdx(debouncedValue);
   };
 
   const handleWheel = (e: WheelEvent<HTMLDivElement>) => {
-    console.log(e);
+    const threshold = 50;
+    debugger;
+    if (Math.abs(e.deltaY) < threshold) return;
+
     if (e.deltaY > 0) {
       setIsWheelDown(true);
       if (photoIdx < dataSelected!.length - 1) {
