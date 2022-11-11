@@ -6,6 +6,7 @@ import Video from "@src/components/Utils/Video";
 import AnimatedLetters from "@src/components/Utils/AnimatedLetters";
 import UserLogin from "./UserLogin";
 import { AuthContext } from "@src/contexts/AuthProvider";
+import DarkGradients from "./DarkGradients";
 
 const containerAnim = {
   hidden: {},
@@ -104,7 +105,7 @@ const Content = () => {
 
 export default function HeroVideo() {
   return (
-    <>
+    <div className="relative">
       <Content />
       {/* Video background */}
       <div className="absolute h-screen w-screen top-0 left-0 overflow-hidden flex justify-center items-center opacity-80">
@@ -115,6 +116,7 @@ export default function HeroVideo() {
           priority={true}
         />
       </div>
-    </>
+      <DarkGradients /> {/* <-- must stay on the bottom of the component */}
+    </div>
   );
 }

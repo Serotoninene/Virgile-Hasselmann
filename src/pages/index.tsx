@@ -1,11 +1,24 @@
 import { TouchEvent, useState, WheelEvent } from "react";
-import type { NextPage } from "next";
+import type { GetStaticProps, NextPage } from "next";
+// Server
+import { prisma } from "@server/prisma";
 // Components
-import DarkGradients from "@components/Home/DarkGradients";
 import HeroVideo from "@components/Home/HeroVideo";
-import MainMenu from "@components/Home/MainMenu";
+import Videos from "@src/components/Home/Videos";
+import { Video } from "@prisma/client";
 
-const Home: NextPage = () => {
+interface Props {
+  videos: Video[];
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+  const videos = await prisma.video.findMany();
+  return {
+    props: { videos },
+  };
+};
+
+function Home({ videos }: Props) {
   const [goToMainMenu, setGoToMainMenu] = useState<boolean>(false);
   let lastY: number = 0;
 
@@ -34,11 +47,10 @@ const Home: NextPage = () => {
       onWheel={(e) => triggerMainMenuAnimDesk(e)}
       onTouchMove={(e) => triggerMainMenuAnimMobile(e)}
     >
-      <MainMenu goToMainMenu={goToMainMenu} />
       <HeroVideo />
-      <DarkGradients /> {/* <-- must stay on the bottom of the component */}
+      <Videos videos={videos} />
     </div>
   );
-};
+}
 
 export default Home;
