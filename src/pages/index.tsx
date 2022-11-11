@@ -2,10 +2,11 @@ import { TouchEvent, useState, WheelEvent } from "react";
 import type { GetStaticProps, NextPage } from "next";
 // Server
 import { prisma } from "@server/prisma";
+import { Video } from "@prisma/client";
 // Components
 import HeroVideo from "@components/Home/HeroVideo";
-import Videos from "@src/components/Home/Videos";
-import { Video } from "@prisma/client";
+import Videos from "@components/Home/Videos";
+import PhotosBanner from "@components/Home/PhotosBanner";
 
 interface Props {
   videos: Video[];
@@ -49,6 +50,7 @@ function Home({ videos }: Props) {
     >
       <HeroVideo />
       <Videos videos={videos} />
+      <PhotosBanner />
     </div>
   );
 }
