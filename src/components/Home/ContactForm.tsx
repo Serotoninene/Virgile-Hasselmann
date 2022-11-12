@@ -6,6 +6,7 @@ interface InputProps {
   type?: string;
 }
 
+// optionnal prop to be added !
 const Input = ({ type = "text", field }: InputProps) => {
   return (
     <input
