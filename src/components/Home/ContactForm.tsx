@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React from "react";
+import React, { FormEvent } from "react";
 
 interface InputProps {
   field: string;
@@ -12,12 +12,27 @@ const Input = ({ type = "text", field }: InputProps) => {
     <input
       type={type}
       placeholder={field}
-      className="outline-none mb-2 bg-transparent border-b-light w-full px-2 pb-2 focus:text-blue focus:border-b-blue focus:placeholder:text-blue "
+      className="outline-none bg-transparent border-b-light border-b-[0.5px] text-xl placeholder-light w-full mb-2 px-2 py-2 focus:text-blue focus:border-b-blue focus:placeholder:text-blue "
     />
   );
 };
 
+const Button = () => {
+  return (
+    <div className="flex justify-center">
+      <input
+        type="submit"
+        className="outline-none bg-transparent text-xl mb-2 pt-2 border-b-[0.5px] border-light"
+      />
+    </div>
+  );
+};
+
 export default function ContactForm() {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
+
   return (
     <div className="relative px-2 pt-12 grid gap-8 sm:gap-0 sm:grid-cols-2 sm:px-6 sm:pt-16 sm:pb-6 sm:h-screen">
       {/* left part */}
@@ -29,8 +44,8 @@ export default function ContactForm() {
         />
       </div>
       {/* right part */}
-      <div className="px-2 sm:px-0 sm:flex sm:justify-center sm:items-center">
-        <div id="ContactText" className="mb-6 sm:w-4/5">
+      <div className="px-2 sm:px-0 sm:flex sm:flex-col sm:justify-center sm:items-center">
+        <div id="ContactText" className="mb-6">
           <h2 className="text-3xl font-thin mb-2 sm:text-5xl">
             Travaillons <span className="font-black">ensemble</span>
           </h2>
@@ -41,13 +56,18 @@ export default function ContactForm() {
             Please 🙏
           </p>
         </div>
-        <form>
+        <form onSubmit={(e) => handleSubmit(e)} className="mb-6">
           <Input field="Prenom" />
           <Input field="Nom" />
           <Input field="Mail" type="mail" />
           <Input field="Telephone" type="number" />
           <Input field="Message" />
+          <Button />
         </form>
+        <div className="flex justify-between mb-2">
+          <p>Instagram</p>
+          <p>@VirgileHasselman, 2022</p>
+        </div>
       </div>
     </div>
   );
