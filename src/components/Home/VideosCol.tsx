@@ -37,7 +37,7 @@ export default function VideosCol({ videos, category }: Props) {
       <Category category={category} />
       {/* videos miniatures */}
       {videos.map((video, idx) => (
-        <div className="mb-6">
+        <div className="mb-6" key={video.id}>
           <VideoMiniature
             data={video}
             key={idx}
