@@ -14,7 +14,7 @@ export default function Photos() {
   const filters: Photo_Category[] | undefined =
     trpc.photoCat.list.useQuery().data;
 
-  const [isWheelDown, setIsWheelDown] = useState(true);
+  const [wheelDirection, setWheelDirection] = useState("");
   const [isOverview, setIsOverview] = useState(false); // if overview's true -> shows the overview nav bar (to be made)
   const [category, setCategory] = useState<Photo_Category>(); // manage the category selected, for now : "Artistiques" and "Professionnelles"
 
@@ -58,19 +58,15 @@ export default function Photos() {
     if (Math.abs(e.deltaY) < threshold) return;
 
     if (e.deltaY > 0) {
-      setIsWheelDown(true);
-      if (photoIdx < dataSelected!.length - 1) {
-        setDebouncedIdx(photoIdx + 1);
-      } else {
-        setDebouncedIdx(0);
-      }
+      setWheelDirection("down");
+      photoIdx < dataSelected!.length - 1
+        ? setDebouncedIdx(photoIdx + 1)
+        : setDebouncedIdx(0);
     } else {
-      setIsWheelDown(false);
-      if (photoIdx > 0) {
-        setDebouncedIdx(photoIdx - 1);
-      } else {
-        setDebouncedIdx(dataSelected!.length - 1);
-      }
+      setWheelDirection("up");
+      photoIdx > 0
+        ? setDebouncedIdx(photoIdx - 1)
+        : setDebouncedIdx(dataSelected!.length - 1);
     }
   };
 
@@ -85,7 +81,7 @@ export default function Photos() {
     >
       <div className="h-full relative overflow-hidden flex items-start sm:items-center">
         <AnimatedPhoto
-          isWheelDown={isWheelDown}
+          wheelDirection={wheelDirection}
           photoDisplayed={photoDisplayed}
         />
       </div>
