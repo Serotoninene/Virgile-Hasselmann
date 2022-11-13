@@ -31,8 +31,9 @@ const Category = ({ category }: CategoryProps) => {
 };
 
 export default function VideosCol({ videos, category }: Props) {
+  if (!videos) return <div>Loading</div>;
   return (
-    <div className="border mx-6">
+    <div className="mx-6">
       <Category category={category} />
       {/* videos miniatures */}
       {videos.map((video, idx) => (

@@ -7,6 +7,7 @@ import { Video } from "@prisma/client";
 import HeroVideo from "@components/Home/HeroVideo";
 import Videos from "@components/Home/Videos";
 import PhotosBanner from "@components/Home/PhotosBanner";
+import SmoothScroll from "@src/components/Utils/SmoothScroll";
 
 interface Props {
   videos: Video[];
@@ -48,9 +49,13 @@ function Home({ videos }: Props) {
       onWheel={(e) => triggerMainMenuAnimDesk(e)}
       onTouchMove={(e) => triggerMainMenuAnimMobile(e)}
     >
-      <HeroVideo />
-      <Videos videos={videos} />
-      <PhotosBanner />
+      <SmoothScroll>
+        <>
+          <HeroVideo />
+          <Videos videos={videos} />
+          {/* <PhotosBanner /> */}
+        </>
+      </SmoothScroll>
     </div>
   );
 }
