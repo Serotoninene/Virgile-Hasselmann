@@ -1,11 +1,8 @@
-import React, { RefObject, useRef } from "react";
+import React from "react";
 // Server
 import { Video } from "@prisma/client";
 // Components
 import VideosCol from "./VideosCol";
-// Framer motion
-import useParallax from "@hooks/useParallax";
-import { motion, useScroll } from "framer-motion";
 
 interface Props {
   videos: Video[];

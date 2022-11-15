@@ -105,7 +105,7 @@ const Content = () => {
 
 export default function HeroVideo() {
   return (
-    <div className="relative">
+    <div className="sticky top-0">
       <Content />
       {/* Video background */}
       <div className="absolute h-screen w-screen top-0 left-0 overflow-hidden flex justify-center items-center opacity-80">

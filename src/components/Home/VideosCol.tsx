@@ -1,8 +1,10 @@
-import React from "react";
+import React, { RefObject, useRef } from "react";
 // Server
 import { Video } from "@prisma/client";
 // Component
 import VideoMiniature from "../Videos/VideoMiniature";
+import { motion, useScroll } from "framer-motion";
+import useParallax from "@src/hooks/useParallax";
 
 interface Props {
   category: string;
@@ -32,19 +34,25 @@ const Category = ({ category }: CategoryProps) => {
 
 export default function VideosCol({ videos, category }: Props) {
   if (!videos) return <div>Loading</div>;
+  const ref = useRef() as RefObject<HTMLDivElement>;
+  const { scrollYProgress } = useScroll();
+  const y = useParallax(scrollYProgress, -40, "full");
+
   return (
-    <div className="mx-6">
+    <div className="mx-6" ref={ref}>
       <Category category={category} />
       {/* videos miniatures */}
-      {videos.map((video, idx) => (
-        <div className="mb-6" key={video.id}>
-          <VideoMiniature
-            data={video}
-            key={idx}
-            placeholder={video.placeholder_hq}
-          />
-        </div>
-      ))}
+      <motion.div style={category === "Evenements" ? { y: y } : {}}>
+        {videos.map((video, idx) => (
+          <div className="mb-6" key={video.id}>
+            <VideoMiniature
+              data={video}
+              key={idx}
+              placeholder={video.placeholder_hq}
+            />
+          </div>
+        ))}
+      </motion.div>
     </div>
   );
 }
