@@ -45,11 +45,7 @@ export default function VideosCol({ videos, category }: Props) {
       <motion.div style={category === "Evenements" ? { y: y } : {}}>
         {videos.map((video, idx) => (
           <div className="mb-6" key={video.id}>
-            <VideoMiniature
-              data={video}
-              key={idx}
-              placeholder={video.placeholder_hq}
-            />
+            <VideoMiniature data={video} scrollYProgress={scrollYProgress} />
           </div>
         ))}
       </motion.div>

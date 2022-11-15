@@ -1,7 +1,7 @@
 import React, { RefObject, useContext, useRef } from "react";
 import Image from "next/image";
 // Framer motion
-import { motion, useScroll, useSpring } from "framer-motion";
+import { motion, MotionValue, useScroll, useSpring } from "framer-motion";
 // Hooks
 import useParallax from "@src/hooks/useParallax";
 import { AuthContext } from "@src/contexts/AuthProvider";
@@ -11,7 +11,7 @@ import Link from "next/link";
 
 interface VideoMiniatureProps {
   data: Video;
-  placeholder: string;
+  scrollYProgress: MotionValue<number>;
 }
 
 const duration = 0.7;
@@ -32,11 +32,11 @@ const textAnim = {
   visible: { opacity: 1, transition: { duration, ease } },
 };
 
-const VideoMiniature = ({ data }: VideoMiniatureProps) => {
+const VideoMiniature = ({ data, scrollYProgress }: VideoMiniatureProps) => {
   // Parallax animation
   let distance = 10;
   const ref = useRef() as RefObject<HTMLDivElement>;
-  const { scrollYProgress } = useScroll({ target: ref, smooth: 0.5 });
+  // const { scrollYProgress } = useScroll({ target: ref, smooth: 0.5 });
   const y = useParallax(scrollYProgress, distance, "full");
   const physics = { damping: 15, mass: 1, stiffness: 55 };
   const springY = useSpring(y, physics);
