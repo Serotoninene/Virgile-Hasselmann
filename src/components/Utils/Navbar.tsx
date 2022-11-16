@@ -1,11 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 // Nextjs
 import { useRouter } from "next/router";
 // framer motion
-import { motion, useInView, useScroll } from "framer-motion";
+import { motion } from "framer-motion";
 // Components
 import CustomLink from "./CustomLink";
-import useWindowSize from "@src/hooks/useWindowSize";
 
 interface Props {
   isNavVisible: boolean;

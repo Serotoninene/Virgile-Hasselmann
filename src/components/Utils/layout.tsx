@@ -1,24 +1,39 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // Next
 import Head from "next/head";
 // Components
 import Navbar from "./Navbar";
+// Hooks
+import useWindowSize from "@src/hooks/useWindowSize";
+import { useRouter } from "next/router";
 
 type Props = {
   children: JSX.Element;
 };
 
 const Layout = ({ children }: Props): JSX.Element => {
-  // Trigger animation only after scrolling a bit (like 100vh)
-  const [isNavVisible, setIsNavVisible] = useState(false);
+  const { pathname } = useRouter();
+  const { width } = useWindowSize();
+  const [isNavVisible, setIsNavVisible] = useState(true);
 
   const toggleNav = (e: React.WheelEvent<HTMLElement>) => {
+    // if on mobile, the navbar is always visible
+    if (width && width < 640) return;
+
+    // if on the photos, the navbar is always visible
+    if (pathname === "/photos") return;
+
     if (e.deltaY < 0) {
       setIsNavVisible(true); // if wheel back up => shows the navbar
     } else {
       setIsNavVisible(false);
     }
   };
+
+  useEffect(() => {
+    // if on mobile, the navbar is always visible
+    if (width && width < 640) setIsNavVisible(true);
+  }, [width]);
 
   return (
     <div
