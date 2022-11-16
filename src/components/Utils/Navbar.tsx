@@ -45,7 +45,7 @@ export default function Navbar({ isNavVisible, pathname }: Props) {
       className="flex justify-between py-2 px-4 sm:py-4 sm:px-6"
     >
       <motion.div variants={itemsAnim} className="font-icon">
-        <CustomLink href="/">VH</CustomLink>
+        <CustomLink href="/">{pathname !== "/photos" ? "VH" : ""}</CustomLink>
       </motion.div>
       <ul className="hidden xs:flex">
         {links.map((link, idx) => (

@@ -1,11 +1,32 @@
 import React, { FormEvent, useState } from "react";
 import Image from "next/image";
+// framer motion
+import { motion } from "framer-motion";
 
 interface InputProps {
   field: string;
   type?: string;
   optionnal?: boolean;
 }
+
+// Anim variants
+const duration = 0.2;
+const ease = [0.73, 0.15, 0.31, 0.94];
+
+const containerAnim = {
+  hidden: {},
+  visible: { transition: { delayChildren: 0.3, staggerChildren: 0.4 } },
+};
+
+const itemAnim = {
+  hidden: { opacity: 0, transition: { duration, ease } },
+  visible: { opacity: 1, transition: { duration, ease } },
+};
+
+const photoAnim = {
+  hidden: { y: "100%", scale: 2, transition: { duration, ease } },
+  visible: { y: 0, scale: 1, transition: { duration: 0.5, ease } },
+};
 
 // optionnal prop to be added !
 const Input = ({ type = "text", field, optionnal }: InputProps) => {
@@ -45,16 +66,29 @@ export default function ContactForm() {
   return (
     <div className="relative px-2 pt-10 grid gap-8 sm:gap-0 sm:grid-cols-2 sm:px-6 sm:pt-14 sm:pb-6 sm:h-screen">
       {/* left part */}
-      <div className="relative w-full h-[35vh] sm:h-full">
-        <Image
-          layout="fill"
-          src="/assets/hands_praying.png"
-          objectFit="cover"
-        />
+      <div className="overflow-hidden">
+        <motion.div
+          className="relative w-full h-[35vh] sm:h-full"
+          variants={photoAnim}
+          initial="hidden"
+          whileInView="visible"
+        >
+          <Image
+            layout="fill"
+            src="/assets/hands_praying.png"
+            objectFit="cover"
+          />
+        </motion.div>
       </div>
       {/* right part */}
-      <div className="px-2 sm:px-6 sm:flex sm:flex-col sm:justify-center sm:items-center 2xl:px-12">
-        <div id="ContactText" className="mb-6">
+      <motion.div
+        variants={containerAnim}
+        initial="hidden"
+        whileInView="visible"
+        exit="hidden"
+        className="px-2 sm:px-6 sm:flex sm:flex-col sm:justify-center sm:items-center 2xl:px-12"
+      >
+        <motion.div id="ContactText" className="mb-6" variants={itemAnim}>
           <h2 className="text-3xl font-thin mb-2 sm:text-5xl">
             Travaillons <span className="font-black">ensemble</span>
           </h2>
@@ -64,8 +98,9 @@ export default function ContactForm() {
             the day you know. It’s just like a drug. So let’s work together.
             Please 🙏
           </p>
-        </div>
-        <form
+        </motion.div>
+        <motion.form
+          variants={itemAnim}
           onSubmit={(e) => handleSubmit(e)}
           className="mb-6 sm:grid sm:grid-cols-2 sm:gap-2 sm:w-full"
         >
@@ -79,12 +114,15 @@ export default function ContactForm() {
           <div className="sm:col-span-2 sm:mt-2">
             <Button />
           </div>
-        </form>
-        <div className="flex justify-between mb-2 sm:absolute sm:right-6 sm:bottom-6">
+        </motion.form>
+        <motion.div
+          variants={itemAnim}
+          className="flex justify-between mb-2 sm:absolute sm:right-6 sm:bottom-6"
+        >
           <p className="sm:hidden">Instagram</p>
           <p>@VirgileHasselman, 2022</p>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </div>
   );
 }
