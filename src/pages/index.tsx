@@ -54,7 +54,7 @@ function Home({ videos }: Props) {
         <>
           <HeroVideo />
           <Videos videos={videos} />
-          {/* <PhotosBanner /> */}
+          <PhotosBanner />
           <ContactForm />
         </>
       </SmoothScroll>

@@ -12,7 +12,7 @@ interface Props {
 }
 
 const links = [
-  { title: "Videos", href: "/videos" },
+  { title: "Videos", href: "/" },
   { title: "Photos", href: "/photos" },
   { title: "Contact", href: "/contact" },
 ];
