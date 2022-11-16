@@ -8,6 +8,7 @@ import CustomLink from "./CustomLink";
 
 interface Props {
   isNavVisible: boolean;
+  pathname: string;
 }
 
 const links = [
@@ -34,9 +35,7 @@ const itemsAnim = {
   },
 };
 
-export default function Navbar({ isNavVisible }: Props) {
-  const { pathname } = useRouter();
-
+export default function Navbar({ isNavVisible, pathname }: Props) {
   return (
     <motion.div
       variants={containerAnim}
