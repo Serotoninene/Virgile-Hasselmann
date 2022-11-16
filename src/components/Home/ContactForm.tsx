@@ -19,7 +19,7 @@ const Input = ({ type = "text", field }: InputProps) => {
 
 const Button = () => {
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center cursor-pointer">
       <input
         type="submit"
         className="outline-none bg-transparent text-xl mb-2 pt-2 border-b-[0.5px] border-light"
@@ -34,7 +34,7 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="relative px-2 pt-12 grid gap-8 sm:gap-0 sm:grid-cols-2 sm:px-6 sm:pt-16 sm:pb-6 sm:h-screen">
+    <div className="relative px-2 pt-10 grid gap-8 sm:gap-0 sm:grid-cols-2 sm:px-6 sm:pt-14 sm:pb-6 sm:h-screen">
       {/* left part */}
       <div className="relative w-full h-[35vh] sm:h-full">
         <Image
@@ -44,7 +44,7 @@ export default function ContactForm() {
         />
       </div>
       {/* right part */}
-      <div className="px-2 sm:px-0 sm:flex sm:flex-col sm:justify-center sm:items-center">
+      <div className="px-2 sm:px-6 sm:flex sm:flex-col sm:justify-center sm:items-center">
         <div id="ContactText" className="mb-6">
           <h2 className="text-3xl font-thin mb-2 sm:text-5xl">
             Travaillons <span className="font-black">ensemble</span>
@@ -56,16 +56,23 @@ export default function ContactForm() {
             Please 🙏
           </p>
         </div>
-        <form onSubmit={(e) => handleSubmit(e)} className="mb-6">
+        <form
+          onSubmit={(e) => handleSubmit(e)}
+          className="mb-6 sm:grid sm:grid-cols-2 sm:gap-2 sm:w-full"
+        >
           <Input field="Prenom" />
           <Input field="Nom" />
           <Input field="Mail" type="mail" />
           <Input field="Telephone" type="number" />
-          <Input field="Message" />
-          <Button />
+          <div className="sm:col-span-2">
+            <Input field="Message" />
+          </div>
+          <div className="sm:col-span-2 sm:mt-2">
+            <Button />
+          </div>
         </form>
-        <div className="flex justify-between mb-2">
-          <p>Instagram</p>
+        <div className="flex justify-between mb-2 sm:absolute sm:right-6 sm:bottom-6">
+          <p className="sm:hidden">Instagram</p>
           <p>@VirgileHasselman, 2022</p>
         </div>
       </div>
