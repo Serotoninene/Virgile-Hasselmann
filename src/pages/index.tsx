@@ -8,6 +8,7 @@ import HeroVideo from "@components/Home/HeroVideo";
 import Videos from "@components/Home/Videos";
 import PhotosBanner from "@components/Home/PhotosBanner";
 import SmoothScroll from "@src/components/Utils/SmoothScroll";
+import ContactForm from "@src/components/Home/ContactForm";
 
 interface Props {
   videos: Video[];
@@ -54,6 +55,7 @@ function Home({ videos }: Props) {
           <HeroVideo />
           <Videos videos={videos} />
           {/* <PhotosBanner /> */}
+          <ContactForm />
         </>
       </SmoothScroll>
     </div>
