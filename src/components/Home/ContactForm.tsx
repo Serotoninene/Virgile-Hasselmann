@@ -1,19 +1,28 @@
+import React, { FormEvent, useState } from "react";
 import Image from "next/image";
-import React, { FormEvent } from "react";
 
 interface InputProps {
   field: string;
   type?: string;
+  optionnal?: boolean;
 }
 
 // optionnal prop to be added !
-const Input = ({ type = "text", field }: InputProps) => {
+const Input = ({ type = "text", field, optionnal }: InputProps) => {
+  const [focus, setFocus] = useState(false);
   return (
-    <input
-      type={type}
-      placeholder={field}
-      className="outline-none bg-transparent border-b-light border-b-[0.5px] text-xl placeholder-light w-full mb-2 px-2 py-2 focus:text-blue focus:border-b-blue focus:placeholder:text-blue "
-    />
+    <div className="relative">
+      <input
+        type={type}
+        placeholder={field}
+        onFocus={() => setFocus(true)}
+        onBlur={() => setFocus(false)}
+        className="border-b-light border-b-[0.5px] text-xl placeholder-light w-full mb-2 px-2 py-2 focus:text-blue focus:border-b-blue focus:placeholder:text-blue"
+      ></input>
+      {optionnal && !focus && (
+        <div className="absolute top-1 right-1 text-xs">(optionnel)</div>
+      )}
+    </div>
   );
 };
 
@@ -44,7 +53,7 @@ export default function ContactForm() {
         />
       </div>
       {/* right part */}
-      <div className="px-2 sm:px-6 sm:flex sm:flex-col sm:justify-center sm:items-center">
+      <div className="px-2 sm:px-6 sm:flex sm:flex-col sm:justify-center sm:items-center 2xl:px-12">
         <div id="ContactText" className="mb-6">
           <h2 className="text-3xl font-thin mb-2 sm:text-5xl">
             Travaillons <span className="font-black">ensemble</span>
@@ -63,9 +72,9 @@ export default function ContactForm() {
           <Input field="Prenom" />
           <Input field="Nom" />
           <Input field="Mail" type="mail" />
-          <Input field="Telephone" type="number" />
+          <Input field="Telephone" type="phone" optionnal />
           <div className="sm:col-span-2">
-            <Input field="Message" />
+            <Input field="Message" optionnal />
           </div>
           <div className="sm:col-span-2 sm:mt-2">
             <Button />
