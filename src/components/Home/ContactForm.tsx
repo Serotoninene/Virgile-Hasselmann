@@ -10,17 +10,17 @@ interface InputProps {
 }
 
 // Anim variants
-const duration = 0.2;
-const ease = [0.73, 0.15, 0.31, 0.94];
+const duration = 0.5;
+const ease = [0.6, 0.01, -0.05, 0.95];
 
 const containerAnim = {
   hidden: {},
-  visible: { transition: { delayChildren: 0.3, staggerChildren: 0.4 } },
+  visible: { transition: { delayChildren: 0.3, staggerChildren: 0.1 } },
 };
 
 const itemAnim = {
-  hidden: { opacity: 0, transition: { duration, ease } },
-  visible: { opacity: 1, transition: { duration, ease } },
+  hidden: { opacity: 0, y: 10, transition: { duration, ease } },
+  visible: { opacity: 1, y: 0, transition: { duration, ease } },
 };
 
 const photoAnim = {
@@ -59,6 +59,7 @@ const Button = () => {
 };
 
 export default function ContactForm() {
+  // HandleSubmit TBD
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };
@@ -66,7 +67,11 @@ export default function ContactForm() {
   return (
     <div className="relative px-2 pt-10 grid gap-8 sm:gap-0 sm:grid-cols-2 sm:px-6 sm:pt-14 sm:pb-6 sm:h-screen">
       {/* left part */}
-      <div className="overflow-hidden">
+      <motion.div
+        initial={{ scaleY: 0.5 }}
+        whileInView={{ scaleY: 1 }}
+        className="overflow-hidden"
+      >
         <motion.div
           className="relative w-full h-[35vh] sm:h-full"
           variants={photoAnim}
@@ -79,7 +84,7 @@ export default function ContactForm() {
             objectFit="cover"
           />
         </motion.div>
-      </div>
+      </motion.div>
       {/* right part */}
       <motion.div
         variants={containerAnim}
