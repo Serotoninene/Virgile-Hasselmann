@@ -7,8 +7,9 @@ import { Video } from "@prisma/client";
 import HeroVideo from "@components/Home/HeroVideo";
 import Videos from "@components/Home/Videos";
 import PhotosBanner from "@components/Home/PhotosBanner";
-import SmoothScroll from "@src/components/Utils/SmoothScroll";
-import ContactForm from "@src/components/Home/ContactForm";
+import SmoothScroll from "@components/Utils/SmoothScroll";
+import ContactForm from "@components/Home/ContactForm";
+import Footer from "@components/Utils/Footer";
 
 interface Props {
   videos: Video[];
@@ -56,6 +57,7 @@ function Home({ videos }: Props) {
           <Videos videos={videos} />
           <PhotosBanner />
           <ContactForm />
+          <Footer />
         </>
       </SmoothScroll>
     </div>
