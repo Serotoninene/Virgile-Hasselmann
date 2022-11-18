@@ -62,27 +62,7 @@ const Videos = ({ data, filters }: Props): JSX.Element => {
               filterSelected={filterSelected}
               setFilterSelected={setFilterSelected}
             />
-            <div className="lg:grid grid-cols-1 sm:grid-cols-12 px-4 sm:px-8 ">
-              {dataSelected.map((d, idx) => (
-                <AnimatePresence key={idx} mode="wait">
-                  <div
-                    key={d.title + idx}
-                    className={`${
-                      idx < positions.length
-                        ? positions[idx]
-                        : positions[idx % positions.length]
-                    }`}
-                  >
-                    <VideoMiniature
-                      data={d}
-                      placeholder={
-                        process.env.NEXT_PUBLIC_PHOTOS + d.placeholder_hq
-                      }
-                    />
-                  </div>
-                </AnimatePresence>
-              ))}
-            </div>
+            <div className="lg:grid grid-cols-1 sm:grid-cols-12 px-4 sm:px-8 "></div>
           </div>
           <div className="hidden pt-8 pr-10 justify-end cursor-pointer lg:flex">
             <ScrollTopButton />
