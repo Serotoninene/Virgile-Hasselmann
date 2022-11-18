@@ -33,10 +33,10 @@ const Category = ({ category }: CategoryProps) => {
 };
 
 export default function VideosCol({ videos, category }: Props) {
-  if (!videos) return <div>Loading</div>;
   const ref = useRef() as RefObject<HTMLDivElement>;
   const { scrollYProgress } = useScroll();
   const y = useParallax(scrollYProgress, -40, "full");
+  if (!videos) return <div>Loading</div>;
 
   return (
     <div className="mx-6" ref={ref}>
