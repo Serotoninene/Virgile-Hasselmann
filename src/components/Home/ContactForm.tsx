@@ -25,7 +25,11 @@ const itemAnim = {
 
 const photoAnim = {
   hidden: { y: "100%", scale: 2, transition: { duration, ease } },
-  visible: { y: 0, scale: 1, transition: { duration: 0.5, ease } },
+  visible: {
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.7, ease: [0.73, 0.15, 0.31, 0.94] },
+  },
 };
 
 // optionnal prop to be added !
