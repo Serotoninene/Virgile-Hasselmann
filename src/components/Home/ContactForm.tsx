@@ -2,6 +2,8 @@ import React, { FormEvent, useState } from "react";
 import Image from "next/image";
 // framer motion
 import { motion } from "framer-motion";
+// EmailJs
+import emailjs from "@emailjs/browser";
 
 interface InputProps {
   field: string;
@@ -30,6 +32,32 @@ const photoAnim = {
     scale: 1,
     transition: { duration: 0.7, ease: [0.73, 0.15, 0.31, 0.94] },
   },
+};
+
+const Form = () => {
+  // HandleSubmit TBD
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
+
+  return (
+    <motion.form
+      variants={itemAnim}
+      onSubmit={(e) => handleSubmit(e)}
+      className="mb-6 sm:grid sm:grid-cols-2 sm:gap-2 sm:w-full"
+    >
+      <Input field="Prenom" />
+      <Input field="Nom" />
+      <Input field="Mail" type="mail" />
+      <Input field="Telephone" type="phone" optionnal />
+      <div className="sm:col-span-2">
+        <Input field="Message" optionnal />
+      </div>
+      <div className="sm:col-span-2 sm:mt-2">
+        <Button />
+      </div>
+    </motion.form>
+  );
 };
 
 // optionnal prop to be added !
@@ -63,11 +91,6 @@ const Button = () => {
 };
 
 export default function ContactForm() {
-  // HandleSubmit TBD
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-  };
-
   return (
     <div className="relative px-2 pt-10 grid gap-8 sm:gap-0 sm:grid-cols-2 sm:px-6 sm:pt-14 sm:pb-6 sm:h-screen">
       {/* left part */}
@@ -108,22 +131,7 @@ export default function ContactForm() {
             Please 🙏
           </p>
         </motion.div>
-        <motion.form
-          variants={itemAnim}
-          onSubmit={(e) => handleSubmit(e)}
-          className="mb-6 sm:grid sm:grid-cols-2 sm:gap-2 sm:w-full"
-        >
-          <Input field="Prenom" />
-          <Input field="Nom" />
-          <Input field="Mail" type="mail" />
-          <Input field="Telephone" type="phone" optionnal />
-          <div className="sm:col-span-2">
-            <Input field="Message" optionnal />
-          </div>
-          <div className="sm:col-span-2 sm:mt-2">
-            <Button />
-          </div>
-        </motion.form>
+        <Form />
         <motion.div
           variants={itemAnim}
           className="flex justify-between mb-2 sm:absolute sm:right-6 sm:bottom-6"

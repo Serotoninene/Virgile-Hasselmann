@@ -1,10 +1,10 @@
 import React from "react";
-import PhotosBanner from "@src/components/Home/PhotosBanner";
+import ContactForm from "@src/components/Home/ContactForm";
 
 export default function Contact() {
   return (
     <div className="relative">
-      <PhotosBanner />
+      <ContactForm />
     </div>
   );
 }
