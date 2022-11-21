@@ -1,10 +1,11 @@
-import React, { RefObject, useRef } from "react";
+import React, { RefObject, useEffect, useRef } from "react";
 // Server
 import { Video } from "@prisma/client";
 // Component
 import VideoMiniature from "../Videos/VideoMiniature";
 import { motion, useScroll } from "framer-motion";
 import useParallax from "@src/hooks/useParallax";
+import useWindowSize from "@src/hooks/useWindowSize";
 
 interface Props {
   category: string;
@@ -18,7 +19,7 @@ interface CategoryProps {
 const Category = ({ category }: CategoryProps) => {
   return (
     <div
-      className={`flex items-center py-4 ${
+      className={`flex items-center py-0 sm:py-4 ${
         category === "Evenements" && "justify-end"
       }`}
     >
@@ -34,16 +35,23 @@ const Category = ({ category }: CategoryProps) => {
 
 export default function VideosCol({ videos, category }: Props) {
   const ref = useRef() as RefObject<HTMLDivElement>;
+  const { width } = useWindowSize();
   const { scrollYProgress } = useScroll();
-  const y = useParallax(scrollYProgress, -40, "full");
+  let y = useParallax(scrollYProgress, -40, "full");
   if (!videos) return <div>Loading</div>;
 
+  useEffect(() => {}, [width]);
+
   return (
-    <div className="mx-6" ref={ref}>
+    <div className="mx-2 col-span-2 sm:col-span-1 sm:mx-6" ref={ref}>
       <Category category={category} />
       {/* videos miniatures */}
-      <motion.div style={category === "Evenements" ? { y: y } : {}}>
-        {videos.map((video, idx) => (
+      <motion.div
+        style={
+          width && width > 640 && category === "Evenements" ? { y: y } : {}
+        }
+      >
+        {videos.map((video) => (
           <div className="mb-6" key={video.id}>
             <VideoMiniature data={video} scrollYProgress={scrollYProgress} />
           </div>
