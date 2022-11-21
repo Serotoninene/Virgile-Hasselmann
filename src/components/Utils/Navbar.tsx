@@ -77,7 +77,7 @@ export default function Navbar({ isNavVisible, pathname }: Props) {
       exit="hidden"
       className="flex justify-between py-2 px-4 sm:py-4 sm:px-6"
     >
-      <motion.div variants={itemsAnim} className="font-icon">
+      <motion.div variants={itemsAnim} className="font-icon z-10">
         <CustomLink href="/">VH</CustomLink>
       </motion.div>
       <ul className="hidden xs:flex">
@@ -93,7 +93,7 @@ export default function Navbar({ isNavVisible, pathname }: Props) {
           </motion.li>
         ))}
       </ul>
-      <div className="block xs:hidden z-10" onClick={toggleBurgerMenu}>
+      <div className="block z-10 mt-1 xs:hidden" onClick={toggleBurgerMenu}>
         <BurgerButton isBurgerOpen={isBurgerOpen} />
       </div>
       <BurgerMenu isBurgerOpen={isBurgerOpen} links={links} />
