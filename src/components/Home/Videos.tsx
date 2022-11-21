@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 // Server
 import { Video } from "@prisma/client";
 // Components
@@ -9,11 +9,21 @@ interface Props {
 }
 
 export default function Videos({ videos }: Props) {
+  const [clips, setClips] = useState<Video[]>();
+  const [evenementVideos, setEvenementVideos] = useState<Video[]>();
+
+  useEffect(() => {
+    setClips(videos.filter((video) => video.vid_CategoryId === "Clips"));
+    setEvenementVideos(
+      videos.filter((video) => video.vid_CategoryId === "Evenements")
+    );
+  }, []);
+
   return (
     <div className="relative py-4 grid grid-cols-2">
-      <VideosCol category="Evenements" videos={videos} />
+      <VideosCol category="Evenements" videos={evenementVideos} />
       <div className="hidden sm:block absolute top-20 h-[90%] w-[0.5px] bg-light left-[50%]"></div>
-      <VideosCol category="Clips" videos={videos} />
+      <VideosCol category="Clips" videos={clips} />
     </div>
   );
 }

@@ -9,7 +9,7 @@ import useWindowSize from "@src/hooks/useWindowSize";
 
 interface Props {
   category: string;
-  videos: Video[];
+  videos?: Video[];
 }
 
 interface CategoryProps {
@@ -38,9 +38,8 @@ export default function VideosCol({ videos, category }: Props) {
   const { width } = useWindowSize();
   const { scrollYProgress } = useScroll();
   let y = useParallax(scrollYProgress, -40, "full");
-  if (!videos) return <div>Loading</div>;
 
-  useEffect(() => {}, [width]);
+  if (!videos) return <div>Loading</div>;
 
   return (
     <div className="mx-2 col-span-2 sm:col-span-1 sm:mx-6" ref={ref}>
