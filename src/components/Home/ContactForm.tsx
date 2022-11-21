@@ -41,10 +41,10 @@ const photoAnim = {
 
 const Button = () => {
   return (
-    <div className="flex justify-center cursor-pointer">
+    <div className="flex justify-center">
       <input
         type="submit"
-        className="outline-none bg-transparent text-xl mb-2 pt-2 border-b-[0.5px] border-light"
+        className="outline-none bg-transparent text-xl mb-2 pt-2 border-b-[0.5px] border-light cursor-pointer"
       />
     </div>
   );
@@ -80,7 +80,7 @@ const Input = ({ type = "text", hasSubmit, field, optionnal }: InputProps) => {
 
 const Form = () => {
   const formRef = useRef() as RefObject<HTMLFormElement>;
-  const [feedback, setFeedback] = useState<string | undefined>();
+  const [feedback, setFeedback] = useState<string>("");
   const [hasSubmit, setHasSubmit] = useState(false);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -115,6 +115,7 @@ const Form = () => {
       <div className="sm:col-span-2 sm:mt-2">
         <Button />
       </div>
+      {hasSubmit && <p className="text-center text-blue">{feedback}</p>}
     </motion.form>
   );
 };
