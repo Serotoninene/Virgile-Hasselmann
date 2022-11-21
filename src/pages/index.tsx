@@ -47,19 +47,19 @@ function Home({ videos }: Props) {
   return (
     <div
       id="Home"
-      className="w-screen h-screen"
+      className="w-screen h-screen relative"
       onWheel={(e) => triggerMainMenuAnimDesk(e)}
       onTouchMove={(e) => triggerMainMenuAnimMobile(e)}
     >
-      <SmoothScroll>
-        <>
-          <HeroVideo />
-          <Videos videos={videos} />
-          <PhotosBanner />
-          <ContactForm />
-          <Footer />
-        </>
-      </SmoothScroll>
+      {/* <SmoothScroll> */}
+      <>
+        <HeroVideo />
+        <Videos videos={videos} />
+        <PhotosBanner />
+        <ContactForm />
+        <Footer />
+      </>
+      {/* </SmoothScroll> */}
     </div>
   );
 }
