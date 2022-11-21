@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, RefObject, useRef, useState } from "react";
 import Image from "next/image";
 // framer motion
 import { motion } from "framer-motion";
@@ -35,13 +35,28 @@ const photoAnim = {
 };
 
 const Form = () => {
+  const formRef = useRef() as RefObject<HTMLFormElement>;
   // HandleSubmit TBD
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    emailjs
+      .sendForm(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+        formRef.current!,
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+      )
+      .then(() => {
+        console.log("mail sent !");
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   return (
     <motion.form
+      ref={formRef}
       variants={itemAnim}
       onSubmit={(e) => handleSubmit(e)}
       className="mb-6 sm:grid sm:grid-cols-2 sm:gap-2 sm:w-full"
@@ -63,9 +78,12 @@ const Form = () => {
 // optionnal prop to be added !
 const Input = ({ type = "text", field, optionnal }: InputProps) => {
   const [focus, setFocus] = useState(false);
+
   return (
     <div className="relative">
       <input
+        required={!optionnal && true}
+        name={field.toLowerCase()}
         type={type}
         placeholder={field}
         onFocus={() => setFocus(true)}
