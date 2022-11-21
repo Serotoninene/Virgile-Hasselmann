@@ -10,6 +10,9 @@ interface Props {
   isNavVisible: boolean;
   pathname: string;
 }
+interface BurgerButtonProps {
+  isBurgerOpen: boolean;
+}
 // Navlinks
 const links = [
   { title: "Videos", href: "/" },
@@ -34,11 +37,28 @@ const itemsAnim = {
   },
 };
 
-const BurgerButton = () => {
+const BurgerButton = ({ isBurgerOpen }: BurgerButtonProps) => {
+  const burgerButtonAnim = {
+    open: { rotate: 0, y: 0 },
+    close: (custom: number) => ({
+      y: custom * 3,
+      rotate: custom * 45,
+    }),
+  };
   return (
     <>
-      <motion.div className="w-6 h-[2px] mt-1 bg-light"></motion.div>
-      <motion.div className="w-6 h-[2px] mt-1 bg-light"></motion.div>
+      <motion.div
+        custom={1}
+        variants={burgerButtonAnim}
+        animate={isBurgerOpen ? "close" : "open"}
+        className="w-6 h-[2px] mt-1 bg-light"
+      ></motion.div>
+      <motion.div
+        custom={-1}
+        variants={burgerButtonAnim}
+        animate={isBurgerOpen ? "close" : "open"}
+        className="w-6 h-[2px] mt-1 bg-light"
+      ></motion.div>
     </>
   );
 };
@@ -74,7 +94,7 @@ export default function Navbar({ isNavVisible, pathname }: Props) {
         ))}
       </ul>
       <div className="block xs:hidden z-10" onClick={toggleBurgerMenu}>
-        <BurgerButton />
+        <BurgerButton isBurgerOpen={isBurgerOpen} />
       </div>
       <BurgerMenu isBurgerOpen={isBurgerOpen} links={links} />
     </motion.div>
