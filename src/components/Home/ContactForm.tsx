@@ -1,30 +1,35 @@
-import React, { FormEvent, RefObject, useRef, useState } from "react";
+import React, {
+  FormEvent,
+  RefObject,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import Image from "next/image";
 // framer motion
 import { motion } from "framer-motion";
 // EmailJs
 import emailjs from "@emailjs/browser";
 
+// Types
 interface InputProps {
   field: string;
   type?: string;
+  hasSubmit: boolean;
   optionnal?: boolean;
 }
 
 // Anim variants
 const duration = 0.5;
 const ease = [0.6, 0.01, -0.05, 0.95];
-
 const containerAnim = {
   hidden: {},
   visible: { transition: { delayChildren: 0.3, staggerChildren: 0.1 } },
 };
-
 const itemAnim = {
   hidden: { opacity: 0, y: 10, transition: { duration, ease } },
   visible: { opacity: 1, y: 0, transition: { duration, ease } },
 };
-
 const photoAnim = {
   hidden: { y: "100%", scale: 2, transition: { duration, ease } },
   visible: {
@@ -34,50 +39,24 @@ const photoAnim = {
   },
 };
 
-const Form = () => {
-  const formRef = useRef() as RefObject<HTMLFormElement>;
-  // HandleSubmit TBD
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    emailjs
-      .sendForm(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
-        formRef.current!,
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
-      )
-      .then(() => {
-        console.log("mail sent !");
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  };
-
+const Button = () => {
   return (
-    <motion.form
-      ref={formRef}
-      variants={itemAnim}
-      onSubmit={(e) => handleSubmit(e)}
-      className="mb-6 sm:grid sm:grid-cols-2 sm:gap-2 sm:w-full"
-    >
-      <Input field="Prenom" />
-      <Input field="Nom" />
-      <Input field="Mail" type="mail" />
-      <Input field="Telephone" type="phone" optionnal />
-      <div className="sm:col-span-2">
-        <Input field="Message" optionnal />
-      </div>
-      <div className="sm:col-span-2 sm:mt-2">
-        <Button />
-      </div>
-    </motion.form>
+    <div className="flex justify-center cursor-pointer">
+      <input
+        type="submit"
+        className="outline-none bg-transparent text-xl mb-2 pt-2 border-b-[0.5px] border-light"
+      />
+    </div>
   );
 };
 
-// optionnal prop to be added !
-const Input = ({ type = "text", field, optionnal }: InputProps) => {
+const Input = ({ type = "text", hasSubmit, field, optionnal }: InputProps) => {
   const [focus, setFocus] = useState(false);
+  const [value, setValue] = useState("");
+
+  useEffect(() => {
+    setValue("");
+  }, [hasSubmit]);
 
   return (
     <div className="relative">
@@ -85,6 +64,8 @@ const Input = ({ type = "text", field, optionnal }: InputProps) => {
         required={!optionnal && true}
         name={field.toLowerCase()}
         type={type}
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
         placeholder={field}
         onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}
@@ -97,14 +78,44 @@ const Input = ({ type = "text", field, optionnal }: InputProps) => {
   );
 };
 
-const Button = () => {
+const Form = () => {
+  const formRef = useRef() as RefObject<HTMLFormElement>;
+  const [feedback, setFeedback] = useState<string | undefined>();
+  const [hasSubmit, setHasSubmit] = useState(false);
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    emailjs
+      .sendForm(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+        formRef.current!,
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+      )
+      .then(() => {
+        setFeedback("Message sent !");
+        setHasSubmit(true);
+      });
+  };
+
   return (
-    <div className="flex justify-center cursor-pointer">
-      <input
-        type="submit"
-        className="outline-none bg-transparent text-xl mb-2 pt-2 border-b-[0.5px] border-light"
-      />
-    </div>
+    <motion.form
+      ref={formRef}
+      variants={itemAnim}
+      onSubmit={(e) => handleSubmit(e)}
+      className="mb-6 sm:grid sm:grid-cols-2 sm:gap-2 sm:w-full"
+    >
+      <Input field="Prenom" hasSubmit={hasSubmit} />
+      <Input field="Nom" hasSubmit={hasSubmit} />
+      <Input field="Mail" type="mail" hasSubmit={hasSubmit} />
+      <Input field="Telephone" type="phone" optionnal hasSubmit={hasSubmit} />
+      <div className="sm:col-span-2">
+        <Input field="Message" optionnal hasSubmit={hasSubmit} />
+      </div>
+      <div className="sm:col-span-2 sm:mt-2">
+        <Button />
+      </div>
+    </motion.form>
   );
 };
 
