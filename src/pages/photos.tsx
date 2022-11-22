@@ -7,6 +7,7 @@ import useDebounce from "@hooks/useDebounce";
 // Components
 import PhotosFooter from "@components/Photos/PhotosFooter";
 import AnimatedPhoto from "@components/Photos/AnimatedPhoto";
+import Overview from "@src/components/Photos/Overview";
 
 export default function Photos() {
   // Getting all the datas, photos and filters(/ that I'll call categories for more complexity ...)
@@ -70,7 +71,7 @@ export default function Photos() {
     }
   };
 
-  if (!photosData || !filters) return <>Loading</>; // while the data's loading, returns loading hihi
+  if (!photosData || !filters) return <>Loading</>; // while the data's loading, returns loading
 
   return (
     <div
@@ -84,6 +85,8 @@ export default function Photos() {
           wheelDirection={wheelDirection}
           photoDisplayed={photoDisplayed}
         />
+
+        <Overview photos={photosData} />
       </div>
       <PhotosFooter
         category={category?.name}
