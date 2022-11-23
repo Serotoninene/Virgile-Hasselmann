@@ -55,8 +55,12 @@ export default function Photos() {
   };
 
   const handleWheel = (e: WheelEvent<HTMLDivElement>) => {
+    // if not wheeling enough : no effect
     const threshold = 50;
     if (Math.abs(e.deltaY) < threshold) return;
+
+    // if overview triggered : no effect
+    if (isOverview) return;
 
     if (e.deltaY > 0) {
       setWheelDirection("down");
