@@ -1,14 +1,21 @@
-import { Photo } from "@prisma/client";
-import useWindowSize from "@src/hooks/useWindowSize";
-import Image from "next/image";
 import React, { useEffect, useState } from "react";
+import Image from "next/image";
+// Server
+import { Photo } from "@prisma/client";
+// Framer motion
+import { motion } from "framer-motion";
+// Components
+import useWindowSize from "@src/hooks/useWindowSize";
 
+const photoLink = "https://virgile-portfollio.s3.amazonaws.com/photos/";
+
+// Types
 interface Props {
   photos: Photo[];
+  isOverview: boolean;
   displayedPhotoIdx: number;
   setDisplayedPhotoIdx: (e: number) => void;
 }
-
 interface MiniatureProps {
   photo: Photo;
   idx: number;
@@ -17,8 +24,6 @@ interface MiniatureProps {
   displayedPhotoIdx: number;
   setDisplayedPhotoIdx: (e: number) => void;
 }
-
-const photoLink = "https://virgile-portfollio.s3.amazonaws.com/photos/";
 
 const Miniature = ({
   idx,
@@ -56,12 +61,23 @@ const Miniature = ({
 
 export default function Overview({
   photos,
+  isOverview,
   displayedPhotoIdx,
   setDisplayedPhotoIdx,
 }: Props) {
   const { width } = useWindowSize();
   const [imgWidth, setImgWidth] = useState<number>(111);
   const [imgHeight, setImgHeight] = useState<number>(158);
+
+  // variants
+  const containerAnim = {
+    hidden: {
+      x: "100%",
+    },
+    visible: {
+      x: 0,
+    },
+  };
 
   // making it bigger on larger screens
   useEffect(() => {
@@ -75,8 +91,10 @@ export default function Overview({
   }, [width]);
 
   return (
-    <div
-      className={`w-[${imgWidth}px] h-full absolute right-0 top-0 overflow-scroll`}
+    <motion.div
+      animate={{ x: isOverview ? "-100%" : 0 }}
+      transition={{ ease: "easeInOut", duration: 0.2 }}
+      className={`w-[${imgWidth}px] h-full absolute left-full top-0 overflow-scroll`}
     >
       {photos.map((p, idx) => (
         <Miniature
@@ -89,6 +107,6 @@ export default function Overview({
           setDisplayedPhotoIdx={setDisplayedPhotoIdx}
         />
       ))}
-    </div>
+    </motion.div>
   );
 }

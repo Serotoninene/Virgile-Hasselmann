@@ -91,6 +91,7 @@ export default function Photos() {
         />
 
         <Overview
+          isOverview={isOverview}
           photos={photosData}
           displayedPhotoIdx={displayedPhotoIdx}
           setDisplayedPhotoIdx={setDisplayedPhotoIdx}
