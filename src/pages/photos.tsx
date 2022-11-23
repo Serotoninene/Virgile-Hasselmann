@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, WheelEvent } from "react";
+import React, { useEffect, useState, WheelEvent } from "react";
 // server | Types
 import { trpc } from "@server/utils/trpc";
 import { Photo, Photo_Category } from "@prisma/client";
@@ -21,9 +21,6 @@ export default function Photos() {
   const [dataSelected, setDataSelected] = useState<Photo[]>(); // photos from the category selected
   const [displayedPhotoIdx, setDisplayedPhotoIdx] = useState(0); // idx of the photo displayed
   const [photoDisplayed, setPhotoDisplayed] = useState(""); // photo displayed among the dataSelected
-
-  // saving the wheel event in a ref to not trigger more rerenders
-  const wheelDelta = useRef<number | undefined>();
 
   // Here we'll push all the data fetched by api into the states
   useEffect(() => {
@@ -49,7 +46,6 @@ export default function Photos() {
   }, [category]);
 
   const handleWheel = (e: WheelEvent<HTMLDivElement>) => {
-    wheelDelta.current = e.deltaY;
     // if not wheeling enough : no effect
     const threshold = 50;
     if (Math.abs(e.deltaY) !== threshold) return;
@@ -78,7 +74,6 @@ export default function Photos() {
     >
       <div className="h-full relative overflow-hidden flex items-start sm:items-center">
         <AnimatedPhoto
-          wheelDelta={wheelDelta.current}
           isOverview={isOverview}
           wheelDirection={wheelDirection}
           photoDisplayed={photoDisplayed}

@@ -41,16 +41,16 @@ export default function BurgerMenu({ links, isBurgerOpen }: Props) {
       </div>
       <ul className="z-10">
         {links.map((link, idx) => (
-          <li key={link.href} className="cursor-pointer text-[80px]">
-            <Link href={link.href}>
+          <Link href={link.href} key={link.href}>
+            <li className="cursor-pointer text-[80px]">
               <AnimatedLetters
                 string={link.title}
                 start={isBurgerOpen}
                 delay={idx * 0.2}
                 fontWeight="font-black"
               />
-            </Link>
-          </li>
+            </li>
+          </Link>
         ))}
       </ul>
     </motion.div>

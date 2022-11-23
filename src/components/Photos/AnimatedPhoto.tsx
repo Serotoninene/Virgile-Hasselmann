@@ -6,7 +6,6 @@ import { AnimatePresence, motion, useMotionValue } from "framer-motion";
 import useWindowSize from "@src/hooks/useWindowSize";
 
 interface Props {
-  wheelDelta?: number;
   isOverview: boolean;
   wheelDirection: string;
   photoDisplayed: string;
@@ -25,7 +24,6 @@ const anim = {
 };
 
 const AnimatedPhoto = ({
-  wheelDelta,
   isOverview,
   wheelDirection,
   photoDisplayed,
@@ -43,7 +41,6 @@ const AnimatedPhoto = ({
         exit={wheelDirection === "up" ? "fromDown" : "fromUp"}
         custom={isOverview}
         className="w-full min-h-[70vh] sm:w-full sm:h-full"
-        style={{ y: wheelDelta }}
       >
         <Image
           src={photoLink + photoDisplayed}
