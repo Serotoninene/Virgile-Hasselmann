@@ -3,7 +3,7 @@ import React from "react";
 import { Photo_Category } from "@prisma/client";
 
 interface Props {
-  photoIdx: number;
+  displayedPhotoIdx: number;
   photosLength?: number;
   isOverview: boolean;
   setIsOverview: (e: boolean) => void;
@@ -13,7 +13,7 @@ interface Props {
 }
 
 const PhotosFooter = ({
-  photoIdx,
+  displayedPhotoIdx,
   photosLength,
   isOverview,
   setIsOverview,
@@ -24,7 +24,7 @@ const PhotosFooter = ({
   return (
     <div className="pt-2 pb-1 flex justify-between text-sm 2xl:text-base">
       <p className="block font-light">
-        {photoIdx + 1} / {photosLength}
+        {displayedPhotoIdx + 1} / {photosLength}
       </p>
       <ul className="flex">
         <li

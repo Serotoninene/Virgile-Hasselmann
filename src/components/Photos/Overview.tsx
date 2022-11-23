@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 
 interface Props {
   photos: Photo[];
+  displayedPhotoIdx: number;
 }
 
 interface MiniatureProps {
@@ -34,7 +35,7 @@ const Miniature = ({ idx, photo, imgWidth, imgHeight }: MiniatureProps) => {
   );
 };
 
-export default function Overview({ photos }: Props) {
+export default function Overview({ photos, displayedPhotoIdx }: Props) {
   const { width } = useWindowSize();
   const [imgWidth, setImgWidth] = useState<number>(111);
   const [imgHeight, setImgHeight] = useState<number>(158);

@@ -20,7 +20,7 @@ export default function Photos() {
   const [category, setCategory] = useState<Photo_Category>(); // manage the category selected, for now : "Artistiques" and "Professionnelles"
 
   // Init the data to display with the photos of the first category
-  const [photoIdx, setPhotoIdx] = useState(0);
+  const [photoIdx, setPhotoIdx] = useState(0); // idx of the photo displayed
   const { debouncedValue, setDebounce } = useDebounce(photoIdx, 500);
 
   const [photoDisplayed, setPhotoDisplayed] = useState(""); // photo displayed among the dataSelected
@@ -85,7 +85,7 @@ export default function Photos() {
           photoDisplayed={photoDisplayed}
         />
 
-        <Overview photos={photosData} />
+        <Overview photos={photosData} photoIdx={photoIdx} />
       </div>
       <PhotosFooter
         category={category?.name}
