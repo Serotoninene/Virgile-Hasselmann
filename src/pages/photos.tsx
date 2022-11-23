@@ -1,9 +1,7 @@
-import React, { useEffect, useState, WheelEvent } from "react";
+import React, { useEffect, useRef, useState, WheelEvent } from "react";
 // server | Types
 import { trpc } from "@server/utils/trpc";
 import { Photo, Photo_Category } from "@prisma/client";
-// Custom hooks
-import useDebounce from "@hooks/useDebounce";
 // Components
 import PhotosFooter from "@components/Photos/PhotosFooter";
 import AnimatedPhoto from "@components/Photos/AnimatedPhoto";
@@ -20,11 +18,12 @@ export default function Photos() {
   const [category, setCategory] = useState<Photo_Category>(); // manage the category selected, for now : "Artistiques" and "Professionnelles"
 
   // Init the data to display with the photos of the first category
-  const [displayedPhotoIdx, setDisplayedPhotoIdx] = useState(0); // idx of the photo displayed
-  const { debouncedValue, setDebounce } = useDebounce(displayedPhotoIdx, 500);
-
-  const [photoDisplayed, setPhotoDisplayed] = useState(""); // photo displayed among the dataSelected
   const [dataSelected, setDataSelected] = useState<Photo[]>(); // photos from the category selected
+  const [displayedPhotoIdx, setDisplayedPhotoIdx] = useState(0); // idx of the photo displayed
+  const [photoDisplayed, setPhotoDisplayed] = useState(""); // photo displayed among the dataSelected
+
+  // saving the wheel event in a ref to not trigger more rerenders
+  const wheelDelta = useRef<number | undefined>();
 
   // Here we'll push all the data fetched by api into the states
   useEffect(() => {
@@ -49,29 +48,24 @@ export default function Photos() {
     setDataSelected(dataToDisplay);
   }, [category]);
 
-  const setDebouncedIdx = (value: number) => {
-    setDebounce(value);
-    setDisplayedPhotoIdx(debouncedValue);
-  };
-
   const handleWheel = (e: WheelEvent<HTMLDivElement>) => {
+    wheelDelta.current = e.deltaY;
     // if not wheeling enough : no effect
     const threshold = 50;
-    if (Math.abs(e.deltaY) < threshold) return;
-
+    if (Math.abs(e.deltaY) !== threshold) return;
     // if overview triggered : no effect
     if (isOverview) return;
 
     if (e.deltaY > 0) {
       setWheelDirection("down");
       displayedPhotoIdx < dataSelected!.length - 1
-        ? setDebouncedIdx(displayedPhotoIdx + 1)
-        : setDebouncedIdx(0);
+        ? setDisplayedPhotoIdx(displayedPhotoIdx + 1)
+        : setDisplayedPhotoIdx(0);
     } else {
       setWheelDirection("up");
       displayedPhotoIdx > 0
-        ? setDebouncedIdx(displayedPhotoIdx - 1)
-        : setDebouncedIdx(dataSelected!.length - 1);
+        ? setDisplayedPhotoIdx(displayedPhotoIdx - 1)
+        : setDisplayedPhotoIdx(dataSelected!.length - 1);
     }
   };
 
@@ -80,12 +74,11 @@ export default function Photos() {
   return (
     <div
       className="h-screen pt-12 px-2 flex flex-col justify-between relative sm:px-6"
-      onWheel={(e) => {
-        handleWheel(e);
-      }}
+      onWheel={handleWheel}
     >
       <div className="h-full relative overflow-hidden flex items-start sm:items-center">
         <AnimatedPhoto
+          wheelDelta={wheelDelta.current}
           isOverview={isOverview}
           wheelDirection={wheelDirection}
           photoDisplayed={photoDisplayed}

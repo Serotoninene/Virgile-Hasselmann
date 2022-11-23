@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 // Framer motion
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useMotionValue } from "framer-motion";
 // Components
 import useWindowSize from "@src/hooks/useWindowSize";
 
 interface Props {
+  wheelDelta?: number;
   isOverview: boolean;
   wheelDirection: string;
   photoDisplayed: string;
@@ -24,6 +25,7 @@ const anim = {
 };
 
 const AnimatedPhoto = ({
+  wheelDelta,
   isOverview,
   wheelDirection,
   photoDisplayed,
@@ -41,12 +43,13 @@ const AnimatedPhoto = ({
         exit={wheelDirection === "up" ? "fromDown" : "fromUp"}
         custom={isOverview}
         className="w-full min-h-[70vh] sm:w-full sm:h-full"
+        style={{ y: wheelDelta }}
       >
         <Image
           src={photoLink + photoDisplayed}
           layout="fill"
           objectFit={width! < 640 ? "cover" : "contain"}
-          objectPosition="topleft"
+          objectPosition="top left"
           placeholder="blur"
           blurDataURL={photoLink + photoDisplayed}
         />
