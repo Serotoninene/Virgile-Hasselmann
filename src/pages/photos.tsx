@@ -86,6 +86,7 @@ export default function Photos() {
     >
       <div className="h-full relative overflow-hidden flex items-start sm:items-center">
         <AnimatedPhoto
+          isOverview={isOverview}
           wheelDirection={wheelDirection}
           photoDisplayed={photoDisplayed}
         />
