@@ -19,7 +19,7 @@ const anim = {
   center: (custom: boolean) => ({
     y: 0,
     width: custom ? "60%" : "100%",
-    transition: { ease: [0.3, 0.01, -0.05, 0.95], duration: 0.1 },
+    transition: transition,
   }),
 };
 
@@ -46,7 +46,7 @@ const AnimatedPhoto = ({
           src={photoLink + photoDisplayed}
           layout="fill"
           objectFit={width! < 640 ? "cover" : "contain"}
-          objectPosition="top left"
+          objectPosition="topleft"
           placeholder="blur"
           blurDataURL={photoLink + photoDisplayed}
         />
