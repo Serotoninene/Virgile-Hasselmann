@@ -11,6 +11,7 @@ const VideoPlayer = () => {
   const videoData = query.id && trpc.video.byId.useQuery(query.id[0]).data;
   const [video, setVideo] = useState<Video | null | undefined>(null);
 
+  console.log(videoData);
   useEffect(() => {
     videoData && setVideo(videoData);
   }, [videoData]);

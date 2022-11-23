@@ -57,7 +57,7 @@ const VideoMiniature = ({ data, scrollYProgress }: VideoMiniatureProps) => {
         initial="hidden"
         animate="visible"
         exit="hidden"
-        className="overflow-hidden"
+        className="overflow-hidden cursor-pointer"
       >
         <motion.div className="overflow-hidden" variants={photoAnim}>
           <motion.div
