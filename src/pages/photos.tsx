@@ -55,7 +55,6 @@ export default function Photos() {
 
   const handleWheel = (e: WheelEvent<HTMLDivElement>) => {
     const threshold = 50;
-    debugger;
     if (Math.abs(e.deltaY) < threshold) return;
 
     if (e.deltaY > 0) {
