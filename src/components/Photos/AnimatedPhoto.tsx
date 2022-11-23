@@ -19,7 +19,7 @@ const anim = {
   center: (custom: boolean) => ({
     y: 0,
     width: custom ? "60%" : "100%",
-    transition: transition,
+    transition: { ease: [0.3, 0.01, -0.05, 0.95], duration: 0.1 },
   }),
 };
 

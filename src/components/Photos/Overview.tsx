@@ -24,6 +24,8 @@ interface MiniatureProps {
   displayedPhotoIdx: number;
   setDisplayedPhotoIdx: (e: number) => void;
 }
+// Anim transition
+const transition = { duration: 0.4, ease: [0.3, 0.01, -0.05, 0.95] };
 
 const Miniature = ({
   idx,
@@ -69,16 +71,6 @@ export default function Overview({
   const [imgWidth, setImgWidth] = useState<number>(111);
   const [imgHeight, setImgHeight] = useState<number>(158);
 
-  // variants
-  const containerAnim = {
-    hidden: {
-      x: "100%",
-    },
-    visible: {
-      x: 0,
-    },
-  };
-
   // making it bigger on larger screens
   useEffect(() => {
     if (width && width > 1536) {
@@ -92,8 +84,7 @@ export default function Overview({
 
   return (
     <motion.div
-      animate={{ x: isOverview ? "-100%" : 0 }}
-      transition={{ ease: "easeInOut", duration: 0.2 }}
+      animate={{ x: isOverview ? "-100%" : 0, transition }}
       className={`w-[${imgWidth}px] h-full absolute left-full top-0 overflow-scroll`}
     >
       {photos.map((p, idx) => (
