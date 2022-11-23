@@ -20,8 +20,8 @@ export default function Photos() {
   const [category, setCategory] = useState<Photo_Category>(); // manage the category selected, for now : "Artistiques" and "Professionnelles"
 
   // Init the data to display with the photos of the first category
-  const [photoIdx, setPhotoIdx] = useState(0); // idx of the photo displayed
-  const { debouncedValue, setDebounce } = useDebounce(photoIdx, 500);
+  const [displayedPhotoIdx, setDisplayedPhotoIdx] = useState(0); // idx of the photo displayed
+  const { debouncedValue, setDebounce } = useDebounce(displayedPhotoIdx, 500);
 
   const [photoDisplayed, setPhotoDisplayed] = useState(""); // photo displayed among the dataSelected
   const [dataSelected, setDataSelected] = useState<Photo[]>(); // photos from the category selected
@@ -30,27 +30,28 @@ export default function Photos() {
   useEffect(() => {
     if (photosData && filters) {
       setCategory(filters[0]);
-      setPhotoDisplayed(photosData[photoIdx].photoName);
+      setPhotoDisplayed(photosData[displayedPhotoIdx].photoName);
     }
   }, [photosData, filters]);
 
   // Changing the photoDisplayed every time the photoIdx changes
   useEffect(() => {
-    dataSelected && setPhotoDisplayed(dataSelected[photoIdx].photoName);
-  }, [photoIdx]);
+    dataSelected &&
+      setPhotoDisplayed(dataSelected[displayedPhotoIdx].photoName);
+  }, [displayedPhotoIdx]);
 
   // changing the data to display when new filter selected
   useEffect(() => {
     const dataToDisplay = photosData?.filter(
       (photo) => photo.photo_CategoryId === category?.id
     );
-    setPhotoIdx(0);
+    setDisplayedPhotoIdx(0);
     setDataSelected(dataToDisplay);
   }, [category]);
 
   const setDebouncedIdx = (value: number) => {
     setDebounce(value);
-    setPhotoIdx(debouncedValue);
+    setDisplayedPhotoIdx(debouncedValue);
   };
 
   const handleWheel = (e: WheelEvent<HTMLDivElement>) => {
@@ -59,13 +60,13 @@ export default function Photos() {
 
     if (e.deltaY > 0) {
       setWheelDirection("down");
-      photoIdx < dataSelected!.length - 1
-        ? setDebouncedIdx(photoIdx + 1)
+      displayedPhotoIdx < dataSelected!.length - 1
+        ? setDebouncedIdx(displayedPhotoIdx + 1)
         : setDebouncedIdx(0);
     } else {
       setWheelDirection("up");
-      photoIdx > 0
-        ? setDebouncedIdx(photoIdx - 1)
+      displayedPhotoIdx > 0
+        ? setDebouncedIdx(displayedPhotoIdx - 1)
         : setDebouncedIdx(dataSelected!.length - 1);
     }
   };
@@ -85,11 +86,11 @@ export default function Photos() {
           photoDisplayed={photoDisplayed}
         />
 
-        <Overview photos={photosData} photoIdx={photoIdx} />
+        <Overview photos={photosData} displayedPhotoIdx={displayedPhotoIdx} />
       </div>
       <PhotosFooter
         category={category?.name}
-        photoIdx={photoIdx}
+        displayedPhotoIdx={displayedPhotoIdx}
         photosLength={dataSelected?.length}
         isOverview={isOverview}
         setIsOverview={setIsOverview}

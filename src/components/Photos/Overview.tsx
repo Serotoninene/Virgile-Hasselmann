@@ -13,13 +13,20 @@ interface MiniatureProps {
   idx: number;
   imgWidth: number;
   imgHeight: number;
+  displayedPhotoIdx: number;
 }
 
 const photoLink = "https://virgile-portfollio.s3.amazonaws.com/photos/";
 
-const Miniature = ({ idx, photo, imgWidth, imgHeight }: MiniatureProps) => {
+const Miniature = ({
+  idx,
+  photo,
+  imgWidth,
+  imgHeight,
+  displayedPhotoIdx,
+}: MiniatureProps) => {
   // Adding leading zero to to the idx
-  const octalIdx = idx.toString().padStart(2, "0");
+  const octalIdx = (idx + 1).toString().padStart(2, "0");
   return (
     <div className="mb-3">
       <Image
@@ -28,7 +35,11 @@ const Miniature = ({ idx, photo, imgWidth, imgHeight }: MiniatureProps) => {
         height={imgHeight}
         objectFit="cover"
       />
-      <p className="font-bold text-xs leading-[2px] 2xl:text-sm 2xl:leading-[4px]">
+      <p
+        className={`font-bold text-xs leading-[2px] 2xl:text-sm 2xl:leading-[4px] ${
+          displayedPhotoIdx === idx && "text-blue"
+        }`}
+      >
         {octalIdx}
       </p>
     </div>
@@ -58,10 +69,11 @@ export default function Overview({ photos, displayedPhotoIdx }: Props) {
       {photos.map((p, idx) => (
         <Miniature
           key={p.id}
-          idx={idx + 1}
+          idx={idx}
           photo={p}
           imgWidth={imgWidth}
           imgHeight={imgHeight}
+          displayedPhotoIdx={displayedPhotoIdx}
         />
       ))}
     </div>
