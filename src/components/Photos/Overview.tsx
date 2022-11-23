@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 interface Props {
   photos: Photo[];
   displayedPhotoIdx: number;
+  setDisplayedPhotoIdx: (e: number) => void;
 }
 
 interface MiniatureProps {
@@ -14,6 +15,7 @@ interface MiniatureProps {
   imgWidth: number;
   imgHeight: number;
   displayedPhotoIdx: number;
+  setDisplayedPhotoIdx: (e: number) => void;
 }
 
 const photoLink = "https://virgile-portfollio.s3.amazonaws.com/photos/";
@@ -24,11 +26,17 @@ const Miniature = ({
   imgWidth,
   imgHeight,
   displayedPhotoIdx,
+  setDisplayedPhotoIdx,
 }: MiniatureProps) => {
   // Adding leading zero to to the idx
   const octalIdx = (idx + 1).toString().padStart(2, "0");
+
+  const changePhotoDisplayed = () => {
+    setDisplayedPhotoIdx(idx);
+  };
+
   return (
-    <div className="mb-3">
+    <div className="mb-3" onClick={changePhotoDisplayed}>
       <Image
         src={photoLink + photo.photoName}
         width={imgWidth}
@@ -46,7 +54,11 @@ const Miniature = ({
   );
 };
 
-export default function Overview({ photos, displayedPhotoIdx }: Props) {
+export default function Overview({
+  photos,
+  displayedPhotoIdx,
+  setDisplayedPhotoIdx,
+}: Props) {
   const { width } = useWindowSize();
   const [imgWidth, setImgWidth] = useState<number>(111);
   const [imgHeight, setImgHeight] = useState<number>(158);
@@ -74,6 +86,7 @@ export default function Overview({ photos, displayedPhotoIdx }: Props) {
           imgWidth={imgWidth}
           imgHeight={imgHeight}
           displayedPhotoIdx={displayedPhotoIdx}
+          setDisplayedPhotoIdx={setDisplayedPhotoIdx}
         />
       ))}
     </div>

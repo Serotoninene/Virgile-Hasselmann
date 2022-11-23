@@ -86,7 +86,11 @@ export default function Photos() {
           photoDisplayed={photoDisplayed}
         />
 
-        <Overview photos={photosData} displayedPhotoIdx={displayedPhotoIdx} />
+        <Overview
+          photos={photosData}
+          displayedPhotoIdx={displayedPhotoIdx}
+          setDisplayedPhotoIdx={setDisplayedPhotoIdx}
+        />
       </div>
       <PhotosFooter
         category={category?.name}
