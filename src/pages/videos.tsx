@@ -54,7 +54,7 @@ const Videos = ({ data, filters }: Props): JSX.Element => {
 
   return (
     <>
-      <SmoothScroll filterSelected={filterSelected}>
+      <SmoothScroll>
         <>
           <div id="Videos" className="pt-16 xs:pt-[88px]">
             <Filters
