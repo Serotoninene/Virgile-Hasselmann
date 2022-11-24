@@ -1,4 +1,5 @@
 import { Prisma } from "@prisma/client";
+import { ParsedUrlQuery } from "querystring";
 
 const videoWithCategories = Prisma.validator<Prisma.VideoArgs>()({
   include: { Vid_Category: true },

@@ -16,7 +16,7 @@
     "@trpc/client": "^10.0.0-proxy-beta.26",
     "@trpc/next": "^10.0.0-proxy-beta.26",
     "@trpc/react-query": "^10.0.0-proxy-beta.26",
-    "@trpc/server": "^10.0.0-proxy-beta.26",
+    "@trpc/server": "^10.1.0",
     "@types/cors": "^2.8.12",
     "aws-sdk": "^2.1238.0",
     "axios": "^1.1.3",

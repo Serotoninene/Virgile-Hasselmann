@@ -8,16 +8,15 @@ import { motion } from "framer-motion";
 
 const VideoPlayer = () => {
   const { query } = useRouter();
-  const videoData = query.id && trpc.video.byId.useQuery(query.id[0]).data;
+  const videoData = query.id && trpc.video.byId.useQuery(query.id as string);
   const [video, setVideo] = useState<Video | null | undefined>(null);
 
-  console.log(videoData);
   useEffect(() => {
-    videoData && setVideo(videoData);
+    videoData && setVideo(videoData.data);
   }, [videoData]);
 
   return (
-    <motion.div className="h-screen w-screen bg-slate-300 z-20">
+    <motion.div className="h-screen w-screen z-20 relative">
       {video && (
         <video
           preload="metadata"

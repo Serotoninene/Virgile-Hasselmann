@@ -58,7 +58,7 @@ const Layout = ({ children }: Props): JSX.Element => {
       <main className="min-h-screen">
         {/* Background noise */}
         <img
-          src="assets/noise.png"
+          src="/assets/noise.png"
           className="w-full h-full fixed top-0 left-0"
         />
         <div>{children}</div>
