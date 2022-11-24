@@ -62,7 +62,7 @@ const Layout = ({ children }: Props): JSX.Element => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <header className="fixed w-screen z-50">
+      <header className="fixed w-screen">
         <Navbar pathname={pathname} isNavVisible={isNavVisible} />
       </header>
       <main className="min-h-screen">
