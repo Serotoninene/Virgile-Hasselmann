@@ -16,6 +16,7 @@ const Layout = ({ children }: Props): JSX.Element => {
   const { width } = useWindowSize();
   const [isNavVisible, setIsNavVisible] = useState(true);
 
+  // Triggered on on wheel event
   const toggleNav = (e: React.WheelEvent<HTMLElement>) => {
     // if on mobile, the navbar is always visible
     if (width && width < 640) return;
@@ -23,12 +24,21 @@ const Layout = ({ children }: Props): JSX.Element => {
     // if on the photos, the navbar is always visible
     if (pathname === "/photos") return;
 
+    if (pathname === "/videos/[id]") return;
+
     if (e.deltaY < 0) {
       setIsNavVisible(true); // if wheel back up => shows the navbar
     } else {
       setIsNavVisible(false);
     }
   };
+
+  useEffect(() => {
+    // hide the navbar if on the video/[id] page
+    if (pathname === "/videos/[id]") {
+      setIsNavVisible(false);
+    }
+  }, [pathname]);
 
   useEffect(() => {
     // if on mobile, the navbar is always visible
