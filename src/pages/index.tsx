@@ -51,15 +51,15 @@ function Home({ videos }: Props) {
       onWheel={(e) => triggerMainMenuAnimDesk(e)}
       onTouchMove={(e) => triggerMainMenuAnimMobile(e)}
     >
-      {/* <SmoothScroll> */}
-      <>
-        <HeroVideo />
-        <Videos videos={videos} />
-        <PhotosBanner />
-        <ContactForm />
-        <Footer />
-      </>
-      {/* </SmoothScroll> */}
+      <SmoothScroll>
+        <>
+          <HeroVideo />
+          <Videos videos={videos} />
+          <PhotosBanner />
+          <ContactForm />
+          <Footer />
+        </>
+      </SmoothScroll>
     </div>
   );
 }
