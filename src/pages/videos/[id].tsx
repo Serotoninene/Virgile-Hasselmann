@@ -22,7 +22,7 @@ const VideoPlayer = () => {
           preload="metadata"
           controls
           controlsList="nodownload nofullscreen noremoteplayback"
-          className={`w-full h-full object-cover border`}
+          className={`w-full h-full object-cover`}
         >
           <source
             src={`https://virgile-portfollio.s3.amazonaws.com/videos/${video.videoName}`}
