@@ -20,7 +20,7 @@ export default function Videos({ videos }: Props) {
   }, []);
 
   return (
-    <div className="relative py-4 grid grid-cols-2">
+    <div id="Videos" className="relative py-4 grid grid-cols-2">
       <VideosCol category="Evenements" videos={evenementVideos} />
       <div className="hidden sm:block absolute top-20 bottom-20 w-[0.5px] bg-light left-[50%]"></div>
       <VideosCol category="Clips" videos={clips} />

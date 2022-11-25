@@ -121,7 +121,10 @@ const Form = () => {
 
 export default function ContactForm() {
   return (
-    <div className="relative px-2 pt-10 grid gap-8 sm:gap-0 sm:grid-cols-2 sm:px-6 sm:pt-14 sm:pb-6 sm:h-screen">
+    <div
+      id="Contact"
+      className="relative px-2 pt-10 grid gap-8 sm:gap-0 sm:grid-cols-2 sm:px-6 sm:pt-14 sm:pb-6 sm:h-screen"
+    >
       {/* left part */}
       <motion.div
         initial={{ scaleY: 0.5 }}

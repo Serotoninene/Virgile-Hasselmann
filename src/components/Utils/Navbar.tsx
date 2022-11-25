@@ -15,9 +15,9 @@ interface BurgerButtonProps {
 }
 // Navlinks
 const links = [
-  { title: "Videos", href: "/" },
+  { title: "Videos", href: "/#Videos" },
   { title: "Photos", href: "/photos" },
-  { title: "Contact", href: "/contact" },
+  { title: "Contact", href: "/#Contact" },
 ];
 // Framer motion variants
 const containerAnim = {
@@ -75,7 +75,7 @@ export default function Navbar({ isNavVisible, pathname }: Props) {
       initial="hidden"
       animate={isNavVisible ? "shown" : "hidden"}
       exit="hidden"
-      className="flex justify-between py-2 px-4 z-40 sm:py-4 sm:px-6"
+      className="flex justify-between py-2 px-4 sm:py-4 sm:px-6"
     >
       <motion.div variants={itemsAnim} className="font-icon z-10">
         <CustomLink href="/">VH</CustomLink>
