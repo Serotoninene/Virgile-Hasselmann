@@ -80,6 +80,7 @@ export default function Navbar({ isNavVisible, pathname }: Props) {
     section?.scrollIntoView({ behavior: "smooth" });
   };
 
+  console.log(pathname);
   return (
     <motion.div
       variants={containerAnim}
@@ -96,11 +97,16 @@ export default function Navbar({ isNavVisible, pathname }: Props) {
           <motion.li
             key={idx}
             variants={itemsAnim}
+            onClick={(e) => scrollToSection(e, link.anchor)}
             className={`ml-14 text-lg hover:font-bold ${
               pathname === link.href ? "font-bold" : "font-light"
             }`}
           >
-            <CustomLink href={link.href}>{link.title}</CustomLink>
+            {pathname === "/" && link.anchor ? (
+              <a className="cursor-pointer">{link.title}</a>
+            ) : (
+              <CustomLink href={link.href}>{link.title}</CustomLink>
+            )}
           </motion.li>
         ))}
       </ul>
