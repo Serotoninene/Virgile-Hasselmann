@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, MouseEvent } from "react";
 // framer motion
 import { motion } from "framer-motion";
 // Components
@@ -15,9 +15,9 @@ interface BurgerButtonProps {
 }
 // Navlinks
 const links = [
-  { title: "Videos", href: "/#Videos" },
+  { title: "Videos", href: "/#Videos", anchor: "#Videos" },
   { title: "Photos", href: "/photos" },
-  { title: "Contact", href: "/#Contact" },
+  { title: "Contact", href: "/#Contact", anchor: "#Contact" },
 ];
 // Framer motion variants
 const containerAnim = {
@@ -69,6 +69,17 @@ export default function Navbar({ isNavVisible, pathname }: Props) {
   const toggleBurgerMenu = () => {
     setIsBurgerOpen(!isBurgerOpen);
   };
+
+  const scrollToSection = (
+    e: React.MouseEvent<HTMLLIElement, globalThis.MouseEvent>,
+    anchor?: string
+  ) => {
+    e.preventDefault();
+    if (!anchor) return;
+    const section = document.querySelector(anchor);
+    section?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <motion.div
       variants={containerAnim}
@@ -85,6 +96,7 @@ export default function Navbar({ isNavVisible, pathname }: Props) {
           <motion.li
             key={idx}
             variants={itemsAnim}
+            // onClick={(e) => scrollToSection(e, link.anchor)}
             className={`ml-14 text-lg hover:font-bold ${
               pathname === link.href ? "font-bold" : "font-light"
             }`}
