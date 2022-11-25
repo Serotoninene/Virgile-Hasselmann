@@ -96,7 +96,6 @@ export default function Navbar({ isNavVisible, pathname }: Props) {
           <motion.li
             key={idx}
             variants={itemsAnim}
-            // onClick={(e) => scrollToSection(e, link.anchor)}
             className={`ml-14 text-lg hover:font-bold ${
               pathname === link.href ? "font-bold" : "font-light"
             }`}
