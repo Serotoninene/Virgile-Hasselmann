@@ -60,6 +60,7 @@ export const DateFormatted = () => {
     );
     setInterval(() => setDateState(Date.now()), 1000);
   }, [dateState]);
+
   if (!formattedDate) return <></>;
   return (
     <>

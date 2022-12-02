@@ -57,7 +57,7 @@ const Content = () => {
         className="flex items-end lg:justify-between w-full"
       >
         <motion.p variants={itemsAnim} className="hidden lg:block">
-          <a href="/#Contact"> Made by @Serotoninene, 2022</a>
+          Made by @Serotoninene, 2022
         </motion.p>
         <motion.p
           variants={itemsAnim}
