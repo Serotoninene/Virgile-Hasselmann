@@ -65,7 +65,7 @@ const Layout = ({ children }: Props): JSX.Element => {
       <header className="fixed w-screen z-50">
         <Navbar pathname={pathname} isNavVisible={isNavVisible} />
       </header>
-      <main className="min-h-screen">
+      <main>
         {/* Background noise */}
         <img
           src="/assets/noise.png"

@@ -4,9 +4,9 @@ type Props = {};
 
 export default function Test({}: Props) {
   return (
-    <div className="bg-slate-700 h-[100vh]">
+    <div id="Test" className="bg-slate-800 h-screen">
       <p className="text-center">top</p>
-      <p className="absolute bottom-0 text-center">bottom</p>
+      <p className="fixed bottom-0 text-center">bottom</p>
     </div>
   );
 }
