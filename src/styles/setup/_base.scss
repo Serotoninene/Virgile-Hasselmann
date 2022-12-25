@@ -52,10 +52,7 @@ input {
 
 #Test {
   background-color: salmon;
-  min-height: -moz-available;
-  min-height: -webkit-fill-available;
-  min-height: fill-available;
-  min-height: 100vh;
+  height: calc(var(--vh) * 100);
 }
 
 // #CustomCursor {
