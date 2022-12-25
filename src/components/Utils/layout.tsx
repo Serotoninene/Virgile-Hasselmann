@@ -71,7 +71,7 @@ const Layout = ({ children }: Props): JSX.Element => {
           src="/assets/noise.png"
           className="w-full h-full fixed top-0 left-0"
         />
-        <div>{children}</div>
+        <div className="relative">{children}</div>
       </main>
     </div>
   );
