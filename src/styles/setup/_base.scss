@@ -18,11 +18,12 @@ body {
   color: #ddd5cb;
 }
 
+// TO DO : BACKGROUND NOT APPEARING, TEST IT OUT IN THE LAYOUT
 body::before {
   content: "";
   position: fixed;
   width: 100%;
-  height: 100%;
+  // height: 100vh;
   z-index: -1;
   background: radial-gradient(#212224 0%, #181111 99.48%);
 }
@@ -47,6 +48,14 @@ a {
 input {
   outline: none;
   background: transparent;
+}
+
+#Test {
+  background-color: salmon;
+  min-height: -moz-available;
+  min-height: -webkit-fill-available;
+  min-height: fill-available;
+  min-height: 100vh;
 }
 
 // #CustomCursor {
