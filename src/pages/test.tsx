@@ -9,11 +9,7 @@ export default function Test({}: Props) {
   // Calculate 1vh value in pixels
   // based on window inner height
   const vh = useMemo(() => (height ? height * 0.01 : 0), [height]);
-  useEffect(() => {
-    if (!height) return;
-    const vh = height * 0.01;
-    document.documentElement.style.setProperty("--vh", vh + "px");
-  }, [height]);
+  useEffect(() => {}, [height]);
 
   return (
     <div id="Test">

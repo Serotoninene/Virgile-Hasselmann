@@ -37,7 +37,7 @@ export default function VideosCol({ videos, category }: Props) {
   const ref = useRef() as RefObject<HTMLDivElement>;
   const { width } = useWindowSize();
   const { scrollYProgress } = useScroll();
-  let y = useParallax(scrollYProgress, -40, "full");
+  let y = useParallax(scrollYProgress, -120, "full");
 
   if (!videos) return <div>Loading</div>;
 
@@ -51,7 +51,7 @@ export default function VideosCol({ videos, category }: Props) {
         }
       >
         {videos.map((video) => (
-          <div className="mb-6" key={video.id}>
+          <div className="mb-4 sm:mb-[120px]" key={video.id}>
             <VideoMiniature data={video} scrollYProgress={scrollYProgress} />
           </div>
         ))}
