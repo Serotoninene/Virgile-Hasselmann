@@ -10,6 +10,7 @@ import { Video } from "@prisma/client";
 import Link from "next/link";
 
 interface VideoMiniatureProps {
+  isInView: boolean;
   data: Video;
   scrollYProgress: MotionValue<number>;
 }
@@ -32,7 +33,11 @@ const textAnim = {
   visible: { opacity: 1, transition: { duration, ease } },
 };
 
-const VideoMiniature = ({ data, scrollYProgress }: VideoMiniatureProps) => {
+const VideoMiniature = ({
+  isInView,
+  data,
+  scrollYProgress,
+}: VideoMiniatureProps) => {
   // Parallax animation
   let distance = 10;
   const ref = useRef() as RefObject<HTMLDivElement>;
@@ -55,7 +60,7 @@ const VideoMiniature = ({ data, scrollYProgress }: VideoMiniatureProps) => {
         ref={ref}
         variants={containerAnim}
         initial="hidden"
-        animate="visible"
+        animate={isInView ? "visible" : "hidden"}
         exit="hidden"
         className="overflow-hidden cursor-pointer"
       >

@@ -80,7 +80,6 @@ export default function Navbar({ isNavVisible, pathname }: Props) {
     section?.scrollIntoView({ behavior: "smooth" });
   };
 
-  console.log(pathname);
   return (
     <motion.div
       variants={containerAnim}

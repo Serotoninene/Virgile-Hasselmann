@@ -3,7 +3,7 @@ import React, { RefObject, useEffect, useRef } from "react";
 import { Video } from "@prisma/client";
 // Component
 import VideoMiniature from "../Videos/VideoMiniature";
-import { motion, useScroll } from "framer-motion";
+import { motion, useInView, useScroll } from "framer-motion";
 import useParallax from "@src/hooks/useParallax";
 import useWindowSize from "@src/hooks/useWindowSize";
 
@@ -35,11 +35,12 @@ const Category = ({ category }: CategoryProps) => {
 
 export default function VideosCol({ videos, category }: Props) {
   const ref = useRef() as RefObject<HTMLDivElement>;
+  const isInView = useInView(ref, { once: true });
   const { width } = useWindowSize();
   const { scrollYProgress } = useScroll();
   let y = useParallax(scrollYProgress, -120, "full");
 
-  if (!videos) return <div>Loading</div>;
+  // if (!videos) return <div>Loading</div>;
 
   return (
     <div className="mx-2 col-span-2 sm:col-span-1 sm:mx-6" ref={ref}>
@@ -50,9 +51,13 @@ export default function VideosCol({ videos, category }: Props) {
           width && width > 640 && category === "Evenements" ? { y: y } : {}
         }
       >
-        {videos.map((video) => (
+        {videos?.map((video) => (
           <div className="mb-4 sm:mb-[120px]" key={video.id}>
-            <VideoMiniature data={video} scrollYProgress={scrollYProgress} />
+            <VideoMiniature
+              isInView={isInView}
+              data={video}
+              scrollYProgress={scrollYProgress}
+            />
           </div>
         ))}
       </motion.div>
