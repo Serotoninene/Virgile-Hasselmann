@@ -99,13 +99,13 @@ export default function Footer() {
         <h3 className="font-black mb-4 md:mb-12">Projects</h3>
         <ul className="grid grid-cols-3 gap-1.5 md:grid-cols-1">
           <li className={pathname === "/videos" ? "font-black" : "font-light"}>
-            <Link href="/videos">Videos</Link>
+            <Link href="/#Videos">Videos</Link>
           </li>
           <li className={pathname === "/photos" ? "font-black" : "font-light"}>
-            <Link href="/videos">Photos</Link>
+            <Link href="/photos">Photos</Link>
           </li>
           <li className={pathname === "/contact" ? "font-black" : "font-light"}>
-            <Link href="/videos">Contact</Link>
+            <Link href="/#Contact">Contact</Link>
           </li>
         </ul>
       </div>
