@@ -17,6 +17,7 @@ export const userRouter = router({
     const users = await prisma.user.findMany();
     let admin;
     for (let i = 0; i < users.length; i++) {
+      console.log(users[i]);
       if (await bcrypt.compare(input, users[0].password)) {
         admin = users[0].status;
         return admin;

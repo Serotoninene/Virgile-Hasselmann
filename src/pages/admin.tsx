@@ -71,16 +71,14 @@ export default function Admin({ videos, photos }: Props) {
   const router = useRouter();
   // auth context
   const { userStatus } = useContext(AuthContext);
-
-  // useEffect(() => {
-  //   if (userStatus !== "ADMIN") {
-  //     router.push("/");
-  //   }
-  // }, []);
-  // if (userStatus !== "ADMIN") return <></>;
-
   // Show or not the video inputs to add a new one
   const [isAddingVideo, setIsAddingVideo] = useState(false);
+
+  useEffect(() => {
+    if (userStatus !== "ADMIN") {
+      router.push("/");
+    }
+  }, []);
 
   return (
     <div className="pt-16 xs:pt-[88px] px-4 sm:px-6">

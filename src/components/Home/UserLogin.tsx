@@ -4,11 +4,7 @@ import { AuthContext } from "@src/contexts/AuthProvider";
 // Trpc
 import { trpc } from "@server/utils/trpc";
 
-interface Props {
-  setIsLogin: (e: boolean) => void;
-}
-
-const UserLogin = ({ setIsLogin }: Props) => {
+const UserLogin = () => {
   const [password, setPassword] = useState("");
   const login = trpc.user.login.useMutation({
     onSuccess(data) {
@@ -22,7 +18,6 @@ const UserLogin = ({ setIsLogin }: Props) => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     login.mutate(password);
-    setIsLogin(false);
   };
 
   return (
@@ -36,12 +31,7 @@ const UserLogin = ({ setIsLogin }: Props) => {
           placeholder="Mot de passe"
         />
       </form>
-      <div
-        className="absolute w-full h-full"
-        onClick={() => {
-          setIsLogin(false);
-        }}
-      ></div>
+      <div className="absolute w-full h-full"></div>
     </>
   );
 };

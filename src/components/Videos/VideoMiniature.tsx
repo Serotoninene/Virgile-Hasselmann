@@ -67,7 +67,7 @@ const VideoMiniature = ({
         <motion.div className="overflow-hidden" variants={photoAnim}>
           <motion.div
             className="relative h-[184px] sm:h-[336px]"
-            style={{ y: springY, scale: 1.5 }}
+            style={{ y: springY }}
           >
             <Image
               src={`https://virgile-portfollio.s3.amazonaws.com/photos/${data.placeholder_hq}`}

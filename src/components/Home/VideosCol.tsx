@@ -1,4 +1,4 @@
-import React, { RefObject, useEffect, useRef } from "react";
+import React, { RefObject, useRef } from "react";
 // Server
 import { Video } from "@prisma/client";
 // Component
@@ -38,28 +38,32 @@ export default function VideosCol({ videos, category }: Props) {
   const isInView = useInView(ref, { once: true });
   const { width } = useWindowSize();
   const { scrollYProgress } = useScroll();
-  let y = useParallax(scrollYProgress, -120, "full");
+  let delta;
+
+  if (category == "Evenements") {
+    delta = -160;
+  } else {
+    delta = -64;
+  }
+
+  const y = useParallax(scrollYProgress, delta, "full");
 
   // if (!videos) return <div>Loading</div>;
 
   return (
     <div className="mx-2 col-span-2 sm:col-span-1 sm:mx-6" ref={ref}>
-      <Category category={category} />
       {/* videos miniatures */}
-      <motion.div
-        style={
-          width && width > 640 && category === "Evenements" ? { y: y } : {}
-        }
-      >
-        {videos?.map((video) => (
-          <div className="mb-4 sm:mb-[120px]" key={video.id}>
-            <VideoMiniature
-              isInView={isInView}
-              data={video}
-              scrollYProgress={scrollYProgress}
-            />
-          </div>
-        ))}
+      <motion.div style={width && width > 640 ? { y: y } : {}}>
+        {videos &&
+          videos.map((video) => (
+            <div className="mb-4 sm:mb-[120px]" key={video.id}>
+              <VideoMiniature
+                isInView={isInView}
+                data={video}
+                scrollYProgress={scrollYProgress}
+              />
+            </div>
+          ))}
       </motion.div>
     </div>
   );

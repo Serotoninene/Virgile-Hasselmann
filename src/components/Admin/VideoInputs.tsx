@@ -20,8 +20,11 @@ const VideoInputs = ({ data }: Props) => {
   const [video, setVideo] = useState<File>();
   const [placeholder_hq, setPlaceholder_hq] = useState<File>();
   const [vid_CategoryId, setvid_CategoryID] = useState<string>(
-    data ? data.vid_CategoryId : "Films"
+    filters ? filters[0].name : "Clips"
   );
+
+  console.log(vid_CategoryId);
+  console.log(filters);
 
   // trpc  API routes
   const updateVideo = trpc.video.update.useMutation();
@@ -57,25 +60,31 @@ const VideoInputs = ({ data }: Props) => {
   return (
     <form onSubmit={handleSubmit}>
       <input
+        id="title"
         type="text"
         className="mb-4 p-1 bg-transparent outline-none border border-light text-light"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Title"
       />
+
       <input
         type="date"
         className="mb-4 p-1 bg-transparent outline-none border border-light text-light"
         value={dateOfCreation.toISOString().split("T")[0]}
         onChange={(e) => setDateOfCreation(new Date(e.target.value))}
       />
+      <label htmlFor="video"> Video</label>
       <input
+        id="video"
         type="file"
         className="mb-4 p-1 bg-transparent outline-none border border-light text-light"
         onChange={(e) => setVideo(e.currentTarget.files![0])}
         placeholder="Name of the data"
       />
+      <label htmlFor="placeholder">Placeholder</label>
       <input
+        id="placeholder"
         type="file"
         className="mb-4 p-1 bg-transparent outline-none border border-light text-light"
         onChange={(e) => setPlaceholder_hq(e.currentTarget.files![0])}
@@ -87,7 +96,7 @@ const VideoInputs = ({ data }: Props) => {
       >
         {filters &&
           filters.map((filter, idx) => (
-            <option key={idx} value={Number(filter.id)}>
+            <option key={idx} value={filter.id}>
               {filter.name}
             </option>
           ))}

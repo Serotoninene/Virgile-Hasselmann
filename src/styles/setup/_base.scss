@@ -56,6 +56,10 @@ input {
   height: calc(var(--vh) * 100);
 }
 
+.arrow path {
+  stroke-dasharray: 100px;
+}
+
 // #CustomCursor {
 //   display: flex;
 //   justify-content: center;
