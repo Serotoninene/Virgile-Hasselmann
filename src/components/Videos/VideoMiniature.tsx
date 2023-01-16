@@ -41,18 +41,12 @@ const VideoMiniature = ({
   // Parallax animation
   let distance = 10;
   const ref = useRef() as RefObject<HTMLDivElement>;
-  // const { scrollYProgress } = useScroll({ target: ref, smooth: 0.5 });
   const y = useParallax(scrollYProgress, distance, "full");
   const physics = { damping: 15, mass: 1, stiffness: 55 };
   const springY = useSpring(y, physics);
 
-  // delete video if userStatus = anim
-  const { userStatus } = useContext(AuthContext);
-  const deleteVideo = trpc.video.delete.useMutation();
-
-  const handleDeletingVideo = (e: string) => {
-    deleteVideo.mutate(data.id);
-  };
+  // Treating the date
+  const year = data.dateOfCreation.getFullYear();
 
   return (
     <Link href={`/videos/${data.id}`}>
@@ -81,16 +75,10 @@ const VideoMiniature = ({
           variants={textAnim}
           className="grid grid-cols-12 px-1 pt-2 text-sm"
         >
-          <p className="col-span-4">08/09/2021</p>
-          <p className="col-span-4 xs:col-span-5">Client</p>
-          {userStatus === "ADMIN" ? (
-            <div className="col-span-4 flex justify-between xs:col-span-3">
-              <p>{data.title}</p>
-              <p onClick={() => handleDeletingVideo(data.id)}>X</p>
-            </div>
-          ) : (
-            <p className="col-span-4 xs:col-span-3">{data.title}</p>
-          )}
+          <p className="col-span-4">{year}</p>
+          <p className="col-span-4 xs:col-span-5"></p>
+
+          <p className="col-span-4 xs:col-span-3">{data.title}</p>
         </motion.div>
       </motion.div>
     </Link>
