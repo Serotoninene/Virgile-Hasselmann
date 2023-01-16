@@ -97,15 +97,9 @@ export default function Navbar({ isNavVisible, pathname }: Props) {
             key={idx}
             variants={itemsAnim}
             onClick={(e) => scrollToSection(e, link.anchor)}
-            className={`ml-14 text-lg hover:font-bold ${
-              pathname === link.href ? "font-bold" : "font-light"
-            }`}
+            className="ml-14 text-lg "
           >
-            {pathname === "/" && link.anchor ? (
-              <a className="cursor-pointer">{link.title}</a>
-            ) : (
-              <CustomLink href={link.href}>{link.title}</CustomLink>
-            )}
+            <CustomLink href={link.href}>{link.title}</CustomLink>
           </motion.li>
         ))}
       </ul>

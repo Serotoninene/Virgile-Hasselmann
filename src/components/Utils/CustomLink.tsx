@@ -7,8 +7,15 @@ interface Props {
 
 export default function CustomLink({ children, href }: Props) {
   return (
-    <Link href={href}>
-      <a className="cursor-pointer">{children}</a>
-    </Link>
+    <div className="cursor-pointer relative">
+      <Link href={href} className="">
+        <a className="opacity-100 hover:opacity-0"> {children}</a>
+      </Link>
+      <Link href={href}>
+        <a className="font-bold opacity-0 absolute left-0 hover:opacity-100">
+          {children}
+        </a>
+      </Link>
+    </div>
   );
 }
