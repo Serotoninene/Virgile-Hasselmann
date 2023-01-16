@@ -68,6 +68,8 @@ const VideoMiniature = ({
               layout="fill"
               objectFit="cover"
               objectPosition="center"
+              placeholder="blur"
+              blurDataURL={`https://virgile-portfollio.s3.amazonaws.com/photos/${data.placeholder_hq}`}
             />
           </motion.div>
         </motion.div>
