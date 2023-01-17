@@ -4,7 +4,7 @@
   box-sizing: border-box;
   list-style: none;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  -moz-oπsx-font-smoothing: grayscale;
 }
 
 html,
@@ -51,13 +51,23 @@ input {
   background: transparent;
 }
 
-#Test {
-  background-color: salmon;
-  height: calc(var(--vh) * 100);
-}
-
 .arrow path {
   stroke-dasharray: 100px;
+}
+
+.snap-parent-mandatory {
+  scroll-snap-type: y mandatory;
+  overflow: scroll;
+  height: calc(100vh - 100px);
+
+  -webkit-overflow-scrolling: touch;
+}
+
+.snap-child-start {
+  opacity: 0.5;
+  z-index: 10;
+  scroll-snap-align: start;
+  flex: none;
 }
 
 // #CustomCursor {
