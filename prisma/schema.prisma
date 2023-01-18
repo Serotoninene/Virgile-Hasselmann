@@ -11,43 +11,29 @@ datasource db {
 }
 
 model Video {
-  id             String       @id @default(uuid())
-  createdAt      DateTime     @default(now())
+  id             String   @id @default(uuid())
+  createdAt      DateTime @default(now())
   dateOfCreation DateTime
   title          String
   videoName      String
   placeholder_lq String?
   placeholder_hq String
-  description    String?      @db.String(1000)
-  published      Boolean      @default(false)
-  Vid_Category   Vid_Category @relation(fields: [vid_CategoryId], references: [id])
-  vid_CategoryId String
-}
-
-model Vid_Category {
-  id     String  @id @default(uuid())
-  name   String
-  videos Video[]
+  description    String?  @db.String(1000)
+  isSecret       Boolean? @default(false)
+  published      Boolean  @default(false)
 }
 
 model Photo {
-  id               String         @id @default(uuid())
-  createdAt        DateTime       @default(now())
-  dateOfCreation   DateTime
-  title            String
-  photoName        String
-  miniature        String
-  placeholder      String
-  description      String?        @db.String(1000)
-  published        Boolean        @default(false)
-  Photo_Category   Photo_Category @relation(fields: [photo_CategoryId], references: [id])
-  photo_CategoryId String
-}
-
-model Photo_Category {
-  id     String  @id @default(uuid())
-  name   String
-  photos Photo[]
+  id             String   @id @default(uuid())
+  createdAt      DateTime @default(now())
+  dateOfCreation DateTime
+  title          String
+  photoName      String
+  miniature      String
+  placeholder    String
+  description    String?  @db.String(1000)
+  isSecret       Boolean? @default(false)
+  published      Boolean  @default(false)
 }
 
 model User {

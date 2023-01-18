@@ -14,7 +14,6 @@ export const photoRouter = router({
         miniature: z.string(),
         placeholder: z.string(),
         description: z.string().or(z.undefined()),
-        photo_CategoryId: z.string(),
       })
     )
     .mutation(async ({ input }) => {
@@ -24,9 +23,6 @@ export const photoRouter = router({
   // Read
   list: publicProcedure.query(async () => {
     return await prisma.photo.findMany();
-  }),
-  listByFilter: publicProcedure.input(z.string()).query(async ({ input }) => {
-    return await prisma.photo.findMany({ where: { photo_CategoryId: input } });
   }),
   // Update
   update: publicProcedure
@@ -39,7 +35,6 @@ export const photoRouter = router({
         miniature: z.string(),
         placeholder: z.string(),
         description: z.string().or(z.undefined()),
-        photo_CategoryId: z.string(),
       })
     )
     .mutation(async ({ input }) => {
@@ -52,7 +47,6 @@ export const photoRouter = router({
           miniature: input.miniature,
           placeholder: input.placeholder,
           description: input.description,
-          photo_CategoryId: input.photo_CategoryId,
         },
       });
       return { success: true, photo: updatePhoto };

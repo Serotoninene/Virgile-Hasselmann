@@ -22,9 +22,7 @@ const VideoInputs = ({ data }: Props) => {
   const [vid_CategoryId, setvid_CategoryID] = useState<string>(
     filters ? filters[0].name : "Clips"
   );
-
-  console.log(vid_CategoryId);
-  console.log(filters);
+  const [isSecret, setIsSecret] = useState<boolean>(false);
 
   // trpc  API routes
   const updateVideo = trpc.video.update.useMutation();
@@ -32,7 +30,9 @@ const VideoInputs = ({ data }: Props) => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+
     if (!placeholder_hq || !video) return;
+    console.log(video);
 
     await uploadImage(placeholder_hq);
     await uploadVideo(video);
@@ -58,50 +58,73 @@ const VideoInputs = ({ data }: Props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4 mb-8">
       <input
         id="title"
         type="text"
-        className="mb-4 p-1 bg-transparent outline-none border border-light text-light"
+        className="p-1 bg-transparent outline-none border border-light text-light"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Title"
       />
+      <div className="flex justify-between">
+        <div className="titleContainer flex items-center gap-4">
+          <label htmlFor="date">Date of Creation</label>
+          <input
+            id="date"
+            type="date"
+            className="p-1 bg-transparent outline-none border border-light text-light"
+            value={dateOfCreation.toISOString().split("T")[0]}
+            onChange={(e) => setDateOfCreation(new Date(e.target.value))}
+          />
+        </div>
 
-      <input
-        type="date"
-        className="mb-4 p-1 bg-transparent outline-none border border-light text-light"
-        value={dateOfCreation.toISOString().split("T")[0]}
-        onChange={(e) => setDateOfCreation(new Date(e.target.value))}
-      />
-      <label htmlFor="video"> Video</label>
-      <input
-        id="video"
-        type="file"
-        className="mb-4 p-1 bg-transparent outline-none border border-light text-light"
-        onChange={(e) => setVideo(e.currentTarget.files![0])}
-        placeholder="Name of the data"
-      />
-      <label htmlFor="placeholder">Placeholder</label>
-      <input
-        id="placeholder"
-        type="file"
-        className="mb-4 p-1 bg-transparent outline-none border border-light text-light"
-        onChange={(e) => setPlaceholder_hq(e.currentTarget.files![0])}
-        placeholder="Placeholder HQ"
-      />
-      <select
-        value={vid_CategoryId}
-        onChange={(e) => setvid_CategoryID(e.target.value)}
-      >
-        {filters &&
-          filters.map((filter, idx) => (
-            <option key={idx} value={filter.id}>
-              {filter.name}
-            </option>
-          ))}
-      </select>
-      <button> go !</button>
+        <div className="VideoContainer flex items-center gap-4">
+          <label htmlFor="video"> Video</label>
+          <input
+            id="video"
+            type="file"
+            className="p-1 bg-transparent outline-none border border-light text-light"
+            onChange={(e) => setVideo(e.currentTarget.files![0])}
+            placeholder="Name of the data"
+          />
+        </div>
+      </div>
+      <div className="placeholderContainer flex items-center self-center gap-4">
+        <label htmlFor="placeholder">Placeholder</label>
+        <input
+          id="placeholder"
+          type="file"
+          className="p-1 bg-transparent outline-none border border-light text-light"
+          onChange={(e) => setPlaceholder_hq(e.currentTarget.files![0])}
+          placeholder="Placeholder HQ"
+        />
+      </div>
+      <div className="flex justify-between">
+        <select
+          value={vid_CategoryId}
+          onChange={(e) => setvid_CategoryID(e.target.value)}
+        >
+          {filters &&
+            filters.map((filter, idx) => (
+              <option key={idx} value={filter.id}>
+                {filter.name}
+              </option>
+            ))}
+        </select>
+        <div className="placeholderContainer flex items-center gap-4">
+          <label htmlFor="secret"> Secret ? </label>
+          <input
+            type="checkbox"
+            id="secret"
+            checked={isSecret}
+            onChange={(e) => setIsSecret(e.target.checked)}
+          />
+        </div>
+        <button className="ml-16 border border-light p-1 rounded-sm">
+          go !
+        </button>
+      </div>
     </form>
   );
 };

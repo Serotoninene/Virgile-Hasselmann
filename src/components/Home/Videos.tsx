@@ -10,21 +10,24 @@ interface Props {
 }
 
 export default function Videos({ videos }: Props) {
-  const [clips, setClips] = useState<Video[]>();
-  const [evenementVideos, setEvenementVideos] = useState<Video[]>();
+  const [leftVideos, setLeftVideos] = useState<Video[]>([]);
+  const [rightVideos, setRightVideos] = useState<Video[]>([]);
 
   useEffect(() => {
-    setClips(videos.filter((video) => video.vid_CategoryId === "Clips"));
-    setEvenementVideos(
-      videos.filter((video) => video.vid_CategoryId === "Evenements")
-    );
+    videos.forEach((video, idx) => {
+      if (idx % 2 !== 0) {
+        setLeftVideos([...leftVideos, video]);
+      } else {
+        setRightVideos([...rightVideos, video]);
+      }
+    });
   }, [videos]);
 
   return (
     <div id="Videos" className="relative py-4 grid grid-cols-2 ">
-      <VideosCol category="Evenements" videos={evenementVideos} />
+      <VideosCol category="Evenements" videos={rightVideos} />
       {/* <div className="hidden sm:block absolute top-20 bottom-20 w-[0.5px] bg-light left-[50%]"></div> */}
-      <VideosCol category="Clips" videos={clips} />
+      <VideosCol category="Clips" videos={leftVideos} />
     </div>
   );
 }
