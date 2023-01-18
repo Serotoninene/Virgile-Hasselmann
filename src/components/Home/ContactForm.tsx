@@ -124,7 +124,7 @@ export default function ContactForm() {
   return (
     <div
       id="Contact"
-      className="relative px-2 pt-10 grid gap-8 sm:gap-0 sm:grid-cols-2 sm:px-6 sm:pt-14 sm:pb-6 sm:h-screen"
+      className="relative px-2 pt-10 grid gap-8 sm:gap-0 sm:grid-cols-2 sm:px-6 sm:pt-14 sm:pb-6 sm:h-screen snap-child-start"
     >
       {/* left part */}
       <motion.div

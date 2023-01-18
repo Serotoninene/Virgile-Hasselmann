@@ -12,7 +12,6 @@ import Link from "next/link";
 interface VideoMiniatureProps {
   isInView: boolean;
   data: Video;
-  scrollYProgress: MotionValue<number>;
 }
 
 const duration = 0.7;
@@ -33,17 +32,13 @@ const textAnim = {
   visible: { opacity: 1, transition: { duration, ease } },
 };
 
-const VideoMiniature = ({
-  isInView,
-  data,
-  scrollYProgress,
-}: VideoMiniatureProps) => {
-  // Parallax animation
-  let distance = 10;
+const VideoMiniature = ({ isInView, data }: VideoMiniatureProps) => {
   const ref = useRef() as RefObject<HTMLDivElement>;
-  const y = useParallax(scrollYProgress, distance, "full");
-  const physics = { damping: 15, mass: 1, stiffness: 55 };
-  const springY = useSpring(y, physics);
+
+  // Parallax animation - the image scrolls faster than its container
+  // let distance = 0;
+  // const { scrollYProgress } = useScroll({ target: ref });
+  // const y = useParallax(scrollYProgress, distance);
 
   // Treating the date
   const year = data.dateOfCreation.getFullYear();
@@ -61,9 +56,10 @@ const VideoMiniature = ({
         <motion.div className="overflow-hidden" variants={photoAnim}>
           <motion.div
             className="relative h-[184px] sm:h-[336px]"
-            style={{ y: springY }}
+            // style={{ y }}
           >
             <Image
+              alt={data.title}
               src={`https://virgile-portfollio.s3.amazonaws.com/photos/${data.placeholder_hq}`}
               layout="fill"
               objectFit="cover"

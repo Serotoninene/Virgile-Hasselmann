@@ -26,7 +26,10 @@ export default function PhotosBanner() {
   const ref = useRef() as RefObject<HTMLDivElement>;
   const isInView = useInView(ref, { margin: "10%" });
   return (
-    <div ref={ref} className="flex justify-center items-center h-[70vh]">
+    <div
+      ref={ref}
+      className="flex justify-center items-center h-[70vh] snap-child-start"
+    >
       <motion.div
         variants={containerAnim}
         initial="hidden"

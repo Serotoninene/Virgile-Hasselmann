@@ -80,7 +80,7 @@ export default function Footer() {
     <motion.div
       initial={{ opacity: 0, y: 10 }}
       whileInView={{ opacity: 1, y: 0 }}
-      className="px-4 pt-6 sm:pt-16  md:pb-4 grid-cols-12 sm:px-6 md:grid"
+      className="px-4 pt-6 sm:pt-16  md:pb-4 grid-cols-12 sm:px-6 md:grid snap-child-end"
     >
       {/* Virgile's presentation */}
       <div className="pb-6 col-span-3">

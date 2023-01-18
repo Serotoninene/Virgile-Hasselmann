@@ -58,15 +58,19 @@ input {
 .snap-parent-mandatory {
   scroll-snap-type: y mandatory;
   overflow: scroll;
-  height: calc(100vh - 100px);
-
+  height: 100vh;
   -webkit-overflow-scrolling: touch;
 }
 
 .snap-child-start {
-  opacity: 0.5;
   z-index: 10;
   scroll-snap-align: start;
+  flex: none;
+}
+
+.snap-child-end {
+  z-index: 10;
+  scroll-snap-align: end;
   flex: none;
 }
 

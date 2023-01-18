@@ -26,7 +26,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
 function Home({ videos }: Props) {
   return (
-    <div id="Home" className="w-screen h-screen relative">
+    <div id="Home" className="w-screen h-screen relative ">
       {/* <SmoothScroll> */}
       <>
         <HeroVideo />

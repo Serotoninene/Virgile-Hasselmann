@@ -57,11 +57,7 @@ export default function VideosCol({ videos, category }: Props) {
         {videos &&
           videos.map((video) => (
             <div className="mb-4 sm:mb-[120px]" key={video.id}>
-              <VideoMiniature
-                isInView={isInView}
-                data={video}
-                scrollYProgress={scrollYProgress}
-              />
+              <VideoMiniature isInView={isInView} data={video} />
             </div>
           ))}
       </motion.div>
