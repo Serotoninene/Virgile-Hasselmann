@@ -25,6 +25,9 @@ export const photoRouter = router({
   list: publicProcedure.query(async () => {
     return await prisma.photo.findMany();
   }),
+  listByFilter: publicProcedure.input(z.string()).query(async ({ input }) => {
+    return await prisma.photo.findMany({ where: { photo_CategoryId: input } });
+  }),
   // Update
   update: publicProcedure
     .input(

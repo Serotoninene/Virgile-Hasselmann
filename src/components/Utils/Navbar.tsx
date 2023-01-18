@@ -4,11 +4,11 @@ import { motion } from "framer-motion";
 // Components
 import CustomLink from "./CustomLink";
 import BurgerMenu from "./BurgerMenu";
+import { useRouter } from "next/router";
 
 // Types
 interface Props {
   isNavVisible: boolean;
-  pathname: string;
 }
 interface BurgerButtonProps {
   isBurgerOpen: boolean;
@@ -63,7 +63,9 @@ const BurgerButton = ({ isBurgerOpen }: BurgerButtonProps) => {
   );
 };
 
-export default function Navbar({ isNavVisible, pathname }: Props) {
+export default function Navbar({ isNavVisible }: Props) {
+  const { pathname } = useRouter();
+
   const [isBurgerOpen, setIsBurgerOpen] = useState(false);
 
   const toggleBurgerMenu = () => {
@@ -89,7 +91,7 @@ export default function Navbar({ isNavVisible, pathname }: Props) {
       className="flex justify-between py-2 px-4 sm:py-4 sm:px-6"
     >
       <motion.div variants={itemsAnim} className="font-icon z-10">
-        <CustomLink href="/">VH</CustomLink>
+        {pathname !== "/photos" && <CustomLink href="/">VH</CustomLink>}
       </motion.div>
       <ul className="hidden xs:flex">
         {links.map((link, idx) => (
@@ -97,7 +99,9 @@ export default function Navbar({ isNavVisible, pathname }: Props) {
             key={idx}
             variants={itemsAnim}
             onClick={(e) => scrollToSection(e, link.anchor)}
-            className="ml-14 text-lg "
+            className={`ml-14 text-lg ${
+              pathname === "/photos" && link.title === "Photos" ? "hidden" : ""
+            }`}
           >
             <CustomLink href={link.href}>{link.title}</CustomLink>
           </motion.li>

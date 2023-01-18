@@ -30,8 +30,6 @@ const transition = { duration: 0.4, ease: [0.3, 0.01, -0.05, 0.95] };
 const Miniature = ({
   idx,
   photo,
-  imgWidth,
-  imgHeight,
   displayedPhotoIdx,
   setDisplayedPhotoIdx,
 }: MiniatureProps) => {
@@ -43,15 +41,17 @@ const Miniature = ({
   };
 
   return (
-    <div className="mb-3" onClick={changePhotoDisplayed}>
-      <Image
-        src={photoLink + photo.photoName}
-        width={imgWidth}
-        height={imgHeight}
-        objectFit="cover"
-      />
+    <div onClick={changePhotoDisplayed}>
+      <div className="w-[13vw] h-[20vw] relative">
+        <Image
+          alt={photo.photoName}
+          src={photoLink + photo.photoName}
+          layout="fill"
+          objectFit="cover"
+        />
+      </div>
       <p
-        className={`font-bold text-xs leading-[2px] 2xl:text-sm 2xl:leading-[4px] ${
+        className={`my-6 font-bold text-xs leading-[2px] 2xl:text-sm 2xl:leading-[4px] ${
           displayedPhotoIdx === idx && "text-blue"
         }`}
       >

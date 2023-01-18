@@ -11,7 +11,7 @@ interface Props {
   photoDisplayed: string;
 }
 
-const transition = { duration: 0.1, ease: [0.3, 0.01, -0.05, 0.95] };
+const transition = { duration: 0.15, ease: [0.3, 0.01, -0.05, 0.95] };
 
 const anim = {
   fromDown: { y: "100%", transition: transition },
@@ -19,7 +19,7 @@ const anim = {
   center: (custom: boolean) => ({
     y: 0,
     width: custom ? "60%" : "100%",
-    transition: transition,
+    transition: { duration: 0.15, ease: "easeOut" },
   }),
 };
 

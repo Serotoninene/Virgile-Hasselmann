@@ -7,9 +7,6 @@ interface Props {
   photosLength?: number;
   isOverview: boolean;
   setIsOverview: (e: boolean) => void;
-  filters: Photo_Category[];
-  category?: string;
-  setCategory: (e: Photo_Category) => void;
 }
 
 const PhotosFooter = ({
@@ -17,9 +14,6 @@ const PhotosFooter = ({
   photosLength,
   isOverview,
   setIsOverview,
-  filters,
-  category,
-  setCategory,
 }: Props) => {
   return (
     <div className="pt-2 pb-1 flex justify-between text-sm 2xl:text-base">
@@ -35,18 +29,6 @@ const PhotosFooter = ({
         >
           Overview
         </li>
-        <li className="hidden sm:block ml-14 font-light">Categories : </li>
-        {filters.map((filter) => (
-          <li
-            key={filter.id}
-            className={`ml-14 sm:block cursor-pointer ${
-              filter.name === category ? "font-bold" : "font-light"
-            }`}
-            onClick={() => setCategory(filter)}
-          >
-            {filter.name}
-          </li>
-        ))}
       </ul>
     </div>
   );
