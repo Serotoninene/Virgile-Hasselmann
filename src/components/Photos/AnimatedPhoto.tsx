@@ -18,7 +18,7 @@ const anim = {
   fromUp: { y: "-100%", transition: transition },
   center: (custom: boolean) => ({
     y: 0,
-    width: custom ? "60%" : "100%",
+    width: custom ? "30%" : "100%",
     transition: { duration: 0.15, ease: "easeOut" },
   }),
 };

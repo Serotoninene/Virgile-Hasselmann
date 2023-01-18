@@ -18,7 +18,7 @@ export default function Videos({ videos }: Props) {
     setEvenementVideos(
       videos.filter((video) => video.vid_CategoryId === "Evenements")
     );
-  }, []);
+  }, [videos]);
 
   return (
     <div id="Videos" className="relative py-4 grid grid-cols-2 ">

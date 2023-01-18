@@ -74,28 +74,27 @@ input {
   flex: none;
 }
 
-// #CustomCursor {
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   position: fixed;
-//   pointer-events: none;
-//   z-index: 99;
-//   background-color: #ddd5cb;
-//   border-radius: 100%;
-//   transform: translate(-50%, -50%);
-//   transition: all ease-out 0.25s;
-//   transition-property: width, transform, background-color, backdrop-filter;
+#CustomCursor {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  pointer-events: none;
+  z-index: 99;
+  transform: translate(-40%, 60%);
+  transition: all ease-out 0.25s;
+  width: 100px;
+  transition-property: width, transform, background-color, backdrop-filter;
 
-//   &.hovered {
-//     background-color: rgba(25, 25, 23, 0.1);
-//     backdrop-filter: blur(10px);
-//     border: 1px solid transparent;
-//     width: 40px;
-//     height: 40px;
-//   }
+  &.hovered {
+    background-color: rgba(25, 25, 23, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid transparent;
 
-//   @media screen and (max-width: 768px) {
-//     display: none;
-//   }
-// }
+    height: 40px;
+  }
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+}

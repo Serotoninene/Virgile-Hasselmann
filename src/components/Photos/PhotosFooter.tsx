@@ -16,7 +16,7 @@ const PhotosFooter = ({
   setIsOverview,
 }: Props) => {
   return (
-    <div className="pt-2 pb-1 flex justify-between text-sm 2xl:text-base">
+    <div className="pt-2 pb-1 flex justify-between z-10 text-sm 2xl:text-base">
       <p className="block font-light">
         {displayedPhotoIdx + 1} / {photosLength}
       </p>

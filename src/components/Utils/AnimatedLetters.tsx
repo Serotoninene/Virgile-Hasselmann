@@ -3,7 +3,7 @@ import React from "react";
 import { motion } from "framer-motion";
 
 interface Props {
-  string: string;
+  string?: string;
   delay?: number;
   ease?: number[] | string | undefined;
   duration?: number | undefined;
@@ -29,6 +29,12 @@ const AnimatedLetters = ({
         staggerChildren: stagger,
       },
     },
+    exit: {
+      transition: {
+        delayChildren: delay,
+        staggerChildren: stagger,
+      },
+    },
   };
 
   const letterAnim = {
@@ -46,19 +52,27 @@ const AnimatedLetters = ({
         duration: duration,
       },
     },
+    exit: {
+      y: -400,
+      transition: {
+        ease: ease,
+        duration: duration,
+      },
+    },
   };
 
-  const words = string.split(" ");
+  const words = string?.split(" ");
 
   return (
     <motion.span
       variants={containerAnim}
       initial="hidden"
       animate={start ? "show" : "hidden"}
+      exit="exit"
       key={string}
       className="overflow-hidden inline-block align-bottom leading-[110%]"
     >
-      {words.map((word) => (
+      {words?.map((word) => (
         <span key={word}>
           {[...word].map((letter, idx) => (
             <motion.span

@@ -41,7 +41,7 @@ const Miniature = ({
   };
 
   return (
-    <div onClick={changePhotoDisplayed}>
+    <div onClick={changePhotoDisplayed} className="mb-4">
       <div className="w-[13vw] h-[20vw] relative">
         <Image
           alt={photo.photoName}
@@ -51,7 +51,7 @@ const Miniature = ({
         />
       </div>
       <p
-        className={`my-6 font-bold text-xs leading-[2px] 2xl:text-sm 2xl:leading-[4px] ${
+        className={`mt-3 font-bold text-xs leading-[2px] 2xl:text-sm 2xl:leading-[4px] ${
           displayedPhotoIdx === idx && "text-blue"
         }`}
       >

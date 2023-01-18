@@ -1,10 +1,14 @@
 import { useEffect, useState, useContext } from "react";
-import { motion, useMotionValue } from "framer-motion";
+import { AnimatePresence, motion, useMotionValue } from "framer-motion";
 // Context
 import { CursorContext } from "@src/contexts/CursorProvider";
 import AnimatedLetters from "./AnimatedLetters";
 
-export default function CustomCursor() {
+interface Props {
+  actionIndicator?: string;
+}
+
+export default function CustomCursor({ actionIndicator }: Props) {
   const { cursorType } = useContext(CursorContext);
   const [mousePosition, setMousePosition] = useState({
     x: 200,
@@ -43,8 +47,6 @@ export default function CustomCursor() {
         left: mousePosition.x,
       }}
       style={{
-        width: cursorSize,
-        height: cursorSize,
         mixBlendMode: hover ? "difference" : "normal",
       }}
       transition={{
@@ -54,11 +56,17 @@ export default function CustomCursor() {
         stiffness: 1000,
       }}
     >
-      {cursorType === "scrollIndicator" && (
-        <p className="text-dark text-sm">
-          <AnimatedLetters string="scroll" />
-        </p>
-      )}
+      <p className="text-light text-sm text-end ">
+        <AnimatePresence mode="wait">
+          <AnimatedLetters
+            string={actionIndicator}
+            key={actionIndicator}
+            delay={0}
+            duration={0.35}
+            stagger={0.01}
+          />
+        </AnimatePresence>
+      </p>
     </motion.div>
   );
 }
