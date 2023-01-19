@@ -31,8 +31,6 @@ export default function Videos({ videos }: Props) {
     return evenVideos;
   }, [videos]);
 
-  console.log(leftVideos);
-
   return (
     <div id="Videos" className="relative py-4 grid grid-cols-2 ">
       <VideosCol category="Evenements" videos={leftVideos} />
