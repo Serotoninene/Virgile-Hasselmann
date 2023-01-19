@@ -14,9 +14,11 @@ export const photoRouter = router({
         miniature: z.string().or(z.undefined()),
         placeholder: z.string().or(z.undefined()),
         description: z.string().or(z.undefined()),
+        isSecret: z.boolean().or(z.undefined()),
       })
     )
     .mutation(async ({ input }) => {
+      console.log("pr");
       const newPhoto = await prisma.photo.create({ data: input });
       return { success: true, photo: newPhoto };
     }),
