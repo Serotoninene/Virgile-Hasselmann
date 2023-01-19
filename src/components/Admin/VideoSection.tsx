@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Video } from "@prisma/client";
 import { trpc } from "@server/utils/trpc";
-import { VideoWithCategories } from "types";
 import VideoInputs from "./VideoInputs";
 
 type Props = {
@@ -9,7 +8,7 @@ type Props = {
 };
 
 interface VideoLineProps {
-  video: VideoWithCategories;
+  video: Video;
 }
 
 const VideoLine = ({ video }: VideoLineProps) => {
