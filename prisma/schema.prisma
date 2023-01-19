@@ -29,8 +29,8 @@ model Photo {
   dateOfCreation DateTime
   title          String
   photoName      String
-  miniature      String
-  placeholder    String
+  miniature      String?
+  placeholder    String?
   description    String?  @db.String(1000)
   isSecret       Boolean? @default(false)
   published      Boolean  @default(false)

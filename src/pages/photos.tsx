@@ -24,7 +24,7 @@ export default function Photos() {
 
   // Here we'll push all the data fetched by api into the states
   useEffect(() => {
-    if (photosData) {
+    if (photosData && photosData.length > 0) {
       setPhotoDisplayed(photosData[displayedPhotoIdx].photoName);
     }
   }, [photosData]);

@@ -1,5 +1,6 @@
 import { Prisma } from "@prisma/client";
-import { ParsedUrlQuery } from "querystring";
+
+// not useful anymore cause I got rid of the categories but I'm keeping it for reference
 
 const videoWithCategories = Prisma.validator<Prisma.VideoArgs>()({
   include: { Vid_Category: true },

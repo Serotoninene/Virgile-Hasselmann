@@ -11,8 +11,8 @@ export const photoRouter = router({
         title: z.string(),
         dateOfCreation: z.date(),
         photoName: z.string(),
-        miniature: z.string(),
-        placeholder: z.string(),
+        miniature: z.string().or(z.undefined()),
+        placeholder: z.string().or(z.undefined()),
         description: z.string().or(z.undefined()),
       })
     )
@@ -32,8 +32,8 @@ export const photoRouter = router({
         title: z.string(),
         dateOfCreation: z.date(),
         photoName: z.string(),
-        miniature: z.string(),
-        placeholder: z.string(),
+        miniature: z.string().or(z.undefined()),
+        placeholder: z.string().or(z.undefined()),
         description: z.string().or(z.undefined()),
       })
     )
