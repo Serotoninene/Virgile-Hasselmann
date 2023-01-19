@@ -8,8 +8,8 @@ export const photoRouter = router({
   create: publicProcedure
     .input(
       z.object({
-        title: z.string(),
-        dateOfCreation: z.date(),
+        title: z.string().or(z.undefined()),
+        dateOfCreation: z.date().or(z.undefined()),
         photoName: z.string(),
         miniature: z.string().or(z.undefined()),
         placeholder: z.string().or(z.undefined()),
@@ -29,8 +29,8 @@ export const photoRouter = router({
     .input(
       z.object({
         id: z.string(),
-        title: z.string(),
-        dateOfCreation: z.date(),
+        title: z.string().or(z.undefined()),
+        dateOfCreation: z.date().or(z.undefined()),
         photoName: z.string(),
         miniature: z.string().or(z.undefined()),
         placeholder: z.string().or(z.undefined()),

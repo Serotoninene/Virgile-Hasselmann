@@ -24,16 +24,16 @@ model Video {
 }
 
 model Photo {
-  id             String   @id @default(uuid())
-  createdAt      DateTime @default(now())
-  dateOfCreation DateTime
-  title          String
+  id             String    @id @default(uuid())
+  createdAt      DateTime  @default(now())
+  dateOfCreation DateTime?
+  title          String?
   photoName      String
   miniature      String?
   placeholder    String?
-  description    String?  @db.String(1000)
-  isSecret       Boolean? @default(false)
-  published      Boolean  @default(false)
+  description    String?   @db.String(1000)
+  isSecret       Boolean?  @default(false)
+  published      Boolean   @default(false)
 }
 
 model User {

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Video } from "@prisma/client";
-import VideoInputs from "./VideoInputs";
 import { trpc } from "@server/utils/trpc";
 import { VideoWithCategories } from "types";
+import VideoInputs from "./VideoInputs";
 
 type Props = {
   videos: Video[];

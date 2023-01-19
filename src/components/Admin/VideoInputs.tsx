@@ -1,9 +1,9 @@
 import React, { FormEvent, useState } from "react";
-// trpc
+// Api
 import { trpc } from "@server/utils/trpc";
+import { uploadImage, uploadVideo } from "@src/pages/api/upload-image";
 // Types
 import { Video } from "@prisma/client";
-import { uploadImage, uploadVideo } from "@src/pages/api/upload-image";
 
 interface Props {
   data?: Video;
@@ -29,9 +29,7 @@ const VideoInputs = ({ data }: Props) => {
     if (!placeholder_hq || !video) return;
 
     await uploadImage(placeholder_hq);
-    const uploadingVideo = await uploadVideo(video);
-
-    console.log(uploadingVideo);
+    await uploadVideo(video);
 
     // if (data) {
     //   updateVideo.mutate({
