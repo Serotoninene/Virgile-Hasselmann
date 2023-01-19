@@ -1,6 +1,4 @@
 import React from "react";
-// Framer motion
-import { Photo_Category } from "@prisma/client";
 
 interface Props {
   displayedPhotoIdx: number;
