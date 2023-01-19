@@ -2,7 +2,7 @@ import React, { FormEvent, useState } from "react";
 // trpc
 import { trpc } from "@server/utils/trpc";
 // Types
-import { Video, Vid_Category } from "@prisma/client";
+import { Video } from "@prisma/client";
 import { uploadImage, uploadVideo } from "@src/pages/api/upload-image";
 
 interface Props {
@@ -10,8 +10,6 @@ interface Props {
 }
 
 const VideoInputs = ({ data }: Props) => {
-  // filters Id for default vid_categoryId
-  const filters: Vid_Category[] | undefined = trpc.vidCat.list.useQuery().data;
   // inputs
   const [title, setTitle] = useState<string>(data ? data.title : "");
   const [dateOfCreation, setDateOfCreation] = useState<Date>(
@@ -19,9 +17,6 @@ const VideoInputs = ({ data }: Props) => {
   );
   const [video, setVideo] = useState<File>();
   const [placeholder_hq, setPlaceholder_hq] = useState<File>();
-  const [vid_CategoryId, setvid_CategoryID] = useState<string>(
-    filters ? filters[0].name : "Clips"
-  );
   const [isSecret, setIsSecret] = useState<boolean>(false);
 
   // trpc  API routes
@@ -32,10 +27,11 @@ const VideoInputs = ({ data }: Props) => {
     e.preventDefault();
 
     if (!placeholder_hq || !video) return;
-    console.log(video);
 
     await uploadImage(placeholder_hq);
-    await uploadVideo(video);
+    const uploadingVideo = await uploadVideo(video);
+
+    console.log(uploadingVideo);
 
     // if (data) {
     //   updateVideo.mutate({
@@ -53,7 +49,6 @@ const VideoInputs = ({ data }: Props) => {
       dateOfCreation,
       videoName: video.name,
       placeholder_hq: placeholder_hq.name,
-      vid_CategoryId,
     });
   };
 
@@ -101,17 +96,6 @@ const VideoInputs = ({ data }: Props) => {
         />
       </div>
       <div className="flex justify-between">
-        <select
-          value={vid_CategoryId}
-          onChange={(e) => setvid_CategoryID(e.target.value)}
-        >
-          {filters &&
-            filters.map((filter, idx) => (
-              <option key={idx} value={filter.id}>
-                {filter.name}
-              </option>
-            ))}
-        </select>
         <div className="placeholderContainer flex items-center gap-4">
           <label htmlFor="secret"> Secret ? </label>
           <input

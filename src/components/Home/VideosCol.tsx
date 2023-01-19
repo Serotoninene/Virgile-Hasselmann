@@ -12,27 +12,6 @@ interface Props {
   videos?: Video[];
 }
 
-interface CategoryProps {
-  category: string;
-}
-
-const Category = ({ category }: CategoryProps) => {
-  return (
-    <div
-      className={`flex items-center py-0 sm:py-4 ${
-        category === "Evenements" && "justify-end"
-      }`}
-    >
-      <div
-        className={`w-12 h-[0.5px] bg-light ${
-          category === "Clips" ? "order-1 ml-4" : "mr-4"
-        }`}
-      />
-      <p className="font-light text-2xl">{category}</p>
-    </div>
-  );
-};
-
 export default function VideosCol({ videos, category }: Props) {
   const ref = useRef() as RefObject<HTMLDivElement>;
   const isInView = useInView(ref, { once: true });

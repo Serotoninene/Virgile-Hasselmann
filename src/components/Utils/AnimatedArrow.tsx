@@ -3,7 +3,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 
 export default function AnimatedArrow() {
   return (
-    <div className="w-2">
+    <div className="w-2 hidden lg:block">
       <svg
         className="w-full"
         width="33"

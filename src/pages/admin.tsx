@@ -32,9 +32,6 @@ const VideoLine = ({ video }: VideoLineProps) => {
       </div>
       <div className="col-span-2 p-1 flex items-end"> {video.title} </div>
       <div className="col-span-2 p-1 flex items-end">
-        {video.Vid_Category.name}
-      </div>
-      <div className="col-span-2 p-1 flex items-end">
         {video.dateOfCreation.toDateString()}
       </div>
       <div
@@ -56,9 +53,7 @@ const VideoLine = ({ video }: VideoLineProps) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const videos = await prisma.video.findMany({
-    include: { Vid_Category: true },
-  });
+  const videos = await prisma.video.findMany();
   const photos = await prisma.photo.findMany();
 
   return {

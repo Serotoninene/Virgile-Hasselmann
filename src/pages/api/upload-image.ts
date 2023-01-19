@@ -12,7 +12,7 @@ const s3 = new S3({
 export const config = {
   api: {
     bodyParser: {
-      sizeLimit: "100000",
+      sizeLimit: "10000mb",
     },
   },
 };
@@ -44,18 +44,24 @@ export async function uploadImage(file: File) {
 }
 
 export async function uploadVideo(file: File) {
+  console.log("init");
   // if no file, return
   if (!file) {
     return { message: "No file" };
   }
+
+  console.log("there is file");
+
   try {
     // Setting parameters - ACL will allow us to see a file
     const fileParams = {
       Bucket: "virgile-portfollio/videos",
       Key: file.name,
-      Expires: 600,
+      Expires: 1000000,
       ContentType: file.type,
     };
+
+    console.log("doing");
     // Generating a signed URL which we'll use to upload the file
     const url = await s3.getSignedUrlPromise("putObject", fileParams);
     await axios.put(url, file, {
@@ -64,7 +70,10 @@ export async function uploadVideo(file: File) {
         "Access-Control-Allow-Origin": "*",
       },
     });
+
+    return { message: "success" };
   } catch (err) {
+    console.log(err);
     return { message: err };
   }
 }
