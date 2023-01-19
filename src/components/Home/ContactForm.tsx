@@ -21,7 +21,7 @@ interface InputProps {
 
 // Anim variants
 const duration = 0.5;
-const ease = [0.6, 0.01, -0.05, 0.95];
+const ease = "easeOut";
 const containerAnim = {
   hidden: {},
   visible: { transition: { delayChildren: 0.3, staggerChildren: 0.1 } },

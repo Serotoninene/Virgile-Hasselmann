@@ -19,26 +19,6 @@ const links = [
   { title: "Photos", href: "/photos" },
   { title: "Contact", href: "/#Contact", anchor: "#Contact" },
 ];
-// Framer motion variants
-const containerAnim = {
-  hidden: {},
-  shown: {
-    transition: {
-      staggerChildren: 0.02,
-    },
-  },
-};
-const itemsAnim = {
-  hidden: { y: -50, opacity: 0 },
-  shown: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      duration: 0.6,
-      ease: [0.3, 0.01, -0.05, 0.95],
-    },
-  },
-};
 
 const BurgerButton = ({ isBurgerOpen }: BurgerButtonProps) => {
   const burgerButtonAnim = {
@@ -46,8 +26,10 @@ const BurgerButton = ({ isBurgerOpen }: BurgerButtonProps) => {
     close: (custom: number) => ({
       y: custom * 3,
       rotate: custom * 45,
+      ease: [0.3, 0.01, -0.05, 0.95],
     }),
   };
+
   return (
     <>
       <motion.div
@@ -70,6 +52,27 @@ export default function Navbar({ isNavVisible }: Props) {
   const { pathname } = useRouter();
 
   const [isBurgerOpen, setIsBurgerOpen] = useState(false);
+
+  // Framer motion variants
+  const containerAnim = {
+    hidden: {},
+    shown: {
+      transition: {
+        staggerChildren: 0.02,
+      },
+    },
+  };
+  const itemsAnim = {
+    hidden: { y: -50, opacity: 0 },
+    shown: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.6,
+        transition: [0.3, 0.01, -0.05, 0.95],
+      },
+    },
+  };
 
   const toggleBurgerMenu = () => {
     setIsBurgerOpen(!isBurgerOpen);

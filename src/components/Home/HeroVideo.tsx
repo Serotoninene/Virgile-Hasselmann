@@ -1,10 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 // Framer motion
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 // Components
 import Video from "@src/components/Utils/Video";
 import AnimatedLetters from "@src/components/Utils/AnimatedLetters";
-import UserLogin from "./UserLogin";
+
 import { AuthContext } from "@src/contexts/AuthProvider";
 import DarkGradients from "./DarkGradients";
 import AnimatedArrow from "../Utils/AnimatedArrow";
@@ -27,7 +27,6 @@ const itemsAnim = {
     opacity: 1,
     transition: {
       duration: 0.6,
-      ease: [0.3, 0.01, -0.05, 0.95],
     },
   },
 };
@@ -54,7 +53,11 @@ const Content = () => {
         exit="hidden"
         className="flex items-end lg:justify-between w-full"
       >
-        <motion.p variants={itemsAnim} className="hidden lg:block">
+        <motion.p
+          variants={itemsAnim}
+          // transition={{ ease: [0.3, 0.01, -0.05, 0.95] }}
+          className="hidden lg:block"
+        >
           Made by @Serotoninene, 2022
         </motion.p>
         <motion.p
