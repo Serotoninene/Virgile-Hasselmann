@@ -1,16 +1,18 @@
+import { useEffect } from "react";
 import type { GetStaticProps } from "next";
+import Image from "next/image";
 // Server
 import { prisma } from "@server/prisma";
 import { Photo, Video } from "@prisma/client";
+// Store
+import { photoLink } from "@src/contexts/store";
 // Components
 import HeroVideo from "@components/Home/HeroVideo";
 import Videos from "@components/Home/Videos";
 import PhotosBanner from "@components/Home/PhotosBanner";
 import ContactForm from "@components/Home/ContactForm";
 import Footer from "@components/Utils/Footer";
-import { useEffect } from "react";
-import Image from "next/image";
-import { photoLink } from "@src/contexts/store";
+import PhotosLoader from "@src/components/Utils/PhotosLoader";
 
 interface Props {
   videos: Video[];
@@ -26,35 +28,21 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 function Home({ videos, photos }: Props) {
-  useEffect(() => {
-    console.log(photos[0]);
-    console.log(photoLink + photos[0].title);
-  }, []);
-
   if (!photos) return;
 
   return (
     <div id="Home" className="w-screen h-screen relative ">
       {/* preloading test */}
-      <div className="absolute opacity-50 w-full h-screen z-10">
-        {photos.map((photo) => (
-          <Image
-            key={photo.id}
-            alt=""
-            src={photoLink + photo.photoName}
-            layout="fill"
-          />
-        ))}
-      </div>
+      <PhotosLoader photos={photos} />
 
       {/* <SmoothScroll> */}
-      <>
+      <div className="snap-parent- ">
         <HeroVideo />
         <Videos videos={videos} />
         <PhotosBanner />
         <ContactForm />
         <Footer />
-      </>
+      </div>
       {/* </SmoothScroll> */}
     </div>
   );

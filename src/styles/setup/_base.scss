@@ -65,13 +65,19 @@ input {
 .snap-child-start {
   z-index: 10;
   scroll-snap-align: start;
-  flex: none;
+  // flex: none;
+}
+
+.snap-child-end {
+  z-index: 10;
+  scroll-snap-align: center;
+  // flex: none;
 }
 
 .snap-child-end {
   z-index: 10;
   scroll-snap-align: end;
-  flex: none;
+  // flex: none;
 }
 
 #CustomCursor {

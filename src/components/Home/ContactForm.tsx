@@ -44,7 +44,7 @@ const Button = () => {
     <div className="flex justify-center">
       <input
         type="submit"
-        className="outline-none bg-transparent text-xl mb-2 pt-2 border-b-[0.5px] border-light cursor-pointer"
+        className="outline-none bg-transparent text-xl mb-2 pt-2 border-b-[0.5px] border-light cursor-pointer snap-child-start"
       />
     </div>
   );

@@ -1,11 +1,7 @@
-import React, { RefObject, useContext, useRef } from "react";
+import React, { RefObject, useRef } from "react";
 import Image from "next/image";
 // Framer motion
-import { motion, MotionValue, useScroll, useSpring } from "framer-motion";
-// Hooks
-import useParallax from "@src/hooks/useParallax";
-import { AuthContext } from "@src/contexts/AuthProvider";
-import { trpc } from "@server/utils/trpc";
+import { motion } from "framer-motion";
 import { Video } from "@prisma/client";
 import Link from "next/link";
 
