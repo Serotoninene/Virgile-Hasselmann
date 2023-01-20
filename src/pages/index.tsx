@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import type { GetStaticProps } from "next";
 import Image from "next/image";
 // Server
@@ -13,6 +13,8 @@ import PhotosBanner from "@components/Home/PhotosBanner";
 import ContactForm from "@components/Home/ContactForm";
 import Footer from "@components/Utils/Footer";
 import PhotosLoader from "@src/components/Utils/PhotosLoader";
+import LoadingFrame from "@src/components/LoadingFrame";
+import { IsLoadedProvider } from "@src/contexts/IsLoadedProvider";
 
 interface Props {
   videos: Video[];
@@ -28,23 +30,27 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 function Home({ videos, photos }: Props) {
+  const [isLoaded, setIsLoaded] = useState(false);
   if (!photos) return;
 
   return (
-    <div id="Home" className="w-screen h-screen relative ">
-      {/* preloading test */}
-      <PhotosLoader photos={photos} />
+    <IsLoadedProvider>
+      <div id="Home" className="w-screen h-screen relative ">
+        {/* preloading test */}
+        <PhotosLoader photos={photos} />
+        <LoadingFrame />
 
-      {/* <SmoothScroll> */}
-      <div className="snap-parent- ">
-        <HeroVideo />
-        <Videos videos={videos} />
-        <PhotosBanner />
-        <ContactForm />
-        <Footer />
+        {/* <SmoothScroll> */}
+        <div className="snap-parent- ">
+          <HeroVideo />
+          <Videos videos={videos} />
+          <PhotosBanner />
+          <ContactForm />
+          <Footer />
+        </div>
+        {/* </SmoothScroll> */}
       </div>
-      {/* </SmoothScroll> */}
-    </div>
+    </IsLoadedProvider>
   );
 }
 

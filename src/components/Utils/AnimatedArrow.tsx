@@ -16,7 +16,7 @@ export default function AnimatedArrow() {
           initial={{ pathLength: 0, opacity: 0 }}
           animate={{ pathLength: 1, opacity: 0.8 }}
           transition={{
-            delay: 1.3,
+            delay: 1.5,
             duration: 1,
             ease: [0.73, 0.15, 0.31, 0.94],
           }}
