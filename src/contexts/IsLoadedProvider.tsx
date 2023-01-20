@@ -8,7 +8,7 @@ export const IsLoadedContext = createContext<any>({ isLoaded: false });
 export const LoadingContext = createContext<any>(0);
 
 export function IsLoadedProvider({ children }: Props) {
-  const [isLoaded, setIsLoaded] = useState({ loaded: false, loadState: 0 });
+  const [isLoaded, setIsLoaded] = useState(false);
   const [loadingState, setLoadingState] = useState(0);
 
   const isLoadedContextValue = useMemo(() => {

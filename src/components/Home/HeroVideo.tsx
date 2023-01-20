@@ -33,8 +33,9 @@ const itemsAnim = {
 
 const Content = () => {
   const { isLoaded } = useContext(IsLoadedContext);
+  console.log(isLoaded);
 
-  if (!isLoaded.loaded) return <div className="h-screen"></div>;
+  if (!isLoaded) return <div className="h-screen"></div>;
 
   return (
     <div className="relative z-10 h-screen flex flex-col justify-between items-center pt-16 pb-14 px-4 xs:pt-[88px] xs:pb-16 xs:px-6 lg:pb-6 lg:justify-end lg:items-end">
