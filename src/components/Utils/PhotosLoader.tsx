@@ -26,12 +26,11 @@ function PhotosLoader({ photos }: Props) {
     setErrored((prev) => prev + 1);
   };
 
-  const percentage = ((loaded + errored) / photos.length) * 100;
-  setLoadingState(percentage.toFixed(0));
-
-  if (percentage === 100) {
-    setIsLoaded(true);
-  }
+  useEffect(() => {
+    const percentage = ((loaded + errored) / photos.length) * 100;
+    setLoadingState(percentage.toFixed(0));
+    percentage === 100 && setIsLoaded(true);
+  }, [loaded, errored]);
 
   return (
     <div className="absolute opacity-0 w-full h-screen z-10">
@@ -45,7 +44,6 @@ function PhotosLoader({ photos }: Props) {
           onError={handleError}
         />
       ))}
-      <div>{`${percentage}% Loaded`}</div>
     </div>
   );
 }

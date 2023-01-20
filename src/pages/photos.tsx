@@ -67,9 +67,7 @@ export default function Photos() {
   };
 
   if (!photosData)
-    return (
-      <div className="h-screen flex justify-center items-center ">Loading</div>
-    ); // while the data's loading, returns loading
+    return <div className="h-screen flex justify-center items-center "></div>; // while the data's loading, returns loading
 
   return (
     <div
