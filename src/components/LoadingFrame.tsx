@@ -11,14 +11,13 @@ type Props = {};
 export default function LoadingFrame({}: Props) {
   const { isLoaded } = useContext(IsLoadedContext);
   const { loadingState } = useContext(LoadingContext);
-  const [slowedLoadingState, setSlowedLoadingState] = useState();
+  const [slowedLoadingState, setSlowedLoadingState] = useState(0);
 
+  const paddedLoadingState = loadingState.toString().padStart(3, "0");
   useEffect(() => {
     const interval = setInterval(() => {
-      const paddedLoadingState = loadingState.toString().padStart(3, "0");
       setSlowedLoadingState(paddedLoadingState);
     }, 500);
-
     return () => clearInterval(interval);
   }, []);
 
@@ -34,8 +33,8 @@ export default function LoadingFrame({}: Props) {
           <p className="text-xl">
             <AnimatePresence>
               <AnimatedLetters
-                key={loadingState}
-                string={loadingState}
+                key={paddedLoadingState}
+                string={paddedLoadingState}
                 absolute
               />
             </AnimatePresence>
