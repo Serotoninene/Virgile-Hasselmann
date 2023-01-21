@@ -53,30 +53,11 @@ export default function Photos() {
     setActionIndicator(action);
   };
 
-  const handleWheel = (e: WheelEvent<HTMLDivElement>) => {
-    // if not wheeling enough : no effect
-    const threshold = 50;
-    if (Math.abs(e.deltaY) !== threshold) return;
-    // if overview triggered : no effect
-    if (isOverview) return;
-
-    if (e.deltaY > 0) {
-      setWheelDirection("down");
-      handleNextPhoto();
-    } else {
-      setWheelDirection("up");
-      handlePreviousPhoto();
-    }
-  };
-
   if (!photosData)
     return <div className="h-screen flex justify-center items-center "></div>; // while the data's loading, returns loading
 
   return (
-    <div
-      className="h-screen pt-4 px-2 flex flex-col justify-between relative sm:px-6"
-      onWheel={handleWheel}
-    >
+    <div className="h-screen pt-4 px-2 flex flex-col justify-between relative sm:px-6">
       <div className="h-full relative overflow-hidden flex items-start sm:items-center">
         {(!isOverview || isMobile) && (
           <CustomCursor actionIndicator={actionIndicator} />
@@ -92,6 +73,7 @@ export default function Photos() {
         >
           <div
             className="w-1/2 h-ful"
+            onTouchStart={handlePreviousPhoto}
             onClick={handlePreviousPhoto}
             onMouseEnter={() => {
               setActionIndicator("precedent");
@@ -99,6 +81,7 @@ export default function Photos() {
           />
           <div
             className="w-1/2 h-full "
+            onTouchStart={handleNextPhoto}
             onClick={handleNextPhoto}
             onMouseEnter={() => {
               handleEnterSide("suivant");
