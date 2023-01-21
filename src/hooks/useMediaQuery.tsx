@@ -13,7 +13,7 @@ export default function useMediaQuery(query: number) {
     } else {
       setMatch(false);
     }
-  }, [match, width]);
+  }, [width, query]);
 
   return match;
 }
