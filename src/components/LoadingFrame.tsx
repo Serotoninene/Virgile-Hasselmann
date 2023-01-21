@@ -4,6 +4,7 @@ import {
   IsLoadedContext,
   LoadingContext,
 } from "@src/contexts/IsLoadedProvider";
+import AnimatedLetters from "./Utils/AnimatedLetters";
 
 type Props = {};
 
@@ -21,7 +22,15 @@ export default function LoadingFrame({}: Props) {
           transition={{ duration: 0.5, ease: "easeOut" }}
           className="h-screen w-full flex justify-center items-center fixed top-0 left-0 bg-black z-50"
         >
-          {!isLoaded && <p className="text-xl">{paddedLoadingState}</p>}
+          <p className="text-xl">
+            <AnimatePresence>
+              <AnimatedLetters
+                key={paddedLoadingState}
+                string={paddedLoadingState.toString()}
+                absolute
+              />
+            </AnimatePresence>
+          </p>
         </motion.div>
       ) : (
         <div key={"loaded"}></div>

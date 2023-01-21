@@ -62,8 +62,8 @@ export default function CustomCursor({ actionIndicator }: Props) {
             string={actionIndicator}
             key={actionIndicator}
             delay={0}
-            duration={0.35}
-            stagger={0.01}
+            duration={0.05}
+            stagger={0.005}
           />
         </AnimatePresence>
       </p>

@@ -10,6 +10,7 @@ interface Props {
   stagger?: number | undefined;
   start?: boolean | undefined;
   fontWeight?: string | undefined;
+  absolute?: boolean;
 }
 
 const AnimatedLetters = ({
@@ -20,6 +21,7 @@ const AnimatedLetters = ({
   stagger = 0.02,
   start = true,
   fontWeight = "font-normal",
+  absolute,
 }: Props) => {
   const containerAnim = {
     hidden: {},
@@ -70,7 +72,8 @@ const AnimatedLetters = ({
       animate={start ? "show" : "hidden"}
       exit="exit"
       key={string}
-      className="overflow-hidden inline-block align-bottom leading-[110%]"
+      className={`${absolute ? "absolute" : ""}
+      overflow-hidden inline-block align-bottom leading-[110%]`}
     >
       {words?.map((word) => (
         <span key={word}>
