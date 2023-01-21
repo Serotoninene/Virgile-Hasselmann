@@ -17,7 +17,6 @@ export default function PhotoInputs({ data }: Props) {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    console.log(photo);
 
     if (!photo) return;
 

@@ -7,10 +7,13 @@ import PhotosFooter from "@components/Photos/PhotosFooter";
 import AnimatedPhoto from "@components/Photos/AnimatedPhoto";
 import Overview from "@src/components/Photos/Overview";
 import CustomCursor from "@src/components/Utils/CustomCursor";
+import useMediaQuery from "@src/hooks/useMediaQuery";
 
 export default function Photos() {
   // Getting all the datas, photos and filters(/ that I'll call categories for more complexity ...)
   const photosData: Photo[] | undefined = trpc.photo.list.useQuery().data;
+
+  const isMobile = useMediaQuery(640);
 
   const [wheelDirection, setWheelDirection] = useState("");
   const [isOverview, setIsOverview] = useState(false); // if overview's true -> shows the overview nav bar (to be made)
@@ -75,7 +78,9 @@ export default function Photos() {
       onWheel={handleWheel}
     >
       <div className="h-full relative overflow-hidden flex items-start sm:items-center">
-        {!isOverview && <CustomCursor actionIndicator={actionIndicator} />}
+        {(!isOverview || isMobile) && (
+          <CustomCursor actionIndicator={actionIndicator} />
+        )}
         <AnimatedPhoto
           isOverview={isOverview}
           wheelDirection={wheelDirection}

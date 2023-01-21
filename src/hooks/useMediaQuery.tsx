@@ -1,0 +1,19 @@
+import { useEffect, useState } from "react";
+import useWindowSize from "./useWindowSize";
+
+export default function useMediaQuery(query: number) {
+  const [match, setMatch] = useState(false);
+  const { width } = useWindowSize();
+
+  useEffect(() => {
+    if (!width) return;
+
+    if (query > width) {
+      setMatch(true);
+    } else {
+      setMatch(false);
+    }
+  }, [match, width]);
+
+  return match;
+}

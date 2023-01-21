@@ -40,8 +40,6 @@ const Layout = ({ children }: Props): JSX.Element => {
     }
   }, [pathname]);
 
-  console.log(isNavVisible);
-
   useEffect(() => {
     // if on mobile, the navbar is always visible
     if ((width && width < 640) || pathname === "/photos") setIsNavVisible(true);

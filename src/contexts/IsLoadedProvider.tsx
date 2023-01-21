@@ -21,8 +21,6 @@ export function IsLoadedProvider({ children }: Props) {
   const [isLoaded, setIsLoaded] = useState<boolean>();
   const [loadingState, setLoadingState] = useState(0);
 
-  console.log(isLoaded);
-
   const isLoadedContextValue = useMemo(() => {
     return { isLoaded, setIsLoaded };
   }, [isLoaded]);

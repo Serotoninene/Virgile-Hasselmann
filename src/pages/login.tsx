@@ -13,7 +13,6 @@ const loginAnim = {
 function Login() {
   const router = useRouter();
   const { userStatus } = useContext(AuthContext);
-  console.log(userStatus);
 
   useEffect(() => {
     if (userStatus === "ADMIN") {
