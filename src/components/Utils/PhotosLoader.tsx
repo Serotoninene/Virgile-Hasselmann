@@ -30,7 +30,7 @@ function PhotosLoader({ photos }: Props) {
     const percentage = ((loaded + errored) / photos.length) * 100;
     setLoadingState(percentage.toFixed(0));
     if (percentage === 100) {
-      setIsLoaded(true);
+      setTimeout(() => setIsLoaded(true), 1000);
       localStorage.setItem("loadedOnce", "true");
     }
   }, [loaded, errored]);

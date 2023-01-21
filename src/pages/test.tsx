@@ -7,24 +7,45 @@ import React, {
 } from "react";
 import { AnimatePresence, motion, useScroll } from "framer-motion";
 import AnimatedLetters from "@src/components/Utils/AnimatedLetters";
+import useDebounce from "@src/hooks/useDebounce";
 
 type Props = {};
 
 const Block = () => {
-  const [counter, setCounter] = useState(0);
+  const [count, setCount] = useState(0);
+  const [displayCount, setDisplayCount] = useState(0);
+  const countRef = useRef(count); // ref to store the latest count
+
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setCounter((counter) => counter + 1);
-    }, 1000);
-
+      setCount((count) => count + 1);
+      countRef.current = count + 1;
+    }, 100);
     return () => clearInterval(intervalId);
   }, []);
+
+  useEffect(() => {
+    let timeoutId: any;
+    const updateDisplayCount = () => {
+      setDisplayCount(countRef.current);
+      timeoutId = setTimeout(updateDisplayCount, 1000);
+    };
+    updateDisplayCount();
+    return () => clearTimeout(timeoutId);
+  }, []);
+
   return (
     <div className="h-screen mb-16 Block snap-child-start">
       <div className="w-16 h-16 bg-red-900"></div>
-      <AnimatePresence>
-        <AnimatedLetters key={counter} string={counter.toString()} absolute />
-      </AnimatePresence>
+      {count}
+      {/* <AnimatePresence>
+        <AnimatedLetters
+          key={slowedCounter}
+          string={slowedCounter.toString()}
+          absolute
+          delay={0.2}
+        />
+      </AnimatePresence> */}
     </div>
   );
 };

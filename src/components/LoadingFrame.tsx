@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   IsLoadedContext,
@@ -11,7 +11,16 @@ type Props = {};
 export default function LoadingFrame({}: Props) {
   const { isLoaded } = useContext(IsLoadedContext);
   const { loadingState } = useContext(LoadingContext);
-  const paddedLoadingState = loadingState.toString().padStart(3, "0");
+  const [slowedLoadingState, setSlowedLoadingState] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const paddedLoadingState = loadingState.toString().padStart(3, "0");
+      setSlowedLoadingState(paddedLoadingState);
+    }, 500);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <AnimatePresence>
@@ -25,8 +34,8 @@ export default function LoadingFrame({}: Props) {
           <p className="text-xl">
             <AnimatePresence>
               <AnimatedLetters
-                key={paddedLoadingState}
-                string={paddedLoadingState.toString()}
+                key={slowedLoadingState}
+                string={slowedLoadingState}
                 absolute
               />
             </AnimatePresence>
