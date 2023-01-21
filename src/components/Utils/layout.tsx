@@ -6,6 +6,7 @@ import Navbar from "./Navbar";
 // Hooks
 import useWindowSize from "@src/hooks/useWindowSize";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 type Props = {
   children: JSX.Element;
@@ -67,11 +68,9 @@ const Layout = ({ children }: Props): JSX.Element => {
       </header>
       <main>
         {/* Background noise */}
-        <img
-          alt="noise"
-          src="/assets/noise.png"
-          className="w-full h-full fixed top-0 left-0"
-        />
+        <div className="h-full w-full fixed top-0 left-0">
+          <Image alt="noise" src="/assets/noise.png" layout="fill" />
+        </div>
         <div className="relative">{children}</div>
       </main>
     </div>
