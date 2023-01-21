@@ -11,7 +11,7 @@ type Props = {};
 export default function LoadingFrame({}: Props) {
   const { isLoaded } = useContext(IsLoadedContext);
   const { loadingState } = useContext(LoadingContext);
-  const [slowedLoadingState, setSlowedLoadingState] = useState(0);
+  const [slowedLoadingState, setSlowedLoadingState] = useState();
 
   useEffect(() => {
     const interval = setInterval(() => {
