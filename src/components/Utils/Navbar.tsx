@@ -1,4 +1,4 @@
-import React, { useState, MouseEvent } from "react";
+import React, { useState } from "react";
 // framer motion
 import { motion } from "framer-motion";
 // Components

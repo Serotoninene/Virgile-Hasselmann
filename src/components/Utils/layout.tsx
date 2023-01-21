@@ -40,10 +40,12 @@ const Layout = ({ children }: Props): JSX.Element => {
     }
   }, [pathname]);
 
+  console.log(isNavVisible);
+
   useEffect(() => {
     // if on mobile, the navbar is always visible
-    if (width && width < 640) setIsNavVisible(true);
-  }, [width]);
+    if ((width && width < 640) || pathname === "/photos") setIsNavVisible(true);
+  }, [width, pathname]);
 
   return (
     <div
@@ -68,6 +70,7 @@ const Layout = ({ children }: Props): JSX.Element => {
       <main>
         {/* Background noise */}
         <img
+          alt="noise"
           src="/assets/noise.png"
           className="w-full h-full fixed top-0 left-0"
         />
