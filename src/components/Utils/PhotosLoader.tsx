@@ -29,7 +29,10 @@ function PhotosLoader({ photos }: Props) {
   useEffect(() => {
     const percentage = ((loaded + errored) / photos.length) * 100;
     setLoadingState(percentage.toFixed(0));
-    percentage === 100 && setIsLoaded(true);
+    if (percentage === 100) {
+      setIsLoaded(true);
+      localStorage.setItem("loadedOnce", "true");
+    }
   }, [loaded, errored]);
 
   return (

@@ -7,14 +7,17 @@ import { CursorProvider } from "@src/contexts/CursorProvider";
 import { trpc } from "@server/utils/trpc";
 // Components
 import Layout from "@src/components/Utils/layout";
+import { IsLoadedProvider } from "@src/contexts/IsLoadedProvider";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <AuthProvider>
       <CursorProvider>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <IsLoadedProvider>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </IsLoadedProvider>
       </CursorProvider>
     </AuthProvider>
   );

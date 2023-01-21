@@ -4,7 +4,7 @@ interface Props {
   children: JSX.Element;
 }
 
-export const IsLoadedContext = createContext<any>("");
+export const IsLoadedContext = createContext<any>(false);
 export const LoadingContext = createContext<any>(0);
 
 function getInitialState() {
@@ -21,7 +21,7 @@ export function IsLoadedProvider({ children }: Props) {
   const [isLoaded, setIsLoaded] = useState<boolean>();
   const [loadingState, setLoadingState] = useState(0);
 
-  // console.log(typeof isLoaded);
+  console.log(isLoaded);
 
   const isLoadedContextValue = useMemo(() => {
     return { isLoaded, setIsLoaded };

@@ -1,4 +1,4 @@
-import React, { Suspense, useContext } from "react";
+import React, { useContext } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   IsLoadedContext,
@@ -10,8 +10,6 @@ type Props = {};
 export default function LoadingFrame({}: Props) {
   const { isLoaded } = useContext(IsLoadedContext);
   const { loadingState } = useContext(LoadingContext);
-
-  console.log(isLoaded);
   const paddedLoadingState = loadingState.toString().padStart(3, "0");
 
   return (

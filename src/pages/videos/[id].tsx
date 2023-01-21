@@ -10,9 +10,9 @@ import { motion } from "framer-motion";
 const ClosingTag = () => {
   return (
     <Link href="/">
-      <div className="absolute top-4 left-2 flex cursor-pointer z-50 pointer-events-auto">
-        <div className="w-6 h-[2px] bg-light rotate-45 "></div>
-        <div className="w-6 h-[2px] bg-light -rotate-45 -translate-x-[24px]"></div>
+      <div className="absolute top-6 left-6 flex cursor-pointer z-50 pointer-events-auto h-6">
+        <div className="w-6 h-[2px] bg-light rotate-45 translate-y-[6px]"></div>
+        <div className="w-6 h-[2px] bg-light -rotate-45 -translate-x-[24px]  translate-y-[6px]"></div>
       </div>
     </Link>
   );
@@ -33,6 +33,7 @@ const VideoPlayer = () => {
       {video && (
         <video
           preload="metadata"
+          autoPlay
           controls
           controlsList="nodownload nofullscreen noremoteplayback"
           className={`w-full h-full object-cover`}
