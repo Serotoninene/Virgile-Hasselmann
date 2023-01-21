@@ -34,8 +34,8 @@ export default function LoadingFrame({}: Props) {
           <p className="text-xl">
             <AnimatePresence>
               <AnimatedLetters
-                key={slowedLoadingState}
-                string={slowedLoadingState}
+                key={loadingState}
+                string={loadingState}
                 absolute
               />
             </AnimatePresence>
