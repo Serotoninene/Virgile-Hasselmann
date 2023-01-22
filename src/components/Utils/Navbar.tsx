@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 // framer motion
 import { motion } from "framer-motion";
 // Components
 import CustomLink from "./CustomLink";
 import BurgerMenu from "./BurgerMenu";
 import { useRouter } from "next/router";
+import { IsLoadedContext } from "@src/contexts/IsLoadedProvider";
 
 // Types
 interface Props {
@@ -50,6 +51,7 @@ const BurgerButton = ({ isBurgerOpen }: BurgerButtonProps) => {
 
 export default function Navbar({ isNavVisible }: Props) {
   const { pathname } = useRouter();
+  const { isLoaded } = useContext(IsLoadedContext);
 
   const [isBurgerOpen, setIsBurgerOpen] = useState(false);
 
@@ -87,6 +89,8 @@ export default function Navbar({ isNavVisible }: Props) {
     const section = document.querySelector(anchor);
     section?.scrollIntoView({ behavior: "smooth" });
   };
+
+  if (!isLoaded) return;
 
   return (
     <motion.div

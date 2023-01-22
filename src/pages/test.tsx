@@ -12,32 +12,34 @@ import useDebounce from "@src/hooks/useDebounce";
 type Props = {};
 
 const Block = () => {
-  const [count, setCount] = useState(0);
+  let count = 0;
   const [displayCount, setDisplayCount] = useState(0);
   const countRef = useRef(count); // ref to store the latest count
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setCount((count) => count + 1);
-      countRef.current = count + 1;
+      countRef.current += 1;
     }, 100);
-    return () => clearInterval(intervalId);
+
+    return () => {
+      clearInterval(intervalId);
+    };
   }, []);
 
   useEffect(() => {
-    let timeoutId: any;
-    const updateDisplayCount = () => {
+    const intervalId = setInterval(() => {
       setDisplayCount(countRef.current);
-      timeoutId = setTimeout(updateDisplayCount, 1000);
+    }, 2000);
+    return () => {
+      clearInterval(intervalId);
     };
-    updateDisplayCount();
-    return () => clearTimeout(timeoutId);
-  }, []);
+  }, [countRef]);
 
   return (
     <div className="h-screen mb-16 Block snap-child-start">
       <div className="w-16 h-16 bg-red-900"></div>
-      {count}
+      {displayCount}
+      <br /> {countRef.current}
       {/* <AnimatePresence>
         <AnimatedLetters
           key={slowedCounter}
