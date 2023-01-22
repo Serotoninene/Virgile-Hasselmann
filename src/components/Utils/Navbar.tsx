@@ -90,7 +90,7 @@ export default function Navbar({ isNavVisible }: Props) {
     section?.scrollIntoView({ behavior: "smooth" });
   };
 
-  if (!isLoaded) return;
+  if (!isLoaded) return <div></div>;
 
   return (
     <motion.div
