@@ -56,14 +56,15 @@ export default function CustomCursor({ actionIndicator }: Props) {
         stiffness: 1000,
       }}
     >
-      <p className="text-light text-sm text-end ">
-        <AnimatePresence mode="wait">
+      <p className="text-light text-base text-end">
+        <AnimatePresence>
           <AnimatedLetters
             string={actionIndicator}
             key={actionIndicator}
             delay={0}
-            duration={0.05}
-            stagger={0.005}
+            // duration={0.05}
+            stagger={0.01}
+            absolute
           />
         </AnimatePresence>
       </p>
