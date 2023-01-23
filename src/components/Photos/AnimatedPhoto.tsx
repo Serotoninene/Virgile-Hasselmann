@@ -7,27 +7,22 @@ import useWindowSize from "@src/hooks/useWindowSize";
 
 interface Props {
   isOverview: boolean;
-  wheelDirection: string;
   photoDisplayed: string;
 }
 
 const transition = { duration: 0.15, ease: [0.3, 0.01, -0.05, 0.95] };
 
 const anim = {
-  fromDown: { y: "100%", transition: transition },
+  toDown: { y: "100%", transition: transition },
   fromUp: { y: "-100%", transition: transition },
   center: (custom: boolean) => ({
     y: 0,
-    width: custom ? "30%" : "100%",
+    width: custom ? "60%" : "100%",
     transition: { duration: 0.15, ease: "easeOut" },
   }),
 };
 
-const AnimatedPhoto = ({
-  isOverview,
-  wheelDirection,
-  photoDisplayed,
-}: Props) => {
+const AnimatedPhoto = ({ isOverview, photoDisplayed }: Props) => {
   const photoLink = "https://virgile-portfollio.s3.amazonaws.com/photos/";
   const { width } = useWindowSize(); // getting the width of the page for the Image Component
 
@@ -36,14 +31,15 @@ const AnimatedPhoto = ({
       <motion.div
         key={photoDisplayed}
         variants={anim}
-        initial={wheelDirection === "down" ? "fromDown" : "fromUp"}
+        initial={"fromUp"}
         animate="center"
-        exit={wheelDirection === "up" ? "fromDown" : "fromUp"}
+        exit={"fromDown"}
         custom={isOverview}
         className="w-full min-h-[70vh] sm:w-full sm:h-full"
       >
         <Image
           src={photoLink + photoDisplayed}
+          alt="photo"
           layout="fill"
           objectFit={width! < 640 ? "cover" : "contain"}
           objectPosition="top left"

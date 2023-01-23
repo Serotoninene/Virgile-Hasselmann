@@ -14,8 +14,6 @@ export default function Photos() {
   const photosData: Photo[] | undefined = trpc.photo.list.useQuery().data;
 
   const isMobile = useMediaQuery(640);
-
-  const [wheelDirection, setWheelDirection] = useState("");
   const [isOverview, setIsOverview] = useState(false); // if overview's true -> shows the overview nav bar (to be made)
 
   // Init the data to display with the photos of the first category
@@ -64,7 +62,6 @@ export default function Photos() {
         )}
         <AnimatedPhoto
           isOverview={isOverview}
-          wheelDirection={wheelDirection}
           photoDisplayed={photoDisplayed}
         />
         <div
