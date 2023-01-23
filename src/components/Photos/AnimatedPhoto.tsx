@@ -33,7 +33,7 @@ const AnimatedPhoto = ({ isOverview, photoDisplayed }: Props) => {
         variants={anim}
         initial={"fromUp"}
         animate="center"
-        exit={"fromDown"}
+        exit={"toDown"}
         custom={isOverview}
         className="w-full min-h-[70vh] sm:w-full sm:h-full"
       >

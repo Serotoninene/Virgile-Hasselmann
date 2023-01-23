@@ -17,7 +17,7 @@ const VideoMiniature = ({ isInView, data }: VideoMiniatureProps) => {
   const ref = useRef() as RefObject<HTMLDivElement>;
 
   const duration = 0.7;
-  const ease = "easeOut";
+  const ease = [0.6, 0.01, 0.05, 0.95];
 
   const containerAnim = {
     hidden: {},

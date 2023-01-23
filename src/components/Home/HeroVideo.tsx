@@ -75,8 +75,12 @@ const Content = () => {
       </motion.div>
       <div className="absolute w-screen flex justify-center bottom-2 xs:bottom-6">
         <AnimatedArrow />
-        <div className="w-[64px] lg:hidden">
-          <img src="/assets/scrollIndicator.svg" className="w-full" />
+        <div className="w-[32px] lg:hidden">
+          <img
+            src="/assets/scrollIndicator.svg"
+            className="w-full"
+            alt="scroll indicator"
+          />
         </div>
       </div>
     </div>
