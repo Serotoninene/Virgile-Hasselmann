@@ -13,13 +13,11 @@ export default function LoadingFrame({}: Props) {
   const { loadingState } = useContext(LoadingContext);
   const [slowedLoadingState, setSlowedLoadingState] = useState("");
 
-  console.log(isLoaded);
-
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       const paddedLoadingState = loadingState.toString().padStart(3, "0");
       setSlowedLoadingState(paddedLoadingState);
-    }, 1000);
+    }, 500);
 
     return () => clearTimeout(timeoutId);
   }, [loadingState]);
@@ -35,11 +33,10 @@ export default function LoadingFrame({}: Props) {
         >
           <p className="text-xl">
             <AnimatedLetters
-              key={slowedLoadingState}
-              string={slowedLoadingState}
+              key={loadingState}
+              string={loadingState.toString()}
               absolute
             />
-            {/* {loadingState} */}
           </p>
         </motion.div>
       ) : (
