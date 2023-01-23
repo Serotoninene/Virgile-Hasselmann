@@ -5,22 +5,14 @@ import {
   LoadingContext,
 } from "@src/contexts/IsLoadedProvider";
 import AnimatedLetters from "./Utils/AnimatedLetters";
+import useDebounce from "@src/hooks/useDebounce";
 
 type Props = {};
 
 export default function LoadingFrame({}: Props) {
   const { isLoaded } = useContext(IsLoadedContext);
   const { loadingState } = useContext(LoadingContext);
-  const [slowedLoadingState, setSlowedLoadingState] = useState("");
-
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      const paddedLoadingState = loadingState.toString().padStart(3, "0");
-      setSlowedLoadingState(paddedLoadingState);
-    }, 500);
-
-    return () => clearTimeout(timeoutId);
-  }, [loadingState]);
+  const slowedLoadingState = useDebounce(loadingState, 500);
 
   return (
     <AnimatePresence>
@@ -35,7 +27,7 @@ export default function LoadingFrame({}: Props) {
             <AnimatePresence>
               <AnimatedLetters
                 key={loadingState}
-                string={loadingState.toString()}
+                string={slowedLoadingState.toString()}
                 absolute
               />
             </AnimatePresence>

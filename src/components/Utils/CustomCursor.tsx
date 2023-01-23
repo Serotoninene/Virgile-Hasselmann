@@ -3,12 +3,15 @@ import { AnimatePresence, motion, useMotionValue } from "framer-motion";
 // Context
 import { CursorContext } from "@src/contexts/CursorProvider";
 import AnimatedLetters from "./AnimatedLetters";
+import useMediaQuery from "@src/hooks/useMediaQuery";
 
 interface Props {
   actionIndicator?: string;
 }
 
 export default function CustomCursor({ actionIndicator }: Props) {
+  const onMobile = useMediaQuery(640);
+
   const { cursorType } = useContext(CursorContext);
   const [mousePosition, setMousePosition] = useState({
     x: 200,
@@ -42,6 +45,7 @@ export default function CustomCursor({ actionIndicator }: Props) {
   return (
     <motion.div
       id="CustomCursor" // had to use css for styling here --> base.scss
+      className={onMobile ? "opacity-0" : ""}
       animate={{
         top: mousePosition.y,
         left: mousePosition.x,

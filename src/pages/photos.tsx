@@ -13,7 +13,6 @@ export default function Photos() {
   // Getting all the datas, photos and filters(/ that I'll call categories for more complexity ...)
   const photosData: Photo[] | undefined = trpc.photo.list.useQuery().data;
 
-  const isMobile = useMediaQuery(640);
   const [isOverview, setIsOverview] = useState(false); // if overview's true -> shows the overview nav bar (to be made)
 
   // Init the data to display with the photos of the first category
@@ -60,9 +59,7 @@ export default function Photos() {
       className="h-screen pt-4 px-2 flex flex-col justify-between relative sm:px-6"
     >
       <div className="h-full relative overflow-hidden flex items-start sm:items-center">
-        {(!isOverview || isMobile) && (
-          <CustomCursor actionIndicator={actionIndicator} />
-        )}
+        {!isOverview && <CustomCursor actionIndicator={actionIndicator} />}
         <AnimatedPhoto
           isOverview={isOverview}
           photoDisplayed={photoDisplayed}
