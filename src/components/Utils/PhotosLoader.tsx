@@ -7,7 +7,6 @@ import {
   IsLoadedContext,
   LoadingContext,
 } from "@src/contexts/IsLoadedProvider";
-import Videos from "../Home/Videos";
 
 interface Props {
   photos: Photo[];

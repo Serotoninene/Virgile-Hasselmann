@@ -7,11 +7,10 @@ import PhotosFooter from "@components/Photos/PhotosFooter";
 import AnimatedPhoto from "@components/Photos/AnimatedPhoto";
 import Overview from "@src/components/Photos/Overview";
 import CustomCursor from "@src/components/Utils/CustomCursor";
-import useMediaQuery from "@src/hooks/useMediaQuery";
 
 export default function Photos() {
   // Getting all the datas, photos and filters(/ that I'll call categories for more complexity ...)
-  // const photosData: Photo[] | undefined = trpc.photo.list.useQuery().data;
+  const photosFromApi: Photo[] | undefined = trpc.photo.list.useQuery().data;
   const [photosData, setPhotosData] = useState<Photo[] | undefined>();
 
   const [isOverview, setIsOverview] = useState(false); // if overview's true -> shows the overview nav bar (to be made)
@@ -25,7 +24,13 @@ export default function Photos() {
 
   useEffect(() => {
     const photosFromLocalStore: any = localStorage.getItem("photosData");
-    setPhotosData(JSON.parse(photosFromLocalStore));
+
+    if (photosFromLocalStore) {
+      setPhotosData(JSON.parse(photosFromLocalStore));
+    } else {
+      setPhotosData(photosFromApi);
+      window.localStorage.setItem("photosData", JSON.stringify(photosFromApi));
+    }
   }, []);
 
   // Here we'll push all the data fetched by api into the states
