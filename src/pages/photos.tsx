@@ -11,7 +11,8 @@ import useMediaQuery from "@src/hooks/useMediaQuery";
 
 export default function Photos() {
   // Getting all the datas, photos and filters(/ that I'll call categories for more complexity ...)
-  const photosData: Photo[] | undefined = trpc.photo.list.useQuery().data;
+  // const photosData: Photo[] | undefined = trpc.photo.list.useQuery().data;
+  const [photosData, setPhotosData] = useState<Photo[] | undefined>();
 
   const [isOverview, setIsOverview] = useState(false); // if overview's true -> shows the overview nav bar (to be made)
 
@@ -21,6 +22,11 @@ export default function Photos() {
 
   // For the custom cursor, we need to know when we're in the left or right side of the screen
   const [actionIndicator, setActionIndicator] = useState("");
+
+  useEffect(() => {
+    const photosFromLocalStore: any = localStorage.getItem("photosData");
+    setPhotosData(JSON.parse(photosFromLocalStore));
+  }, []);
 
   // Here we'll push all the data fetched by api into the states
   useEffect(() => {

@@ -26,6 +26,12 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 function Home({ videos, photos }: Props) {
+  useEffect(() => {
+    if (!photos) return;
+
+    window.localStorage.setItem("photosData", JSON.stringify(photos));
+  }, [photos]);
+
   if (!photos) return;
 
   return (
