@@ -14,7 +14,7 @@ type Props = {
 
 const Layout = ({ children }: Props): JSX.Element => {
   const { pathname } = useRouter();
-  const { width } = useWindowSize();
+  const { width, height } = useWindowSize();
   const [isNavVisible, setIsNavVisible] = useState(true);
 
   // Triggered on on wheel event
@@ -40,6 +40,13 @@ const Layout = ({ children }: Props): JSX.Element => {
       setIsNavVisible(false);
     }
   }, [pathname]);
+
+  useEffect(() => {
+    // Set vh to be the actual viewport height and be usable on mobile
+    if (!height) return;
+    const vh = height * 0.01;
+    document.documentElement.style.setProperty("--vh", vh + "px");
+  }, [height]);
 
   useEffect(() => {
     // if on mobile, the navbar is always visible

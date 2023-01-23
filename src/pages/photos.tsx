@@ -55,7 +55,10 @@ export default function Photos() {
     return <div className="h-screen flex justify-center items-center "></div>; // while the data's loading, returns loading
 
   return (
-    <div className="h-screen pt-4 px-2 flex flex-col justify-between relative sm:px-6">
+    <div
+      id="Photos"
+      className="h-screen pt-4 px-2 flex flex-col justify-between relative sm:px-6"
+    >
       <div className="h-full relative overflow-hidden flex items-start sm:items-center">
         {(!isOverview || isMobile) && (
           <CustomCursor actionIndicator={actionIndicator} />
@@ -69,7 +72,7 @@ export default function Photos() {
           className="fixed h-full w-full top-0 left-0 flex"
         >
           <div
-            className="cursor-pointer sm:cursor-default w-1/2 h-ful" // for the click event to be triggered on mobile, we had to add a pointer-cursor
+            className="cursor-pointer sm:cursor-default w-1/2 h-full" // for the click event to be triggered on mobile, we had to add a pointer-cursor
             onClick={handlePreviousPhoto}
             onMouseEnter={() => {
               setActionIndicator("precedent");

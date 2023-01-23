@@ -80,6 +80,18 @@ input {
   // flex: none;
 }
 
+#Photos {
+  height: calc(var(--vh) * 100);
+}
+
+#HeroVideo {
+  height: calc(var(--vh) * 100);
+}
+
+#BurgerMenu {
+  height: calc(var(--vh) * 100);
+}
+
 #CustomCursor {
   display: flex;
   justify-content: center;

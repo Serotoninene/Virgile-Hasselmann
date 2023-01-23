@@ -29,6 +29,7 @@ const containerAnim = {
 export default function BurgerMenu({ links, isBurgerOpen }: Props) {
   return (
     <motion.div
+      id="BurgerMenu"
       variants={containerAnim}
       animate={isBurgerOpen ? "open" : "closed"}
       className="fixed top-0 py-2 px-4 left-full bg-dark h-screen w-screen flex items-end xs:hidden"
