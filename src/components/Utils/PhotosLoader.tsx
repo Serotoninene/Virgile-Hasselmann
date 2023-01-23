@@ -18,7 +18,7 @@ function PhotosLoader({ photos, videos }: Props) {
   const [loaded, setLoaded] = useState(0);
   const [errored, setErrored] = useState(0);
   const { setIsLoaded } = useContext(IsLoadedContext);
-  const loadingState = useContext(LoadingContext);
+  const { setLoadingState } = useContext(LoadingContext);
 
   const handleLoad = () => {
     setLoaded((prev) => prev + 1);
@@ -31,7 +31,7 @@ function PhotosLoader({ photos, videos }: Props) {
   useEffect(() => {
     const percentage =
       ((loaded + errored) / (photos.length + videos.length)) * 100;
-    loadingState.current = percentage.toFixed(0);
+    setLoadingState(percentage.toFixed(0));
     if (percentage === 100) {
       setTimeout(() => setIsLoaded(true), 1500);
     }

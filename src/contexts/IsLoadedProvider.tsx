@@ -1,11 +1,4 @@
-import React, {
-  createContext,
-  RefObject,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import React, { createContext, useEffect, useMemo, useState } from "react";
 
 interface Props {
   children: JSX.Element;
@@ -26,14 +19,14 @@ function getInitialState() {
 export function IsLoadedProvider({ children }: Props) {
   const localData = getInitialState();
   const [isLoaded, setIsLoaded] = useState<boolean>();
-  const loadingState = useRef() as RefObject<HTMLDivElement>;
+  const [loadingState, setLoadingState] = useState(0);
 
   const isLoadedContextValue = useMemo(() => {
     return { isLoaded, setIsLoaded };
   }, [isLoaded]);
 
   const LoadingStateContextValue = useMemo(() => {
-    return loadingState;
+    return { loadingState, setLoadingState };
   }, [loadingState]);
 
   useEffect(() => {
