@@ -1,11 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import type { GetStaticProps } from "next";
-import Image from "next/image";
 // Server
 import { prisma } from "@server/prisma";
 import { Photo, Video } from "@prisma/client";
-// Store
-import { photoLink } from "@src/contexts/store";
 // Components
 import HeroVideo from "@components/Home/HeroVideo";
 import Videos from "@components/Home/Videos";
@@ -14,10 +11,6 @@ import ContactForm from "@components/Home/ContactForm";
 import Footer from "@components/Utils/Footer";
 import PhotosLoader from "@src/components/Utils/PhotosLoader";
 import LoadingFrame from "@src/components/LoadingFrame";
-import {
-  IsLoadedContext,
-  IsLoadedProvider,
-} from "@src/contexts/IsLoadedProvider";
 
 interface Props {
   videos: Video[];

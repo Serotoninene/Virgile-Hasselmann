@@ -69,16 +69,14 @@ export default function Photos() {
           className="fixed h-full w-full top-0 left-0 flex"
         >
           <div
-            className="w-1/2 h-ful"
-            onTouchStart={handlePreviousPhoto}
+            className="cursor-pointer sm:cursor-default w-1/2 h-ful" // for the click event to be triggered on mobile, we had to add a pointer-cursor
             onClick={handlePreviousPhoto}
             onMouseEnter={() => {
               setActionIndicator("precedent");
             }}
           />
           <div
-            className="w-1/2 h-full "
-            onTouchStart={handleNextPhoto}
+            className="cursor-pointer sm:cursor-default w-1/2 h-full " // for the click event to be triggered on mobile, we had to add a pointer-cursor
             onClick={handleNextPhoto}
             onMouseEnter={() => {
               handleEnterSide("suivant");
