@@ -27,7 +27,7 @@ export default function LoadingFrame({}: Props) {
             <AnimatePresence>
               <AnimatedLetters
                 key={loadingState}
-                string={slowedLoadingState.toString()}
+                string={slowedLoadingState.debouncedValue.toString()}
                 absolute
               />
             </AnimatePresence>
