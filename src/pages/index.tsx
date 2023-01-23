@@ -39,7 +39,7 @@ function Home({ videos, photos }: Props) {
     <div id="Home" className="w-screen h-screen relative ">
       {/* preloading test */}
       <LoadingFrame />
-      <PhotosLoader photos={photos} />
+      <PhotosLoader photos={photos} videos={videos} />
 
       {/* <SmoothScroll> */}
       <div className="snap-parent- ">

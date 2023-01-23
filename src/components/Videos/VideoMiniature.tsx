@@ -1,9 +1,12 @@
 import React, { RefObject, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 // Framer motion
 import { motion } from "framer-motion";
+// Types
 import { Video } from "@prisma/client";
-import Link from "next/link";
+// Store
+import { photoLink } from "@src/contexts/store";
 
 interface VideoMiniatureProps {
   isInView: boolean;
@@ -64,7 +67,7 @@ const VideoMiniature = ({ isInView, data }: VideoMiniatureProps) => {
           >
             <Image
               alt={data.title}
-              src={`https://virgile-portfollio.s3.amazonaws.com/photos/${data.placeholder_hq}`}
+              src={photoLink + data.placeholder_hq}
               layout="fill"
               objectFit="cover"
               objectPosition="center"

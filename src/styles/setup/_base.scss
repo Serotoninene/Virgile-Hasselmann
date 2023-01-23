@@ -87,8 +87,9 @@ input {
   position: fixed;
   pointer-events: none;
   z-index: 99;
-  transform: translate(-40%, 60%);
+  transform: translate(6px, 6px);
   transition: all ease-out 0.25s;
+  border: 1px solid red;
   width: 100px;
   transition-property: width, transform, background-color, backdrop-filter;
 

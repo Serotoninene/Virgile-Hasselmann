@@ -25,8 +25,8 @@ export default function CustomCursor({ actionIndicator }: Props) {
   };
 
   // different types
-  let scrollIndicator = cursorType === "scrollIndicator";
   let hover = cursorType === "hover";
+  let scrollIndicator = cursorType === "scrollIndicator";
 
   useEffect(() => {
     scrollIndicator || hover ? cursorSize.set(56) : cursorSize.set(8);
@@ -45,9 +45,6 @@ export default function CustomCursor({ actionIndicator }: Props) {
       animate={{
         top: mousePosition.y,
         left: mousePosition.x,
-      }}
-      style={{
-        mixBlendMode: hover ? "difference" : "normal",
       }}
       transition={{
         type: "spring",

@@ -32,13 +32,11 @@ export default function LoadingFrame({}: Props) {
           className="h-screen w-full flex justify-center items-center fixed top-0 left-0 bg-black z-50"
         >
           <p className="text-xl">
-            <AnimatePresence>
-              <AnimatedLetters
-                key={slowedLoadingState}
-                string={slowedLoadingState}
-                absolute
-              />
-            </AnimatePresence>
+            <AnimatedLetters
+              key={slowedLoadingState}
+              string={slowedLoadingState}
+              absolute
+            />
           </p>
         </motion.div>
       ) : (
