@@ -12,7 +12,19 @@ type Props = {};
 export default function LoadingFrame({}: Props) {
   const { isLoaded } = useContext(IsLoadedContext);
   const { loadingState } = useContext(LoadingContext);
-  const slowedLoadingState = useDebounce(loadingState, 500);
+  const [slowedLoadingState, setSlowedLoadingState] = useState(0);
+
+  useEffect(() => {
+    if (!loadingState) return;
+    const intervalId = setInterval(() => {
+      setSlowedLoadingState(loadingState.current);
+    }, 1000);
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [loadingState]);
+
+  console.log("being rerendered  :)");
 
   return (
     <AnimatePresence>
@@ -27,7 +39,7 @@ export default function LoadingFrame({}: Props) {
             <AnimatePresence>
               <AnimatedLetters
                 key={loadingState}
-                string={slowedLoadingState.debouncedValue.toString()}
+                string={slowedLoadingState.toString()}
                 absolute
               />
             </AnimatePresence>
