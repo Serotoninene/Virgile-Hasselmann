@@ -41,7 +41,7 @@ const AnimatedPhoto = ({ isOverview, photoDisplayed }: Props) => {
           src={photoLink + photoDisplayed}
           alt="photo"
           layout="fill"
-          objectFit={width! < 640 ? "cover" : "contain"}
+          objectFit={"contain"}
           objectPosition="top left"
           placeholder="blur"
           blurDataURL={photoLink + photoDisplayed}
