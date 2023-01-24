@@ -12,7 +12,7 @@ interface UniqueLink {
 interface Props {
   links: UniqueLink[];
   isBurgerOpen: boolean;
-  setIsBurgerOpen : () => void;
+  setIsBurgerOpen : (e:boolean) => void;
 }
 
 const ease = [0.6, 0.01, -0.05, 0.95];
