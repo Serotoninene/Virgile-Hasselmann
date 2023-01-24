@@ -38,12 +38,15 @@ export default function PhotosBanner() {
       >
         <div className="hidden sm:block h-full col-span-2 relative ">
           <motion.div variants={photoAnim}>
-            <Image
-              src="https://virgile-portfollio.s3.amazonaws.com/photos/girl_portrait.png"
-              layout="fill"
-              objectFit="cover"
-              objectPosition="center"
-            />
+            <Link href="/photos" >
+              <Image
+                className="cursor-pointer"
+                src="https://virgile-portfollio.s3.amazonaws.com/photos/girl_portrait.png"
+                layout="fill"
+                objectFit="cover"
+                objectPosition="center"
+              />
+            </Link>
           </motion.div>
         </div>
         <div className="w-full col-span-3 flex flex-col justify-center sm:justify-end ">
@@ -54,12 +57,15 @@ export default function PhotosBanner() {
           </Link>
           <div className="h-2/3 relative overflow-hidden">
             <motion.div variants={photoAnim}>
-              <Image
-                src="https://virgile-portfollio.s3.amazonaws.com/photos/hands_holding.png"
-                layout="fill"
-                objectFit="cover"
-                objectPosition="center"
-              />
+              <Link href="/photos">
+                <Image
+                  className="cursor-pointer"
+                  src="https://virgile-portfollio.s3.amazonaws.com/photos/hands_holding.png"
+                  layout="fill"
+                  objectFit="cover"
+                  objectPosition="center"
+                />
+              </Link>
             </motion.div>
           </div>
         </div>
