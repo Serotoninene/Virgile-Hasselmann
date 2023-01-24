@@ -22,6 +22,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const photos = await prisma.photo.findMany();
   return {
     props: { videos, photos },
+    revalidate: 30
   };
 };
 
