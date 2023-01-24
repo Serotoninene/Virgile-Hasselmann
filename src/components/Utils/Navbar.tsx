@@ -120,7 +120,7 @@ export default function Navbar({ isNavVisible }: Props) {
       <div className="block z-10 mt-1 xs:hidden" onClick={toggleBurgerMenu}>
         <BurgerButton isBurgerOpen={isBurgerOpen} />
       </div>
-      <BurgerMenu isBurgerOpen={isBurgerOpen} links={links} />
+      <BurgerMenu isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} links={links} />
     </motion.div>
   );
 }

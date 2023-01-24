@@ -12,6 +12,7 @@ interface UniqueLink {
 interface Props {
   links: UniqueLink[];
   isBurgerOpen: boolean;
+  setIsBurgerOpen : () => void;
 }
 
 const ease = [0.6, 0.01, -0.05, 0.95];
@@ -26,7 +27,7 @@ const containerAnim = {
   },
 };
 
-export default function BurgerMenu({ links, isBurgerOpen }: Props) {
+export default function BurgerMenu({ links, isBurgerOpen, setIsBurgerOpen }: Props) {
   return (
     <motion.div
       id="BurgerMenu"
@@ -40,9 +41,9 @@ export default function BurgerMenu({ links, isBurgerOpen }: Props) {
           layout="fill"
         />
       </div>
-      <ul className="z-10">
+      <ul className="z-10">e
         {links.map((link, idx) => (
-          <Link href={link.href} key={link.href}>
+          <Link href={link.href} key={link.href} >
             <li className="cursor-pointer text-[80px]">
               <AnimatedLetters
                 string={link.title}
