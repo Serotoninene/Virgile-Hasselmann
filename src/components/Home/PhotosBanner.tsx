@@ -41,7 +41,7 @@ export default function PhotosBanner() {
             <Link href="/photos" >
               <Image
                 className="cursor-pointer"
-                src="https://virgile-portfollio.s3.amazonaws.com/photos/girl_portrait.png"
+                src="/assets/girl_portrait.webp"
                 layout="fill"
                 objectFit="cover"
                 objectPosition="center"
@@ -60,7 +60,7 @@ export default function PhotosBanner() {
               <Link href="/photos">
                 <Image
                   className="cursor-pointer"
-                  src="https://virgile-portfollio.s3.amazonaws.com/photos/hands_holding.png"
+                  src="https://virgile-portfollio.s3.amazonaws.com/photos/3.jpg"
                   layout="fill"
                   objectFit="cover"
                   objectPosition="center"

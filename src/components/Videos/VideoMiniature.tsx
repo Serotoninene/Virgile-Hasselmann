@@ -63,7 +63,6 @@ const VideoMiniature = ({ isInView, data }: VideoMiniatureProps) => {
         <motion.div className="overflow-hidden" variants={photoAnim}>
           <motion.div
             className="relative h-[184px] sm:h-[336px]"
-            // style={{ y }}
           >
             <Image
               alt={data.title}
