@@ -124,7 +124,7 @@ export default function ContactForm() {
   return (
     <div
       id="Contact"
-      className="relative px-2 pt-10 grid gap-8 sm:gap-0 sm:grid-cols-2 sm:px-6 sm:pt-14 sm:pb-6 sm:h-screen snap-child-start"
+      className="relative px-2 pt-10 grid gap-8 sm:gap-0 sm:grid-cols-2 sm:px-6 sm:pt-14 sm:pb-6 sm:h-screen 2xl:max-w-[1536px] m-auto snap-child-start"
     >
       {/* left part */}
       <motion.div
@@ -142,6 +142,7 @@ export default function ContactForm() {
             layout="fill"
             src="/assets/hands_praying.png"
             objectFit="cover"
+            objectPosition="center"
           />
         </motion.div>
       </motion.div>

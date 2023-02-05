@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo } from "react";
 // Server
 import { Video } from "@prisma/client";
 // Components
@@ -34,7 +34,7 @@ export default function Videos({ videos }: Props) {
   return (
     <div
       id="Videos"
-      className="relative py-4 grid grid-cols-2 xl:max-w-[1280px] 2xl:max-w-[1536px] xl:m-auto snap-child-start"
+      className="relative py-4 grid grid-cols-2 2xl:max-w-[1536px] xl:m-auto snap-child-start"
     >
       <VideosCol category="Evenements" videos={leftVideos} />
       {/* <div className="hidden sm:block absolute top-20 bottom-20 w-[0.5px] bg-light left-[50%]"></div> */}
