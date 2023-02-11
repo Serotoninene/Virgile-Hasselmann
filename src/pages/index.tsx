@@ -11,6 +11,7 @@ import ContactForm from "@components/Home/ContactForm";
 import Footer from "@components/Utils/Footer";
 import PhotosLoader from "@src/components/Utils/PhotosLoader";
 import LoadingFrame from "@src/components/LoadingFrame";
+import { useAuthContext } from "@src/contexts/AuthProvider";
 
 interface Props {
   videos: Video[];
@@ -22,11 +23,15 @@ export const getStaticProps: GetStaticProps = async () => {
   const photos = await prisma.photo.findMany();
   return {
     props: { videos, photos },
-    revalidate: 30
+    revalidate: 30,
   };
 };
 
 function Home({ videos, photos }: Props) {
+  const { userStatus } = useAuthContext();
+  const publicVideos = videos?.filter((video) => video.isSecret === false);
+  const secretVideos = videos?.filter((video) => video.isSecret === true);
+
   useEffect(() => {
     if (!photos) return;
 
@@ -44,7 +49,14 @@ function Home({ videos, photos }: Props) {
       {/* <SmoothScroll> */}
       <div className="snap-parent- ">
         <HeroVideo />
-        <Videos videos={videos} />
+        <Videos videos={publicVideos} />
+        {userStatus === "ADMIN" && (
+          <>
+            <h2> Secret Videos</h2>
+            <Videos videos={secretVideos} />{" "}
+          </>
+        )}
+
         <PhotosBanner />
         <ContactForm />
         <Footer />

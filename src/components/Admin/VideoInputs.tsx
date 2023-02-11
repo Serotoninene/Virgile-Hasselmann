@@ -46,6 +46,7 @@ const VideoInputs = ({ data }: Props) => {
       dateOfCreation,
       videoName: video.name,
       placeholder_hq: placeholder_hq.name,
+      isSecret,
     });
   };
 

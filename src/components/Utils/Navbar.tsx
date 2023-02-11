@@ -6,6 +6,7 @@ import CustomLink from "./CustomLink";
 import BurgerMenu from "./BurgerMenu";
 import { useRouter } from "next/router";
 import { IsLoadedContext } from "@src/contexts/IsLoadedProvider";
+import { useAuthContext } from "@src/contexts/AuthProvider";
 
 // Types
 interface Props {
@@ -51,6 +52,7 @@ const BurgerButton = ({ isBurgerOpen }: BurgerButtonProps) => {
 
 export default function Navbar({ isNavVisible }: Props) {
   const { pathname } = useRouter();
+  const { userStatus } = useAuthContext();
   const { isLoaded } = useContext(IsLoadedContext);
 
   const [isBurgerOpen, setIsBurgerOpen] = useState(false);
@@ -116,11 +118,24 @@ export default function Navbar({ isNavVisible }: Props) {
             <CustomLink href={link.href}>{link.title}</CustomLink>
           </motion.li>
         ))}
+        {userStatus === "ADMIN" && (
+          <motion.li
+            key={"admin"}
+            variants={itemsAnim}
+            className={`ml-14 text-lg ${pathname === "/admin" ? "hidden" : ""}`}
+          >
+            <CustomLink href="/admin">Admin</CustomLink>
+          </motion.li>
+        )}
       </ul>
       <div className="block z-10 mt-1 xs:hidden" onClick={toggleBurgerMenu}>
         <BurgerButton isBurgerOpen={isBurgerOpen} />
       </div>
-      <BurgerMenu isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} links={links} />
+      <BurgerMenu
+        isBurgerOpen={isBurgerOpen}
+        setIsBurgerOpen={setIsBurgerOpen}
+        links={links}
+      />
     </motion.div>
   );
 }
