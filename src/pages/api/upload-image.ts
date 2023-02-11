@@ -38,6 +38,8 @@ export async function uploadImage(file: File) {
         "Access-Control-Allow-Origin": "*",
       },
     });
+
+    return { message: "PHOTO UPLOADED WITH SUCCESS" };
   } catch (err) {
     return { message: err };
   }
@@ -54,7 +56,7 @@ export async function uploadVideo(file: File) {
     const fileParams = {
       Bucket: "virgile-portfollio/videos",
       Key: file.name,
-      Expires: 1000000,
+      Expires: 600,
       ContentType: file.type,
     };
 
@@ -67,7 +69,7 @@ export async function uploadVideo(file: File) {
       },
     });
 
-    return { message: "success" };
+    return { message: "VIDEO UPLOADED WITH SUCCESS" };
   } catch (err) {
     return { message: err };
   }

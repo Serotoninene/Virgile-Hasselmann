@@ -25,7 +25,6 @@ const VideoInputs = ({ data }: Props) => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-
     if (!placeholder_hq || !video) return;
 
     await uploadImage(placeholder_hq);

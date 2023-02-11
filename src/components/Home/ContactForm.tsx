@@ -139,6 +139,7 @@ export default function ContactForm() {
           whileInView="visible"
         >
           <Image
+            alt="hands praying"
             layout="fill"
             src="/assets/hands_praying.png"
             objectFit="cover"

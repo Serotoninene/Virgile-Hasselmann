@@ -1,4 +1,10 @@
-import React, { useState, createContext, useMemo, useEffect } from "react";
+import React, {
+  useState,
+  createContext,
+  useMemo,
+  useEffect,
+  useContext,
+} from "react";
 
 interface Props {
   children: JSX.Element;
@@ -20,12 +26,6 @@ export function AuthProvider({ children }: Props) {
   // 2 different roles for the user : "USER" and "ADMIN", by default, every one is USER
   const [userStatus, setUserStatus] = useState(localData || "USER");
 
-  // const saveUserStatus = (status: string) => {
-  //   setUserStatus(status);
-  //   typeof window !== "undefined" &&
-  //     window.localStorage.setItem("userStatus", JSON.stringify(status));
-  // };
-
   useEffect(() => {
     window.localStorage.setItem("userStatus", userStatus);
   }, [userStatus]);
@@ -38,3 +38,7 @@ export function AuthProvider({ children }: Props) {
     <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
   );
 }
+
+export const useAuthContext = () => {
+  return useContext(AuthContext);
+};

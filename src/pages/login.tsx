@@ -1,9 +1,7 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 // Components
 import UserLogin from "@src/components/Home/UserLogin";
-import { AuthContext } from "@src/contexts/AuthProvider";
-import { useRouter } from "next/router";
 
 const loginAnim = {
   hidden: { opacity: 0 },
@@ -11,15 +9,6 @@ const loginAnim = {
 };
 
 function Login() {
-  const router = useRouter();
-  const { userStatus } = useContext(AuthContext);
-
-  useEffect(() => {
-    if (userStatus === "ADMIN") {
-      router.push("/");
-    }
-  }, [userStatus]);
-
   return (
     <motion.div
       key="login"

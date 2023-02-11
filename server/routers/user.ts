@@ -9,6 +9,7 @@ export const userRouter = router({
   // signUp
   signUp: publicProcedure.input(z.string()).mutation(async ({ input }) => {
     const hash = bcrypt.hashSync(input, salt);
+    console.log(input);
     const user = await prisma.user.create({ data: { password: hash } });
     return user;
   }),
