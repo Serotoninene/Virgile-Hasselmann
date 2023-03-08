@@ -93,7 +93,7 @@ const Form = () => {
         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
       )
       .then(() => {
-        setFeedback("Message sent !");
+        setFeedback("Message Envoyé !");
         setHasSubmit(true);
       });
   };
@@ -157,7 +157,7 @@ export default function ContactForm() {
       >
         <motion.div id="ContactText" className="mb-6" variants={itemAnim}>
           <h2 className="text-3xl font-thin mb-2 sm:text-5xl">
-            Travaillons <span className="font-black">ensemble</span>
+            Travaillons <span className="font-black">ensemble</span> !
           </h2>
           <p className="font-thin">
             If you liked what you saw, do not hesitate to reach for me. I’m

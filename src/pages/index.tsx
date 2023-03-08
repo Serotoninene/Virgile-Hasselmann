@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect } from "react";
 import type { GetStaticProps } from "next";
 // Server
 import { prisma } from "@server/prisma";

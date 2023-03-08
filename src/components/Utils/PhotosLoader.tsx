@@ -14,6 +14,11 @@ interface Props {
 }
 
 function PhotosLoader({ photos, videos }: Props) {
+  const photosOnlyOnHome = [
+    "/assets/girl_portrait.webp",
+    "https://virgile-portfollio.s3.amazonaws.com/photos/3.jpg",
+    "/assets/hands_praying.png",
+  ];
   const [loaded, setLoaded] = useState(0);
   const [errored, setErrored] = useState(0);
   const { setIsLoaded } = useContext(IsLoadedContext);
@@ -29,7 +34,7 @@ function PhotosLoader({ photos, videos }: Props) {
 
   useEffect(() => {
     const percentage =
-      ((loaded + errored) / (photos.length + videos.length)) * 100;
+      ((loaded + errored) / (photos.length + videos.length + 3)) * 100;
     setLoadingState(percentage.toFixed(0));
     if (percentage === 100) {
       setTimeout(() => setIsLoaded(true), 1500);
@@ -43,6 +48,17 @@ function PhotosLoader({ photos, videos }: Props) {
           key={photo.id}
           alt=""
           src={photoLink + photo.photoName}
+          layout="fill"
+          onLoad={handleLoad}
+          onError={handleError}
+        />
+      ))}
+      {/* Photos only on the home */}
+      {photosOnlyOnHome.map((photo, idx) => (
+        <Image
+          key={idx}
+          alt=""
+          src={photo}
           layout="fill"
           onLoad={handleLoad}
           onError={handleError}

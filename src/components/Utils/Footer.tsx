@@ -14,12 +14,8 @@ interface DateElements {
 
 const contactsLinks = [
   {
-    text: "Twitter : @virgilehasselman",
-    href: "https://twitter.com/",
-  },
-  {
-    text: "Instagram : https://www.instagram.com/serotoninene",
-    href: " https://www.instagram.com/serotoninene",
+    text: "Instagram : v_hasselmann",
+    href: " https://www.instagram.com/v_hasselmann",
   },
   {
     text: "Email : virgilehasselman@gmail.com",
@@ -115,7 +111,7 @@ export default function Footer() {
         <h3 className="font-black mb-4 md:mb-12">Contacts</h3>
         <ul>
           {contactsLinks.map((contactLink) => (
-            <li key={contactLink.text} className="pb-2">
+            <li key={contactLink.text} className="pb-2 cursor-pointer">
               <a href={contactLink.href}>{contactLink.text}</a>
             </li>
           ))}
