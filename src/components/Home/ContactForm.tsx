@@ -93,7 +93,7 @@ const Form = () => {
         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
       )
       .then(() => {
-        setFeedback("Message Envoyé !");
+        setFeedback("Votre message a bien été envoyé");
         setHasSubmit(true);
       });
   };
@@ -115,7 +115,7 @@ const Form = () => {
       <div className="sm:col-span-2 sm:mt-2">
         <Button />
       </div>
-      {hasSubmit && <p className="text-center text-blue">{feedback}</p>}
+      {hasSubmit && <p className="text-left">{feedback}</p>}
     </motion.form>
   );
 };
@@ -160,10 +160,8 @@ export default function ContactForm() {
             Travaillons <span className="font-black">ensemble</span> !
           </h2>
           <p className="font-thin">
-            If you liked what you saw, do not hesitate to reach for me. I’m
-            cool, fun and nice and I’m a workaholic, love working, evey day all
-            the day you know. It’s just like a drug. So let’s work together.
-            Please 🙏
+            N'hésitez pas à me contacter ici pour toute demande de collaboration
+            ! 🤝
           </p>
         </motion.div>
         <Form />

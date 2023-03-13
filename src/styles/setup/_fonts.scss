@@ -25,6 +25,24 @@
 }
 
 @font-face {
+  font-family: "PPRadioGrotesk";
+  src: url("/fonts/PPRadioGrotesk-Ultralight.otf") format("OpenType");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "PPRadioGrotesk";
+  src: url("/fonts/PPRadioGrotesk-Regular.otf") format("OpenType");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "PPRadioGrotesk";
+  src: url("/fonts/PPRadioGrotesk-Black.ttf") format("OpenType");
+  font-weight: 900;
+}
+
+@font-face {
   font-family: "BwModelica";
   src: url("/fonts/BwModelica-ExtraBold.otf") format("OpenType");
   font-weight: 800;

@@ -63,14 +63,14 @@ const Content = () => {
           // transition={{ ease: [0.3, 0.01, -0.05, 0.95] }}
           className="hidden lg:block"
         >
-          Made by @Serotoninene, 2022
+          @Virgile Hasselmann, 2023
         </motion.p>
         <motion.p
           variants={itemsAnim}
           className="text-center font-light text-xl xs:text-3xl lg:text-end lg:text-2xl lg:w-[30vw]"
         >
-          Supa short text with a biiiig unerline. Explaining basically who is
-          Virgile and what he does (can be keywords).
+          Spectacles, Musique, Danse, Sport, Artisanat... Je créer des vidéos
+          artistique pour mettre en lumière votre projet.
         </motion.p>
       </motion.div>
       <div className="absolute w-screen flex justify-center bottom-2 xs:bottom-6">
