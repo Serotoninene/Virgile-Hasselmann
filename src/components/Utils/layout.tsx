@@ -74,6 +74,7 @@ const Layout = ({ children }: Props): JSX.Element => {
         <Navbar isNavVisible={isNavVisible} />
       </header>
       <main>
+        <div className="noise"></div>
         {/* Background noise */}
         <div className="h-full w-full fixed top-0 left-0">
           <Image alt="noise" src="/assets/noise.png" layout="fill" />

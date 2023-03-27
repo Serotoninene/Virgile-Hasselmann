@@ -50,12 +50,12 @@ function Home({ videos, photos }: Props) {
       <div className="snap-parent- ">
         <HeroVideo />
         <Videos videos={publicVideos} />
-        {userStatus === "ADMIN" && (
+        {/* {userStatus === "ADMIN" && (
           <>
             <h2> Secret Videos</h2>
             <Videos videos={secretVideos} />{" "}
           </>
-        )}
+        )} */}
 
         <PhotosBanner />
         <ContactForm />
