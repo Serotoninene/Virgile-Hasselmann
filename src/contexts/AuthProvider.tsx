@@ -22,9 +22,13 @@ function getInitialState() {
 }
 
 export function AuthProvider({ children }: Props) {
-  const localData = getInitialState();
   // 2 different roles for the user : "USER" and "ADMIN", by default, every one is USER
-  const [userStatus, setUserStatus] = useState(localData || "USER");
+  const [userStatus, setUserStatus] = useState("USER");
+
+  useEffect(() => {
+    const localData = window.localStorage.getItem("userStatus");
+    setUserStatus(localData || "USER");
+  }, []);
 
   useEffect(() => {
     window.localStorage.setItem("userStatus", userStatus);

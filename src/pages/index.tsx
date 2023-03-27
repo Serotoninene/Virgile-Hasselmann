@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import type { GetStaticProps } from "next";
 // Server
 import { prisma } from "@server/prisma";
@@ -18,6 +18,11 @@ interface Props {
   photos: Photo[];
 }
 
+interface SecretVideosProps {
+  videos: Video[];
+  userStatus: string;
+}
+
 export const getStaticProps: GetStaticProps = async () => {
   const videos = await prisma.video.findMany();
   const photos = await prisma.photo.findMany();
@@ -27,10 +32,27 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
+const SecretVideos = ({ videos, userStatus }: SecretVideosProps) => {
+  console.log(userStatus);
+  if (userStatus !== "ADMIN") return null;
+
+  return (
+    <section>
+      <h2> Secret Videos</h2>
+      <Videos videos={videos} />
+    </section>
+  );
+};
+
 function Home({ videos, photos }: Props) {
   const { userStatus } = useAuthContext();
-  const publicVideos = videos?.filter((video) => video.isSecret === false);
-  const secretVideos = videos?.filter((video) => video.isSecret === true);
+  const [publicVideos, setPublicVideos] = useState<Video[]>([]);
+  const [secretVideos, setSecretVideos] = useState<Video[]>([]);
+
+  useEffect(() => {
+    setPublicVideos(videos?.filter((video) => video.isSecret === false));
+    setSecretVideos(videos?.filter((video) => video.isSecret === true));
+  }, []);
 
   useEffect(() => {
     if (!photos) return;
@@ -42,7 +64,6 @@ function Home({ videos, photos }: Props) {
 
   return (
     <div id="Home" className="w-screen h-screen relative ">
-      {/* preloading test */}
       <LoadingFrame />
       <PhotosLoader photos={photos} videos={videos} />
 
@@ -50,12 +71,7 @@ function Home({ videos, photos }: Props) {
       <div className="snap-parent- ">
         <HeroVideo />
         <Videos videos={publicVideos} />
-        {/* {userStatus === "ADMIN" && (
-          <>
-            <h2> Secret Videos</h2>
-            <Videos videos={secretVideos} />{" "}
-          </>
-        )} */}
+        <SecretVideos videos={secretVideos} userStatus={userStatus} />
 
         <PhotosBanner />
         <ContactForm />

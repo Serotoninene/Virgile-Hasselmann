@@ -42,7 +42,7 @@ const Miniature = ({
 
   return (
     <div onClick={changePhotoDisplayed} className="mb-4">
-      <div className="w-[13vw] h-[20vw] relative">
+      <div className="w-[13vw] h-[20vw] relative cursor-pointer">
         <Image
           alt={photo.photoName}
           src={photoLink + photo.photoName}
