@@ -30,9 +30,9 @@ export function AuthProvider({ children }: Props) {
     setUserStatus(localData || "USER");
   }, []);
 
-  useEffect(() => {
-    window.localStorage.setItem("userStatus", userStatus);
-  }, [userStatus]);
+  // useEffect(() => {
+  //   window.localStorage.setItem("userStatus", userStatus);
+  // }, [userStatus]);
 
   const contextValue = useMemo(() => {
     return { userStatus, setUserStatus };
