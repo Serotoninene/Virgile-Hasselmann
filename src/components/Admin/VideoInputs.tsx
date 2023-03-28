@@ -1,15 +1,11 @@
-import React, { FormEvent, useRef, useState } from "react";
+import React, { FormEvent, useEffect, useRef, useState } from "react";
 // Api
 import { trpc } from "@server/utils/trpc";
 import { uploadImage, uploadVideo } from "@src/pages/api/upload-image";
 // Types
 import { Video } from "@prisma/client";
 
-import {
-  CameraIcon,
-  PhotoIcon,
-  UserCircleIcon,
-} from "@heroicons/react/24/solid";
+import { CameraIcon, PhotoIcon } from "@heroicons/react/24/solid";
 
 interface Props {
   data?: Video;
@@ -19,6 +15,8 @@ const VideoInputs = ({ data }: Props) => {
   // inputs
   const [title, setTitle] = useState<string>(data ? data.title : "");
   const [isDragOver, setIsDragOver] = useState(false);
+
+  const [status, setStatus] = useState({ message: "", type: "" });
   const [dateOfCreation, setDateOfCreation] = useState<Date>(
     data ? data.dateOfCreation : new Date("2023-01-01")
   );
@@ -29,11 +27,28 @@ const VideoInputs = ({ data }: Props) => {
 
   const [isSecret, setIsSecret] = useState<boolean>(false);
 
-  console.log(video);
-
   // trpc  API routes
   const updateVideo = trpc.video.update.useMutation();
   const createVideo = trpc.video.create.useMutation();
+
+  useEffect(() => {
+    if (createVideo.isSuccess || createVideo.isError) {
+      setStatus(
+        createVideo.error
+          ? { type: "ERROR", message: createVideo.error.toString() }
+          : { type: "SUCCESS", message: " Vidéo enregistrée " }
+      );
+    }
+  }, [createVideo.isSuccess, createVideo.isError]);
+
+  useEffect(() => {
+    if (!status.type || status.type === "LOADING") return;
+    const timeout = setTimeout(() => {
+      setStatus({ message: "", type: "" });
+    }, 2500);
+
+    return () => clearTimeout(timeout);
+  }, [status]);
 
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -48,7 +63,12 @@ const VideoInputs = ({ data }: Props) => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+
     if (!placeholder_hq || !video) return;
+    setStatus({
+      type: "LOADING",
+      message: "Upload en cours. Peut prendre plusieurs minutes.",
+    });
 
     await uploadImage(placeholder_hq);
     await uploadVideo(video);
@@ -183,6 +203,7 @@ const VideoInputs = ({ data }: Props) => {
       >
         Submit
       </button>
+      {status.message && <div>{status.message}</div>}
     </form>
 
     // <form onSubmit={handleSubmit} className="flex flex-col gap-4 mb-8">
