@@ -6,6 +6,7 @@ import { uploadImage, uploadVideo } from "@src/pages/api/upload-image";
 import { Video } from "@prisma/client";
 
 import { CameraIcon, PhotoIcon } from "@heroicons/react/24/solid";
+import Button from "../Utils/Button";
 
 interface Props {
   data?: Video;
@@ -30,25 +31,6 @@ const VideoInputs = ({ data }: Props) => {
   // trpc  API routes
   const updateVideo = trpc.video.update.useMutation();
   const createVideo = trpc.video.create.useMutation();
-
-  useEffect(() => {
-    if (createVideo.isSuccess || createVideo.isError) {
-      setStatus(
-        createVideo.error
-          ? { type: "ERROR", message: createVideo.error.toString() }
-          : { type: "SUCCESS", message: " Vidéo enregistrée " }
-      );
-    }
-  }, [createVideo.isSuccess, createVideo.isError]);
-
-  useEffect(() => {
-    if (!status.type || status.type === "LOADING") return;
-    const timeout = setTimeout(() => {
-      setStatus({ message: "", type: "" });
-    }, 2500);
-
-    return () => clearTimeout(timeout);
-  }, [status]);
 
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -80,7 +62,30 @@ const VideoInputs = ({ data }: Props) => {
       placeholder_hq: placeholder_hq.name,
       isSecret,
     });
+    setTitle("");
+    setVideo(undefined);
+    setPlaceholder_hq(undefined);
+    setIsSecret(false);
   };
+
+  useEffect(() => {
+    if (!status.type || status.type === "LOADING") return;
+    const timeout = setTimeout(() => {
+      setStatus({ message: "", type: "" });
+    }, 2500);
+
+    return () => clearTimeout(timeout);
+  }, [status]);
+
+  useEffect(() => {
+    if (createVideo.isSuccess || createVideo.isError) {
+      setStatus(
+        createVideo.error
+          ? { type: "ERROR", message: createVideo.error.toString() }
+          : { type: "SUCCESS", message: " Vidéo enregistrée " }
+      );
+    }
+  }, [createVideo.isSuccess, createVideo.isError]);
 
   return (
     <form
@@ -197,70 +202,9 @@ const VideoInputs = ({ data }: Props) => {
         />
       </div>
 
-      <button
-        onClick={handleSubmit}
-        className="mt-2 border border-gray-500 px-10 py-2 flex-none rounded w-fit"
-      >
-        Submit
-      </button>
+      <Button onClick={handleSubmit}>Submit</Button>
       {status.message && <div>{status.message}</div>}
     </form>
-
-    // <form onSubmit={handleSubmit} className="flex flex-col gap-4 mb-8">
-    //   <input
-    //     id="title"
-    //     type="text"
-    //     className="p-1 bg-transparent outline-none border border-light text-light"
-    //     value={title}
-    //     onChange={(e) => setTitle(e.target.value)}
-    //     placeholder="Title"
-    //   />
-    //   <div className="flex justify-between">
-    //     <div className="titleContainer flex items-center gap-4">
-    //       <label htmlFor="date">Date of Creation</label>
-    //       <input
-    //         id="date"
-    //         type="date"
-    //         className="p-1 bg-transparent outline-none border border-light text-light"
-    //         value={dateOfCreation.toISOString().split("T")[0]}
-    //         onChange={(e) => setDateOfCreation(new Date(e.target.value))}
-    //       />
-    //     </div>
-
-    //     <div className="VideoContainer flex items-center gap-4">
-    //       <label htmlFor="video"> Video</label>
-    //       <input
-    //         id="video"
-    //         type="file"
-    //         className="p-1 bg-transparent outline-none border border-light text-light"
-    //         onChange={(e) => setVideo(e.currentTarget.files![0])}
-    //         placeholder="Name of the data"
-    //       />
-    //     </div>
-    //   </div>
-    //   <div className="placeholderContainer flex items-center self-center gap-4">
-    //     <label htmlFor="placeholder">Placeholder</label>
-    //     <input
-    //       id="placeholder"
-    //       type="file"
-    //       className="p-1 bg-transparent outline-none border border-light text-light"
-    //       onChange={(e) => setPlaceholder_hq(e.currentTarget.files![0])}
-    //       placeholder="Placeholder HQ"
-    //     />
-    //   </div>
-    //   <div className="flex justify-between">
-    //     <div className="placeholderContainer flex items-center gap-4">
-    //       <label htmlFor="secret"> Secret ? </label>
-    //       <input
-    //         type="checkbox"
-    //         id="secret"
-    //         checked={isSecret}
-    //         onChange={(e) => setIsSecret(e.target.checked)}
-    //       />
-    //     </div>
-    //
-    //   </div>
-    // </form>
   );
 };
 
