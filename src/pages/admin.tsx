@@ -10,6 +10,7 @@ import { Photo, Video } from "@prisma/client";
 // Component
 import VideoSection from "@src/components/Admin/VideoSection";
 import PhotoInputs from "@src/components/Admin/PhotoInputs";
+import PhotoSection from "@src/components/Admin/PhotoSection";
 
 // Defining a type for videos that includes the relation with categories`
 
@@ -91,7 +92,7 @@ export default function Admin({ videos, photos }: Props) {
           </div>
         </div>
         {currentTab === "Photo" ? (
-          <PhotoInputs />
+          <PhotoSection photos={photos} />
         ) : (
           <VideoSection videos={videos} />
         )}
