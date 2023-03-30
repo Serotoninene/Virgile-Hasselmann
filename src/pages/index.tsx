@@ -24,7 +24,9 @@ interface SecretVideosProps {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const videos = await prisma.video.findMany();
+  const videos = await prisma.video.findMany({
+    orderBy: { dateOfCreation: "desc" },
+  });
   const photos = await prisma.photo.findMany();
   return {
     props: { videos, photos },
@@ -33,7 +35,6 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 const SecretVideos = ({ videos, userStatus }: SecretVideosProps) => {
-  console.log(userStatus);
   if (userStatus !== "ADMIN") return null;
 
   return (
@@ -45,6 +46,7 @@ const SecretVideos = ({ videos, userStatus }: SecretVideosProps) => {
 };
 
 function Home({ videos, photos }: Props) {
+  console.log(videos);
   const { userStatus } = useAuthContext();
   const [publicVideos, setPublicVideos] = useState<Video[]>([]);
   const [secretVideos, setSecretVideos] = useState<Video[]>([]);

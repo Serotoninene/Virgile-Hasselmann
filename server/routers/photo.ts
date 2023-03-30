@@ -23,7 +23,7 @@ export const photoRouter = router({
     }),
   // Read
   list: publicProcedure.query(async () => {
-    return await prisma.photo.findMany();
+    return await prisma.photo.findMany({ orderBy: { createdAt: "desc" } });
   }),
   // Update
   update: publicProcedure

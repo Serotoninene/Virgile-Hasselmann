@@ -5,7 +5,7 @@ import { uploadImage, uploadVideo } from "@src/pages/api/upload-image";
 // Types
 import { Video } from "@prisma/client";
 
-import { CameraIcon, PhotoIcon } from "@heroicons/react/24/solid";
+import { PhotoIcon } from "@heroicons/react/24/solid";
 import Button from "../Utils/Button";
 
 interface Props {
@@ -123,12 +123,10 @@ const VideoInputs = ({ data }: Props) => {
           Photo de la vignette
         </label>
         <div className="mt-2 flex items-center gap-x-3">
-          <CameraIcon className="h-12 w-12 text-gray-300" aria-hidden="true" />
-
           <input
             id="placeholder"
             type="file"
-            className="p-2 bg-transparent rounded outline-none border border-gray-500 text-gray-500"
+            className="p-2 bg-transparent rounded outline-none border border-gray-500 text-gray-500 cursor-pointer"
             onChange={(e) => setPlaceholder_hq(e.currentTarget.files![0])}
             placeholder="Placeholder HQ"
           />
@@ -140,7 +138,7 @@ const VideoInputs = ({ data }: Props) => {
         <input
           id="date"
           type="date"
-          className="block mt-2 py-2 px-3 bg-transparent drop-shadow rounded outline-none border border-gray-900  focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600"
+          className="block mt-2 py-2 px-3 bg-transparent drop-shadow cursor-pointer rounded outline-none border border-gray-900  focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600"
           value={dateOfCreation.toISOString().split("T")[0]}
           onChange={(e) => setDateOfCreation(new Date(e.target.value))}
         />

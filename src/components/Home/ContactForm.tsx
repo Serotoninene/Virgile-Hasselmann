@@ -10,6 +10,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 // EmailJs
 import emailjs from "@emailjs/browser";
+import AnimatedLetters from "../Utils/AnimatedLetters";
 
 // Types
 interface InputProps {
@@ -115,7 +116,11 @@ const Form = () => {
       <div className="sm:col-span-2 sm:mt-2">
         <Button />
       </div>
-      {hasSubmit && <p className="text-left">{feedback}</p>}
+      {hasSubmit && (
+        <p className="w-full text-center sm:absolute sm:bottom-28">
+          <AnimatedLetters string={feedback} stagger={0.005} />
+        </p>
+      )}
     </motion.form>
   );
 };
@@ -153,7 +158,7 @@ export default function ContactForm() {
         initial="hidden"
         whileInView="visible"
         exit="hidden"
-        className="px-2 sm:px-6 sm:flex sm:flex-col sm:justify-center sm:items-center 2xl:px-12"
+        className="relative px-2 sm:px-6 sm:flex sm:flex-col sm:justify-center sm:items-center 2xl:px-12"
       >
         <motion.div id="ContactText" className="mb-6" variants={itemAnim}>
           <h2 className="text-3xl font-thin mb-2 sm:text-5xl">
@@ -167,7 +172,7 @@ export default function ContactForm() {
         <Form />
         <motion.div
           variants={itemAnim}
-          className="flex justify-between mb-2 sm:absolute sm:right-6 sm:bottom-6"
+          className="flex justify-between mb-2 sm:absolute sm:right-4 sm:bottom-0"
         >
           <p className="sm:hidden">Instagram</p>
           <p>@VirgileHasselman, 2022</p>

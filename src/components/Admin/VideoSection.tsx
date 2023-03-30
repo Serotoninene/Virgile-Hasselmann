@@ -69,7 +69,7 @@ export default function VideoSection({ videos }: Props) {
         <VideoInputs />
       ) : (
         <button
-          className="text-white rounded bg-blue px-4 py-2 hover:bg-indigo-400"
+          className="text-white rounded bg-blue px-4 py-2 hover:bg-indigo-400 mb-10"
           onClick={() => {
             setIsAddingVideo(true);
           }}
@@ -78,7 +78,7 @@ export default function VideoSection({ videos }: Props) {
         </button>
       )}
       <section>
-        <ul className="grid grid-cols-1  gap-4 sm:grid-cols-2 md:grid-cols-4">
+        <ul className="grid grid-cols-1 pb-10 gap-4 sm:grid-cols-2 md:grid-cols-4">
           {videos &&
             videos.map((video) => (
               <VideoLine video={video} key={video.id.toString()} />

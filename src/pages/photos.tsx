@@ -10,8 +10,8 @@ import CustomCursor from "@src/components/Utils/CustomCursor";
 
 export default function Photos() {
   // Getting all the datas, photos and filters(/ that I'll call categories for more complexity ...)
-  const photosFromApi: Photo[] | undefined = trpc.photo.list.useQuery().data;
-  const [photosData, setPhotosData] = useState<Photo[] | undefined>();
+  const photosData: Photo[] | undefined = trpc.photo.list.useQuery().data;
+  // const [photosData, setPhotosData] = useState<Photo[] | undefined>();
 
   const [isOverview, setIsOverview] = useState(false); // if overview's true -> shows the overview nav bar (to be made)
 
@@ -23,14 +23,7 @@ export default function Photos() {
   const [actionIndicator, setActionIndicator] = useState("");
 
   useEffect(() => {
-    const photosFromLocalStore: any = localStorage.getItem("photosData");
-
-    if (photosFromLocalStore) {
-      setPhotosData(JSON.parse(photosFromLocalStore));
-    } else {
-      setPhotosData(photosFromApi);
-      window.localStorage.setItem("photosData", JSON.stringify(photosFromApi));
-    }
+    // setPhotosData(photosFromApi);
   }, []);
 
   // Here we'll push all the data fetched by api into the states

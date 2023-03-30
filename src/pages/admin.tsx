@@ -9,11 +9,10 @@ import { prisma } from "@server/prisma";
 import { Photo, Video } from "@prisma/client";
 // Component
 import VideoSection from "@src/components/Admin/VideoSection";
-import PhotoInputs from "@src/components/Admin/PhotoInputs";
+
 import PhotoSection from "@src/components/Admin/PhotoSection";
 
-// Defining a type for videos that includes the relation with categories`
-
+// Defining a type for videos that includes the relation with categories
 interface Props {
   videos: Video[];
   photos: Photo[];
@@ -21,10 +20,13 @@ interface Props {
 
 export const getStaticProps: GetStaticProps = async () => {
   const videos = await prisma.video.findMany();
-  const photos = await prisma.photo.findMany();
+  const photos = await prisma.photo.findMany({
+    orderBy: { dateOfCreation: "desc" },
+  });
 
   return {
     props: { videos: videos, photos: photos },
+    revalidate: 30,
   };
 };
 
@@ -48,7 +50,7 @@ export default function Admin({ videos, photos }: Props) {
       <h1 className="text-center text-2xl text-light font-bold my-10">
         Admin's page
       </h1>
-      <div className="bg-gray-100 text-gray-900 rounded mx-6 px-4 sm:mx-20 sm:px-10">
+      <div className="bg-gray-100 text-gray-900 rounded mx-6 px-4 mb-10 sm:mx-20 sm:px-10">
         <div className="sm:hidden">
           <label htmlFor="tabs" className="sr-only">
             Select a tab
@@ -70,7 +72,7 @@ export default function Admin({ videos, photos }: Props) {
             ))}
           </select>
         </div>
-        <div className="hidden  sm:block">
+        <div className="hidden sm:block">
           <div className="border-b border-gray-200">
             <nav className="-mb-px flex space-x-8" aria-label="Tabs">
               {tabs.map((tab) => (
