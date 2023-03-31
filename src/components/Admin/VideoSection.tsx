@@ -5,6 +5,7 @@ import { Video } from "@prisma/client";
 import { trpc } from "@server/utils/trpc";
 
 import VideoInputs from "./VideoInputs";
+import Link from "next/link";
 
 type Props = {
   videos: Video[];
@@ -40,12 +41,14 @@ const VideoLine = ({ video }: VideoLineProps) => {
           </p>
           <h3 className="mt-1 font-semibold text-gray-900">{video.title}</h3>
           <div className="mt-1 flex flex-1 items-end justify-center gap-4 text-blue">
-            <button
-              type="button"
-              className="text-sm font-medium hover:text-indigo-500"
-            >
-              Mettre à jour
-            </button>
+            <Link href={`/admin/${video.id}`}>
+              <button
+                type="button"
+                className="text-sm font-medium hover:text-indigo-500"
+              >
+                Mettre à jour
+              </button>
+            </Link>
             <button
               type="button"
               className="text-sm font-medium hover:text-indigo-500"

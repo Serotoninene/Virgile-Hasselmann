@@ -17,7 +17,6 @@ const VideoInputs = ({ data }: Props) => {
   const [title, setTitle] = useState<string>(data ? data.title : "");
   const [isDragOver, setIsDragOver] = useState(false);
 
-  const [status, setStatus] = useState({ message: "", type: "" });
   const [dateOfCreation, setDateOfCreation] = useState<Date>(
     data ? data.dateOfCreation : new Date("2023-01-01")
   );
@@ -26,10 +25,11 @@ const VideoInputs = ({ data }: Props) => {
   const [video, setVideo] = useState<File>();
   const [placeholder_hq, setPlaceholder_hq] = useState<File>();
 
+  const [status, setStatus] = useState({ message: "", type: "" });
+
   const [isSecret, setIsSecret] = useState<boolean>(false);
 
   // trpc  API routes
-  const updateVideo = trpc.video.update.useMutation();
   const createVideo = trpc.video.create.useMutation();
 
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
@@ -200,7 +200,9 @@ const VideoInputs = ({ data }: Props) => {
         />
       </div>
 
-      <Button onClick={handleSubmit}>Submit</Button>
+      <div className="flex justify-center">
+        <Button onClick={handleSubmit}>Submit</Button>
+      </div>
       {status.message && <div>{status.message}</div>}
     </form>
   );

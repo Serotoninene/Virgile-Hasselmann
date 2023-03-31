@@ -38,6 +38,7 @@ export const videoRouter = router({
         placeholder_lq: z.string().or(z.undefined()),
         placeholder_hq: z.string(),
         description: z.string().or(z.undefined()),
+        isSecret: z.boolean().or(z.undefined()),
       })
     )
     .mutation(async ({ input }) => {
@@ -49,6 +50,7 @@ export const videoRouter = router({
           videoName: input.videoName,
           placeholder_lq: input.placeholder_lq,
           placeholder_hq: input.placeholder_hq,
+          isSecret: input.isSecret,
         },
       });
       return { success: true, video: updatedVideo };
