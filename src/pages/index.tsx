@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { GetStaticProps } from "next";
+import type { GetServerSideProps } from "next";
 // Server
 import { prisma } from "@server/prisma";
 import { Photo, Video } from "@prisma/client";
@@ -23,14 +23,13 @@ interface SecretVideosProps {
   userStatus: string;
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const videos = await prisma.video.findMany({
     orderBy: { dateOfCreation: "desc" },
   });
   const photos = await prisma.photo.findMany();
   return {
     props: { videos, photos },
-    revalidate: 30,
   };
 };
 

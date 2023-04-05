@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { GetStaticProps } from "next";
+import { GetServerSideProps, GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import classNames from "@src/utils";
 // Context
@@ -18,7 +18,7 @@ interface Props {
   photos: Photo[];
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const videos = await prisma.video.findMany();
   const photos = await prisma.photo.findMany({
     orderBy: { dateOfCreation: "desc" },
@@ -26,7 +26,6 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: { videos: videos, photos: photos },
-    revalidate: 30,
   };
 };
 
