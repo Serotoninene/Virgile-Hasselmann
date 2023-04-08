@@ -82,11 +82,10 @@ export default function Footer() {
       <div className="pb-6 col-span-3">
         <h3 className="font-black mb-4 md:mb-12">Virgile Hasselmann</h3>
         <p className="font-extralight">
-          Virgile Hasselmann is a young videomaker from Paris, France (and not
-          Texas lul). His work was featured in both corporate projects and
-          artistic ones inclunding music and cinema. Today he is a young
-          incredibe young dude that’s lives an healthy life and makes crazy
-          jokes.
+          Vidéaste et photographe basé sur Paris, je suis ouvert à tout types de
+          projets. Du concept à la finalisation je vous accompagne tout le long
+          de la création de l'histoire que vous voulez raconter ainsi que de
+          l'identité visuelle désirée.
         </p>
       </div>
       <div className="col-span-1" />
