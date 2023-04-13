@@ -12,16 +12,6 @@ interface DateElements {
   hour?: string;
 }
 
-const contactsLinks = [
-  {
-    text: "Instagram : v_hasselmann",
-    href: " https://www.instagram.com/v_hasselmann",
-  },
-  {
-    text: "Email : virgilehasselman@gmail.com",
-    href: " virgilehasselman@gmail.com",
-  },
-];
 function capitalizeWord(string: string) {
   const uppercasedString = [string].map(
     (element: string) =>
@@ -109,11 +99,16 @@ export default function Footer() {
       <div className="pb-3 md:pb-6 col-span-4">
         <h3 className="font-black mb-4 md:mb-12">Contacts</h3>
         <ul>
-          {contactsLinks.map((contactLink) => (
-            <li key={contactLink.text} className="pb-2 cursor-pointer">
-              <a href={contactLink.href}>{contactLink.text}</a>
-            </li>
-          ))}
+          <li className="pb-2 cursor-pointer">
+            <a
+              target="_blank"
+              rel="noreferrer"
+              href="https://www.instagram.com/v_hasselmann"
+            >
+              Instagram : v_hasselmann
+            </a>
+          </li>
+          <li className="pb-2">Email : virgilehasselman@gmail.com</li>
         </ul>
       </div>
       {/* Footer of the footer */}
