@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 // Framer motion
 import { motion } from "framer-motion";
+import bcrypt from "bcryptjs";
 
 interface DateElements {
   weekday?: string;
@@ -57,11 +58,6 @@ export const DateFormatted = () => {
 };
 
 export default function Footer() {
-  const { pathname } = useRouter();
-  {
-    /* Mardi 4 Octobre, 16:02 */
-  }
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
@@ -72,10 +68,9 @@ export default function Footer() {
       <div className="pb-6 col-span-3">
         <h3 className="font-black mb-4 md:mb-12">Virgile Hasselmann</h3>
         <p className="font-extralight">
-          Vidéaste et photographe basé sur Paris, je suis ouvert à tout types de
-          projets. Du concept à la finalisation je vous accompagne tout le long
-          de la création de l'histoire que vous voulez raconter ainsi que de
-          l'identité visuelle désirée.
+          Je vous accompagne dans la création d’une histoire et d’une identité
+          visuelle pour votre projet en restant à l’écoute de vos envies et
+          besoins.
         </p>
       </div>
       <div className="col-span-1" />

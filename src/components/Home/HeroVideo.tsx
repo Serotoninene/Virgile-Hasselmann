@@ -69,7 +69,7 @@ const Content = () => {
           variants={itemsAnim}
           className="text-center font-light text-xl xs:text-3xl lg:text-end lg:text-2xl lg:w-[30vw]"
         >
-          Spectacles, Musique, Danse, Sport, Artisanat... Je crée des vidéos
+          Spectacles, musique, danse, sport, entreprises... Je crée des vidéos
           artistiques pour mettre en lumière votre projet.
         </motion.p>
       </motion.div>
