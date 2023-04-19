@@ -174,7 +174,7 @@ export default function ContactForm() {
           variants={itemAnim}
           className="flex justify-between mb-2 sm:absolute sm:right-4 sm:bottom-0"
         >
-          <p className="sm:hidden">Instagram</p>
+          <p className="sm:hidden"></p>
           <p>@VirgileHasselman, 2022</p>
         </motion.div>
       </motion.div>

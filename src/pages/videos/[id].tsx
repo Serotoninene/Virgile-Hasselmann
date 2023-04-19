@@ -35,6 +35,9 @@ const VideoPlayer = () => {
           preload="metadata"
           autoPlay
           controls
+          onLoadedData={() => {
+            console.log("finish loading ?");
+          }}
           controlsList="nodownload nofullscreen noremoteplayback"
           className={`w-full h-full object-cover`}
         >

@@ -103,7 +103,7 @@ export default function Footer() {
               Instagram : v_hasselmann
             </a>
           </li>
-          <li className="pb-2">Email : virgilehasselman@gmail.com</li>
+          <li className="pb-2">Email : virgile.hasselmann@hotmail.fr</li>
         </ul>
       </div>
       {/* Footer of the footer */}
