@@ -116,7 +116,7 @@ export default function Footer() {
         <DateFormatted />
       </div>
       <div className="hidden col-span-4 justify-between text-sm md:flex">
-        <p>@VirgileHasselman, 2022</p>
+        <p>@VirgileHasselman, 2023</p>
         <div className="w-2 h-2 bg-light mt-1"></div>
       </div>
     </motion.div>

@@ -175,7 +175,7 @@ export default function ContactForm() {
           className="flex justify-between mb-2 sm:absolute sm:right-4 sm:bottom-0"
         >
           <p className="sm:hidden"></p>
-          <p>@VirgileHasselman, 2022</p>
+          <p>@VirgileHasselman, 2023</p>
         </motion.div>
       </motion.div>
     </div>
