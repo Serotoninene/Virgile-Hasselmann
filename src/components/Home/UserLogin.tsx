@@ -3,6 +3,7 @@ import { FormEvent, useState } from "react";
 import { useAuthContext } from "@src/contexts/AuthProvider";
 // Trpc
 import { trpc } from "@server/utils/trpc";
+import Button from "../Utils/Button";
 
 const UserLogin = () => {
   const { userStatus, setUserStatus } = useAuthContext();
@@ -17,6 +18,7 @@ const UserLogin = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log("trying to login");
     // signUp.mutate(password);
     login.mutate(password);
   };
@@ -29,7 +31,6 @@ const UserLogin = () => {
 
   return (
     <>
-      {" "}
       <form onSubmit={(e) => handleSubmit(e)} className="z-10">
         <input
           type="password"
@@ -38,6 +39,9 @@ const UserLogin = () => {
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Mot de passe"
         />
+        <div className="text-center sm:hidden">
+          <Button> Se connecter </Button>
+        </div>
       </form>
       <div className="absolute w-full h-full"></div>
     </>
