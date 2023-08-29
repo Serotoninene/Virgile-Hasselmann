@@ -43,13 +43,13 @@ export default function Video({
   priority = false,
 }: Props) {
   const [isLoading, setIsLoading] = useState(true);
-  console.log(isLoading);
+
   return (
-    <>
+    <div className="w-full h-full">
       <Placeholder
         placeholder={placeholder}
-        priority={priority}
         isLoading={isLoading}
+        priority={priority}
       />
       <video
         preload="metadata"
@@ -57,10 +57,10 @@ export default function Video({
         autoPlay
         muted
         onLoadedData={() => setIsLoading(false)}
-        className={`w-full h-full object-cover`}
+        className="w-full h-full object-cover"
       >
         <source src={src} type={`video/${type}`} />
       </video>
-    </>
+    </div>
   );
 }

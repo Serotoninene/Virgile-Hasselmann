@@ -9,8 +9,7 @@ import Videos from "@components/Home/Videos";
 import PhotosBanner from "@components/Home/PhotosBanner";
 import ContactForm from "@components/Home/ContactForm";
 import Footer from "@components/Utils/Footer";
-import PhotosLoader from "@src/components/Utils/PhotosLoader";
-import LoadingFrame from "@src/components/LoadingFrame";
+
 import { useAuthContext } from "@src/contexts/AuthProvider";
 
 interface Props {
@@ -45,7 +44,6 @@ const SecretVideos = ({ videos, userStatus }: SecretVideosProps) => {
 };
 
 function Home({ videos, photos }: Props) {
-  console.log(videos);
   const { userStatus } = useAuthContext();
   const [publicVideos, setPublicVideos] = useState<Video[]>([]);
   const [secretVideos, setSecretVideos] = useState<Video[]>([]);
@@ -65,10 +63,6 @@ function Home({ videos, photos }: Props) {
 
   return (
     <div id="Home" className="w-screen h-screen relative ">
-      <LoadingFrame />
-      <PhotosLoader photos={photos} videos={videos} />
-
-      {/* <SmoothScroll> */}
       <div className="snap-parent- ">
         <HeroVideo />
         <Videos videos={publicVideos} />
@@ -78,7 +72,6 @@ function Home({ videos, photos }: Props) {
         <ContactForm />
         <Footer />
       </div>
-      {/* </SmoothScroll> */}
     </div>
   );
 }
