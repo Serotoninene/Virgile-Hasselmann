@@ -90,6 +90,7 @@ const Content = () => {
 export default function HeroVideo() {
   return (
     <div className="snap-child-start">
+      <DarkGradients />
       {/* the text */}
       <Content />
       {/* the video in background */}
