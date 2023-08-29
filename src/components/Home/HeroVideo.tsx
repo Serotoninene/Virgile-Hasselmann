@@ -8,6 +8,7 @@ import AnimatedLetters from "@src/components/Utils/AnimatedLetters";
 import DarkGradients from "./DarkGradients";
 import AnimatedArrow from "../Utils/AnimatedArrow";
 import { IsLoadedContext } from "@src/contexts/IsLoadedProvider";
+import Image from "next/image";
 
 const containerAnim = {
   hidden: {},
@@ -75,11 +76,12 @@ const Content = () => {
       </motion.div>
       <div className="absolute w-screen flex justify-center bottom-2 xs:bottom-6">
         <AnimatedArrow />
-        <div className="w-[32px] lg:hidden">
-          <img
+        <div className="lg:hidden">
+          <Image
             src="/assets/scrollIndicator.svg"
-            className="w-full"
             alt="scroll indicator"
+            width={32}
+            height={32}
           />
         </div>
       </div>
