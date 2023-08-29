@@ -90,7 +90,9 @@ const Content = () => {
 export default function HeroVideo() {
   return (
     <div className="snap-child-start">
+      {/* the text */}
       <Content />
+      {/* the video in background */}
       <div className="absolute h-screen w-screen top-0 left-0 overflow-hidden flex justify-center items-center opacity-80">
         <Video
           src="https://virgile-portfollio.s3.amazonaws.com/videos/herovideo2.mp4"
