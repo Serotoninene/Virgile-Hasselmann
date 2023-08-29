@@ -1,33 +1,24 @@
-import React, { createContext, useEffect, useMemo, useState } from "react";
-
-interface Props {
-  children: JSX.Element;
-}
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 
 export const IsLoadedContext = createContext<any>(false);
-export const LoadingContext = createContext<any>(0);
 
 function getInitialState() {
   const isLoaded =
     typeof window !== "undefined" && window.localStorage.getItem("isLoaded");
-
   if (!isLoaded) return "false";
-
   return isLoaded;
 }
 
-export function IsLoadedProvider({ children }: Props) {
+export function IsLoadedProvider({ children }: { children: React.ReactNode }) {
   const localData = getInitialState();
   const [isLoaded, setIsLoaded] = useState<boolean>();
   const [loadingState, setLoadingState] = useState(0);
-
-  const isLoadedContextValue = useMemo(() => {
-    return { isLoaded, setIsLoaded };
-  }, [isLoaded]);
-
-  const LoadingStateContextValue = useMemo(() => {
-    return { loadingState, setLoadingState };
-  }, [loadingState]);
 
   useEffect(() => {
     localData === "true" ? setIsLoaded(true) : setIsLoaded(false);
@@ -37,11 +28,18 @@ export function IsLoadedProvider({ children }: Props) {
     window.localStorage.setItem("isLoaded", JSON.stringify(isLoaded));
   }, [isLoaded]);
 
+  const value = useMemo(
+    () => ({ isLoaded, setIsLoaded, loadingState, setLoadingState }),
+    [isLoaded, loadingState]
+  );
+
   return (
-    <IsLoadedContext.Provider value={isLoadedContextValue}>
-      <LoadingContext.Provider value={LoadingStateContextValue}>
-        {children}
-      </LoadingContext.Provider>
+    <IsLoadedContext.Provider value={value}>
+      {children}
     </IsLoadedContext.Provider>
   );
+}
+
+export function useIsLoadedContext() {
+  return useContext(IsLoadedContext);
 }

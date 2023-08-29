@@ -1,13 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import {
-  IsLoadedContext,
-  LoadingContext,
-} from "@src/contexts/IsLoadedProvider";
+import { useIsLoadedContext } from "@src/contexts/IsLoadedProvider";
 
 export default function LoadingFrame() {
-  const { isLoaded } = useContext(IsLoadedContext);
-  const { loadingState } = useContext(LoadingContext);
+  const { isLoaded, loadingState } = useIsLoadedContext();
 
   return (
     <AnimatePresence>
