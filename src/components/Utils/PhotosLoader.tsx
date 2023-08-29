@@ -1,12 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 // Type
 import { Photo, Video } from "@prisma/client";
 import { photoLink } from "@src/contexts/store";
-import {
-  IsLoadedContext,
-  LoadingContext,
-} from "@src/contexts/IsLoadedProvider";
+import { useIsLoadedContext } from "@src/contexts/IsLoadedProvider";
 
 interface Props {
   photos: Photo[];
@@ -21,8 +18,7 @@ function PhotosLoader({ photos, videos }: Props) {
   ];
   const [loaded, setLoaded] = useState(0);
   const [errored, setErrored] = useState(0);
-  const { setIsLoaded } = useContext(IsLoadedContext);
-  const { setLoadingState } = useContext(LoadingContext);
+  const { setIsLoaded, setLoadingState } = useIsLoadedContext();
 
   const handleLoad = () => {
     setLoaded((prev) => prev + 1);
