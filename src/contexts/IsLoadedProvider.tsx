@@ -6,7 +6,7 @@ import React, {
   useState,
 } from "react";
 
-export const IsLoadedContext = createContext<any>(false);
+export const IsLoadedContext = createContext<any>(true);
 
 function getInitialState() {
   const isLoaded =

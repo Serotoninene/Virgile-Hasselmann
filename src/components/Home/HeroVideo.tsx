@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 // Framer motion
 import { motion } from "framer-motion";
 // Components
@@ -7,7 +7,7 @@ import AnimatedLetters from "@src/components/Utils/AnimatedLetters";
 
 import DarkGradients from "./DarkGradients";
 import AnimatedArrow from "../Utils/AnimatedArrow";
-import { IsLoadedContext } from "@src/contexts/IsLoadedProvider";
+import { useIsLoadedContext } from "@src/contexts/IsLoadedProvider";
 import Image from "next/image";
 
 const containerAnim = {
@@ -33,7 +33,8 @@ const itemsAnim = {
 };
 
 const Content = () => {
-  const { isLoaded } = useContext(IsLoadedContext);
+  const { isLoaded } = useIsLoadedContext();
+  console.log("isLoaded", isLoaded);
 
   if (!isLoaded) return <div className="h-screen"></div>;
 
