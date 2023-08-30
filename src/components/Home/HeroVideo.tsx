@@ -33,11 +33,6 @@ const itemsAnim = {
 };
 
 const Content = () => {
-  const { isLoaded } = useIsLoadedContext();
-  console.log("isLoaded", isLoaded);
-
-  if (!isLoaded) return <div className="h-screen"></div>;
-
   return (
     <div
       id="HeroVideo"
