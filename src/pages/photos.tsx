@@ -1,17 +1,27 @@
-import React, { useEffect, useState, WheelEvent } from "react";
+import React, { useEffect, useState } from "react";
 // server | Types
 import { trpc } from "@server/utils/trpc";
+import { prisma } from "@server/prisma";
 import { Photo } from "@prisma/client";
 // Components
 import PhotosFooter from "@components/Photos/PhotosFooter";
 import AnimatedPhoto from "@components/Photos/AnimatedPhoto";
 import Overview from "@src/components/Photos/Overview";
 import CustomCursor from "@src/components/Utils/CustomCursor";
+import { GetStaticProps } from "next";
 
-export default function Photos() {
+type Props = {
+  photosData: Photo[];
+};
+
+export const getStaticProps: GetStaticProps = async () => {
+  const photosData = prisma.photo.findMany({ orderBy: { createdAt: "desc" } });
+
+  return { props: { photosData }, revalidate: 60 * 60 };
+};
+
+export default function Photos({ photosData }: Props) {
   // Getting all the datas, photos and filters(/ that I'll call categories for more complexity ...)
-  const photosData: Photo[] | undefined = trpc.photo.list.useQuery().data;
-  // const [photosData, setPhotosData] = useState<Photo[] | undefined>();
 
   const [isOverview, setIsOverview] = useState(false); // if overview's true -> shows the overview nav bar (to be made)
 
