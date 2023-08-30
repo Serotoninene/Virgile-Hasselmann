@@ -15,12 +15,15 @@ type Props = {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const photosData = prisma.photo.findMany({ orderBy: { createdAt: "desc" } });
+  const photosData = await prisma.photo.findMany({
+    orderBy: { createdAt: "desc" },
+  });
 
   return { props: { photosData }, revalidate: 60 * 60 };
 };
 
 export default function Photos({ photosData }: Props) {
+  console.log(photosData);
   // Getting all the datas, photos and filters(/ that I'll call categories for more complexity ...)
 
   const [isOverview, setIsOverview] = useState(false); // if overview's true -> shows the overview nav bar (to be made)
