@@ -24,7 +24,6 @@ const anim = {
 
 const AnimatedPhoto = ({ isOverview, photoDisplayed }: Props) => {
   const photoLink = "https://virgile-portfollio.s3.amazonaws.com/photos/";
-  const { width } = useWindowSize(); // getting the width of the page for the Image Component
 
   return (
     <AnimatePresence mode="wait">
