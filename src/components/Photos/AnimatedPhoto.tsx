@@ -1,9 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Image from "next/image";
 // Framer motion
-import { AnimatePresence, motion, useMotionValue } from "framer-motion";
-// Components
-import useWindowSize from "@src/hooks/useWindowSize";
+import { AnimatePresence, motion } from "framer-motion";
 
 interface Props {
   isOverview: boolean;
@@ -23,7 +21,7 @@ const anim = {
 };
 
 const AnimatedPhoto = ({ isOverview, photoDisplayed }: Props) => {
-  const photoLink = process.env.NEXT_PUBLIC_CLOUDFRONT + "photos/";
+  const photoLink = process.env.NEXT_PUBLIC_CLOUDFRONT + "/photos/";
 
   return (
     <AnimatePresence mode="wait">

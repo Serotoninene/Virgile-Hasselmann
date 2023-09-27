@@ -94,9 +94,9 @@ export default function HeroVideo() {
       {/* the video in background */}
       <div className="absolute h-screen w-screen top-0 left-0 overflow-hidden flex justify-center items-center opacity-80">
         <Video
-          src="https://virgile-portfollio.s3.amazonaws.com/videos/herovideo2.mp4"
+          src={`${process.env.NEXT_PUBLIC_CLOUDFRONT}/videos/herovideo2.mp4`}
           type="mp4"
-          placeholder="https://virgile-portfollio.s3.amazonaws.com/photos/heroVideo_placeholder.png"
+          placeholder={`${process.env.NEXT_PUBLIC_CLOUDFRONT}/photos/heroVideo_placeholder.png`}
           priority={true}
         />
       </div>
