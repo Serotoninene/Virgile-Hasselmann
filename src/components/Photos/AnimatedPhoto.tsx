@@ -24,7 +24,6 @@ const anim = {
 
 const AnimatedPhoto = ({ isOverview, photoDisplayed }: Props) => {
   const photoLink = process.env.NEXT_PUBLIC_CLOUDFRONT + "photos/";
-  // const photoLink = "https://d2nuyhqai1xu20.cloudfront.net/photos/";
 
   return (
     <AnimatePresence mode="wait">
