@@ -1,1 +1,2 @@
-export const photoLink = "https://virgile-portfollio.s3.amazonaws.com/photos/";
+export const photoLink = `${process.env.NEXT_PUBLIC_CLOUDFRONT}/photos`;
+export const videoLink = `${process.env.NEXT_PUBLIC_CLOUDFRONT}/videos`;

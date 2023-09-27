@@ -6,6 +6,7 @@ import { Video } from "@prisma/client";
 import { trpc } from "@server/utils/trpc";
 // Framer motion
 import { motion } from "framer-motion";
+import { videoLink } from "@src/contexts/store";
 
 const ClosingTag = () => {
   return (
@@ -41,10 +42,7 @@ const VideoPlayer = () => {
           controlsList="nodownload nofullscreen noremoteplayback"
           className={`w-full h-full object-cover`}
         >
-          <source
-            src={`https://virgile-portfollio.s3.amazonaws.com/videos/${video.videoName}`}
-            type={`video/mp4`}
-          />
+          <source src={`${videoLink}/${video.videoName}`} type={`video/mp4`} />
         </video>
       )}
     </motion.div>

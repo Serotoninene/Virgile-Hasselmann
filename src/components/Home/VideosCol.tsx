@@ -27,18 +27,15 @@ export default function VideosCol({ videos, category }: Props) {
 
   const y = useParallax(scrollYProgress, delta, "full");
 
-  // if (!videos) return <div>Loading</div>;
-
   return (
     <div className="mx-2 col-span-2 sm:col-span-1 sm:mx-6" ref={ref}>
       {/* videos miniatures */}
       <motion.div style={width && width > 640 ? { y: y } : {}}>
-        {videos &&
-          videos.map((video) => (
-            <div className="mb-4 sm:mb-[120px]" key={video.id}>
-              <VideoMiniature isInView={isInView} data={video} />
-            </div>
-          ))}
+        {videos?.map((video) => (
+          <div className="mb-4 sm:mb-[120px]" key={video.id}>
+            <VideoMiniature isInView={isInView} data={video} />
+          </div>
+        ))}
       </motion.div>
     </div>
   );

@@ -4,12 +4,11 @@ import { Miniature } from "@components/Photos/Overview";
 import PhotoInputs from "./PhotoInputs";
 import Image from "next/image";
 import { trpc } from "@server/utils/trpc";
+import { photoLink } from "@src/contexts/store";
 
 interface Props {
   photos: Photo[];
 }
-
-const photoLink = "https://virgile-portfollio.s3.amazonaws.com/photos/";
 
 export default function PhotoSection({ photos }: Props) {
   const deletePhoto = trpc.photo.delete.useMutation();
@@ -27,7 +26,7 @@ export default function PhotoSection({ photos }: Props) {
             <div className="w-[13vw] h-[20vw] relative cursor-pointer">
               <Image
                 alt={p.photoName}
-                src={photoLink + p.photoName}
+                src={`${photoLink}/${p.photoName}`}
                 layout="fill"
                 objectFit="cover"
               />

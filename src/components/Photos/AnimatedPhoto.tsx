@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 // Framer motion
 import { AnimatePresence, motion } from "framer-motion";
+import { photoLink } from "@src/contexts/store";
 
 interface Props {
   isOverview: boolean;
@@ -21,8 +22,6 @@ const anim = {
 };
 
 const AnimatedPhoto = ({ isOverview, photoDisplayed }: Props) => {
-  const photoLink = process.env.NEXT_PUBLIC_CLOUDFRONT + "/photos/";
-
   return (
     <AnimatePresence mode="wait">
       <motion.div
@@ -35,13 +34,13 @@ const AnimatedPhoto = ({ isOverview, photoDisplayed }: Props) => {
         className="w-full min-h-[70vh] sm:w-full sm:h-full"
       >
         <Image
-          src={photoLink + photoDisplayed}
+          src={`${photoLink}/${photoDisplayed}`}
           alt="photo"
           layout="fill"
           objectFit={"contain"}
           objectPosition="top left"
           placeholder="blur"
-          blurDataURL={photoLink + photoDisplayed}
+          blurDataURL={`${photoLink}/${photoDisplayed}`}
         />
       </motion.div>
     </AnimatePresence>

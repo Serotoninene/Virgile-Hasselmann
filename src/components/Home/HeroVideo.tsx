@@ -7,8 +7,8 @@ import AnimatedLetters from "@src/components/Utils/AnimatedLetters";
 
 import DarkGradients from "./DarkGradients";
 import AnimatedArrow from "../Utils/AnimatedArrow";
-import { useIsLoadedContext } from "@src/contexts/IsLoadedProvider";
 import Image from "next/image";
+import { photoLink, videoLink } from "@src/contexts/store";
 
 const containerAnim = {
   hidden: {},
@@ -94,9 +94,9 @@ export default function HeroVideo() {
       {/* the video in background */}
       <div className="absolute h-screen w-screen top-0 left-0 overflow-hidden flex justify-center items-center opacity-80">
         <Video
-          src={`${process.env.NEXT_PUBLIC_CLOUDFRONT}/videos/herovideo2.mp4`}
+          src={`${videoLink}/herovideo2.mp4`}
           type="mp4"
-          placeholder={`${process.env.NEXT_PUBLIC_CLOUDFRONT}/photos/heroVideo_placeholder.png`}
+          placeholder={`${photoLink}/heroVideo_placeholder.png`}
           priority={true}
         />
       </div>

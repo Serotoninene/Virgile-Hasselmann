@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 // server | Types
-import { trpc } from "@server/utils/trpc";
 import { prisma } from "@server/prisma";
 import { Photo } from "@prisma/client";
 // Components

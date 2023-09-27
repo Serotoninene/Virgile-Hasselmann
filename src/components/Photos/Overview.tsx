@@ -6,8 +6,7 @@ import { Photo } from "@prisma/client";
 import { motion } from "framer-motion";
 // Components
 import useWindowSize from "@src/hooks/useWindowSize";
-
-const photoLink = "https://virgile-portfollio.s3.amazonaws.com/photos/";
+import { photoLink } from "@src/contexts/store";
 
 // Types
 interface Props {
@@ -45,7 +44,7 @@ export const Miniature = ({
       <div className="w-[13vw] h-[20vw] relative cursor-pointer">
         <Image
           alt={photo.photoName}
-          src={photoLink + photo.photoName}
+          src={`${photoLink}/${photo.photoName}`}
           layout="fill"
           objectFit="cover"
         />

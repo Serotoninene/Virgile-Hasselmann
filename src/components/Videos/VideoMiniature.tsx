@@ -61,17 +61,15 @@ const VideoMiniature = ({ isInView, data }: VideoMiniatureProps) => {
         className="overflow-hidden cursor-pointer"
       >
         <motion.div className="overflow-hidden" variants={photoAnim}>
-          <motion.div
-            className="relative h-[184px] sm:h-[336px]"
-          >
+          <motion.div className="relative h-[184px] sm:h-[336px]">
             <Image
               alt={data.title}
-              src={photoLink + data.placeholder_hq}
+              src={`${photoLink}/${data.placeholder_hq}`}
               layout="fill"
               objectFit="cover"
               objectPosition="center"
               placeholder="blur"
-              blurDataURL={`https://virgile-portfollio.s3.amazonaws.com/photos/${data.placeholder_hq}`}
+              blurDataURL={`${photoLink}/${data.placeholder_hq}`}
             />
           </motion.div>
         </motion.div>

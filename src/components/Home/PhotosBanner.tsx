@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 // Components
 import AnimatedLetters from "../Utils/AnimatedLetters";
+import { photoLink } from "@src/contexts/store";
 
 // Anim variants
 const duration = 0.5;
@@ -38,7 +39,7 @@ export default function PhotosBanner() {
       >
         <div className="hidden sm:block h-full col-span-2 relative ">
           <motion.div variants={photoAnim}>
-            <Link href="/photos" >
+            <Link href="/photos">
               <Image
                 className="cursor-pointer"
                 src="/assets/girl_portrait.webp"
@@ -60,7 +61,7 @@ export default function PhotosBanner() {
               <Link href="/photos">
                 <Image
                   className="cursor-pointer"
-                  src="https://virgile-portfollio.s3.amazonaws.com/photos/3.jpg"
+                  src={`${photoLink}/3.jpg`}
                   layout="fill"
                   objectFit="cover"
                   objectPosition="center"
