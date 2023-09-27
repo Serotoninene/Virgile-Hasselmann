@@ -23,7 +23,6 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 export default function Photos({ photosData }: Props) {
-  console.log(photosData);
   // Getting all the datas, photos and filters(/ that I'll call categories for more complexity ...)
 
   const [isOverview, setIsOverview] = useState(false); // if overview's true -> shows the overview nav bar (to be made)

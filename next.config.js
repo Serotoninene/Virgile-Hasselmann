@@ -4,9 +4,10 @@ const nextConfig = {
   swcMinify: true,
   images: {
     domains: [
-      "virgile-portfollio.s3.amazonaws.com"
+      "virgile-portfollio.s3.amazonaws.com",
+      "d2nuyhqai1xu20.cloudfront.net",
     ],
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

@@ -23,7 +23,7 @@ const anim = {
 };
 
 const AnimatedPhoto = ({ isOverview, photoDisplayed }: Props) => {
-  const photoLink = "https://virgile-portfollio.s3.amazonaws.com/photos/";
+  const photoLink = process.env.NEXT_PUBLIC_CLOUDFRONT + "photos/";
 
   return (
     <AnimatePresence mode="wait">
