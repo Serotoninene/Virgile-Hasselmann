@@ -32,25 +32,12 @@ const VideoOverlay: React.FC = () => {
       <div className="absolute top-6 left-6 w-8 h-8 cursor-pointer">
         <XMarkIcon />
       </div>
-      <div
-        className=" fixed top-0 left-0 right-0 bottom-0 bg-dark bg-opacity-40 flex justify-center items-center z-50"
-        onKeyDown={(event) => {
-          if (event.key === "Escape") {
-            handleCloseOverlay();
-          }
-        }}
-        onClick={handleCloseOverlay}
-      >
-        <div className="absolute top-6 left-6 w-8 h-8 cursor-pointer">
-          <XMarkIcon />
-        </div>
-        <ReactPlayer
-          url={selectedVideo.videoLink}
-          controls={true}
-          width={playerWidth}
-          height={playerHeight}
-        />
-      </div>
+      <ReactPlayer
+        url={selectedVideo.videoLink}
+        controls={true}
+        width={playerWidth}
+        height={playerHeight}
+      />
     </div>
   );
 };
