@@ -12,6 +12,7 @@ export const videoRouter = router({
         videoName: z.string(),
         placeholder_lq: z.string().or(z.undefined()),
         placeholder_hq: z.string(),
+        videoLink: z.string().or(z.undefined()),
         description: z.string().or(z.undefined()),
         isSecret: z.boolean().or(z.undefined()),
       })

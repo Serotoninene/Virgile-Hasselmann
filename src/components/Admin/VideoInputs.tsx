@@ -8,6 +8,7 @@ import { Video } from "@prisma/client";
 
 import { PhotoIcon } from "@heroicons/react/24/solid";
 import Button from "../Utils/Button";
+import { set } from "lodash";
 
 interface Props {
   data?: Video;
@@ -16,6 +17,9 @@ interface Props {
 const VideoInputs = ({ data }: Props) => {
   // inputs
   const [title, setTitle] = useState<string>(data ? data.title : "");
+  const [videoLink, setVideoLink] = useState<string>(
+    data && data.videoLink ? data.videoLink : ""
+  );
   const [isDragOver, setIsDragOver] = useState(false);
 
   const [dateOfCreation, setDateOfCreation] = useState<Date>(
@@ -47,25 +51,28 @@ const VideoInputs = ({ data }: Props) => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    if (!placeholder_hq || !video) return;
+    if (!placeholder_hq) return;
     setStatus({
       type: "LOADING",
       message: "Upload en cours. Peut prendre plusieurs minutes.",
     });
 
     await uploadImage(placeholder_hq);
-    await uploadVideo(video);
+    video && (await uploadVideo(video));
 
     createVideo.mutate({
       title,
       dateOfCreation,
-      videoName: video.name,
+      videoName: video ? video.name : title,
       placeholder_hq: placeholder_hq.name,
+      videoLink,
       isSecret,
     });
+
     setTitle("");
     setVideo(undefined);
     setPlaceholder_hq(undefined);
+    setVideoLink("");
     setIsSecret(false);
   };
 
@@ -134,7 +141,24 @@ const VideoInputs = ({ data }: Props) => {
         </div>
       </div>
 
-      <div className="titleContainer">
+      <div className="videoLinkContainer">
+        <label htmlFor="date">Lien Youtube</label>
+        <div className="mt-2">
+          <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+            <input
+              type="text"
+              name="videoLink"
+              id="videoLink"
+              className="block flex-1 border-0 bg-transparent py-2 pl-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-base sm:leading-6"
+              placeholder="Lien Youtube"
+              value={videoLink}
+              onChange={(e) => setVideoLink(e.target.value)}
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="titleContainer col-start-2">
         <label htmlFor="date">Date of Creation</label>
         <input
           id="date"

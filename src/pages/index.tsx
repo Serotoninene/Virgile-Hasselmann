@@ -36,7 +36,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 };
 
 const SecretVideos = ({ videos, userStatus }: SecretVideosProps) => {
-  if (userStatus !== "ADMIN") return null;
+  // if (userStatus !== "ADMIN") return null;
 
   return (
     <section>

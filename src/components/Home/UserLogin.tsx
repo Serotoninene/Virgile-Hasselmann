@@ -14,14 +14,14 @@ const UserLogin = () => {
     },
   });
 
-  // const signUp = trpc.user.signUp.useMutation();
+  const signUp = trpc.user.signUp.useMutation();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("trying to login");
     // signUp.mutate(password);
     login.mutate(password);
   };
+
   const handleSignOut = () => {
     setUserStatus("USER");
   };

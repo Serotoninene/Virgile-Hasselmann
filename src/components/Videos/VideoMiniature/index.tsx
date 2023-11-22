@@ -9,6 +9,7 @@ import { Video } from "@prisma/client";
 import { photoLink } from "@src/contexts/store";
 import { useVideoOverlayContext } from "@src/contexts/VideoOverlayProvider";
 import { containerAnim, photoAnim, textAnim } from "./animations";
+import { useRouter } from "next/router";
 
 interface VideoMiniatureProps {
   isInView: boolean;
@@ -17,6 +18,7 @@ interface VideoMiniatureProps {
 
 const VideoMiniature = ({ isInView, data }: VideoMiniatureProps) => {
   const ref = useRef() as RefObject<HTMLDivElement>;
+  const router = useRouter();
   const { handleOpenOverlay } = useVideoOverlayContext();
 
   // Parallax animation - the image scrolls faster than its container
@@ -31,7 +33,11 @@ const VideoMiniature = ({ isInView, data }: VideoMiniatureProps) => {
     <motion.div
       ref={ref}
       variants={containerAnim}
-      onClick={() => handleOpenOverlay(data)}
+      onClick={() =>
+        data.videoLink
+          ? handleOpenOverlay(data)
+          : router.push(`/videos/${data.id}`)
+      }
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
       exit="hidden"

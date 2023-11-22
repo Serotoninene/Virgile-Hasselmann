@@ -21,7 +21,7 @@ const VideoOverlay: React.FC = () => {
 
   return (
     <div
-      className=" fixed top-0 left-0 right-0 bottom-0 bg-dark bg-opacity-40 flex justify-center items-center z-50"
+      className=" fixed top-0 left-0 right-0 bottom-0 bg-dark bg-opacity-80 flex justify-center items-center z-50"
       onKeyDown={(event) => {
         if (event.key === "Escape") {
           handleCloseOverlay();

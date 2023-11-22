@@ -25,6 +25,7 @@ export async function uploadVideo(file: File) {
 
     // Generating a signed URL which we'll use to upload the file
     const url = await s3.getSignedUrlPromise("putObject", fileParams);
+
     await axios.put(url, file, {
       headers: {
         "Content-type": String(file.type),
@@ -34,6 +35,8 @@ export async function uploadVideo(file: File) {
 
     return { message: "VIDEO UPLOADED WITH SUCCESS" };
   } catch (err) {
+    console.log("error", err);
+
     return { message: err };
   }
 }
