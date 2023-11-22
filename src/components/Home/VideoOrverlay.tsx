@@ -47,7 +47,7 @@ const VideoOverlay: React.FC = () => {
         <ReactPlayer
           url={selectedVideo.videoLink}
           controls={true}
-          width={width * ratio}
+          width={playerWidth}
           height={playerHeight}
         />
       </div>
