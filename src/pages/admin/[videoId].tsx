@@ -1,13 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { Video } from "@prisma/client";
 import { trpc } from "@server/utils/trpc";
-
-import {
-  CheckIcon,
-  QuestionMarkCircleIcon,
-  StarIcon,
-} from "@heroicons/react/20/solid";
 
 import { photoLink } from "@src/contexts/store";
 import VideoInputs from "@src/components/Admin/VideoInputs";
@@ -45,9 +39,6 @@ export default function VideoId() {
 
   return (
     <div className="pt-16 xs:pt-[88px] px-4 sm:px-6">
-      <div className="z-50 fixed h-screen w-screen top-0 left-0 flex justify-center items-center bg-white/50 text-black text-[80px] font-extrabold">
-        PAS ENCORE FINI
-      </div>
       <div className="bg-white m-6">
         <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
           {/* Product details */}

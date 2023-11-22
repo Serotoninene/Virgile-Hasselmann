@@ -8,28 +8,21 @@ const s3 = new S3({
   signatureVersion: "v4",
 });
 
-// export config to set sizelimit of files
-export const config = {
-  api: {
-    bodyParser: {
-      sizeLimit: "10000mb",
-    },
-  },
-};
-
-export async function uploadImage(file: File) {
+export async function uploadVideo(file: File) {
   // if no file, return
   if (!file) {
     return { message: "No file" };
   }
+
   try {
     // Setting parameters - ACL will allow us to see a file
     const fileParams = {
-      Bucket: "virgile-portfollio/photos",
+      Bucket: "virgile-portfollio/videos",
       Key: file.name,
       Expires: 600,
       ContentType: file.type,
     };
+
     // Generating a signed URL which we'll use to upload the file
     const url = await s3.getSignedUrlPromise("putObject", fileParams);
     await axios.put(url, file, {
@@ -39,7 +32,7 @@ export async function uploadImage(file: File) {
       },
     });
 
-    return { message: "PHOTO UPLOADED WITH SUCCESS" };
+    return { message: "VIDEO UPLOADED WITH SUCCESS" };
   } catch (err) {
     return { message: err };
   }

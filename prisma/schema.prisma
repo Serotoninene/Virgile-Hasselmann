@@ -16,6 +16,7 @@ model Video {
   dateOfCreation DateTime
   title          String
   videoName      String
+  videoLink      String?
   placeholder_lq String?
   placeholder_hq String
   description    String?  @db.String(1000)

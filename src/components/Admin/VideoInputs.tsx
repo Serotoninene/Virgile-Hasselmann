@@ -1,7 +1,8 @@
 import React, { FormEvent, useEffect, useRef, useState } from "react";
 // Api
 import { trpc } from "@server/utils/trpc";
-import { uploadImage, uploadVideo } from "@src/pages/api/upload-image";
+import { uploadImage } from "@src/pages/api/upload-image";
+import { uploadVideo } from "@src/pages/api/upload-video";
 // Types
 import { Video } from "@prisma/client";
 
