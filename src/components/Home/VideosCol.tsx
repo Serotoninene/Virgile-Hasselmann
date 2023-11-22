@@ -2,10 +2,11 @@ import React, { RefObject, useRef } from "react";
 // Server
 import { Video } from "@prisma/client";
 // Component
-import VideoMiniature from "../Videos/VideoMiniature";
+
 import { motion, useInView, useScroll } from "framer-motion";
 import useParallax from "@src/hooks/useParallax";
 import useWindowSize from "@src/hooks/useWindowSize";
+import VideoMiniature from "../Videos/VideoMiniature";
 
 interface Props {
   category: string;

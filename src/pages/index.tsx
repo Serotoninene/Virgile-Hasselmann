@@ -11,6 +11,8 @@ import ContactForm from "@components/Home/ContactForm";
 import Footer from "@components/Utils/Footer";
 
 import { useAuthContext } from "@src/contexts/AuthProvider";
+import VideoOverlay from "@src/components/Home/VideoOrverlay";
+import VideoOverlayProvider from "@src/contexts/VideoOverlayProvider";
 
 interface Props {
   videos: Video[];
@@ -26,6 +28,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
   const videos = await prisma.video.findMany({
     orderBy: { dateOfCreation: "desc" },
   });
+
   const photos = await prisma.photo.findMany();
   return {
     props: { videos, photos },
@@ -63,15 +66,17 @@ function Home({ videos, photos }: Props) {
 
   return (
     <div id="Home" className="w-screen h-screen relative ">
-      <div className="snap-parent- ">
-        <HeroVideo />
-        <Videos videos={publicVideos} />
-        <SecretVideos videos={secretVideos} userStatus={userStatus} />
-
-        <PhotosBanner />
-        <ContactForm />
-        <Footer />
-      </div>
+      <VideoOverlayProvider>
+        <div className="snap-parent">
+          <VideoOverlay />
+          <HeroVideo />
+          <Videos videos={publicVideos} />
+          <SecretVideos videos={secretVideos} userStatus={userStatus} />
+          <PhotosBanner />
+          <ContactForm />
+          <Footer />
+        </div>
+      </VideoOverlayProvider>
     </div>
   );
 }

@@ -22,7 +22,8 @@ export const videoRouter = router({
     }),
   // Read
   list: publicProcedure.query(async () => {
-    return await prisma.video.findMany();
+    const allVideos = await prisma.video.findMany();
+    return allVideos;
   }),
   byId: publicProcedure.input(z.string()).query(async ({ input }) => {
     return await prisma.video.findFirst({ where: { id: input } });
