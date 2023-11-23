@@ -17,3 +17,12 @@ import { Prisma } from "@prisma/client";
 // export type PhotoWithCategories = Prisma.PhotoGetPayload<
 //   typeof photoWithCategories
 // >;
+
+export interface VideoInputs {
+  title: string;
+  videoLink: string;
+  dateOfCreation: Date;
+  placeholder_hq?: File;
+  isSecret: boolean;
+  status: { message: string; type: string };
+}

@@ -2,29 +2,17 @@ import React, { FormEvent, useEffect, useRef, useState } from "react";
 // Api
 import { trpc } from "@server/utils/trpc";
 import { uploadImage } from "@src/pages/api/upload-image";
-import { uploadVideo } from "@src/pages/api/upload-video";
 // Types
 import { Video } from "@prisma/client";
-
-import { PhotoIcon } from "@heroicons/react/24/solid";
 import Button from "../Utils/Button";
-import { set } from "lodash";
+import { VideoInputs } from "types";
 
 interface Props {
   data?: Video;
 }
 
-interface FormState {
-  title: string;
-  videoLink: string;
-  dateOfCreation: Date;
-  placeholder_hq?: File;
-  isSecret: boolean;
-  status: { message: string; type: string };
-}
-
 const VideoInputs = ({ data }: Props) => {
-  const [formState, setFormState] = useState<FormState>({
+  const [formState, setFormState] = useState<VideoInputs>({
     title: data ? data.title : "",
     videoLink: data && data.videoLink ? data.videoLink : "",
     dateOfCreation: data ? data.dateOfCreation : new Date("2023-01-01"),
