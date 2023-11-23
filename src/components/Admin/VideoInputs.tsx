@@ -62,7 +62,6 @@ const VideoInputs = () => {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm<VideoInputsProps>();
   const [status, setStatus] = useState({ type: "", message: "" });
@@ -114,39 +113,42 @@ const VideoInputs = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="my-10 grid grid-cols-1 gap-y-4 gap-x-8 sm:grid-cols-3"
+      className="relative my-10 flex flex-col items-center mx-auto "
     >
-      {fields.map((field) => (
-        <div key={field.name}>
-          <label
-            htmlFor={field.name}
-            className="block font-medium leading-6 text-gray-900"
-          >
-            {field.label}
-          </label>
-          <div className="mt-2">
-            <div
-              className={`flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md ${field.customClass}`}
+      <div className="relative w-full sm:w-auto">
+        {fields.map((field) => (
+          <div key={field.name} className="mb-4">
+            <label
+              htmlFor={field.name}
+              className="block font-medium leading-6 text-gray-900"
             >
-              <input
-                className="block flex-1 border-0 bg-transparent py-2 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-base sm:leading-6"
-                type={field.type}
-                placeholder={field.placeholder}
-                {...register(field.name, {
-                  required: field.required ? "Ce champ est requis" : false,
-                })}
-              />
+              {field.label}
+            </label>
+            <div className="mt-2">
+              <div
+                className={`flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 ${field.customClass}`}
+              >
+                <input
+                  className="block flex-1 border-0 bg-transparent py-2 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-base sm:leading-6"
+                  type={field.type}
+                  placeholder={field.placeholder}
+                  {...register(field.name, {
+                    required: field.required ? "Ce champ est requis" : false,
+                  })}
+                />
+              </div>
+              {errors[field.name] && (
+                <p className="text-red-500">{errors[field.name]?.message}</p>
+              )}
             </div>
-            {errors[field.name] && (
-              <p className="text-red-500">{errors[field.name]?.message}</p>
-            )}
           </div>
-        </div>
-      ))}
+        ))}
 
-      <div className="flex justify-center">
-        <Button>Submit</Button>
+        <div className="absolute bottom-4 right-0">
+          <Button>Submit</Button>
+        </div>
       </div>
+
       {status.message && <div>{status.message}</div>}
     </form>
   );
