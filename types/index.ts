@@ -22,7 +22,7 @@ export interface VideoInputsProps {
   title: string;
   videoLink: string;
   dateOfCreation: Date;
-  placeholder_hq?: File;
+  placeholder_hq?: File[];
   isSecret: boolean;
   status: { message: string; type: string };
 }
