@@ -39,8 +39,11 @@ export async function uploadImage(file: File) {
       },
     });
 
+    console.log("worked");
+
     return { message: "PHOTO UPLOADED WITH SUCCESS" };
   } catch (err) {
+    console.log(err);
     return { message: err };
   }
 }

@@ -1,79 +1,94 @@
-import React, { FormEvent, useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 // Api
 import { trpc } from "@server/utils/trpc";
 import { uploadImage } from "@src/pages/api/upload-image";
-import { uploadVideo } from "@src/pages/api/upload-video";
+// React-hook-form
+import { useForm } from "react-hook-form";
 // Types
-import { Video } from "@prisma/client";
-
-import { PhotoIcon } from "@heroicons/react/24/solid";
 import Button from "../Utils/Button";
-import { set } from "lodash";
+import { VideoInputsProps } from "types";
 
-interface Props {
-  data?: Video;
+interface Fields {
+  label: string;
+  type: string;
+  placeholder?: string;
+  customClass?: string;
+  required?: boolean;
+  name:
+    | "title"
+    | "placeholder_hq"
+    | "videoLink"
+    | "dateOfCreation"
+    | "isSecret";
 }
 
-const VideoInputs = ({ data }: Props) => {
-  // inputs
-  const [title, setTitle] = useState<string>(data ? data.title : "");
-  const [videoLink, setVideoLink] = useState<string>(
-    data && data.videoLink ? data.videoLink : ""
-  );
-  const [isDragOver, setIsDragOver] = useState(false);
+const fields: Fields[] = [
+  {
+    label: "Titre de la photo",
+    type: "text",
+    placeholder: "Titre",
+    name: "title",
+    required: true,
+  },
+  {
+    label: "Photo de la vignette",
+    type: "file",
+    placeholder: "Placeholder HQ",
+    name: "placeholder_hq",
+    required: true,
+  },
+  {
+    label: "Lien Youtube",
+    type: "text",
+    placeholder: "Lien Youtube",
+    name: "videoLink",
+    required: true,
+  },
+  {
+    label: "Date of Creation",
+    type: "date",
+    name: "dateOfCreation",
+    required: true,
+  },
+  {
+    label: "Secret ?",
+    type: "checkbox",
+    name: "isSecret",
+    customClass: "w-6 h-6",
+  },
+];
 
-  const [dateOfCreation, setDateOfCreation] = useState<Date>(
-    data ? data.dateOfCreation : new Date("2023-01-01")
-  );
-  const fileUploadRef = useRef() as React.RefObject<HTMLInputElement>;
-
-  const [video, setVideo] = useState<File>();
-  const [placeholder_hq, setPlaceholder_hq] = useState<File>();
-
-  const [status, setStatus] = useState({ message: "", type: "" });
-
-  const [isSecret, setIsSecret] = useState<boolean>(false);
+const VideoInputs = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<VideoInputsProps>();
+  const [status, setStatus] = useState({ type: "", message: "" });
 
   // trpc  API routes
   const createVideo = trpc.video.create.useMutation();
 
-  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    const file = e.dataTransfer.files[0];
-    setVideo(file);
-    const fileInput = fileUploadRef.current;
-    if (fileInput && e.dataTransfer.files.length > 0) {
-      (fileInput as HTMLInputElement).files = e.dataTransfer.files;
-    }
-    setIsDragOver(false);
-  };
+  const onSubmit = async (formData: VideoInputsProps) => {
+    if (!formData.placeholder_hq?.[0]) return;
+    setStatus({ type: "LOADING", message: "Upload en cours" });
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
+    await uploadImage(formData.placeholder_hq[0]);
 
-    if (!placeholder_hq) return;
-    setStatus({
-      type: "LOADING",
-      message: "Upload en cours. Peut prendre plusieurs minutes.",
-    });
-
-    await uploadImage(placeholder_hq);
-    video && (await uploadVideo(video));
-
-    createVideo.mutate({
-      title,
-      dateOfCreation,
-      videoName: video ? video.name : title,
-      placeholder_hq: placeholder_hq.name,
-      videoLink,
-      isSecret,
-    });
-
-    setTitle("");
-    setVideo(undefined);
-    setPlaceholder_hq(undefined);
-    setVideoLink("");
-    setIsSecret(false);
+    createVideo.mutate(
+      {
+        title: formData.title,
+        dateOfCreation: new Date(formData.dateOfCreation),
+        placeholder_hq: formData.placeholder_hq[0].name,
+        videoLink: formData.videoLink,
+        isSecret: formData.isSecret,
+      },
+      {
+        onSuccess: () => {
+          window.location.reload();
+        },
+      }
+    );
   };
 
   useEffect(() => {
@@ -97,137 +112,43 @@ const VideoInputs = ({ data }: Props) => {
 
   return (
     <form
-      onSubmit={handleSubmit}
-      className="my-10 grid grid-cols-1 gap-y-4 gap-x-8 sm:grid-cols-3"
+      onSubmit={handleSubmit(onSubmit)}
+      className="relative my-10 flex flex-col items-center mx-auto "
     >
-      <div>
-        <label
-          htmlFor="title"
-          className="block font-medium leading-6 text-gray-900"
-        >
-          Titre de la photo
-        </label>
-        <div className="mt-2">
-          <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-            <input
-              type="text"
-              name="title"
-              id="title"
-              autoComplete="title"
-              className="block flex-1 border-0 bg-transparent py-2 pl-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-base sm:leading-6"
-              placeholder="Titre"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
-          </div>
-        </div>
-      </div>
-
-      <div>
-        <label
-          htmlFor="photo"
-          className="block font-medium leading-6 text-gray-900"
-        >
-          Photo de la vignette
-        </label>
-        <div className="mt-2 flex items-center gap-x-3">
-          <input
-            id="placeholder"
-            type="file"
-            className="p-2 bg-transparent rounded outline-none border border-gray-500 text-gray-500 cursor-pointer"
-            onChange={(e) => setPlaceholder_hq(e.currentTarget.files![0])}
-            placeholder="Placeholder HQ"
-          />
-        </div>
-      </div>
-
-      <div className="videoLinkContainer">
-        <label htmlFor="date">Lien Youtube</label>
-        <div className="mt-2">
-          <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-            <input
-              type="text"
-              name="videoLink"
-              id="videoLink"
-              className="block flex-1 border-0 bg-transparent py-2 pl-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-base sm:leading-6"
-              placeholder="Lien Youtube"
-              value={videoLink}
-              onChange={(e) => setVideoLink(e.target.value)}
-            />
-          </div>
-        </div>
-      </div>
-
-      <div className="titleContainer col-start-2">
-        <label htmlFor="date">Date of Creation</label>
-        <input
-          id="date"
-          type="date"
-          className="block mt-2 py-2 px-3 bg-transparent drop-shadow cursor-pointer rounded outline-none border border-gray-900  focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600"
-          value={dateOfCreation.toISOString().split("T")[0]}
-          onChange={(e) => setDateOfCreation(new Date(e.target.value))}
-        />
-      </div>
-
-      <div className="col-span-full">
-        <label
-          htmlFor="cover-photo"
-          className="block font-medium leading-6 text-gray-900"
-        >
-          Vidéo
-        </label>
-        <div
-          className={`mt-2 flex justify-center rounded-lg border px-6 py-10 ${
-            isDragOver ? "border-blue/75" : "border-gray-900/25 border-dashed"
-          }`}
-          onDrop={handleDrop}
-          onDragOver={(e) => {
-            e.preventDefault();
-            setIsDragOver(true);
-          }}
-          onDragLeave={() => setIsDragOver(false)}
-        >
-          <div className="text-center">
-            <PhotoIcon
-              className="mx-auto h-12 w-12 text-gray-300"
-              aria-hidden="true"
-            />
-            <div className="mt-4 flex text-sm leading-6 text-gray-600">
-              <label
-                htmlFor="file-upload"
-                className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
+      <div className="relative w-full sm:w-auto">
+        {fields.map((field) => (
+          <div key={field.name} className="mb-4">
+            <label
+              htmlFor={field.name}
+              className="block font-medium leading-6 text-gray-900"
+            >
+              {field.label}
+            </label>
+            <div className="mt-2">
+              <div
+                className={`flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 ${field.customClass}`}
               >
-                <span className="px-3">Upload a file</span>{" "}
                 <input
-                  ref={fileUploadRef}
-                  id="file-upload"
-                  name="file-upload"
-                  type="file"
-                  className="sr-only"
-                  onChange={(e) => setVideo(e.currentTarget.files![0])}
+                  className="block flex-1 border-0 bg-transparent py-2 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-base sm:leading-6"
+                  type={field.type}
+                  placeholder={field.placeholder}
+                  {...register(field.name, {
+                    required: field.required ? "Ce champ est requis" : false,
+                  })}
                 />
-              </label>
-              <p className="pl-1">or drag and drop</p>
+              </div>
+              {errors[field.name] && (
+                <p className="text-red-500">{errors[field.name]?.message}</p>
+              )}
             </div>
-            <p className="text-xs leading-5 text-gray-600">
-              {!video?.name ? "The video here " : video.name}
-            </p>
           </div>
+        ))}
+
+        <div className="absolute bottom-4 right-0">
+          <Button>Submit</Button>
         </div>
       </div>
-      <div className="placeholderContainer flex items-center gap-4">
-        <label htmlFor="secret"> Secret ? </label>
-        <input
-          type="checkbox"
-          id="secret"
-          checked={isSecret}
-          onChange={(e) => setIsSecret(e.target.checked)}
-        />
-      </div>
 
-      <div className="flex justify-center">
-        <Button onClick={handleSubmit}>Submit</Button>
-      </div>
       {status.message && <div>{status.message}</div>}
     </form>
   );
