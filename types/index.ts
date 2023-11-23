@@ -18,7 +18,7 @@ import { Prisma } from "@prisma/client";
 //   typeof photoWithCategories
 // >;
 
-export interface VideoInputs {
+export interface VideoInputsProps {
   title: string;
   videoLink: string;
   dateOfCreation: Date;

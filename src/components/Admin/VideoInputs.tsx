@@ -5,14 +5,14 @@ import { uploadImage } from "@src/pages/api/upload-image";
 // Types
 import { Video } from "@prisma/client";
 import Button from "../Utils/Button";
-import { VideoInputs } from "types";
+import { VideoInputsProps } from "types";
 
 interface Props {
   data?: Video;
 }
 
 const VideoInputs = ({ data }: Props) => {
-  const [formState, setFormState] = useState<VideoInputs>({
+  const [formState, setFormState] = useState<VideoInputsProps>({
     title: data ? data.title : "",
     videoLink: data && data.videoLink ? data.videoLink : "",
     dateOfCreation: data ? data.dateOfCreation : new Date("2023-01-01"),
