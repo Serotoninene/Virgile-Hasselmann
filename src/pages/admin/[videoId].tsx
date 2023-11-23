@@ -26,7 +26,6 @@ export const formatDate = (dateString: Date | undefined) => {
 export default function VideoId() {
   const router = useRouter();
   const { videoId } = router.query;
-  const [isUpdated, setIsUpdated] = useState(false);
 
   const video: Video | undefined | null = trpc.video.byId.useQuery(
     videoId as string
@@ -89,16 +88,9 @@ export default function VideoId() {
               <form>
                 <div className="mt-4"></div>
                 <div className="mt-10">
-                  {!isUpdated ? (
-                    <button
-                      onClick={() => setIsUpdated(true)}
-                      className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
-                    >
-                      Mettre à jour
-                    </button>
-                  ) : (
-                    <VideoInputs data={video} />
-                  )}
+                  <button className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50">
+                    Mettre à jour
+                  </button>
                 </div>
               </form>
             </section>
