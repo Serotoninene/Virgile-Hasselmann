@@ -14,84 +14,98 @@ interface Props {
   data?: Video;
 }
 
+interface FormState {
+  title: string;
+  videoLink: string;
+  dateOfCreation: Date;
+  placeholder_hq?: File;
+  isSecret: boolean;
+  status: { message: string; type: string };
+}
+
 const VideoInputs = ({ data }: Props) => {
-  // inputs
-  const [title, setTitle] = useState<string>(data ? data.title : "");
-  const [videoLink, setVideoLink] = useState<string>(
-    data && data.videoLink ? data.videoLink : ""
-  );
-  const [isDragOver, setIsDragOver] = useState(false);
-
-  const [dateOfCreation, setDateOfCreation] = useState<Date>(
-    data ? data.dateOfCreation : new Date("2023-01-01")
-  );
-  const fileUploadRef = useRef() as React.RefObject<HTMLInputElement>;
-
-  const [video, setVideo] = useState<File>();
-  const [placeholder_hq, setPlaceholder_hq] = useState<File>();
-
-  const [status, setStatus] = useState({ message: "", type: "" });
-
-  const [isSecret, setIsSecret] = useState<boolean>(false);
+  const [formState, setFormState] = useState<FormState>({
+    title: data ? data.title : "",
+    videoLink: data && data.videoLink ? data.videoLink : "",
+    dateOfCreation: data ? data.dateOfCreation : new Date("2023-01-01"),
+    placeholder_hq: undefined,
+    status: { message: "", type: "" },
+    isSecret: false,
+  });
 
   // trpc  API routes
   const createVideo = trpc.video.create.useMutation();
 
-  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    const file = e.dataTransfer.files[0];
-    setVideo(file);
-    const fileInput = fileUploadRef.current;
-    if (fileInput && e.dataTransfer.files.length > 0) {
-      (fileInput as HTMLInputElement).files = e.dataTransfer.files;
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value, files } = event.target;
+    if (files) {
+      setFormState((prevFormData) => ({
+        ...prevFormData,
+        [name]: files[0],
+      }));
+    } else if (name === "dateOfCreation") {
+      setFormState((prevFormData) => ({
+        ...prevFormData,
+        [name]: new Date(value),
+      }));
+    } else {
+      setFormState((prevFormData) => ({ ...prevFormData, [name]: value }));
     }
-    setIsDragOver(false);
   };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    if (!placeholder_hq) return;
-    setStatus({
-      type: "LOADING",
-      message: "Upload en cours. Peut prendre plusieurs minutes.",
-    });
+    if (!formState.placeholder_hq) return;
+    setFormState((prevState) => ({
+      ...prevState,
+      status: {
+        type: "LOADING",
+        message: "Upload en cours. Peut prendre plusieurs minutes.",
+      },
+    }));
 
-    await uploadImage(placeholder_hq);
-    video && (await uploadVideo(video));
+    await uploadImage(formState.placeholder_hq);
 
     createVideo.mutate({
-      title,
-      dateOfCreation,
-      videoName: video ? video.name : title,
-      placeholder_hq: placeholder_hq.name,
-      videoLink,
-      isSecret,
+      title: formState.title,
+      dateOfCreation: formState.dateOfCreation,
+      videoName: formState.title,
+      placeholder_hq: formState.placeholder_hq.name,
+      videoLink: formState.videoLink,
+      isSecret: formState.isSecret,
     });
 
-    setTitle("");
-    setVideo(undefined);
-    setPlaceholder_hq(undefined);
-    setVideoLink("");
-    setIsSecret(false);
+    setFormState((prevState) => ({
+      ...prevState,
+      title: "",
+      video: undefined,
+      placeholder_hq: undefined,
+      videoLink: "",
+      isSecret: false,
+    }));
   };
 
   useEffect(() => {
-    if (!status.type || status.type === "LOADING") return;
+    if (!formState.status.type || formState.status.type === "LOADING") return;
     const timeout = setTimeout(() => {
-      setStatus({ message: "", type: "" });
+      setFormState((prevState) => ({
+        ...prevState,
+        status: { message: "", type: "" },
+      }));
     }, 2500);
 
     return () => clearTimeout(timeout);
-  }, [status]);
+  }, [formState.status]);
 
   useEffect(() => {
     if (createVideo.isSuccess || createVideo.isError) {
-      setStatus(
-        createVideo.error
+      setFormState((prevState) => ({
+        ...prevState,
+        status: createVideo.error
           ? { type: "ERROR", message: createVideo.error.toString() }
-          : { type: "SUCCESS", message: " Vidéo enregistrée " }
-      );
+          : { type: "SUCCESS", message: " Vidéo enregistrée " },
+      }));
     }
   }, [createVideo.isSuccess, createVideo.isError]);
 
@@ -110,14 +124,15 @@ const VideoInputs = ({ data }: Props) => {
         <div className="mt-2">
           <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
             <input
+              aria-invalid={true}
               type="text"
               name="title"
               id="title"
               autoComplete="title"
               className="block flex-1 border-0 bg-transparent py-2 pl-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-base sm:leading-6"
               placeholder="Titre"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              value={formState.title}
+              onChange={handleChange}
             />
           </div>
         </div>
@@ -133,14 +148,14 @@ const VideoInputs = ({ data }: Props) => {
         <div className="mt-2 flex items-center gap-x-3">
           <input
             id="placeholder"
+            name="placeholder_hq"
             type="file"
             className="p-2 bg-transparent rounded outline-none border border-gray-500 text-gray-500 cursor-pointer"
-            onChange={(e) => setPlaceholder_hq(e.currentTarget.files![0])}
+            onChange={handleChange}
             placeholder="Placeholder HQ"
           />
         </div>
       </div>
-
       <div className="videoLinkContainer">
         <label htmlFor="date">Lien Youtube</label>
         <div className="mt-2">
@@ -151,8 +166,8 @@ const VideoInputs = ({ data }: Props) => {
               id="videoLink"
               className="block flex-1 border-0 bg-transparent py-2 pl-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-base sm:leading-6"
               placeholder="Lien Youtube"
-              value={videoLink}
-              onChange={(e) => setVideoLink(e.target.value)}
+              value={formState.videoLink}
+              onChange={handleChange}
             />
           </div>
         </div>
@@ -163,72 +178,32 @@ const VideoInputs = ({ data }: Props) => {
         <input
           id="date"
           type="date"
+          name="dateOfCreation"
           className="block mt-2 py-2 px-3 bg-transparent drop-shadow cursor-pointer rounded outline-none border border-gray-900  focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600"
-          value={dateOfCreation.toISOString().split("T")[0]}
-          onChange={(e) => setDateOfCreation(new Date(e.target.value))}
+          value={formState.dateOfCreation.toISOString().split("T")[0]}
+          onChange={handleChange}
         />
       </div>
 
-      <div className="col-span-full">
-        <label
-          htmlFor="cover-photo"
-          className="block font-medium leading-6 text-gray-900"
-        >
-          Vidéo
-        </label>
-        <div
-          className={`mt-2 flex justify-center rounded-lg border px-6 py-10 ${
-            isDragOver ? "border-blue/75" : "border-gray-900/25 border-dashed"
-          }`}
-          onDrop={handleDrop}
-          onDragOver={(e) => {
-            e.preventDefault();
-            setIsDragOver(true);
-          }}
-          onDragLeave={() => setIsDragOver(false)}
-        >
-          <div className="text-center">
-            <PhotoIcon
-              className="mx-auto h-12 w-12 text-gray-300"
-              aria-hidden="true"
-            />
-            <div className="mt-4 flex text-sm leading-6 text-gray-600">
-              <label
-                htmlFor="file-upload"
-                className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
-              >
-                <span className="px-3">Upload a file</span>{" "}
-                <input
-                  ref={fileUploadRef}
-                  id="file-upload"
-                  name="file-upload"
-                  type="file"
-                  className="sr-only"
-                  onChange={(e) => setVideo(e.currentTarget.files![0])}
-                />
-              </label>
-              <p className="pl-1">or drag and drop</p>
-            </div>
-            <p className="text-xs leading-5 text-gray-600">
-              {!video?.name ? "The video here " : video.name}
-            </p>
-          </div>
-        </div>
-      </div>
       <div className="placeholderContainer flex items-center gap-4">
         <label htmlFor="secret"> Secret ? </label>
         <input
           type="checkbox"
           id="secret"
-          checked={isSecret}
-          onChange={(e) => setIsSecret(e.target.checked)}
+          checked={formState.isSecret}
+          onChange={(e) =>
+            setFormState((prevState) => ({
+              ...prevState,
+              isSecret: e.target.checked,
+            }))
+          }
         />
       </div>
 
       <div className="flex justify-center">
         <Button onClick={handleSubmit}>Submit</Button>
       </div>
-      {status.message && <div>{status.message}</div>}
+      {formState.status.message && <div>{formState.status.message}</div>}
     </form>
   );
 };
