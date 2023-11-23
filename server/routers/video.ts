@@ -34,7 +34,7 @@ export const videoRouter = router({
     .input(
       z.object({
         id: z.string(),
-        title: z.string(),
+        title: z.string().or(z.undefined()),
         dateOfCreation: z.date(),
         videoName: z.string(),
         placeholder_lq: z.string().or(z.undefined()),
