@@ -29,16 +29,15 @@ const VideoLine = ({ video }: VideoLineProps) => {
   return (
     <li
       key={video.id}
-      className="inline-flex w-64 flex-col text-center lg:w-auto my-4"
+      className="inline-flex flex-col text-center lg:w-auto my-4"
     >
       <div className="group relative">
-        <div className="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200">
+        <div className="relative w-full aspect-square overflow-hidden rounded-md bg-gray-200 ">
           <Image
             src={process.env.NEXT_PUBLIC_PHOTOS + video.placeholder_hq}
             alt={video.title}
-            width={256}
-            height={256}
-            className="rounded-md object-cover  object-center w-full"
+            layout="fill"
+            className="object-cover object-center"
           />
         </div>
         <div className="mt-6">
