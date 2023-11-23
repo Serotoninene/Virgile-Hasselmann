@@ -16,10 +16,16 @@ interface VideoLineProps {
 }
 
 const VideoLine = ({ video }: VideoLineProps) => {
-  const [isUpdated, setIsUpdated] = useState(false);
   const deleteVideo = trpc.video.delete.useMutation();
 
-  if (isUpdated) return <VideoInputs data={video} />;
+  const handleDelete = async () => {
+    deleteVideo.mutate(video.id, {
+      onSuccess: () => {
+        window.location.reload();
+      },
+    });
+  };
+
   return (
     <li
       key={video.id}
@@ -29,7 +35,7 @@ const VideoLine = ({ video }: VideoLineProps) => {
         <div className="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200">
           <Image
             src={process.env.NEXT_PUBLIC_PHOTOS + video.placeholder_hq}
-            alt={video.videoName}
+            alt={video.title}
             width={256}
             height={256}
             className="rounded-md object-cover  object-center w-full"
@@ -52,7 +58,7 @@ const VideoLine = ({ video }: VideoLineProps) => {
             <button
               type="button"
               className="text-sm font-medium hover:text-indigo-500"
-              onClick={() => deleteVideo.mutate(video.id)}
+              onClick={handleDelete}
             >
               Supprimer
             </button>

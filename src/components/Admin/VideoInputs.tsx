@@ -1,11 +1,10 @@
-import React, { FormEvent, useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 // Api
 import { trpc } from "@server/utils/trpc";
 import { uploadImage } from "@src/pages/api/upload-image";
 // React-hook-form
 import { useForm } from "react-hook-form";
 // Types
-import { Video } from "@prisma/client";
 import Button from "../Utils/Button";
 import { VideoInputsProps } from "types";
 
@@ -77,16 +76,20 @@ const VideoInputs = () => {
 
     await uploadImage(formData.placeholder_hq[0]);
 
-    createVideo.mutate({
-      title: formData.title,
-      dateOfCreation: new Date(formData.dateOfCreation),
-      placeholder_hq: formData.placeholder_hq[0].name,
-      videoLink: formData.videoLink,
-      isSecret: formData.isSecret,
-    });
-
-    // reset the formData
-    reset();
+    createVideo.mutate(
+      {
+        title: formData.title,
+        dateOfCreation: new Date(formData.dateOfCreation),
+        placeholder_hq: formData.placeholder_hq[0].name,
+        videoLink: formData.videoLink,
+        isSecret: formData.isSecret,
+      },
+      {
+        onSuccess: () => {
+          window.location.reload();
+        },
+      }
+    );
   };
 
   useEffect(() => {
