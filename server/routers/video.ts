@@ -9,7 +9,7 @@ export const videoRouter = router({
       z.object({
         title: z.string(),
         dateOfCreation: z.date(),
-        videoName: z.string(),
+        videoName: z.string().or(z.undefined()),
         placeholder_lq: z.string().or(z.undefined()),
         placeholder_hq: z.string(),
         videoLink: z.string().or(z.undefined()),

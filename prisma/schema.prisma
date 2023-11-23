@@ -15,7 +15,7 @@ model Video {
   createdAt      DateTime @default(now())
   dateOfCreation DateTime
   title          String
-  videoName      String
+  videoName      String?
   videoLink      String?
   placeholder_lq String?
   placeholder_hq String

@@ -14,6 +14,7 @@ interface Fields {
   type: string;
   placeholder?: string;
   customClass?: string;
+  required?: boolean;
   name:
     | "title"
     | "placeholder_hq"
@@ -28,23 +29,27 @@ const fields: Fields[] = [
     type: "text",
     placeholder: "Titre",
     name: "title",
+    required: true,
   },
   {
     label: "Photo de la vignette",
     type: "file",
     placeholder: "Placeholder HQ",
     name: "placeholder_hq",
+    required: true,
   },
   {
     label: "Lien Youtube",
     type: "text",
     placeholder: "Lien Youtube",
     name: "videoLink",
+    required: true,
   },
   {
     label: "Date of Creation",
     type: "date",
     name: "dateOfCreation",
+    required: true,
   },
   {
     label: "Secret ?",
@@ -75,7 +80,6 @@ const VideoInputs = () => {
     createVideo.mutate({
       title: formData.title,
       dateOfCreation: new Date(formData.dateOfCreation),
-      videoName: formData.title,
       placeholder_hq: formData.placeholder_hq[0].name,
       videoLink: formData.videoLink,
       isSecret: formData.isSecret,
@@ -122,10 +126,12 @@ const VideoInputs = () => {
               className={`flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md ${field.customClass}`}
             >
               <input
-                className="block flex-1 border-0 bg-transparent py-2 pl-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-base sm:leading-6"
+                className="block flex-1 border-0 bg-transparent py-2 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-base sm:leading-6"
                 type={field.type}
                 placeholder={field.placeholder}
-                {...register(field.name, { required: "Ce champ est requis" })}
+                {...register(field.name, {
+                  required: field.required ? "Ce champ est requis" : false,
+                })}
               />
             </div>
             {errors[field.name] && (
