@@ -13,6 +13,7 @@ import Footer from "@components/Utils/Footer";
 import { useAuthContext } from "@src/contexts/AuthProvider";
 import VideoOverlay from "@src/components/Home/VideoOrverlay";
 import VideoOverlayProvider from "@src/contexts/VideoOverlayProvider";
+import { useLoader } from "@src/hooks/useLoader";
 
 interface Props {
   videos: Video[];
@@ -50,6 +51,8 @@ function Home({ videos, photos }: Props) {
   const { userStatus } = useAuthContext();
   const [publicVideos, setPublicVideos] = useState<Video[]>([]);
   const [secretVideos, setSecretVideos] = useState<Video[]>([]);
+
+  const isLoading = useLoader({ videos });
 
   useEffect(() => {
     setPublicVideos(videos?.filter((video) => video.isSecret === false));
