@@ -5,58 +5,9 @@ import { uploadImage } from "@src/pages/api/upload-image";
 // React-hook-form
 import { useForm } from "react-hook-form";
 // Types
-import Button from "../Utils/Button";
+import Button from "../../Utils/Button";
 import { VideoInputsProps } from "types";
-
-interface Fields {
-  label: string;
-  type: string;
-  placeholder?: string;
-  customClass?: string;
-  required?: boolean;
-  name:
-    | "title"
-    | "placeholder_hq"
-    | "videoLink"
-    | "dateOfCreation"
-    | "isSecret";
-}
-
-const fields: Fields[] = [
-  {
-    label: "Titre de la photo",
-    type: "text",
-    placeholder: "Titre",
-    name: "title",
-    required: true,
-  },
-  {
-    label: "Photo de la vignette",
-    type: "file",
-    placeholder: "Placeholder HQ",
-    name: "placeholder_hq",
-    required: true,
-  },
-  {
-    label: "Lien Youtube",
-    type: "text",
-    placeholder: "Lien Youtube",
-    name: "videoLink",
-    required: true,
-  },
-  {
-    label: "Date of Creation",
-    type: "date",
-    name: "dateOfCreation",
-    required: true,
-  },
-  {
-    label: "Secret ?",
-    type: "checkbox",
-    name: "isSecret",
-    customClass: "w-6 h-6",
-  },
-];
+import { fields } from "./fields";
 
 const VideoInputs = () => {
   const {
@@ -126,7 +77,8 @@ const VideoInputs = () => {
             </label>
             <div className="mt-2">
               <div
-                className={`flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 ${field.customClass}`}
+                className={`flex rounded-md shadow-sm ring-1 ring-in
+                set ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 ${field.customClass}`}
               >
                 <input
                   className="block flex-1 border-0 bg-transparent py-2 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-base sm:leading-6"

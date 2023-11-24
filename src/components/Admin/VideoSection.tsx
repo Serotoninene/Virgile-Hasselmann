@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Video } from "@prisma/client";
 import { trpc } from "@server/utils/trpc";
 
-import VideoInputs from "./VideoInputs";
+import VideoInputs from "@src/components/Admin/VideoInputs";
 import Link from "next/link";
 
 type Props = {

@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { useRouter } from "next/router";
 import { Video } from "@prisma/client";
 import { trpc } from "@server/utils/trpc";
 
 import { photoLink } from "@src/contexts/store";
-import VideoInputs from "@src/components/Admin/VideoInputs";
 
 interface Options {
   year: string;
