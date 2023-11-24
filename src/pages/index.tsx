@@ -14,6 +14,7 @@ import { useAuthContext } from "@src/contexts/AuthProvider";
 import VideoOverlay from "@src/components/Home/VideoOrverlay";
 import VideoOverlayProvider from "@src/contexts/VideoOverlayProvider";
 import { useLoader } from "@src/hooks/useLoader";
+import Loader from "@src/components/Home/Loader";
 
 interface Props {
   videos: Video[];
@@ -30,9 +31,8 @@ export const getServerSideProps: GetServerSideProps = async () => {
     orderBy: { dateOfCreation: "desc" },
   });
 
-  const photos = await prisma.photo.findMany();
   return {
-    props: { videos, photos },
+    props: { videos },
   };
 };
 
@@ -47,25 +47,21 @@ const SecretVideos = ({ videos, userStatus }: SecretVideosProps) => {
   );
 };
 
-function Home({ videos, photos }: Props) {
+function Home({ videos }: Props) {
   const { userStatus } = useAuthContext();
   const [publicVideos, setPublicVideos] = useState<Video[]>([]);
   const [secretVideos, setSecretVideos] = useState<Video[]>([]);
 
-  const isLoading = useLoader({ videos });
+  const { isLoading, loadingProgress } = useLoader({ videos });
 
   useEffect(() => {
     setPublicVideos(videos?.filter((video) => video.isSecret === false));
     setSecretVideos(videos?.filter((video) => video.isSecret === true));
   }, []);
 
-  useEffect(() => {
-    if (!photos) return;
-
-    window.localStorage.setItem("photosData", JSON.stringify(photos));
-  }, [photos]);
-
-  if (!photos) return;
+  if (isLoading) {
+    return <Loader loadingProgress={loadingProgress} />; // Replace with your actual loader component
+  }
 
   return (
     <div id="Home" className="w-screen h-screen relative ">
