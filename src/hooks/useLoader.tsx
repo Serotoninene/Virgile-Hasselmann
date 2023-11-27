@@ -33,7 +33,9 @@ export const useLoader = ({ videos }: Props) => {
 
       Promise.all(images)
         .then(() => {
-          setIsLoading(false);
+          setTimeout(() => {
+            setIsLoading(false);
+          }, 1500);
         })
         .catch((e) => {
           console.log(e);
