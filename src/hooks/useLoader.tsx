@@ -7,18 +7,18 @@ type Props = {
 };
 
 export const useLoader = ({ videos }: Props) => {
-  const [isLoading, setIsLoading] = useState(true);
   const [progress, setProgress] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+  const videosNotSecret = videos?.filter((video) => video.isSecret === false);
 
   const loadAssets = async () => {
-    const videosNotSecret = videos.filter((video) => video.isSecret === false);
     const urls = videosNotSecret.map(
       (video) => photoLink + "/" + video.placeholder_hq
     );
 
     try {
       const images = urls.map((url) => {
-        return new Promise<void>((resolve) => {
+        return new Promise<void>((resolve, reject) => {
           const img = new Image();
           img.src = url;
           img.onload = () => {
@@ -26,8 +26,7 @@ export const useLoader = ({ videos }: Props) => {
             resolve();
           };
           img.onerror = () => {
-            setProgress((prev) => prev + 1);
-            resolve();
+            reject();
           };
         });
       });
@@ -48,7 +47,9 @@ export const useLoader = ({ videos }: Props) => {
     loadAssets();
   }, []);
 
-  const loadingProgress = Math.round((progress / videos?.length) * 100);
+  const loadingProgress = Math.round(
+    (progress / videosNotSecret?.length) * 100
+  );
 
   return { isLoading, loadingProgress };
 };
