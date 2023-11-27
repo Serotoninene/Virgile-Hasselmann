@@ -8,6 +8,7 @@ import AnimatedPhoto from "@components/Photos/AnimatedPhoto";
 import Overview from "@src/components/Photos/Overview";
 import CustomCursor from "@src/components/Utils/CustomCursor";
 import { GetStaticProps } from "next";
+import Navbar from "@src/components/Utils/Navbar";
 
 type Props = {
   photosData: Photo[];
@@ -73,6 +74,9 @@ export default function Photos({ photosData }: Props) {
       id="Photos"
       className="h-screen pt-4 px-2 flex flex-col justify-between relative sm:px-6"
     >
+      <header className="fixed left-0  w-screen z-50">
+        <Navbar />
+      </header>
       <div className="h-full relative overflow-hidden flex items-start sm:items-center">
         {!isOverview && <CustomCursor actionIndicator={actionIndicator} />}
         <AnimatedPhoto

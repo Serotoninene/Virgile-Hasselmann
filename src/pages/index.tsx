@@ -15,6 +15,7 @@ import VideoOverlay from "@src/components/Home/VideoOrverlay";
 import VideoOverlayProvider from "@src/contexts/VideoOverlayProvider";
 import { useLoader } from "@src/hooks/useLoader";
 import Loader from "@src/components/Home/Loader";
+import Navbar from "@src/components/Utils/Navbar";
 
 interface Props {
   videos: Video[];
@@ -52,12 +53,12 @@ function Home({ videos }: Props) {
   const [publicVideos, setPublicVideos] = useState<Video[]>([]);
   const [secretVideos, setSecretVideos] = useState<Video[]>([]);
 
-  const { isLoading, loadingProgress } = useLoader({ videos });
-
   useEffect(() => {
     setPublicVideos(videos?.filter((video) => video.isSecret === false));
     setSecretVideos(videos?.filter((video) => video.isSecret === true));
   }, []);
+
+  const { isLoading, loadingProgress } = useLoader({ videos });
 
   if (isLoading) {
     return <Loader loadingProgress={loadingProgress} />; // Replace with your actual loader component
@@ -65,6 +66,9 @@ function Home({ videos }: Props) {
 
   return (
     <div id="Home" className="w-screen h-screen relative ">
+      <header className="fixed w-screen z-50">
+        <Navbar />
+      </header>
       <VideoOverlayProvider>
         <div className="snap-parent">
           <VideoOverlay />

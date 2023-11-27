@@ -13,33 +13,7 @@ type Props = {
 };
 
 const Layout = ({ children }: Props): JSX.Element => {
-  const { pathname } = useRouter();
-  const { width, height } = useWindowSize();
-  const [isNavVisible, setIsNavVisible] = useState(true);
-
-  // Triggered on on wheel event
-  const toggleNav = (e: React.WheelEvent<HTMLElement>) => {
-    // if on mobile, the navbar is always visible
-    if (width && width < 640) return;
-
-    // if on the photos, the navbar is always visible
-    if (pathname === "/photos") return;
-
-    if (pathname === "/videos/[id]") return;
-
-    if (e.deltaY < 0) {
-      setIsNavVisible(true); // if wheel back up => shows the navbar
-    } else {
-      setIsNavVisible(false);
-    }
-  };
-
-  useEffect(() => {
-    // hide the navbar if on the video/[id] page
-    if (pathname === "/videos/[id]") {
-      setIsNavVisible(false);
-    }
-  }, [pathname]);
+  const { height } = useWindowSize();
 
   useEffect(() => {
     // Set vh to be the actual viewport height and be usable on mobile
@@ -48,19 +22,8 @@ const Layout = ({ children }: Props): JSX.Element => {
     document.documentElement.style.setProperty("--vh", vh + "px");
   }, [height]);
 
-  useEffect(() => {
-    // if on mobile, the navbar is always visible
-    if ((width && width < 640) || pathname === "/photos") setIsNavVisible(true);
-  }, [width, pathname]);
-
   return (
-    <div
-      id="App"
-      className="relative"
-      onWheel={(e) => {
-        toggleNav(e);
-      }}
-    >
+    <div id="App" className="relative">
       <Head>
         <title>Virgile Hasselmann</title>
         <meta
@@ -69,10 +32,6 @@ const Layout = ({ children }: Props): JSX.Element => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <header className="fixed w-screen z-50">
-        <Navbar isNavVisible={isNavVisible} />
-      </header>
       <main>
         <div className="noise"></div>
         {/* Background noise */}

@@ -94,7 +94,7 @@ export default function HeroVideo() {
       {/* the video in background */}
       <div className="absolute h-screen w-screen top-0 left-0 overflow-hidden flex justify-center items-center opacity-80">
         <Video
-          src={`${videoLink}/herovideo2.mp4`}
+          src={`/videos/herovideo2.mp4`}
           type="mp4"
           placeholder={`${photoLink}/heroVideo_placeholder.png`}
           priority={true}

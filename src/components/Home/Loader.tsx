@@ -5,7 +5,11 @@ type Props = {
 };
 
 const Loader = ({ loadingProgress }: Props) => {
-  return <div>Loader</div>;
+  return (
+    <div className="h-[calc(var(--vh)*100)] flex justify-center items-center">
+      Loader
+    </div>
+  );
 };
 
 export default Loader;
