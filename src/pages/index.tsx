@@ -60,9 +60,9 @@ function Home({ videos }: Props) {
 
   const { isLoading, loadingProgress } = useLoader({ videos });
 
-  // if (isLoading) {
-  return <Loader loadingProgress={loadingProgress} />; // Replace with your actual loader component
-  // }
+  if (isLoading) {
+    return <Loader loadingProgress={loadingProgress} />; // Replace with your actual loader component
+  }
 
   return (
     <div id="Home" className="w-screen h-screen relative ">
