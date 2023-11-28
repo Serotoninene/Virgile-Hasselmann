@@ -26,7 +26,7 @@ const Loader = ({ loadingProgress }: Props) => {
   const [finishedLoading, setFinishedLoading] = useState(false);
 
   useEffect(() => {
-    if (loadingProgress === 200) {
+    if (loadingProgress === 100) {
       setTimeout(() => {
         setFinishedLoading(true);
       }, 500);
@@ -48,6 +48,7 @@ const Loader = ({ loadingProgress }: Props) => {
               initial={{ scaleX: 0 }}
               animate={{ scaleX: loadingProgress / 100 }}
               exit={{ scaleX: 0, x: "100%" }}
+              transition={{ duration: 0.45, ease: "easeInOut" }}
             />
             <div className="flex justify-between mt-3 overflow-hidden">
               <AnimatedLetters string="Virgile Hasselmann" />

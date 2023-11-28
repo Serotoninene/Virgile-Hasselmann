@@ -14,9 +14,10 @@ import { useRouter } from "next/router";
 interface VideoMiniatureProps {
   isInView: boolean;
   data: Video;
+  idx: number;
 }
 
-const VideoMiniature = ({ isInView, data }: VideoMiniatureProps) => {
+const VideoMiniature = ({ isInView, data, idx }: VideoMiniatureProps) => {
   const ref = useRef() as RefObject<HTMLDivElement>;
   const router = useRouter();
   const { handleOpenOverlay } = useVideoOverlayContext();
@@ -52,6 +53,7 @@ const VideoMiniature = ({ isInView, data }: VideoMiniatureProps) => {
             objectFit="cover"
             objectPosition="center"
             placeholder="blur"
+            priority={idx < 2}
             blurDataURL={`${photoLink}/${data.placeholder_hq}`}
           />
         </motion.div>

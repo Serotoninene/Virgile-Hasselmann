@@ -32,9 +32,9 @@ export default function VideosCol({ videos, category }: Props) {
     <div className="mx-2 col-span-2 sm:col-span-1 sm:mx-6" ref={ref}>
       {/* videos miniatures */}
       <motion.div style={width && width > 640 ? { y: y } : {}}>
-        {videos?.map((video) => (
+        {videos?.map((video, idx) => (
           <div className="mb-4 sm:mb-[120px]" key={video.id}>
-            <VideoMiniature isInView={isInView} data={video} />
+            <VideoMiniature isInView={isInView} data={video} idx={idx} />
           </div>
         ))}
       </motion.div>
