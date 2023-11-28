@@ -16,6 +16,7 @@ import VideoOverlayProvider from "@src/contexts/VideoOverlayProvider";
 import { useLoader } from "@src/hooks/useLoader";
 import Loader from "@src/components/Home/Loader";
 import Navbar from "@src/components/Utils/Navbar";
+import { ReactLenis } from "@studio-freight/react-lenis";
 
 interface Props {
   videos: Video[];
@@ -65,22 +66,28 @@ function Home({ videos }: Props) {
   }
 
   return (
-    <div id="Home" className="w-screen h-screen relative ">
-      <header className="fixed w-screen z-50">
-        <Navbar />
-      </header>
-      <VideoOverlayProvider>
-        <div className="snap-parent">
-          <VideoOverlay />
-          <HeroVideo />
-          <Videos videos={publicVideos} />
-          <SecretVideos videos={secretVideos} userStatus={userStatus} />
-          <PhotosBanner />
-          <ContactForm />
-          <Footer />
-        </div>
-      </VideoOverlayProvider>
-    </div>
+    <ReactLenis
+      options={{
+        lerp: 0.1,
+      }}
+    >
+      <div id="Home" className="w-screen h-screen relative ">
+        <header className="fixed w-screen z-50">
+          <Navbar />
+        </header>
+        <VideoOverlayProvider>
+          <div className="snap-parent">
+            <VideoOverlay />
+            <HeroVideo />
+            <Videos videos={publicVideos} />
+            <SecretVideos videos={secretVideos} userStatus={userStatus} />
+            <PhotosBanner />
+            <ContactForm />
+            <Footer />
+          </div>
+        </VideoOverlayProvider>
+      </div>
+    </ReactLenis>
   );
 }
 

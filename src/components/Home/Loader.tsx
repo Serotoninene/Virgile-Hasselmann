@@ -51,7 +51,11 @@ const Loader = ({ loadingProgress }: Props) => {
               transition={{ duration: 0.45, ease: "easeInOut" }}
             />
             <div className="flex justify-between mt-3 overflow-hidden">
-              <AnimatedLetters string="Virgile Hasselmann" />
+              <AnimatedLetters
+                string="Virgile Hasselmann"
+                delay={0}
+                stagger={0.01}
+              />
               <Counter value={loadingProgress} />
             </div>
           </div>
