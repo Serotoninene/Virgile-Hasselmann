@@ -31,7 +31,7 @@ function Counter({ from, to }: CounterProps) {
 }
 
 const Loader = ({ loadingProgress }: Props) => {
-  const [from, setFrom] = useState(0);
+  const [from, setFrom] = useState(50);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -43,13 +43,12 @@ const Loader = ({ loadingProgress }: Props) => {
     };
   }, [loadingProgress]);
 
-  console.log(loadingProgress / 200);
-
   return (
     <div className="h-[calc(var(--vh)*100)] flex justify-center items-center">
       <div className="w-[305px] sm:w-[420px] xl:[33vw]">
         <motion.div
           className="h-[1px] w-full bg-light origin-left"
+          initial={{ scaleX: 0 }}
           animate={{ scaleX: loadingProgress / 100 }}
           exit={{ scaleX: 0, x: "100%" }}
         />
