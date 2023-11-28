@@ -15,39 +15,48 @@ function Counter({ value }: CounterProps) {
 
   const nodeRef = useRef<HTMLParagraphElement>(null);
 
-  return <motion.p ref={nodeRef}>{value} </motion.p>;
+  return (
+    <motion.p ref={nodeRef} exit={{ y: "-100%" }}>
+      {value}{" "}
+    </motion.p>
+  );
 }
 
 const Loader = ({ loadingProgress }: Props) => {
-  const [from, setFrom] = useState(50);
+  const [finishedLoading, setFinishedLoading] = useState(false);
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      setFrom(loadingProgress);
-    }, 2000);
-
-    return () => {
-      clearInterval(intervalId);
-    };
+    if (loadingProgress === 200) {
+      setTimeout(() => {
+        setFinishedLoading(true);
+      }, 500);
+    }
   }, [loadingProgress]);
 
   return (
-    <div className="h-[calc(var(--vh)*100)] flex justify-center items-center">
-      <div className="w-[305px] sm:w-[420px] xl:[33vw]">
-        <motion.div
-          className="h-[1px] w-full bg-light origin-left"
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: loadingProgress / 100 }}
-          exit={{ scaleX: 0, x: "100%" }}
-        />
-        <div className="flex justify-between mt-3 overflow-hidden">
-          <AnimatePresence>
-            <AnimatedLetters string="Virgile Hasselmann" />
-            <Counter value={loadingProgress} />
-          </AnimatePresence>
+    <AnimatePresence>
+      {finishedLoading ? (
+        <div key="finishedLoading"> </div>
+      ) : (
+        <div
+          key="loading"
+          className="h-[calc(var(--vh)*100)] flex justify-center items-center"
+        >
+          <div className="w-[305px] sm:w-[420px] xl:[33vw]">
+            <motion.div
+              className="h-[1px] w-full bg-light origin-left"
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: loadingProgress / 100 }}
+              exit={{ scaleX: 0, x: "100%" }}
+            />
+            <div className="flex justify-between mt-3 overflow-hidden">
+              <AnimatedLetters string="Virgile Hasselmann" />
+              <Counter value={loadingProgress} />
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      )}
+    </AnimatePresence>
   );
 };
 

@@ -1,4 +1,5 @@
-import React, { Suspense, useState } from "react";
+import React, { useState } from "react";
+import { motion } from "framer-motion";
 import Image from "next/image";
 
 type Props = {
@@ -45,7 +46,12 @@ export default function Video({
   const [isLoading, setIsLoading] = useState(true);
 
   return (
-    <div className="w-full h-full">
+    <motion.div
+      className="w-full h-full"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1, delay: 0.5 }}
+    >
       <Placeholder
         placeholder={placeholder}
         isLoading={isLoading}
@@ -61,6 +67,6 @@ export default function Video({
       >
         <source src={src} type={`video/${type}`} />
       </video>
-    </div>
+    </motion.div>
   );
 }
