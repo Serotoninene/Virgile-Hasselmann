@@ -7,27 +7,15 @@ type Props = {
 };
 
 type CounterProps = {
-  from: number;
-  to: number;
+  value: number;
 };
 
-function Counter({ from, to }: CounterProps) {
+function Counter({ value }: CounterProps) {
+  // basicaly i want to animate the counter with the
+
   const nodeRef = useRef<HTMLParagraphElement>(null);
 
-  useEffect(() => {
-    const controls = animate(from, to, {
-      duration: 1,
-      onUpdate(value) {
-        if (nodeRef.current) {
-          nodeRef.current.textContent = value.toFixed(0);
-        }
-      },
-    });
-
-    return () => controls.stop();
-  }, [from, to]);
-
-  return <p ref={nodeRef} />;
+  return <motion.p ref={nodeRef}>{value} </motion.p>;
 }
 
 const Loader = ({ loadingProgress }: Props) => {
@@ -55,7 +43,7 @@ const Loader = ({ loadingProgress }: Props) => {
         <div className="flex justify-between mt-3 overflow-hidden">
           <AnimatePresence>
             <AnimatedLetters string="Virgile Hasselmann" />
-            <Counter from={from} to={loadingProgress} />
+            <Counter value={loadingProgress} />
           </AnimatePresence>
         </div>
       </div>

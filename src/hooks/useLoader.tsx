@@ -11,11 +11,17 @@ export const useLoader = ({ videos }: Props) => {
   const [isLoading, setIsLoading] = useState(true);
   const videosNotSecret = videos?.filter((video) => video.isSecret === false);
 
-  const loadAssets = async () => {
-    const urls = videosNotSecret.map(
-      (video) => photoLink + "/" + video.placeholder_hq
-    );
+  const extraPhotos = [
+    `${photoLink}/3.jpg`,
+    "/assets/girl_portrait.webp",
+    "/assets/hands_praying.png",
+  ];
+  const urls = videosNotSecret?.map(
+    (video) => photoLink + "/" + video.placeholder_hq
+  );
+  urls?.push(...extraPhotos);
 
+  const loadAssets = async () => {
     try {
       const images = urls.map((url) => {
         return new Promise<void>((resolve, reject) => {
@@ -49,9 +55,7 @@ export const useLoader = ({ videos }: Props) => {
     loadAssets();
   }, []);
 
-  const loadingProgress = Math.round(
-    (progress / videosNotSecret?.length) * 100
-  );
+  const loadingProgress = Math.round((progress / urls?.length) * 100);
 
   return { isLoading, loadingProgress };
 };
