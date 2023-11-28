@@ -66,28 +66,22 @@ function Home({ videos }: Props) {
   }
 
   return (
-    <ReactLenis
-      options={{
-        lerp: 0.1,
-      }}
-    >
-      <div id="Home" className="w-screen h-screen relative ">
-        <header className="fixed w-screen z-50">
-          <Navbar />
-        </header>
-        <VideoOverlayProvider>
-          <div className="snap-parent">
-            <VideoOverlay />
-            <HeroVideo />
-            <Videos videos={publicVideos} />
-            <SecretVideos videos={secretVideos} userStatus={userStatus} />
-            <PhotosBanner />
-            <ContactForm />
-            <Footer />
-          </div>
-        </VideoOverlayProvider>
-      </div>
-    </ReactLenis>
+    <div id="Home" className="w-screen h-screen relative ">
+      <header className="fixed w-screen z-50">
+        <Navbar />
+      </header>
+      <VideoOverlayProvider>
+        <div className="snap-parent">
+          <VideoOverlay />
+          <HeroVideo />
+          <Videos videos={publicVideos} />
+          <SecretVideos videos={secretVideos} userStatus={userStatus} />
+          <PhotosBanner />
+          <ContactForm />
+          <Footer />
+        </div>
+      </VideoOverlayProvider>
+    </div>
   );
 }
 
