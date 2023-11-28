@@ -145,6 +145,7 @@ export default function ContactForm() {
         >
           <Image
             alt="hands praying"
+            priority
             layout="fill"
             src="/assets/hands_praying.png"
             objectFit="cover"

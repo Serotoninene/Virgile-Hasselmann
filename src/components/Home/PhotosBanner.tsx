@@ -43,9 +43,11 @@ export default function PhotosBanner() {
               <Image
                 className="cursor-pointer"
                 src="/assets/girl_portrait.webp"
+                alt="girl portrait"
                 layout="fill"
                 objectFit="cover"
                 objectPosition="center"
+                priority
               />
             </Link>
           </motion.div>
@@ -61,10 +63,12 @@ export default function PhotosBanner() {
               <Link href="/photos">
                 <Image
                   className="cursor-pointer"
+                  alt="holding hands"
                   src={`${photoLink}/3.jpg`}
                   layout="fill"
                   objectFit="cover"
                   objectPosition="center"
+                  priority
                 />
               </Link>
             </motion.div>
