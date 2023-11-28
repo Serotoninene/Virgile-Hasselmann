@@ -16,7 +16,7 @@ import VideoOverlayProvider from "@src/contexts/VideoOverlayProvider";
 import { useLoader } from "@src/hooks/useLoader";
 import Loader from "@src/components/Home/Loader";
 import Navbar from "@src/components/Utils/Navbar";
-import { ReactLenis } from "@studio-freight/react-lenis";
+import Lenis from "@studio-freight/lenis";
 
 interface Props {
   videos: Video[];
@@ -54,12 +54,25 @@ function Home({ videos }: Props) {
   const [publicVideos, setPublicVideos] = useState<Video[]>([]);
   const [secretVideos, setSecretVideos] = useState<Video[]>([]);
 
+  const { isLoading, loadingProgress } = useLoader({ videos });
+
   useEffect(() => {
     setPublicVideos(videos?.filter((video) => video.isSecret === false));
     setSecretVideos(videos?.filter((video) => video.isSecret === true));
   }, []);
 
-  const { isLoading, loadingProgress } = useLoader({ videos });
+  useEffect(() => {
+    if (!isLoading) {
+      const lenis = new Lenis();
+
+      const raf = (time: number) => {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      };
+
+      requestAnimationFrame(raf);
+    }
+  }, [isLoading]);
 
   if (isLoading) {
     return <Loader loadingProgress={loadingProgress} />; // Replace with your actual loader component
