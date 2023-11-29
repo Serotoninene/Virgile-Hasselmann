@@ -10,6 +10,7 @@ import { VideoInputsProps } from "types";
 import { fields, updateFields } from "./fields";
 import { Video } from "@prisma/client";
 import { deleteImage } from "@src/pages/api/delete-image";
+import { useRouter } from "next/router";
 
 type Props = {
   video?: Video;
@@ -22,6 +23,7 @@ const VideoInputs = ({ video }: Props) => {
     setValue,
     formState: { errors },
   } = useForm<VideoInputsProps>();
+  const router = useRouter();
   const [status, setStatus] = useState({ type: "", message: "" });
 
   // trpc  API routes
@@ -44,7 +46,7 @@ const VideoInputs = ({ video }: Props) => {
       },
       {
         onSuccess: () => {
-          window.location.reload();
+          router.reload();
         },
         onError: (error) => {
           setStatus({ type: "ERROR", message: error.toString() });
@@ -72,7 +74,7 @@ const VideoInputs = ({ video }: Props) => {
       },
       {
         onSuccess: () => {
-          window.location.reload();
+          router.reload();
         },
         onError: (error) => {
           setStatus({ type: "ERROR", message: error.toString() });

@@ -7,6 +7,7 @@ import { trpc } from "@server/utils/trpc";
 import VideoInputs from "@src/components/Admin/VideoInputs";
 import Link from "next/link";
 import { deleteImage } from "@src/pages/api/delete-image";
+import { useRouter } from "next/router";
 
 type Props = {
   videos: Video[];
@@ -17,13 +18,14 @@ interface VideoLineProps {
 }
 
 const VideoLine = ({ video }: VideoLineProps) => {
+  const router = useRouter();
   const deleteVideo = trpc.video.delete.useMutation();
 
   const handleDelete = async () => {
     deleteVideo.mutate(video.id, {
       onSuccess: async () => {
         await deleteImage(video!.placeholder_hq);
-        window.location.reload();
+        router.reload();
       },
     });
   };
