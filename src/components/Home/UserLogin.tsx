@@ -4,8 +4,10 @@ import { useAuthContext } from "@src/contexts/AuthProvider";
 // Trpc
 import { trpc } from "@server/utils/trpc";
 import Button from "../Utils/Button";
+import { useRouter } from "next/router";
 
 const UserLogin = () => {
+  const router = useRouter();
   const { userStatus, setUserStatus } = useAuthContext();
   const [password, setPassword] = useState("");
   const login = trpc.user.login.useMutation({
@@ -20,6 +22,7 @@ const UserLogin = () => {
     e.preventDefault();
     // signUp.mutate(password);
     login.mutate(password);
+    router.push("/admin");
   };
 
   const handleSignOut = () => {

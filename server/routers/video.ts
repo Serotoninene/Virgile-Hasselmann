@@ -35,10 +35,11 @@ export const videoRouter = router({
       z.object({
         id: z.string(),
         title: z.string().or(z.undefined()),
-        dateOfCreation: z.date(),
-        videoName: z.string(),
+        dateOfCreation: z.date().or(z.undefined()),
+        videoName: z.string().or(z.undefined()),
+        videoLink: z.string().or(z.undefined()),
         placeholder_lq: z.string().or(z.undefined()),
-        placeholder_hq: z.string(),
+        placeholder_hq: z.string().or(z.undefined()),
         description: z.string().or(z.undefined()),
         isSecret: z.boolean().or(z.undefined()),
       })

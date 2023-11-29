@@ -7,26 +7,33 @@ import { useForm } from "react-hook-form";
 // Types
 import Button from "../../Utils/Button";
 import { VideoInputsProps } from "types";
-import { fields } from "./fields";
+import { fields, updateFields } from "./fields";
+import { Video } from "@prisma/client";
 
-const VideoInputs = () => {
+type Props = {
+  video?: Video;
+};
+
+const VideoInputs = ({ video }: Props) => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<VideoInputsProps>();
   const [status, setStatus] = useState({ type: "", message: "" });
 
   // trpc  API routes
-  const createVideo = trpc.video.create.useMutation();
+  const createVideoMutation = trpc.video.create.useMutation();
+  const updateVideoMutation = trpc.video.update.useMutation();
 
-  const onSubmit = async (formData: VideoInputsProps) => {
+  const handleSubmitCreateVideo = async (formData: VideoInputsProps) => {
     if (!formData.placeholder_hq?.[0]) return;
     setStatus({ type: "LOADING", message: "Upload en cours" });
 
     await uploadImage(formData.placeholder_hq[0]);
 
-    createVideo.mutate(
+    createVideoMutation.mutate(
       {
         title: formData.title,
         dateOfCreation: new Date(formData.dateOfCreation),
@@ -42,6 +49,40 @@ const VideoInputs = () => {
     );
   };
 
+  const handleUpdateVideoMutation = async (formData: VideoInputsProps) => {
+    setStatus({ type: "LOADING", message: "Upload en cours" });
+
+    if (formData.placeholder_hq?.[0]) {
+      await uploadImage(formData.placeholder_hq[0]);
+    }
+
+    updateVideoMutation.mutate(
+      {
+        id: video!.id,
+        title: formData.title,
+        dateOfCreation: new Date(formData.dateOfCreation),
+        placeholder_hq: formData.placeholder_hq?.[0].name,
+        videoLink: formData.videoLink,
+        isSecret: formData.isSecret,
+      },
+      {
+        onSuccess: () => {
+          window.location.reload();
+        },
+      }
+    );
+  };
+
+  const onSubmit = (formData: VideoInputsProps) => {
+    console.log(formData);
+    if (video) {
+      console.log(formData);
+      // handleUpdateVideoMutation(formData);
+    } else {
+      handleSubmitCreateVideo(formData);
+    }
+  };
+
   useEffect(() => {
     if (!status.type || status.type === "LOADING") return;
     const timeout = setTimeout(() => {
@@ -52,14 +93,32 @@ const VideoInputs = () => {
   }, [status]);
 
   useEffect(() => {
-    if (createVideo.isSuccess || createVideo.isError) {
+    if (createVideoMutation.isSuccess || createVideoMutation.isError) {
       setStatus(
-        createVideo.error
-          ? { type: "ERROR", message: createVideo.error.toString() }
+        createVideoMutation.error
+          ? { type: "ERROR", message: createVideoMutation.error.toString() }
           : { type: "SUCCESS", message: " Vidéo enregistrée " }
       );
     }
-  }, [createVideo.isSuccess, createVideo.isError]);
+  }, [createVideoMutation.isSuccess, createVideoMutation.isError]);
+
+  useEffect(() => {
+    if (video) {
+      setValue("title", video.title);
+      setValue("dateOfCreation", new Date(video.dateOfCreation));
+      setValue("videoLink", video.videoLink || "");
+      setValue("isSecret", video.isSecret || false);
+
+      fetch(process.env.NEXT_PUBLIC_PHOTOS + video.placeholder_hq)
+        .then((response) => response.blob())
+        .then((blob) => {
+          const file = new File([blob], video.placeholder_hq, {
+            type: blob.type,
+          });
+          setValue("placeholder_hq", [file]);
+        });
+    }
+  }, [video]);
 
   return (
     <form
@@ -67,7 +126,7 @@ const VideoInputs = () => {
       className="relative my-10 flex flex-col items-center mx-auto "
     >
       <div className="relative w-full sm:w-auto">
-        {fields.map((field) => (
+        {(video ? updateFields : fields).map((field) => (
           <div key={field.name} className="mb-4">
             <label
               htmlFor={field.name}
@@ -96,7 +155,7 @@ const VideoInputs = () => {
           </div>
         ))}
 
-        <div className="absolute bottom-4 right-0">
+        <div className="absolute bottom-4 right-0 text-dark">
           <Button>Submit</Button>
         </div>
       </div>

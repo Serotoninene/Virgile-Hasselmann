@@ -35,3 +35,35 @@ export const fields: Fields[] = [
     customClass: "w-6 h-6",
   },
 ];
+
+export const updateFields: Fields[] = [
+  {
+    label: "Nouveau titre",
+    type: "text",
+    placeholder: "Titre",
+    name: "title",
+  },
+  {
+    label: "Nouvelle vignette",
+    type: "file",
+    placeholder: "Placeholder HQ",
+    name: "placeholder_hq",
+  },
+  {
+    label: "Lien Youtube",
+    type: "text",
+    placeholder: "Lien Youtube",
+    name: "videoLink",
+  },
+  {
+    label: "Nouvelle Date",
+    type: "date",
+    name: "dateOfCreation",
+  },
+  {
+    label: "Secret ?",
+    type: "checkbox",
+    name: "isSecret",
+    customClass: "w-6 h-6",
+  },
+];
