@@ -62,12 +62,12 @@ const VideoInputs = ({ video }: Props) => {
         title: formData.title,
         dateOfCreation: new Date(formData.dateOfCreation),
         placeholder_hq: formData.placeholder_hq?.[0].name,
-        videoLink: formData.videoLink,
+        videoLink: formData.videoLink || "",
         isSecret: formData.isSecret,
       },
       {
         onSuccess: () => {
-          window.location.reload();
+          // window.location.reload();
         },
       }
     );
@@ -76,8 +76,7 @@ const VideoInputs = ({ video }: Props) => {
   const onSubmit = (formData: VideoInputsProps) => {
     console.log(formData);
     if (video) {
-      console.log(formData);
-      // handleUpdateVideoMutation(formData);
+      handleUpdateVideoMutation(formData);
     } else {
       handleSubmitCreateVideo(formData);
     }
