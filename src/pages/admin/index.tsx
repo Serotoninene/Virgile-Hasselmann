@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import classNames from "@src/utils";
@@ -37,11 +37,11 @@ export default function Admin({ videos, photos }: Props) {
   // auth context
   const { userStatus } = useContext(AuthContext);
 
-  // useEffect(() => {
-  //   if (userStatus !== "ADMIN") {
-  //     router.push("/");
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (userStatus !== "ADMIN") {
+      router.push("/");
+    }
+  }, []);
 
   const tabs = ["Video", "Photo"];
 
