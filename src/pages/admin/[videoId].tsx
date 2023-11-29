@@ -5,6 +5,8 @@ import { trpc } from "@server/utils/trpc";
 
 import { photoLink } from "@src/contexts/store";
 import VideoInputs from "@src/components/Admin/VideoInputs";
+import { ArrowLeftIcon } from "@heroicons/react/24/solid";
+import Link from "next/link";
 
 interface Options {
   year: string;
@@ -48,15 +50,21 @@ export default function VideoId() {
 
   return (
     <div className="pt-16 xs:pt-[88px] px-4 sm:px-6">
-      <div className="bg-white m-6">
+      <div className="bg-white m-6 ">
         <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
           {/* Product details */}
           <div className="lg:max-w-lg lg:self-end">
-            <div className="mt-4">
-              <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                {video?.title}
-              </h1>
-            </div>
+            <Link href="/admin">
+              <div className="mt-4 flex items-center cursor-pointer">
+                <ArrowLeftIcon
+                  className="h-10 w-10 text-dark mr-4"
+                  aria-hidden="true"
+                />
+                <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+                  {video?.title}
+                </h1>
+              </div>
+            </Link>
 
             <section aria-labelledby="information-heading" className="mt-4">
               <p className="text-lg text-gray-900 sm:text-xl">
