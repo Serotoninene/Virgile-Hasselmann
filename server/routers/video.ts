@@ -50,6 +50,7 @@ export const videoRouter = router({
         data: {
           title: input.title,
           dateOfCreation: input.dateOfCreation,
+          videoLink: input.videoLink,
           videoName: input.videoName,
           placeholder_lq: input.placeholder_lq,
           placeholder_hq: input.placeholder_hq,

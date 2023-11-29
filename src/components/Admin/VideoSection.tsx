@@ -6,6 +6,7 @@ import { trpc } from "@server/utils/trpc";
 
 import VideoInputs from "@src/components/Admin/VideoInputs";
 import Link from "next/link";
+import { deleteImage } from "@src/pages/api/delete-image";
 
 type Props = {
   videos: Video[];
@@ -20,7 +21,8 @@ const VideoLine = ({ video }: VideoLineProps) => {
 
   const handleDelete = async () => {
     deleteVideo.mutate(video.id, {
-      onSuccess: () => {
+      onSuccess: async () => {
+        await deleteImage(video!.placeholder_hq);
         window.location.reload();
       },
     });
