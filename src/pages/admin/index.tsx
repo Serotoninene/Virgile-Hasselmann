@@ -38,10 +38,11 @@ export default function Admin({ videos, photos }: Props) {
   const { userStatus } = useContext(AuthContext);
 
   useEffect(() => {
+    if (!userStatus) return;
     if (userStatus !== "ADMIN") {
       router.push("/");
     }
-  }, []);
+  }, [userStatus]);
 
   const tabs = ["Video", "Photo"];
 

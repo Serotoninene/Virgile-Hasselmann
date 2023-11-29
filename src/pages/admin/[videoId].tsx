@@ -8,12 +8,6 @@ import VideoInputs from "@src/components/Admin/VideoInputs";
 import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 
-interface Options {
-  year: string;
-  month: string;
-  day: string;
-}
-
 export const formatDate = (dateString: Date | undefined) => {
   const options: Intl.DateTimeFormatOptions = {
     year: "numeric",
