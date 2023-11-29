@@ -9,6 +9,7 @@ import Button from "../../Utils/Button";
 import { VideoInputsProps } from "types";
 import { fields, updateFields } from "./fields";
 import { Video } from "@prisma/client";
+import { deleteImage } from "@src/pages/api/delete-image";
 
 type Props = {
   video?: Video;
@@ -45,6 +46,9 @@ const VideoInputs = ({ video }: Props) => {
         onSuccess: () => {
           window.location.reload();
         },
+        onError: (error) => {
+          setStatus({ type: "ERROR", message: error.toString() });
+        },
       }
     );
   };
@@ -53,6 +57,7 @@ const VideoInputs = ({ video }: Props) => {
     setStatus({ type: "LOADING", message: "Upload en cours" });
 
     if (formData.placeholder_hq?.[0]) {
+      await deleteImage(video!.placeholder_hq);
       await uploadImage(formData.placeholder_hq[0]);
     }
 
@@ -67,14 +72,16 @@ const VideoInputs = ({ video }: Props) => {
       },
       {
         onSuccess: () => {
-          // window.location.reload();
+          window.location.reload();
+        },
+        onError: (error) => {
+          setStatus({ type: "ERROR", message: error.toString() });
         },
       }
     );
   };
 
   const onSubmit = (formData: VideoInputsProps) => {
-    console.log(formData);
     if (video) {
       handleUpdateVideoMutation(formData);
     } else {
@@ -101,6 +108,7 @@ const VideoInputs = ({ video }: Props) => {
     }
   }, [createVideoMutation.isSuccess, createVideoMutation.isError]);
 
+  // setting the values of the form if we are updating a video
   useEffect(() => {
     if (video) {
       setValue("title", video.title);
