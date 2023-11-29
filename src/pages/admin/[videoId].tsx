@@ -26,10 +26,20 @@ export const formatDate = (dateString: Date | undefined) => {
 export default function VideoId() {
   const router = useRouter();
   const { videoId } = router.query;
+  // const memoVideoId = React.useMemo(() => videoId, [videoId]);
 
+  // trpc  API routes
   const video: Video | undefined | null = trpc.video.byId.useQuery(
-    videoId as string
+    videoId as string,
+    {
+      refetchOnWindowFocus: false,
+    }
   ).data;
+
+  const memoVideo = React.useMemo<Video | undefined>(
+    () => (video ? video : undefined),
+    [video]
+  );
 
   if (!video)
     return (
@@ -73,7 +83,7 @@ export default function VideoId() {
           {/* Product form */}
           <div className="mt-10 lg:col-start-1 lg:row-start-2 lg:max-w-lg lg:self-start">
             <section aria-labelledby="options-heading">
-              <VideoInputs video={video} />
+              <VideoInputs video={memoVideo} />
             </section>
           </div>
         </div>
