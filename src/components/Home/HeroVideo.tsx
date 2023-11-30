@@ -9,6 +9,7 @@ import DarkGradients from "./DarkGradients";
 import AnimatedArrow from "../Utils/AnimatedArrow";
 import Image from "next/image";
 import { photoLink } from "@src/contexts/store";
+import { AnimatedWords } from "../Utils/AnimatedWords.tsx";
 
 const containerAnim = {
   hidden: {},
@@ -62,13 +63,16 @@ const Content = () => {
         >
           @Virgile Hasselmann, 2023
         </motion.p>
-        <motion.p
-          variants={itemsAnim}
-          className="text-center font-light text-xl xs:text-3xl lg:text-end lg:text-2xl lg:w-[30vw]"
-        >
-          Spectacles, musique, danse, sport, entreprises... Je crée des vidéos
-          artistiques pour mettre en lumière votre projet.
-        </motion.p>
+        <div className="text-center font-light text-xl xs:text-3xl lg:text-end lg:text-2xl lg:w-[30vw]">
+          <AnimatedWords
+            ease="easeOut"
+            delay={0.6}
+            duration={0.4}
+            stagger={0.02}
+            string="Spectacles, musique, danse, sport, entreprises... Je crée des vidéos
+          artistiques pour mettre en lumière votre projet."
+          />
+        </div>
       </motion.div>
       <div className="absolute w-screen flex justify-center bottom-2 xs:bottom-6">
         <AnimatedArrow />
