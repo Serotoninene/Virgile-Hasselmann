@@ -3,6 +3,7 @@
 import React from "react";
 // Framer Motion
 import { AnimatePresence, motion } from "framer-motion";
+import { getAnimations } from "./anims";
 
 interface Props {
   string?: string;
@@ -28,45 +29,7 @@ export const AnimatedWords = ({
 }: Props) => {
   const words = string?.split(" ");
 
-  const containerAnim = {
-    hidden: {},
-    show: {
-      transition: {
-        delayChildren: delay,
-        staggerChildren: stagger,
-      },
-    },
-    exit: {
-      transition: {
-        delayChildren: delay,
-        staggerChildren: stagger,
-      },
-    },
-  };
-
-  const letterAnim = {
-    hidden: {
-      y: "110%",
-      transition: {
-        ease: ease,
-        duration: duration,
-      },
-    },
-    show: {
-      y: 0,
-      transition: {
-        ease: ease,
-        duration: duration,
-      },
-    },
-    exit: {
-      y: -400,
-      transition: {
-        ease: ease,
-        duration: duration,
-      },
-    },
-  };
+  const { containerAnim, letterAnim } = getAnimations(delay, duration, ease);
 
   return (
     <AnimatePresence mode="wait">
