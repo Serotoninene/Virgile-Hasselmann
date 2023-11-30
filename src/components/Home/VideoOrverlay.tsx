@@ -10,9 +10,8 @@ const VideoOverlay: React.FC = () => {
   const { isOverlay, selectedVideo, handleCloseOverlay } =
     useVideoOverlayContext();
 
-  const ratio = 0.7;
-
   const { width } = useWindowSize();
+  const ratio = width && width < 640 ? 0.9 : 0.7;
 
   const playerWidth = width && width * ratio;
   const playerHeight = playerWidth && playerWidth * (9 / 16);
