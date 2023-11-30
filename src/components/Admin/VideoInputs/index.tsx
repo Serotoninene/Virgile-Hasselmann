@@ -12,6 +12,8 @@ import { Video } from "@prisma/client";
 import { deleteImage } from "@src/pages/api/delete-image";
 import { useRouter } from "next/router";
 
+import _ from "lodash";
+
 type Props = {
   video?: Video;
 };
@@ -40,7 +42,7 @@ const VideoInputs = ({ video }: Props) => {
       {
         title: formData.title,
         dateOfCreation: new Date(formData.dateOfCreation),
-        placeholder_hq: formData.placeholder_hq[0].name,
+        placeholder_hq: _.kebabCase(formData.placeholder_hq[0].name),
         videoLink: formData.videoLink,
         isSecret: formData.isSecret,
       },
@@ -68,7 +70,7 @@ const VideoInputs = ({ video }: Props) => {
         id: video!.id,
         title: formData.title,
         dateOfCreation: new Date(formData.dateOfCreation),
-        placeholder_hq: formData.placeholder_hq?.[0].name,
+        placeholder_hq: _.kebabCase(formData.placeholder_hq?.[0].name),
         videoLink: formData.videoLink || "",
         isSecret: formData.isSecret,
       },

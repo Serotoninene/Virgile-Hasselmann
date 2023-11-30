@@ -1,5 +1,6 @@
 import S3 from "aws-sdk/clients/s3";
 import axios from "axios";
+import _ from "lodash";
 
 const s3 = new S3({
   region: "eu-west-3",
@@ -26,7 +27,7 @@ export async function uploadImage(file: File) {
     // Setting parameters - ACL will allow us to see a file
     const fileParams = {
       Bucket: "virgile-portfollio/photos",
-      Key: file.name,
+      Key: _.kebabCase(file.name),
       Expires: 600,
       ContentType: file.type,
     };
@@ -38,10 +39,6 @@ export async function uploadImage(file: File) {
         "Access-Control-Allow-Origin": "*",
       },
     });
-
-    console.log("worked");
-
-    return { message: "PHOTO UPLOADED WITH SUCCESS" };
   } catch (err) {
     console.log(err);
     return { message: err };
