@@ -12,7 +12,7 @@ const UserLogin = () => {
   const [password, setPassword] = useState("");
   const login = trpc.user.login.useMutation({
     onSuccess(data) {
-      setUserStatus(data);
+      setUserStatus(data || "USER");
     },
   });
 
