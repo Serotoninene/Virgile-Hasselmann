@@ -8,7 +8,7 @@ import AnimatedLetters from "@src/components/Utils/AnimatedLetters";
 import DarkGradients from "./DarkGradients";
 import AnimatedArrow from "../Utils/AnimatedArrow";
 import Image from "next/image";
-import { photoLink, videoLink } from "@src/contexts/store";
+import { photoLink } from "@src/contexts/store";
 
 const containerAnim = {
   hidden: {},

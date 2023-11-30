@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 // Next
 import Head from "next/head";
-// Components
-import Navbar from "./Navbar";
+import { motion } from "framer-motion";
 // Hooks
 import useWindowSize from "@src/hooks/useWindowSize";
-import { useRouter } from "next/router";
 import Image from "next/image";
 
 type Props = {
@@ -35,9 +33,14 @@ const Layout = ({ children }: Props): JSX.Element => {
       <main>
         <div className="noise"></div>
         {/* Background noise */}
-        <div className="h-full w-full fixed top-0 left-0">
-          <Image alt="noise" src="/assets/noise.png" layout="fill" />
-        </div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.4 }}
+          className="h-full w-full fixed top-0 left-0"
+        >
+          <Image alt="noise" src="/assets/noise.png" layout="fill" priority />
+        </motion.div>
         <div className="relative">{children}</div>
       </main>
     </div>
