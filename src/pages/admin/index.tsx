@@ -35,14 +35,16 @@ export default function Admin({ videos, photos }: Props) {
   // If the status is not ADMIN, redirects toward the home
   const router = useRouter();
   // auth context
-  const { userStatus } = useContext(AuthContext);
+  const { userStatus, loading } = useContext(AuthContext);
+
+  console.log(!loading && userStatus !== "ADMIN");
 
   useEffect(() => {
-    if (!userStatus) return;
-    if (userStatus !== "ADMIN") {
+    if (!loading && userStatus !== "ADMIN") {
+      console.log("EH OH");
       router.push("/");
     }
-  }, [userStatus]);
+  }, [loading, userStatus]);
 
   const tabs = ["Video", "Photo"];
 

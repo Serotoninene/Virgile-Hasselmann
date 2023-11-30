@@ -10,7 +10,17 @@ interface Props {
   children: JSX.Element;
 }
 
-export const AuthContext = createContext<any>({ userStatus: "USER" });
+interface AuthContextType {
+  userStatus: string;
+  loading: boolean;
+  setUserStatus: (el: string) => void;
+}
+
+export const AuthContext = createContext<AuthContextType>({
+  userStatus: "USER",
+  loading: true,
+  setUserStatus: () => {},
+});
 
 function getInitialState() {
   const userStatus =
@@ -18,24 +28,28 @@ function getInitialState() {
       ? window.localStorage.getItem("userStatus")
       : "USER";
 
-  return userStatus;
+  return userStatus || "USER";
 }
 
 export function AuthProvider({ children }: Props) {
-  // 2 different roles for the user : "USER" and "ADMIN", by default, every one is USER
   const [userStatus, setUserStatus] = useState("USER");
+  const [loading, setLoading] = useState(true);
+
+  const handleChangeUserStatus = (userStatus: string) => {
+    setUserStatus(userStatus);
+    window.localStorage.setItem("userStatus", userStatus);
+  };
 
   useEffect(() => {
-    const localData = window.localStorage.getItem("userStatus");
-    setUserStatus(localData || "USER");
+    if (typeof window !== "undefined") {
+      const initialUserStatus = window.localStorage.getItem("userStatus");
+      setUserStatus(initialUserStatus || "USER");
+    }
+    setLoading(false);
   }, []);
 
-  // useEffect(() => {
-  //   window.localStorage.setItem("userStatus", userStatus);
-  // }, [userStatus]);
-
   const contextValue = useMemo(() => {
-    return { userStatus, setUserStatus };
+    return { userStatus, loading, setUserStatus: handleChangeUserStatus };
   }, [userStatus]);
 
   return (
