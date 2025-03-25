@@ -17,20 +17,24 @@ function Counter({ value }: CounterProps) {
 
   return (
     <motion.p ref={nodeRef} exit={{ y: "-100%" }}>
-      {value}{" "}
+      {value}
     </motion.p>
   );
 }
 
 const Loader = ({ loadingProgress }: Props) => {
   const [finishedLoading, setFinishedLoading] = useState(false);
+  const [displayProgress, setDisplayProgress] = useState(0);
 
   useEffect(() => {
-    if (loadingProgress === 100) {
+    const clampedProgress = Math.min(loadingProgress, 100);
+    if (clampedProgress === 100) {
       setTimeout(() => {
         setFinishedLoading(true);
       }, 500);
     }
+
+    setDisplayProgress(clampedProgress);
   }, [loadingProgress]);
 
   return (
@@ -46,7 +50,7 @@ const Loader = ({ loadingProgress }: Props) => {
             <motion.div
               className="h-[1px] w-full bg-light origin-left"
               initial={{ scaleX: 0 }}
-              animate={{ scaleX: loadingProgress / 100 }}
+              animate={{ scaleX: displayProgress / 100 }}
               exit={{ scaleX: 0, x: "100%" }}
               transition={{ duration: 0.45, ease: "easeInOut" }}
             />
@@ -56,7 +60,7 @@ const Loader = ({ loadingProgress }: Props) => {
                 delay={0}
                 stagger={0.01}
               />
-              <Counter value={loadingProgress} />
+              <Counter value={displayProgress} />
             </div>
           </div>
         </div>
