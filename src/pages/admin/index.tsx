@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { GetServerSideProps, GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import classNames from "@src/utils";
 // Context

@@ -23,6 +23,7 @@ function Counter({ value }: CounterProps) {
 
 const Loader = ({ loadingProgress }: Props) => {
   const [finishedLoading, setFinishedLoading] = useState(false);
+  console.log("loader");
 
   useEffect(() => {
     if (loadingProgress === 100) {

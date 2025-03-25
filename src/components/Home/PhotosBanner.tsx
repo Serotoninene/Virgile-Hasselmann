@@ -38,10 +38,11 @@ export default function PhotosBanner() {
       >
         <div className="hidden sm:block h-full col-span-2 relative ">
           <motion.div variants={photoAnim}>
-            <Link href="/photos" >
+            <Link href="/photos">
               <Image
                 className="cursor-pointer"
                 src="/assets/girl_portrait.webp"
+                alt="girl fixing the camera"
                 layout="fill"
                 objectFit="cover"
                 objectPosition="center"
@@ -61,6 +62,7 @@ export default function PhotosBanner() {
                 <Image
                   className="cursor-pointer"
                   src="https://virgile-portfollio.s3.amazonaws.com/photos/3.jpg"
+                  alt="hands in prayer"
                   layout="fill"
                   objectFit="cover"
                   objectPosition="center"
