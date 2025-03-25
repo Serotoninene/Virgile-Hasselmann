@@ -29,7 +29,7 @@ const VideoLine = ({ video }: VideoLineProps) => {
         <div className="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200">
           <Image
             src={process.env.NEXT_PUBLIC_PHOTOS + video.placeholder_hq}
-            alt={video.videoName}
+            alt={video.videoName || ""}
             width={256}
             height={256}
             className="rounded-md object-cover  object-center w-full"
